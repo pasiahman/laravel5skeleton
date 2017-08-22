@@ -10,6 +10,15 @@
                     <form class="form-horizontal" method="POST" action="{{ route('login') }}">
                         {{ csrf_field() }}
 
+                        <div class="form-group">
+                            <label for="name" class="col-md-4 control-label">Login With</label>
+                            <div class="col-md-6">
+                               <a href="{{ url('login/facebook') }}" class="btn btn-social-icon btn-facebook">Facebook<i class="fa fa-facebook"></i></a>
+                               <a href="{{ url('login/github') }}" class="btn btn-social-icon btn-github">Github<i class="fa fa-github"></i></a>
+                               <a href="{{ url('login/google') }}" class="btn btn-social-icon btn-google">Google<i class="fa fa-google"></i></a>
+                            </div>
+                        </div>
+
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
