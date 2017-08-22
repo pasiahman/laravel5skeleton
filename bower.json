@@ -1,0 +1,23 @@
+{
+  "name": "laravel5skeleton",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Jovi <redzjovi@gmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/redzjovi/laravel5skeleton",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "resources/assets/bower",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "font-awesome": "~4.7",
+    "bootstrap": "boostrap#^3.3.7",
+    "bootstrap-social": "^5.1.1"
+  }
+}
