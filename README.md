@@ -51,7 +51,8 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
 # Included Packages
-- [laravel-permission](https://github.com/spatie/laravel-permission)
+- [LaravelCollective/html](https://github.com/LaravelCollective/html)
+- [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
 
 ## Installation
 - Run command, composer update
