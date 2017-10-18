@@ -2,6 +2,8 @@
 
 namespace App\Http\Models;
 
+use Illuminate\Support\Facades\Validator;
+
 class Users extends \App\User
 {
     /**
@@ -21,6 +23,19 @@ class Users extends \App\User
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function validate($input, $scenario = 'create')
+    {
+        if ($scenario == 'create') {
+            $rules = [
+                'name' => ['required'],
+                'email' => ['required', 'email'],
+                'password' => ['required', 'min:5'],
+            ];
+        }
+
+        return Validator::make($input, $rules);
+    }
 
     public function scopeSearch($query, $params)
     {

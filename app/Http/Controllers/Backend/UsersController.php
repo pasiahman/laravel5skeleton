@@ -25,9 +25,16 @@ class UsersController extends Controller
         $data['user'] = $user = new Users;
 
         if ($request->input('create')) {
-            $request->merge(['password' => Hash::make($request->input('password'))]);
-            $user->fill($request->input())->save();
-            return redirect()->route('backendUsers');
+            $validator = $user->validate($request->input(), 'create');
+            if ($validator->passes()) {
+                $request->merge(['password' => Hash::make($request->input('password'))]);
+                $user->fill($request->input())->save();
+                flash('Data has been created')->success()->important();
+                return redirect()->route('backendUsers');
+            } else {
+                $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
+                $data['errors'] = $validator->errors();
+            }
         }
 
         return view('backend/users/create', $data);
@@ -36,6 +43,7 @@ class UsersController extends Controller
     public function delete($id)
     {
         Users::find($id)->delete($id);
+        flash('Data has been deleted')->success()->important();
         return redirect()->route('backendUsers');
     }
 
@@ -46,6 +54,7 @@ class UsersController extends Controller
         if ($request->input('update')) {
             $request->merge(['password' => Hash::make($request->input('password'))]);
             $user->fill($request->input())->save();
+            flash('Data has been updated')->success()->important();
             return redirect()->route('backendUsers');
         }
 

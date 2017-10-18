@@ -73,10 +73,15 @@
             </div>
         </nav>
 
+        @include('flash::message')
+
         @yield('content')
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('bower/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('bower/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('vendor/laracasts/flash/custom.js') }}"></script>
+    <!-- <script src="{{ asset('js/app.js') }}"></script> -->
 </body>
 </html>
