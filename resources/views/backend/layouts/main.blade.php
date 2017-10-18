@@ -14,8 +14,10 @@
     <link href="{{ asset('bower/bootstrap-social/bootstrap-social.css') }}" rel="stylesheet">
     <link href="{{ asset('bower/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
+    <script src="{{ asset('bower/jquery/dist/jquery.min.js') }}"></script>
 </head>
-<body>
+<body class="pjax-container">
     <div id="app">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
@@ -79,9 +81,12 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('bower/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ asset('bower/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('bower/jquery-pjax/jquery.pjax.js') }}"></script>
+    <script src="{{ asset('vendor/jquery-pjax/jquery.pjax-custom.js') }}"></script>
     <script src="{{ asset('vendor/laracasts/flash/custom.js') }}"></script>
     <!-- <script src="{{ asset('js/app.js') }}"></script> -->
+
+    @yield('scripts')
 </body>
 </html>

@@ -16,8 +16,9 @@
     "tests"
   ],
   "dependencies": {
-    "font-awesome": "~4.7",
     "bootstrap": "boostrap#^3.3.7",
-    "bootstrap-social": "^5.1.1"
+    "bootstrap-social": "^5.1.1",
+    "font-awesome": "~4.7",
+    "jquery-pjax": "^2.0.1"
   }
 }

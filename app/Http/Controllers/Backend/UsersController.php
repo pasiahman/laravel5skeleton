@@ -44,7 +44,7 @@ class UsersController extends Controller
     {
         Users::find($id)->delete($id);
         flash('Data has been deleted')->success()->important();
-        return redirect()->route('backendUsers');
+        return back();
     }
 
     public function update(Request $request)

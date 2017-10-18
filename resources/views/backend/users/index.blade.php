@@ -2,10 +2,11 @@
 
 @section('title', 'Users')
 
+
 @section('content')
 <a class="btn btn-default" href="{{ route('backendUserCreate') }}">Create</a>
 
-{!! Form::open(['method' => 'GET', 'route' => 'backendUsers']) !!}
+{!! Form::open(['data-pjax', 'method' => 'GET', 'route' => 'backendUsers']) !!}
 <table class="table table-bordered table-condensed table-striped">
     <thead>
         <tr>
@@ -51,11 +52,7 @@
         </tr>
         @endforeach
     </tbody>
-    <tfoot>
-        <tr>
-            <td align="center" colspan="4">{!! $users->appends($request->query())->links() !!}</td>
-        </tr>
-    </tfoot>
+    <tfoot><tr><td align="center" colspan="4">{!! $users->appends($request->query())->links('vendor.pagination.default-pjax') !!}</td></tr></tfoot>
 </table>
 {!! Form::close() !!}
 @endsection('content')
