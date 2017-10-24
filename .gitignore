@@ -1,7 +1,7 @@
 /node_modules
-/public/bower/*
 /public/hot
 /public/storage
+/resources/bower/*
 /storage/*.key
 /vendor
 /.idea
@@ -9,5 +9,6 @@
 Homestead.json
 Homestead.yaml
 npm-debug.log
+package-lock.json
 yarn-error.log
 .env

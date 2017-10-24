@@ -14,7 +14,7 @@
                 <div class="form-inline">
                     <div class="form-group">
                         Per page
-                        @php ($limitOptions = ['10' => '10', '25' => '25', '50' => '50', '' => 'All'])
+                        @php ($limitOptions = ['10' => '10', '25' => '25', '50' => '50', '100' => '100'])
                         {!! Form::select('limit', $limitOptions, $request->query('limit'), ['class' => 'input-sm']) !!}
 
                         Sort

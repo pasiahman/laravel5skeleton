@@ -11,7 +11,7 @@ class UsersController extends Controller
 {
     public function index(Request $request)
     {
-        $request->query('sort') ?: $request->query->set('sort', 'name,ASC');
+        $request->query('sort') ?: $request->query->set('sort', 'email,ASC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['request'] = $request;
@@ -52,10 +52,16 @@ class UsersController extends Controller
         $data['user'] = $user = Users::find($request->input('id'));
 
         if ($request->input('update')) {
-            $request->merge(['password' => Hash::make($request->input('password'))]);
-            $user->fill($request->input())->save();
-            flash('Data has been updated')->success()->important();
-            return redirect()->route('backendUsers');
+            $validator = $user->validate($request->input(), 'update');
+            if ($validator->passes()) {
+                $request->input('password') ? $request->merge(['password' => Hash::make($request->input('password'))]) : $request->request->remove('password');
+                $user->fill($request->input())->save();
+                flash('Data has been updated')->success()->important();
+                return redirect()->route('backendUsers');
+            } else {
+                $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
+                $data['errors'] = $validator->errors();
+            }
         }
 
         return view('backend/users/update', $data);
