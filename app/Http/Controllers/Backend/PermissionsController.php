@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\Permissions;
+use App\Http\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -15,14 +15,14 @@ class PermissionsController extends Controller
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['request'] = $request;
-        $data['permissions'] = Permissions::search($request->query())->paginate($request->query('limit'));
+        $data['permissions'] = Permission::search($request->query())->paginate($request->query('limit'));
 
         return view('backend/permissions/index', $data);
     }
 
     public function create(Request $request)
     {
-        $data['permission'] = $permission = new Permissions;
+        $data['permission'] = $permission = new Permission;
 
         if ($request->input('create')) {
             $validator = $permission->validate($request->input(), 'create');
@@ -41,14 +41,14 @@ class PermissionsController extends Controller
 
     public function delete($id)
     {
-        Permissions::find($id)->delete($id);
+        Permission::find($id)->delete($id);
         flash('Data has been deleted')->success()->important();
         return back();
     }
 
     public function update(Request $request)
     {
-        $data['permission'] = $permission = Permissions::find($request->input('id'));
+        $data['permission'] = $permission = Permission::find($request->input('id'));
 
         if ($request->input('update')) {
             $validator = $permission->validate($request->input(), 'update');

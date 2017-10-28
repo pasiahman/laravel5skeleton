@@ -2,10 +2,9 @@
 
 namespace App\Http\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 
-class Permissions extends Model
+class Role extends \Spatie\Permission\Models\Role
 {
     /**
      * The attributes that are mass assignable.
@@ -27,20 +26,20 @@ class Permissions extends Model
     {
         $rules = [
             'id' => ['required', 'integer', 'digits_between:1,10'],
-            'name' => ['required', 'between:1,191'],
-            'guard_name' => ['required', 'between:1,191'],
+            'name' => ['required', 'between:0,191'],
+            'guard_name' => ['required', 'between:0,191'],
         ];
 
         if ($scenario == 'create') {
             $rules = [
-                'name' => ['required', 'between:1,191', 'unique:permissions,name'],
-                'guard_name' => ['between:1,191'],
+                'name' => ['required', 'between:0,191', 'unique:roles,name'],
+                'guard_name' => ['between:0,191'],
             ];
         } else if ($scenario == 'update') {
             $rules = [
                 'id' => ['required', 'integer', 'digits_between:1,10'],
-                'name' => ['required', 'between:1,191', 'unique:permissions,name,'.$this->id],
-                'guard_name' => ['between:1,191'],
+                'name' => ['required', 'between:0,191', 'unique:roles,name,'.$this->id],
+                'guard_name' => ['between:0,191'],
             ];
         }
 

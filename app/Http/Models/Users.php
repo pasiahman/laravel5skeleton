@@ -28,9 +28,9 @@ class Users extends \App\User
     {
         $rules = [
             'id' => ['required', 'integer', 'digits_between:1,10'],
-            'name' => ['required', 'digits_between:1,191'],
-            'email' => ['required', 'email', 'digits_between:1,191'],
-            'password' => ['required', 'digits_between:1,191'],
+            'name' => ['required', 'digits_between:0,191'],
+            'email' => ['required', 'email', 'digits_between:0,191'],
+            'password' => ['required', 'digits_between:0,191'],
         ];
 
         if ($scenario == 'create') {
