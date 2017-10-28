@@ -11,8 +11,8 @@
     <i class="text-danger">{{ $errors->first('name') }}</i>
 </div>
 <div class="form-group">
-    {!! Form::label('guard_name') !!}
-    {!! Form::text('guard_name', old('guard_name', $role->guard_name), ['class' => 'form-control']) !!}
+    {!! Form::label('guard_name'.' (*)') !!}
+    {!! Form::text('guard_name', old('guard_name', $role->guard_name), ['class' => 'form-control', 'required']) !!}
     <i class="text-danger">{{ $errors->first('guard_name') }}</i>
 </div>
 

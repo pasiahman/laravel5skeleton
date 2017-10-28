@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Validator;
 
 class Role extends \Spatie\Permission\Models\Role
 {
+    protected $attributes = [
+        'guard_name' => 'web',
+    ];
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -33,13 +37,13 @@ class Role extends \Spatie\Permission\Models\Role
         if ($scenario == 'create') {
             $rules = [
                 'name' => ['required', 'between:0,191', 'unique:roles,name'],
-                'guard_name' => ['between:0,191'],
+                'guard_name' => ['required', 'between:0,191'],
             ];
         } else if ($scenario == 'update') {
             $rules = [
                 'id' => ['required', 'integer', 'digits_between:1,10'],
                 'name' => ['required', 'between:0,191', 'unique:roles,name,'.$this->id],
-                'guard_name' => ['between:0,191'],
+                'guard_name' => ['required', 'between:0,191'],
             ];
         }
 
