@@ -16,7 +16,7 @@ Auth::routes();
 Route::prefix('backend')->group(function () {
     Route::get('/user/create', ['as' => 'backendUserCreate', 'uses' => 'Backend\UsersController@create']);
     Route::post('/user/create', ['as' => 'backendUserCreate', 'uses' => 'Backend\UsersController@create']);
-    Route::delete('/user/delete/{id}', ['as' => 'backendUserDelete', 'uses' => 'Backend\UsersController@delete']);
+    Route::get('/user/delete/{id}', ['as' => 'backendUserDelete', 'uses' => 'Backend\UsersController@delete']);
     Route::get('/user/update', ['as' => 'backendUserUpdate', 'uses' => 'Backend\UsersController@update']);
     Route::put('/user/update', ['as' => 'backendUserUpdate', 'uses' => 'Backend\UsersController@update']);
     Route::get('/users', ['as' => 'backendUsers', 'uses' => 'Backend\UsersController@index']);

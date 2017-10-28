@@ -12,7 +12,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('email'.' (*)') !!}
-    {!! Form::email('email', old('name', $user->email), ['class' => 'form-control', 'required']) !!}
+    {!! Form::email('email', old('email', $user->email), ['class' => 'form-control', 'required']) !!}
     <i class="text-danger">{{ $errors->first('email') }}</i>
 </div>
 <div class="form-group">
