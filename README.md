@@ -50,9 +50,23 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
 
-Installation
--------------------
+## Included Css
+- [lipis/bootstrap-social](https://github.com/lipis/bootstrap-social)
+- [twbs/bootstrap](https://github.com/twbs/bootstrap)
+
+## Included Js
+- [defunkt/jquery-pjax](https://github.com/defunkt/jquery-pjax)
+
+# Included Packages
+- [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
+- [laracasts/flash](https://github.com/laracasts/flash)
+- [LaravelCollective/html](https://github.com/LaravelCollective/html)
+- [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
+- [spatie/laravel-pjax](https://github.com/spatie/laravel-pjax)
+
+## Installation
 - Run command, composer update
 - Run command, bower update
+- Run command, npm run production (to run laravel mix)
 - Rename .env.example to .env, and update all setting
-- Run command, php artisan migrate:refresh
+- Run command, php artisan migrate:refresh --seed
