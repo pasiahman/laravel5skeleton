@@ -16,7 +16,8 @@ class UsersController extends Controller
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['request'] = $request;
-        $data['users'] = Users::search($request->query())->paginate($request->query('limit'));
+        $data['role'] = new Role;
+        $data['users'] = Users::with('roles')->search($request->query())->paginate($request->query('limit'));
 
         return view('backend/users/index', $data);
     }

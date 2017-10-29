@@ -59,8 +59,11 @@ class Users extends \App\User
     {
         isset($params['name']) ? $query->where('name', 'like', '%'.$params['name'].'%') : '';
         isset($params['email']) ? $query->where('email', 'like', '%'.$params['email'].'%') : '';
+        isset($params['role_id']) ? $query->whereHas('roles', function ($query) use ($params) { $query->where('id', $params['role_id']); }) : '';
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {
-            count($sort) == 2 ? $query->orderBy($sort[0], $sort[1]) : '';
+            if (count($sort) == 2) {
+                $query->orderBy($sort[0], $sort[1]);
+            }
         }
 
         return $query;

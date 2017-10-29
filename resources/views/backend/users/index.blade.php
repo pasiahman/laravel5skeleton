@@ -6,11 +6,11 @@
 @section('content')
     <a class="btn btn-default" href="{{ route('backendUserCreate') }}">Create</a>
 
-    {!! Form::open(['data-pjax', 'method' => 'GET', 'route' => 'backendUsers']) !!}
+    {!! Form::open(['method' => 'GET', 'route' => 'backendUsers']) !!}
     <table class="table table-bordered table-condensed table-striped">
         <thead>
             <tr>
-                <th colspan="4">
+                <th colspan="5">
                     <div class="form-inline">
                         <div class="form-group">
                             Per page
@@ -28,6 +28,7 @@
                 <th>No</th>
                 <th>Name {{ Form::text('name', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
                 <th>Email {{ Form::text('email', $request->query('email'), ['class' => 'form-control input-sm']) }}</th>
+                <th>Roles {{ Form::select('role_id', $role->name_options, $request->query('role_id'), ['class' => 'form-control input-sm']) }}</th>
                 <th>Action <button class="btn btn-block btn-default btn-sm" type="submit"><i class="fa fa-search"></i> Filter</button></th>
             </tr>
         </thead>
@@ -38,6 +39,11 @@
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
                     <td>
+                        @foreach ($user->roles as $role)
+                            <a href="{{ route('backendRoleUpdate', ['id' => $role->id]) }}">{{ $role->name }}</a><br />
+                        @endforeach
+                    </td>
+                    <td>
                         <a class="btn btn-primary btn-xs" href="{{ route('backendUserUpdate', ['id' => $user->id]) }}"><i class="fa fa-pencil"></i></a>
                         <a class="btn btn-danger btn-xs" href="{{ route('backendUserDelete', $user->id) }}" onclick="return confirm('Are you sure to delete this?')"><i class="fa fa-trash-o"></i></a>
                     </td>
@@ -46,7 +52,7 @@
                 <tr><td align="center" colspan="4">No data</td></tr>
             @endforelse
         </tbody>
-        <tfoot><tr><td align="center" colspan="4">{!! $users->appends($request->query())->links('vendor.pagination.default-pjax') !!}</td></tr></tfoot>
+        <tfoot><tr><td align="center" colspan="5">{!! $users->appends($request->query())->links('vendor.pagination.default-pjax') !!}</td></tr></tfoot>
     </table>
     {!! Form::close() !!}
 @endsection('content')
