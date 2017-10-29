@@ -21,6 +21,22 @@
     <i class="text-danger">{{ $errors->first('password') }}</i>
 </div>
 
+<div class="panel panel-default">
+    <div class="panel-heading">Roles</div>
+    <div class="panel-body" style="max-height: 300px; overflow: auto;">
+        @forelse ($roles as $role)
+            <div class="checkbox">
+                <label>
+                    {!! Form::checkbox('roles[]', $role->name, old('roles[]', $user->hasRole($role->name))) !!}
+                    {!! $role->name !!}
+                </label>
+            </div>
+        @empty
+            No data
+        @endforelse
+    </div>
+</div>
+
 @if ($user->id)
     {!! Form::submit('Update', ['class' => 'btn btn-default', 'name' => 'update']) !!}
 @else

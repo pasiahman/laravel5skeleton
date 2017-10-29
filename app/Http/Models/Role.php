@@ -9,7 +9,7 @@ class Role extends \Spatie\Permission\Models\Role
     protected $attributes = [
         'guard_name' => 'web',
     ];
-    
+
     /**
      * The attributes that are mass assignable.
      *
@@ -59,5 +59,14 @@ class Role extends \Spatie\Permission\Models\Role
         }
 
         return $query;
+    }
+
+    public function syncPermissions(...$permissions)
+    {
+        $this->permissions()->detach();
+        if ($permissions = array_filter($permissions)) {
+            return $this->givePermissionTo($permissions);
+        };
+        return $this;
     }
 }

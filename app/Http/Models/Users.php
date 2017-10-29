@@ -3,9 +3,12 @@
 namespace App\Http\Models;
 
 use Illuminate\Support\Facades\Validator;
+use Spatie\Permission\Traits\HasRoles;
 
 class Users extends \App\User
 {
+    use HasRoles;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -14,6 +17,8 @@ class Users extends \App\User
     protected $fillable = [
         'name', 'email', 'password',
     ];
+
+    protected $guard_name = 'web';
 
     /**
      * The attributes that should be hidden for arrays.
@@ -59,5 +64,14 @@ class Users extends \App\User
         }
 
         return $query;
+    }
+
+    public function syncRoles(...$roles)
+    {
+        $this->roles()->detach();
+        if ($roles = array_filter($roles)) {
+            return $this->assignRole($roles);
+        }
+        return $this;
     }
 }
