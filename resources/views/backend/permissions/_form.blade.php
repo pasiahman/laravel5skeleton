@@ -12,7 +12,7 @@
 </div>
 <div class="form-group">
     {!! Form::label('guard_name'.' (*)') !!}
-    {!! Form::text('guard_name', old('guard_name', $permission->guard_name), ['class' => 'form-control', 'required']) !!}
+    {!! Form::text('guard_name', old('guard_name', $permission->guard_name), ['class' => 'form-control', 'readonly', 'required']) !!}
     <i class="text-danger">{{ $errors->first('guard_name') }}</i>
 </div>
 

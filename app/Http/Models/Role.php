@@ -26,7 +26,7 @@ class Role extends \Spatie\Permission\Models\Role
      */
     protected $hidden = [];
 
-    public function validate($input, $scenario = 'create')
+    public function validate($input, string $scenario = 'create')
     {
         $rules = [
             'id' => ['required', 'integer', 'digits_between:1,10'],

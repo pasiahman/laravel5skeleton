@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Permission;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class PermissionsController extends Controller
 {
