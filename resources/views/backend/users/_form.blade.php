@@ -21,20 +21,68 @@
     <i class="text-danger">{{ $errors->first('password') }}</i>
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Roles</div>
-    <div class="panel-body" style="max-height: 300px; overflow: auto;">
-        @forelse ($roles as $role)
-            <div class="checkbox">
-                <label>
-                    {!! Form::checkbox('roles[]', $role->name, old('roles[]', $user->hasRole($role->name))) !!}
-                    {!! $role->name !!}
-                </label>
+<div class="row">
+    @can('backend roles')
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Roles</div>
+                <div class="panel-body" style="max-height: 500px; overflow: auto;">
+                    @forelse ($roles as $role)
+                        <div class="checkbox">
+                            <label>
+                                {!! Form::checkbox('roles[]', $role->name, old('roles[]', $user->hasRole($role->name))) !!}
+                                {!! $role->name !!}
+                            </label>
+                        </div>
+                    @empty
+                        No data
+                    @endforelse
+                </div>
             </div>
-        @empty
-            No data
-        @endforelse
-    </div>
+        </div>
+    @endcan
+
+    @can('backend permissions')
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading">Permissions</div>
+                <div class="panel-body" style="max-height: 500px; overflow: auto;">
+                    @if (count($permissions) > 1)
+                        <table class="table table-bordered table-condensed">
+                            <tr>
+                                <th>Role permissions</th>
+                                <th>Overwrite permissions</th>
+                            </tr>
+                            @php ($user_permissions = $user->getDirectPermissions()->pluck('name')->toArray())
+                            @php ($user_roles = $user->getPermissionsViaRoles()->pluck('name')->toArray())
+                            @foreach ($permissions as $permission)
+                                <tr>
+                                    <td>
+                                        <div class="checkbox">
+                                            <label>
+                                                {!! Form::checkbox('', $permission->name, in_array($permission->name, $user_roles), ['disabled']) !!}
+                                                {!! $permission->name !!}
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="checkbox">
+                                            <label>
+                                                {!! Form::checkbox('permissions[]', $permission->name, old('permissions[]', in_array($permission->name, $user_permissions))) !!}
+                                                {!! $permission->name !!}
+                                            </label>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    @else
+                        No data
+                    @endif
+                </div>
+            </div>
+        </div>
+    @endcan
 </div>
 
 @if ($user->id)

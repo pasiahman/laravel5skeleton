@@ -28,7 +28,9 @@
                 <th>No</th>
                 <th>Name {{ Form::text('name', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
                 <th>Email {{ Form::text('email', $request->query('email'), ['class' => 'form-control input-sm']) }}</th>
-                <th>Roles {{ Form::select('role_id', $role->name_options, $request->query('role_id'), ['class' => 'form-control input-sm']) }}</th>
+                @can('backend roles')
+                    <th>Roles {{ Form::select('role_id', $role->name_options, $request->query('role_id'), ['class' => 'form-control input-sm']) }}</th>
+                @endcan
                 <th>Action <button class="btn btn-block btn-default btn-sm" type="submit"><i class="fa fa-search"></i> Filter</button></th>
             </tr>
         </thead>
@@ -38,11 +40,13 @@
                     <td>{{ ($users->currentPage() - 1) * $users->perPage() + $i + 1 }}</td>
                     <td>{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
-                    <td>
-                        @foreach ($user->roles as $role)
-                            <a href="{{ route('backendRoleUpdate', ['id' => $role->id]) }}">{{ $role->name }}</a><br />
-                        @endforeach
-                    </td>
+                    @can('backend roles')
+                        <td>
+                            @foreach ($user->roles as $role)
+                                <a href="{{ route('backendRoleUpdate', ['id' => $role->id]) }}">{{ $role->name }}</a><br />
+                            @endforeach
+                        </td>
+                    @endcan
                     <td>
                         <a class="btn btn-primary btn-xs" href="{{ route('backendUserUpdate', ['id' => $user->id]) }}"><i class="fa fa-pencil"></i></a>
                         <a class="btn btn-danger btn-xs" href="{{ route('backendUserDelete', $user->id) }}" onclick="return confirm('Are you sure to delete this?')"><i class="fa fa-trash-o"></i></a>
