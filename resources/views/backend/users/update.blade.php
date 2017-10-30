@@ -4,4 +4,4 @@
 
 @section('content')
     @include('backend.users._form', ['user' => $user])
-@endsection('content')
+@endsection

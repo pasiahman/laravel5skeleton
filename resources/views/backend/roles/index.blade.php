@@ -49,4 +49,4 @@
         <tfoot><tr><td align="center" colspan="4">{!! $roles->appends($request->query())->links('vendor.pagination.default-pjax') !!}</td></tr></tfoot>
     </table>
     {!! Form::close() !!}
-@endsection('content')
+@endsection
