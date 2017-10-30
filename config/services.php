@@ -20,16 +20,16 @@ return [
         'redirect' => env('FACEBOOK_CALLBACK_URL'),
     ],
 
-    'google' => [
-        'client_id' => env('GOOGLE_KEY'),
-        'client_secret' => env('GOOGLE_SECRET'),
-        'redirect' => env('GOOGLE_CALLBACK_URL'),
-    ],
-
     'github' => [
         'client_id' => env('GITHUB_KEY'),
         'client_secret' => env('GITHUB_SECRET'),
         'redirect' => env('GITHUB_CALLBACK_URL'),
+    ],
+
+    'google' => [
+        'client_id' => env('GOOGLE_KEY'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect' => env('GOOGLE_CALLBACK_URL'),
     ],
 
     'mailgun' => [
