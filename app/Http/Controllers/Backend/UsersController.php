@@ -26,6 +26,7 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
+        $data['permissions'] = Permission::orderBy('name')->get();
         $data['roles'] = Role::orderBy('name')->get();
         $data['user'] = $user = new Users;
 

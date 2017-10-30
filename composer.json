@@ -11,6 +11,7 @@
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "laravelcollective/html": "^5.5",
+        "renatomarinho/laravel-page-speed": "^1.8",
         "spatie/laravel-permission": "^2.7",
         "spatie/laravel-pjax": "^1.3"
     },

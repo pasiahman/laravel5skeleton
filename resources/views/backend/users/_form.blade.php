@@ -60,7 +60,7 @@
                                     <td>
                                         <div class="checkbox">
                                             <label>
-                                                {!! Form::checkbox('', $permission->name, in_array($permission->name, $user_roles), ['disabled']) !!}
+                                                {!! Form::checkbox('user_permissions[]', $permission->name, in_array($permission->name, $user_roles), ['disabled']) !!}
                                                 {!! $permission->name !!}
                                             </label>
                                         </div>

@@ -61,6 +61,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
 - [laracasts/flash](https://github.com/laracasts/flash)
 - [LaravelCollective/html](https://github.com/LaravelCollective/html)
+- [renatomarinho/laravel-page-speed](https://github.com/renatomarinho/laravel-page-speed)
 - [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
 - [spatie/laravel-pjax](https://github.com/spatie/laravel-pjax)
 
