@@ -14,6 +14,8 @@
 Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
+    Route::get('backend', ['as' => 'backend', 'uses' => 'Backend\UsersController@index']);
+
     Route::group(['middleware' => ['permission:backend permissions']], function () {
         Route::get('backend/permission/create', ['as' => 'backendPermissionCreate', 'uses' => 'Backend\PermissionsController@create']);
         Route::post('backend/permission/create', ['as' => 'backendPermissionCreate', 'uses' => 'Backend\PermissionsController@create']);
