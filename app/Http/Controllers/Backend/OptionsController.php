@@ -3,10 +3,10 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\Permission;
+use App\Http\Models\Options;
 use Illuminate\Http\Request;
 
-class PermissionsController extends Controller
+class OptionsController extends Controller
 {
     public function index(Request $request)
     {
@@ -14,55 +14,55 @@ class PermissionsController extends Controller
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['request'] = $request;
-        $data['permissions'] = Permission::search($request->query())->paginate($request->query('limit'));
+        $data['options'] = Options::search($request->query())->paginate($request->query('limit'));
 
-        return view('backend/permissions/index', $data);
+        return view('backend/options/index', $data);
     }
 
     public function create(Request $request)
     {
-        $data['permission'] = $permission = new Permission;
+        $data['option'] = $option = new Options;
 
         if ($request->input('create')) {
-            $validator = $permission->validate($request->input(), 'create');
+            $validator = $option->validate($request->input(), 'create');
             if ($validator->passes()) {
-                $permission->fill($request->input())->save();
+                $option->fill($request->input())->save();
                 flash('Data has been created')->success()->important();
-                return redirect()->route('backendPermissions');
+                return redirect()->route('backendOptions');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
                 $data['errors'] = $validator->errors();
             }
         }
 
-        return view('backend/permissions/create', $data);
+        return view('backend/options/create', $data);
     }
 
     public function delete($id)
     {
-        $permission = Permission::find($id) ?: abort(404);
+        $option = Options::find($id) ?: abort(404);
 
-        $permission->delete();
+        $option->delete();
         flash('Data has been deleted')->success()->important();
         return back();
     }
 
     public function update(Request $request)
     {
-        $data['permission'] = $permission = Permission::find($request->input('id'));
+        $data['option'] = $option = Options::find($request->input('id'));
 
         if ($request->input('update')) {
-            $validator = $permission->validate($request->input(), 'update');
+            $validator = $option->validate($request->input(), 'update');
             if ($validator->passes()) {
-                $permission->fill($request->input())->save();
+                $option->fill($request->input())->save();
                 flash('Data has been updated')->success()->important();
-                return redirect()->route('backendPermissions');
+                return redirect()->route('backendOptions');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
                 $data['errors'] = $validator->errors();
             }
         }
 
-        return view('backend/permissions/update', $data);
+        return view('backend/options/update', $data);
     }
 }

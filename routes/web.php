@@ -16,6 +16,14 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
     Route::get('backend', ['as' => 'backend', 'uses' => 'Backend\UsersController@index']);
 
+    Route::group(['middleware' => ['permission:backend options']], function () {
+        Route::get('backend/option/create', ['as' => 'backendOptionCreate', 'uses' => 'Backend\OptionsController@create']);
+        Route::post('backend/option/create', ['as' => 'backendOptionCreate', 'uses' => 'Backend\OptionsController@create']);
+        Route::get('backend/option/delete/{id}', ['as' => 'backendOptionDelete', 'uses' => 'Backend\OptionsController@delete']);
+        Route::get('backend/option/update', ['as' => 'backendOptionUpdate', 'uses' => 'Backend\OptionsController@update']);
+        Route::put('backend/option/update', ['as' => 'backendOptionUpdate', 'uses' => 'Backend\OptionsController@update']);
+        Route::get('backend/options', ['as' => 'backendOptions', 'uses' => 'Backend\OptionsController@index']);
+    });
     Route::group(['middleware' => ['permission:backend permissions']], function () {
         Route::get('backend/permission/create', ['as' => 'backendPermissionCreate', 'uses' => 'Backend\PermissionsController@create']);
         Route::post('backend/permission/create', ['as' => 'backendPermissionCreate', 'uses' => 'Backend\PermissionsController@create']);

@@ -106,6 +106,7 @@
                 <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-ban"></i> <span>Permissions</span></a></li>
                 <li><a href="{{ route('backendRoles') }}"><i class="fa fa-user"></i> <span>Roles</span></a></li>
                 <li><a href="{{ route('backendUsers') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
+                <li><a href="{{ route('backendOptions') }}"><i class="fa fa-sliders"></i> <span>Options</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
