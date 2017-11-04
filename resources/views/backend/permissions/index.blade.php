@@ -4,7 +4,7 @@
 @section('content_header', 'Permissions')
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li class="active"><i class="fa fa fa-ban"></i> Permissions</li>
+        <li class="active"><i class="fa fa-ban"></i> Permissions</li>
     </ol>
 @endsection
 

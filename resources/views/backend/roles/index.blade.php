@@ -4,7 +4,7 @@
 @section('content_header', 'Roles')
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li class="active"><i class="fa fa fa-user"></i> Roles</li>
+        <li class="active"><i class="fa fa-user"></i> Roles</li>
     </ol>
 @endsection
 

@@ -103,9 +103,9 @@
                 </li>
 
                 <li class="header">Masters</li>
-                <li><a href="{{ route('backendPermissions') }}"><i class="fa fa fa-ban"></i> <span>Permissions</span></a></li>
+                <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-ban"></i> <span>Permissions</span></a></li>
                 <li><a href="{{ route('backendRoles') }}"><i class="fa fa-user"></i> <span>Roles</span></a></li>
-                <li><a href="{{ route('backendUsers') }}"><i class="fa fa fa-users"></i> <span>Users</span></a></li>
+                <li><a href="{{ route('backendUsers') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
