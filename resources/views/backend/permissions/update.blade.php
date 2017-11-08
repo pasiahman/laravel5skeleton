@@ -1,11 +1,11 @@
 @extends('backend.layouts.main')
 
-@section('title', 'Update Permission')
-@section('content_header', 'Update Permission')
+@section('title', __('cms.update'))
+@section('content_header', __('cms.update'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-user"></i>Permissions</a></li>
-        <li class="active">Update</li>
+        <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-user"></i>@lang('cms.permissions')</a></li>
+        <li class="active">@lang('cms.update')</li>
     </ol>
 @endsection
 

@@ -1,17 +1,17 @@
 @extends('backend.layouts.main')
 
-@section('title', 'Options')
-@section('content_header', 'Options')
+@section('title', __('cms.options'))
+@section('content_header', __('cms.options'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-sliders"></i> Options</li>
+        <li class="active"><i class="fa fa-sliders"></i> @lang('cms.options')</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backendOptionCreate') }}">Create</a>
+            <a class="btn btn-default" href="{{ route('backendOptionCreate') }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             {!! Form::open(['method' => 'GET', 'route' => 'backendOptions']) !!}
@@ -21,22 +21,22 @@
                         <th class="text-right" colspan="4">
                             <div class="form-inline">
                                 <div class="form-group">
-                                    Per page
+                                    @lang('cms.per_page')
                                     @php ($limitOptions = ['10' => '10', '25' => '25', '50' => '50', '100' => '100'])
                                     {!! Form::select('limit', $limitOptions, $request->query('limit'), ['class' => 'input-sm']) !!}
 
-                                    Sort
-                                    @php ($sortOptions = ['name,ASC' => 'Name (A-Z)', 'name,DESC' => 'Name (Z-A)', 'value,ASC' => 'Value (A-Z)', 'value,DESC' => 'Value (Z-A)'])
+                                    @lang('cms.sort')
+                                    @php ($sortOptions = ['name,ASC' => __('validation.attributes.name').' (A-Z)', 'name,DESC' => __('validation.attributes.name').' (Z-A)', 'value,ASC' => __('validation.attributes.value').' (A-Z)', 'value,DESC' => __('validation.attributes.value').' (Z-A)'])
                                     {!! Form::select('sort', $sortOptions, $request->query('sort'), ['class' => 'input-sm']) !!}
                                 </div>
                             </div>
                         </th>
                     </tr>
                     <tr>
-                        <th>No</th>
-                        <th>Name {{ Form::text('name', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
-                        <th>Value {{ Form::text('value', $request->query('value'), ['class' => 'form-control input-sm']) }}</th>
-                        <th>Action <button class="btn btn-block btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button></th>
+                        <th></th>
+                        <th>@lang('validation.attributes.name') {{ Form::text('name', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
+                        <th>@lang('validation.attributes.value') {{ Form::text('value', $request->query('value'), ['class' => 'form-control input-sm']) }}</th>
+                        <th>@lang('cms.action') <button class="btn btn-block btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,7 +51,7 @@
                             </td>
                         </tr>
                     @empty
-                        <tr><td align="center" colspan="4">No data</td></tr>
+                        <tr><td align="center" colspan="4">@lang('cms.no_data')</td></tr>
                     @endforelse
                 </tbody>
                 <tfoot><tr><td align="center" colspan="4">{!! $options->appends($request->query())->links('vendor.pagination.default-pjax') !!}</td></tr></tfoot>

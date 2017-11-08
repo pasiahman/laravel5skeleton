@@ -30,7 +30,7 @@ class RolesController extends Controller
             if ($validator->passes()) {
                 $role->fill($request->input())->save();
                 $role->syncPermissions($request->input('permissions'));
-                flash('Data has been created')->success()->important();
+                flash(__('cms.data_has_been_created'))->success()->important();
                 return redirect()->route('backendRoles');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
@@ -46,7 +46,7 @@ class RolesController extends Controller
         $role = Role::find($id) ?: abort(404);
 
         $role->syncPermissions()->delete($id);
-        flash('Data has been deleted')->success()->important();
+        flash(__('cms.data_has_been_deleted'))->success()->important();
         return back();
     }
 
@@ -62,7 +62,7 @@ class RolesController extends Controller
             if ($validator->passes()) {
                 $role->fill($request->input())->save();
                 $role->syncPermissions($request->input('permissions'));
-                flash('Data has been updated')->success()->important();
+                flash(__('cms.data_has_been_updated'))->success()->important();
                 return redirect()->route('backendRoles');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();

@@ -27,7 +27,7 @@ class OptionsController extends Controller
             $validator = $option->validate($request->input(), 'create');
             if ($validator->passes()) {
                 $option->fill($request->input())->save();
-                flash('Data has been created')->success()->important();
+                flash(__('cms.data_has_been_created'))->success()->important();
                 return redirect()->route('backendOptions');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
@@ -43,7 +43,7 @@ class OptionsController extends Controller
         $option = Options::find($id) ?: abort(404);
 
         $option->delete();
-        flash('Data has been deleted')->success()->important();
+        flash(__('cms.data_has_been_deleted'))->success()->important();
         return back();
     }
 
@@ -55,7 +55,7 @@ class OptionsController extends Controller
             $validator = $option->validate($request->input(), 'update');
             if ($validator->passes()) {
                 $option->fill($request->input())->save();
-                flash('Data has been updated')->success()->important();
+                flash(__('cms.data_has_been_updated'))->success()->important();
                 return redirect()->route('backendOptions');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();

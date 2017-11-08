@@ -7,21 +7,21 @@
 <div class="box">
     <div class="box-body">
         <div class="form-group">
-            {!! Form::label('name'.' (*)') !!}
+            {!! Form::label(__('validation.attributes.name').' (*)') !!}
             {!! Form::text('name', old('name', $option->name), ['class' => 'form-control', 'required']) !!}
             <i class="text-danger">{{ $errors->first('name') }}</i>
         </div>
         <div class="form-group">
-            {!! Form::label('value') !!}
+            {!! Form::label(__('validation.attributes.value')) !!}
             {!! Form::textarea('value', old('value', $option->value), ['class' => 'form-control', 'rows' => 3]) !!}
             <i class="text-danger">{{ $errors->first('value') }}</i>
         </div>
     </div>
     <div class="box-footer">
         @if ($option->id)
-            {!! Form::submit('Update', ['class' => 'btn btn-default', 'name' => 'update']) !!}
+            <input class="btn btn-default" name="update" type="submit" value="@lang('cms.update')" />
         @else
-            {!! Form::submit('Create', ['class' => 'btn btn-default', 'name' => 'create']) !!}
+            <input class="btn btn-default" name="create" type="submit" value="@lang('cms.create')" />
         @endif
     </div>
 </div>

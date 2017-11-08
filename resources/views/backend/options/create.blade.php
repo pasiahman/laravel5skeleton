@@ -1,11 +1,11 @@
 @extends('backend.layouts.main')
 
-@section('title', 'Create Option')
-@section('content_header', 'Create Option')
+@section('title', __('cms.create'))
+@section('content_header', __('cms.create'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('backendOptions') }}"><i class="fa fa-sliders"></i>Options</a></li>
-        <li class="active">Create</li>
+        <li><a href="{{ route('backendOptions') }}"><i class="fa fa-sliders"></i>@lang('cms.options')</a></li>
+        <li class="active">@lang('cms.create')</li>
     </ol>
 @endsection
 

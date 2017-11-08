@@ -1,11 +1,11 @@
 @extends('backend.layouts.main')
 
-@section('title', 'Create Permission')
-@section('content_header', 'Create Permission')
+@section('title', __('cms.create'))
+@section('content_header', __('cms.create'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-ban"></i>Permissions</a></li>
-        <li class="active">Create</li>
+        <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-ban"></i>@lang('cms.permissions')</a></li>
+        <li class="active">@lang('cms.create')</li>
     </ol>
 @endsection
 

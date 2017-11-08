@@ -1,17 +1,17 @@
 @extends('backend.layouts.main')
 
-@section('title', 'Roles')
-@section('content_header', 'Roles')
+@section('title', __('cms.roles'))
+@section('content_header', __('cms.roles'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li class="active"><i class="fa fa-user"></i> Roles</li>
+        <li class="active"><i class="fa fa-user"></i> @lang('cms.roles')</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backendRoleCreate') }}">Create</a>
+            <a class="btn btn-default" href="{{ route('backendRoleCreate') }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             {!! Form::open(['method' => 'GET', 'route' => 'backendRoles']) !!}
@@ -21,22 +21,22 @@
                         <th class="text-right" colspan="4">
                             <div class="form-inline">
                                 <div class="form-group">
-                                    Per page
+                                    @lang('cms.per_page')
                                     @php ($limitOptions = ['10' => '10', '25' => '25', '50' => '50', '100' => '100'])
                                     {!! Form::select('limit', $limitOptions, $request->query('limit'), ['class' => 'input-sm']) !!}
 
-                                    Sort
-                                    @php ($sortOptions = ['name,ASC' => 'Name (A-Z)', 'name,DESC' => 'Name (Z-A)', 'guard_name,ASC' => 'Guard Name (A-Z)', 'guard_name,DESC' => 'Guard Name (Z-A)'])
+                                    @lang('cms.sort')
+                                    @php ($sortOptions = ['name,ASC' => __('validation.attributes.name').' (A-Z)', 'name,DESC' => __('validation.attributes.name').' (Z-A)', 'guard_name,ASC' => __('validation.attributes.guard_name').' (A-Z)', 'guard_name,DESC' => __('validation.attributes.guard_name').' (Z-A)'])
                                     {!! Form::select('sort', $sortOptions, $request->query('sort'), ['class' => 'input-sm']) !!}
                                 </div>
                             </div>
                         </th>
                     </tr>
                     <tr>
-                        <th>No</th>
-                        <th>Name {{ Form::text('name', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
-                        <th>Guard Name {{ Form::text('guard_name', $request->query('guard_name'), ['class' => 'form-control input-sm']) }}</th>
-                        <th>Action <button class="btn btn-block btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button></th>
+                        <th></th>
+                        <th>@lang('validation.attributes.name') {{ Form::text('name', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
+                        <th>@lang('validation.attributes.guard_name') {{ Form::text('guard_name', $request->query('guard_name'), ['class' => 'form-control input-sm']) }}</th>
+                        <th>@lang('cms.action') <button class="btn btn-block btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -51,7 +51,7 @@
                             </td>
                         </tr>
                     @empty
-                        <tr><td align="center" colspan="4">No data</td></tr>
+                        <tr><td align="center" colspan="4">@lang('cms.no_data')</td></tr>
                     @endforelse
                 </tbody>
                 <tfoot><tr><td align="center" colspan="4">{!! $roles->appends($request->query())->links('vendor.pagination.default-pjax') !!}</td></tr></tfoot>
