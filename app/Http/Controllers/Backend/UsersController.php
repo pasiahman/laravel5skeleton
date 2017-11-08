@@ -37,7 +37,7 @@ class UsersController extends Controller
                 $user->fill($request->input())->save();
                 Auth::user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
                 Auth::user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
-                flash('Data has been created')->success()->important();
+                flash(__('cms.data_has_been_created'))->success()->important();
                 return redirect()->route('backendUsers');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
@@ -53,7 +53,7 @@ class UsersController extends Controller
         $user = Users::find($id) ?: abort(404);
 
         $user->syncRoles()->delete($id);
-        flash('Data has been deleted')->success()->important();
+        flash(__('cms.data_has_been_deleted'))->success()->important();
         return back();
     }
 
@@ -72,7 +72,7 @@ class UsersController extends Controller
                 $user->fill($request->input())->save();
                 Auth::user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
                 Auth::user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
-                flash('Data has been updated')->success()->important();
+                flash(__('cms.data_has_been_updated'))->success()->important();
                 return redirect()->route('backendUsers');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();

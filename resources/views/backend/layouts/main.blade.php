@@ -35,11 +35,25 @@
 
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        @php ($languages = config('app.languages'))
+                        @php ($locale = config('app.locale'))
+                        <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                            <img src="{{ asset('images/flags/'.$locale.'.gif') }}" /> <span class="caret"></span>
+                        </a>
+                        @if ($languages)
+                            <ul class="dropdown-menu" role="menu">
+                                @foreach ($languages as $languageCode => $languageName)
+                                    <li><a href="{{ route('locale.setlocale', $languageCode) }}" class="language"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /> <span>{{ $languageName }}</span></a></li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </li>
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            {{ Auth::user()->name }}
                             {{-- <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image"> need Jovi --}}
                             {{-- <span class="hidden-xs">{{ Auth::user()->name }}</span> --}}
+                            {{ Auth::user()->name }}
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
@@ -54,11 +68,9 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                     <div class="pull-right">
-                                        <a class="btn btn-default btn-flat" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                        document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
+                                        <a class="btn btn-default btn-flat" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                            @lang('cms.logout')
+                                        </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
@@ -103,10 +115,10 @@
                 </li>
 
                 <li class="header">Masters</li>
-                <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-ban"></i> <span>Permissions</span></a></li>
-                <li><a href="{{ route('backendRoles') }}"><i class="fa fa-user"></i> <span>Roles</span></a></li>
-                <li><a href="{{ route('backendUsers') }}"><i class="fa fa-users"></i> <span>Users</span></a></li>
-                <li><a href="{{ route('backendOptions') }}"><i class="fa fa-sliders"></i> <span>Options</span></a></li>
+                <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
+                <li><a href="{{ route('backendRoles') }}"><i class="fa fa-user"></i> <span>@lang('cms.roles')</span></a></li>
+                <li><a href="{{ route('backendUsers') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
+                <li><a href="{{ route('backendOptions') }}"><i class="fa fa-sliders"></i> <span>@lang('cms.options')</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->
