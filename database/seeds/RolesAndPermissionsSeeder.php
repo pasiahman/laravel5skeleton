@@ -21,6 +21,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend options']);
         Permission::create(['name' => 'backend permissions']);
         Permission::create(['name' => 'backend roles']);
+        Permission::create(['name' => 'backend media']);
         Permission::create(['name' => 'backend users']);
 
         // create roles and assign existing permissions
@@ -29,6 +30,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'backend options',
             'backend permissions',
             'backend roles',
+            'backend media',
             'backend users',
         ]);
 

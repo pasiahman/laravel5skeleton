@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/backend-app.css') }}" rel="stylesheet">
-    @yield('styles')
+    @stack('styles')
 </head>
 <body class="hold-transition pjax-container sidebar-mini skin-purple">
     <header class="main-header">
@@ -148,6 +148,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/backend-app.js') }}"></script>
-    @yield('scripts')
+    @stack('scripts')
 </body>
 </html>

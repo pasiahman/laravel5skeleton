@@ -15,4 +15,6 @@ class Posts extends Model
     protected $fillable = [
         'author', 'title', 'name', 'content', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
     ];
+
+    protected $table = 'posts';
 }

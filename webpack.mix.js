@@ -39,6 +39,12 @@ mix.styles([
     'resources/bower/bootstrap-social/bootstrap-social.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
 ], 'public/css/app.css')
+// .copy('resources/bower/fine-uploader', 'public/bower/fine-uploader')
+.copy('resources/bower/fine-uploader/dist/edit.gif', 'public/bower/fine-uploader')
+.copy('resources/bower/fine-uploader/dist/fine-uploader-gallery.min.css', 'public/bower/fine-uploader')
+.copy('resources/bower/fine-uploader/dist/fine-uploader.min.js', 'public/bower/fine-uploader')
+.copy('resources/bower/fine-uploader/dist/loading.gif', 'public/bower/fine-uploader')
+.copy('resources/bower/fine-uploader/dist/retry.gif', 'public/bower/fine-uploader')
 .copy('resources/bower/font-awesome/fonts', 'public/fonts');
 
 mix.combine([

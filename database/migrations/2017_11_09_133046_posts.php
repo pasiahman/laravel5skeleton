@@ -18,12 +18,12 @@ class Posts extends Migration
             $table->bigInteger('author');
             $table->text('title');
             $table->string('name', 200);
-            $table->longText('content');
+            $table->longText('content')->nullable();
             $table->enum('type', ['attachment', 'page', 'post']);
             $table->string('mime_type', 100);
             $table->enum('status', ['draft', 'publish', 'trash', 'deleted']);
             $table->enum('comment_status', ['closed', 'open']);
-            $table->bigInteger('comment_count');
+            $table->bigInteger('comment_count')->default('0');
             $table->timestamps();
         });
     }

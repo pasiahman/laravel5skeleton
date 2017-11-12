@@ -7,6 +7,7 @@ return [
     'data_has_been_deleted' => 'Data has been deleted',
     'data_has_been_updated' => 'Data has been updated',
     'logout' => 'Logout',
+    'media' => 'Media',
     'name' => 'Name',
     'no_data' => 'No data',
     'options' => 'Options',

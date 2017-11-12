@@ -7,6 +7,7 @@ return [
     'data_has_been_deleted' => 'Data telah dihapus',
     'data_has_been_updated' => 'Data telah diperbarui',
     'logout' => 'Keluar',
+    'media' => 'Media',
     'name' => 'Nama',
     'no_data' => 'Tidak ada data',
     'options' => 'Pilihan',
