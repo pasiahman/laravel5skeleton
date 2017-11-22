@@ -4,15 +4,16 @@ namespace App\Http\Models;
 
 use App\Http\Models\Posts;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 
 class Media extends Posts
 {
-    protected $attribute = [
+    protected $attributes = [
         'type' => 'attachment',
-
-        'attached_file_thumbnail' => '',
     ];
 
     /**
@@ -23,6 +24,10 @@ class Media extends Posts
     protected $fillable = [
         'author', 'title', 'name', 'content', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
     ];
+
+    protected $guarded = ['attached_file', 'attached_file_thumbnail'];
+
+    protected $mimeTypeImages = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'];
 
     protected static function boot()
     {
@@ -45,23 +50,49 @@ class Media extends Posts
         return $options;
     }
 
-    public function getAttachedFileThumbnailAttribute()
-    {
-        return $this->attached_file_thumbnail;
-    }
-
     public function postmetas()
     {
         return $this->hasMany('App\Http\Models\Postmeta', 'post_id', 'id');
     }
 
-    public function setAttachedFileThumbnailAttribute($attached_file)
+    public function setAttachedFile($attachedFile)
     {
-        $url = Storage::disk('media')->url($attached_file);
-        // dd($url);
+        $mimeType = Storage::mimeType($attachedFile);
 
-        $this->attached_file_thumbnail = $attached_file;
-        return $this;
+        if (in_array($mimeType, $this->mimeTypeImages)) {
+            $image = Image::make($attachedFile)->trim();
+
+            $max = max($image->height(), $image->width());
+            $image->resizeCanvas($max, $max)->resize(Config::get('image.large_size'), Config::get('image.large_size'));
+
+            if (Config::get('image.watermark')) {
+                $watermark = Image::make(Config::get('image.watermark_image'));
+                $image->insert($watermark, 'center');
+            }
+
+            $image->save($attachedFile);
+        }
+    }
+
+    public function setAttachedFileThumbnail($attachedFile, $attachedFileThumbnail)
+    {
+        $mimeType = Storage::mimeType($attachedFile);
+
+        if (in_array($mimeType, $this->mimeTypeImages)) {
+            Storage::copy($attachedFile, $attachedFileThumbnail);
+            $image = Image::make($attachedFile)->resize(Config::get('image.thumbnail_size'), Config::get('image.thumbnail_size'));
+
+            if (Config::get('image.watermark')) {
+                $watermark = Image::make(Config::get('image.watermark_image_thumbnail'));
+                $image->insert($watermark, 'center');
+            }
+
+            $image->save($attachedFileThumbnail);
+        } else {
+            $attachedFileThumbnail = 'images/media/text.png';
+        }
+
+        return $attachedFileThumbnail;
     }
 
     public function scopeSearch($query, $params)

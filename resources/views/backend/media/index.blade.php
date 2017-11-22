@@ -18,7 +18,7 @@
             <table class="table table-bordered table-condensed table-striped">
                 <thead>
                     <tr>
-                        <th class="text-right" colspan="5">
+                        <th class="text-right" colspan="6">
                             <div class="form-inline">
                                 <div class="form-group">
                                     @lang('cms.per_page')
@@ -34,6 +34,7 @@
                     </tr>
                     <tr>
                         <th></th>
+                        <th></th>
                         <th>@lang('validation.attributes.name') {{ Form::text('title', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
                         <th>@lang('validation.attributes.mime_type') {{ Form::select('mime_type', $mime_type_options, $request->query('value'), ['class' => 'form-control input-sm']) }}</th>
                         <th>@lang('validation.attributes.created_at') {{ Form::text('created_at', $request->query('value'), ['class' => 'form-control input-sm']) }}</th>
@@ -42,13 +43,16 @@
                 </thead>
                 <tbody>
                     @forelse ($media as $i => $medium)
+                        @php ($attached_file = $medium->postmetas->where('key', 'attached_file')->first()->value)
+                        @php ($attached_file_thumbnail = $medium->postmetas->where('key', 'attached_file_thumbnail')->first()->value)
                         <tr>
                             <td align="center">{{ ($media->currentPage() - 1) * $media->perPage() + $i + 1 }}</td>
                             <td>
-                                {{ dump($medium->postmetas) }}
-                                {{ dump($medium->postmetas->where('key', 'attached_file')->first()->value) }}
-                                {{ $medium->title }}
+                                <a href="{{ Storage::url($attached_file_thumbnail) }}" target="_blank">
+                                    <img class="media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="width: 64px; height: 64px;" />
+                                </a>
                             </td>
+                            <td>{{ $medium->title }}</td>
                             <td>{{ $medium->mime_type }}</td>
                             <td>{{ $medium->created_at }}</td>
                             <td align="center">
@@ -57,10 +61,10 @@
                             </td>
                         </tr>
                     @empty
-                        <tr><td align="center" colspan="5">@lang('cms.no_data')</td></tr>
+                        <tr><td align="center" colspan="6">@lang('cms.no_data')</td></tr>
                     @endforelse
                 </tbody>
-                <tfoot><tr><td align="center" colspan="5">{!! $media->appends($request->query())->links('vendor.pagination.default-pjax') !!}</td></tr></tfoot>
+                <tfoot><tr><td align="center" colspan="6">{!! $media->appends($request->query())->links('vendor.pagination.default-pjax') !!}</td></tr></tfoot>
             </table>
             {!! Form::close() !!}
         </div>

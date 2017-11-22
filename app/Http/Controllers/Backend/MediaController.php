@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Media;
 use App\Http\Models\Postmeta;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
@@ -56,17 +57,19 @@ class MediaController extends Controller
             $extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
 
             $medium = Media::create(['author' => auth()->user()->id, 'title' => $filename, 'name' => str_slug($filename), 'mime_type' => $file->getMimeType()]);
-            $path = $medium->id.'/'.str_slug($filename).'.'.$extension;
-            $file->storeAs('', $path, 'media');
-            $medium->setAttachedFileThumbnailAttribute($path);
+            $originalPath = 'media/original/'.$medium->id.'/'.str_slug($filename).'.'.$extension;
+            $thumbnailPath = 'media/thumbnail/'.$medium->id.'/'.str_slug($filename).'.'.$extension;
+            $file->storeAs('', $originalPath);
 
-            Postmeta::create(['post_id' => $medium->id, 'key' => 'attached_file', 'value' => $path]);
-            // dd($medum->attached_file_thumbnail);
-            Postmeta::create(['post_id' => $medium->id, 'key' => 'attached_file_thumbnail', 'value' => 'media/'.$medium->id.'/'.str_slug($filename).'.'.$extension]);
+            $medium->setAttachedFile($originalPath);
+            $thumbnailPath = $medium->setAttachedFileThumbnail($originalPath, $thumbnailPath);
+
+            Postmeta::create(['post_id' => $medium->id, 'key' => 'attached_file', 'value' => $originalPath]);
+            Postmeta::create(['post_id' => $medium->id, 'key' => 'attached_file_thumbnail', 'value' => $thumbnailPath]);
             Postmeta::create(['post_id' => $medium->id, 'key' => 'attachment_metadata', 'value' => json_encode(['extension' => $extension, 'size' => $file->getClientSize()])]);
         }
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'thumbnailUrl' => Storage::url($thumbnailPath)]);
     }
 
     public function update(Request $request)
