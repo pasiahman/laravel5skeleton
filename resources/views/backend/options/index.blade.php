@@ -54,7 +54,7 @@
                         <tr><td align="center" colspan="4">@lang('cms.no_data')</td></tr>
                     @endforelse
                 </tbody>
-                <tfoot><tr><td align="center" colspan="4">{!! $options->appends($request->query())->links('vendor.pagination.default-pjax') !!}</td></tr></tfoot>
+                <tfoot><tr><td align="center" colspan="4">{!! $options->appends($request->query())->links('vendor.pagination.default') !!}</td></tr></tfoot>
             </table>
             {!! Form::close() !!}
         </div>
