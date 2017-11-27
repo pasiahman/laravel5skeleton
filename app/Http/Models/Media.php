@@ -27,7 +27,7 @@ class Media extends Posts
 
     protected $guarded = ['attached_file', 'attached_file_thumbnail'];
 
-    protected $mimeTypeImages = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'];
+    public $mimeTypeImages = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'];
 
     protected static function boot()
     {

@@ -56,6 +56,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Included Js
 - [defunkt/jquery-pjax](https://github.com/defunkt/jquery-pjax)
+- [fancyapps/fancybox](https://github.com/fancyapps/fancybox)
 - [FineUploader/fine-uploader](https://github.com/FineUploader/fine-uploader)
 
 # Included Packages

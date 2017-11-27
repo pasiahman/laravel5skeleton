@@ -19,6 +19,7 @@ mix.styles([
     'resources/bower/admin-lte/dist/css/AdminLTE.min.css',
     'resources/bower/admin-lte/dist/css/skins/_all-skins.min.css',
     'resources/bower/bootstrap-social/bootstrap-social.css',
+    'resources/bower/fancybox/dist/jquery.fancybox.min.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
     'resources/vendor/admin-lte/AdminLTE-custom.css',
 ], 'public/css/backend-app.css')
@@ -28,10 +29,11 @@ mix.combine([
     'resources/bower/jquery/dist/jquery.min.js',
     'resources/bower/bootstrap/dist/js/bootstrap.min.js',
     'resources/bower/admin-lte/dist/js/adminlte.min.js',
+    'resources/bower/fancybox/dist/jquery.fancybox.min.js',
     'resources/bower/fastclick/lib/fastclick.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
-    'resources/vendor/laracasts/flash/custom.js'
+    'resources/vendor/laracasts/flash/custom.js',
 ], 'public/js/backend-app.js');
 
 mix.styles([
@@ -52,5 +54,5 @@ mix.combine([
     'resources/bower/bootstrap/dist/js/bootstrap.min.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
-    'resources/vendor/laracasts/flash/custom.js'
+    'resources/vendor/laracasts/flash/custom.js',
 ], 'public/js/app.js');
