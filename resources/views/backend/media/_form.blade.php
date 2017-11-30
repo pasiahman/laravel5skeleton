@@ -61,7 +61,10 @@
                             <tr>
                                 <td>@lang('cms.file_size')</td>
                                 <td>:</td>
-                                <td>{{ $attachment_metadata['size'] }}</td>
+                                <td>
+                                    {{ Conversion::convert($attachment_metadata['size'], 'byte')->to('megabyte') }} MB
+                                    ({{ $attachment_metadata['size'] }} B)
+                                </td>
                             </tr>
                         </tbody>
                     </table>
