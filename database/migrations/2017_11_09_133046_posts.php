@@ -18,6 +18,7 @@ class Posts extends Migration
             $table->bigInteger('author');
             $table->text('title');
             $table->string('name', 200);
+            $table->text('excerpt')->nullable();
             $table->longText('content')->nullable();
             $table->enum('type', ['attachment', 'page', 'post']);
             $table->string('mime_type', 100);

@@ -52,7 +52,7 @@
                                     @if (in_array($medium->mime_type, $medium->mimeTypeImages)) data-fancybox="group" @endif
                                     href="{{ Storage::url($attached_file) }}" target="_blank"
                                 >
-                                    <img class="media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="width: 32px; height: 32px;" />
+                                    <img class="media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="height: 32px; width: 32px;" />
                                 </a>
                             </td>
                             <td>{{ $medium->title }}</td>

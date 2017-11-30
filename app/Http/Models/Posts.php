@@ -13,7 +13,7 @@ class Posts extends Model
      * @var array
      */
     protected $fillable = [
-        'author', 'title', 'name', 'content', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
+        'author', 'title', 'name', 'excerpt', 'content', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
     ];
 
     protected $table = 'posts';

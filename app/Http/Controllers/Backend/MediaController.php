@@ -79,6 +79,7 @@ class MediaController extends Controller
         if ($request->input('update')) {
             $validator = $medium->validate($request->input(), 'update');
             if ($validator->passes()) {
+                $request->merge(['name' => str_slug($request->input('title'))]);
                 $medium->fill($request->input())->save();
                 flash(__('cms.data_has_been_updated'))->success()->important();
                 return redirect()->route('backendMedia');

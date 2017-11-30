@@ -16,15 +16,6 @@ class Media extends Posts
         'type' => 'attachment',
     ];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'author', 'title', 'name', 'content', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
-    ];
-
     protected $guarded = ['attached_file', 'attached_file_thumbnail'];
 
     public $mimeTypeImages = ['image/gif', 'image/jpeg', 'image/jpg', 'image/png'];
@@ -40,6 +31,17 @@ class Media extends Posts
         static::addGlobalScope('type', function (Builder $builder) {
             $builder->where('type', 'attachment');
         });
+    }
+
+    public function validate($input, $scenario)
+    {
+        if ($scenario == 'update') {
+            $rules = [
+                'title' => ['required'],
+            ];
+        }
+
+        return Validator::make($input, $rules);
     }
 
     public function getMimeTypeOptionsAttribute()
