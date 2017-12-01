@@ -27,7 +27,7 @@ class PermissionsController extends Controller
             $validator = $permission->validate($request->input(), 'create');
             if ($validator->passes()) {
                 $permission->fill($request->input())->save();
-                flash('Data has been created')->success()->important();
+                flash(__('cms.data_has_been_created'))->success()->important();
                 return redirect()->route('backendPermissions');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
@@ -40,8 +40,10 @@ class PermissionsController extends Controller
 
     public function delete($id)
     {
-        Permission::find($id)->delete($id);
-        flash('Data has been deleted')->success()->important();
+        $permission = Permission::find($id) ?: abort(404);
+
+        $permission->delete();
+        flash(__('cms.data_has_been_deleted'))->success()->important();
         return back();
     }
 
@@ -53,7 +55,7 @@ class PermissionsController extends Controller
             $validator = $permission->validate($request->input(), 'update');
             if ($validator->passes()) {
                 $permission->fill($request->input())->save();
-                flash('Data has been updated')->success()->important();
+                flash(__('cms.data_has_been_updated'))->success()->important();
                 return redirect()->route('backendPermissions');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();

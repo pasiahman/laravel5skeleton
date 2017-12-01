@@ -69,6 +69,15 @@ class Users extends \App\User
         return $query;
     }
 
+    public function syncPermissions(...$permissions)
+    {
+        $this->permissions()->detach();
+        if ($permissions = array_filter($permissions)) {
+            return $this->givePermissionTo($permissions);
+        }
+        return $this;
+    }
+
     public function syncRoles(...$roles)
     {
         $this->roles()->detach();

@@ -19,8 +19,14 @@ class Kernel extends HttpKernel
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
 
+        \RenatoMarinho\LaravelPageSpeed\Middleware\CollapseWhitespace::class,
+        \RenatoMarinho\LaravelPageSpeed\Middleware\ElideAttributes::class,
+        \RenatoMarinho\LaravelPageSpeed\Middleware\InlineCss::class,
+        \RenatoMarinho\LaravelPageSpeed\Middleware\InsertDNSPrefetch::class,
+        \RenatoMarinho\LaravelPageSpeed\Middleware\TrimUrls::class,
+        \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveComments::class,
+        \RenatoMarinho\LaravelPageSpeed\Middleware\RemoveQuotes::class,
         \Spatie\Pjax\Middleware\FilterIfPjax::class,
-
     ];
 
     /**
@@ -37,6 +43,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
+            \App\Http\Middleware\Localization::class,
         ],
 
         'api' => [
@@ -59,5 +67,8 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+
+        'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
+        'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
     ];
 }

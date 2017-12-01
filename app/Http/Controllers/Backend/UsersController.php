@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\Permission;
 use App\Http\Models\Role;
 use App\Http\Models\Users;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -24,6 +26,7 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
+        $data['permissions'] = Permission::orderBy('name')->get();
         $data['roles'] = Role::orderBy('name')->get();
         $data['user'] = $user = new Users;
 
@@ -32,8 +35,9 @@ class UsersController extends Controller
             if ($validator->passes()) {
                 $request->merge(['password' => Hash::make($request->input('password'))]);
                 $user->fill($request->input())->save();
-                $user->syncRoles($request->input('roles'));
-                flash('Data has been created')->success()->important();
+                Auth::user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
+                Auth::user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
+                flash(__('cms.data_has_been_created'))->success()->important();
                 return redirect()->route('backendUsers');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
@@ -49,7 +53,7 @@ class UsersController extends Controller
         $user = Users::find($id) ?: abort(404);
 
         $user->syncRoles()->delete($id);
-        flash('Data has been deleted')->success()->important();
+        flash(__('cms.data_has_been_deleted'))->success()->important();
         return back();
     }
 
@@ -57,6 +61,7 @@ class UsersController extends Controller
     {
         $user = Users::find($request->input('id')) ?: abort(404);
 
+        $data['permissions'] = Permission::orderBy('name')->get();
         $data['roles'] = Role::orderBy('name')->get();
         $data['user'] = $user;
 
@@ -65,8 +70,9 @@ class UsersController extends Controller
             if ($validator->passes()) {
                 $request->input('password') ? $request->merge(['password' => Hash::make($request->input('password'))]) : $request->request->remove('password');
                 $user->fill($request->input())->save();
-                $user->syncRoles($request->input('roles'));
-                flash('Data has been updated')->success()->important();
+                Auth::user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
+                Auth::user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
+                flash(__('cms.data_has_been_updated'))->success()->important();
                 return redirect()->route('backendUsers');
             } else {
                 $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
