@@ -61,6 +61,7 @@ class Role extends \Spatie\Permission\Models\Role
 
     public function scopeSearch($query, $params)
     {
+        isset($params['id']) ? $query->where('id', $params['id']) : '';
         isset($params['name']) ? $query->where('name', 'like', '%'.$params['name'].'%') : '';
         isset($params['guard_name']) ? $query->where('guard_name', 'like', '%'.$params['guard_name'].'%') : '';
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {

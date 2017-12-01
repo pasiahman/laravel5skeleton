@@ -40,7 +40,7 @@ class OptionsController extends Controller
 
     public function delete($id)
     {
-        $option = Options::find($id) ?: abort(404);
+        $option = Options::search($id)->firstOrFail();
 
         $option->delete();
         flash(__('cms.data_has_been_deleted'))->success()->important();
@@ -49,7 +49,7 @@ class OptionsController extends Controller
 
     public function update(Request $request)
     {
-        $data['option'] = $option = Options::find($request->input('id'));
+        $data['option'] = $option = Options::search(['id' => $request->input('id')])->firstOrFail();
 
         if ($request->input('update')) {
             $validator = $option->validate($request->input(), 'update');

@@ -50,7 +50,7 @@ class UsersController extends Controller
 
     public function delete($id)
     {
-        $user = Users::find($id) ?: abort(404);
+        $user = Users::search(['id' => $id])->firstOrFail();
 
         $user->syncRoles()->delete($id);
         flash(__('cms.data_has_been_deleted'))->success()->important();
@@ -59,7 +59,7 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        $user = Users::find($request->input('id')) ?: abort(404);
+        $user = Users::search(['id' => $request->input('id')])->firstOrFail();
 
         $data['permissions'] = Permission::orderBy('name')->get();
         $data['roles'] = Role::orderBy('name')->get();

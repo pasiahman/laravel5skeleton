@@ -47,6 +47,7 @@ class Options extends Model
 
     public function scopeSearch($query, $params)
     {
+        isset($params['id']) ? $query->where('id', $params['id']) : '';
         isset($params['name']) ? $query->where('name', 'like', '%'.$params['name'].'%') : '';
         isset($params['value']) ? $query->where('value', 'like', '%'.$params['value'].'%') : '';
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {

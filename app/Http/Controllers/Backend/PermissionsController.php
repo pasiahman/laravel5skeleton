@@ -40,7 +40,7 @@ class PermissionsController extends Controller
 
     public function delete($id)
     {
-        $permission = Permission::find($id) ?: abort(404);
+        $permission = Permission::search(['id' => $id])->firstOrFail();
 
         $permission->delete();
         flash(__('cms.data_has_been_deleted'))->success()->important();
@@ -49,7 +49,7 @@ class PermissionsController extends Controller
 
     public function update(Request $request)
     {
-        $data['permission'] = $permission = Permission::find($request->input('id'));
+        $data['permission'] = $permission = Permission::search(['id' => $request->input('id')])->firstOrFail();
 
         if ($request->input('update')) {
             $validator = $permission->validate($request->input(), 'update');
