@@ -2,11 +2,18 @@
 
 return [
     'action' => 'Aksi',
+    'caption' => 'Keterangan',
     'create' => 'Buat',
     'data_has_been_created' => 'Data telah dibuat',
     'data_has_been_deleted' => 'Data telah dihapus',
     'data_has_been_updated' => 'Data telah diperbarui',
+    'description' => 'Deskripsi',
+    'extension' => 'Ekstensi',
+    'file_size' => 'Ukuran Berkas',
+    'file_type' => 'Tipe Berkas',
+    'file_url' => 'Url Berkas',
     'logout' => 'Keluar',
+    'media' => 'Media',
     'name' => 'Nama',
     'no_data' => 'Tidak ada data',
     'options' => 'Pilihan',

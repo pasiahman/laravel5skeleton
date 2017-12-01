@@ -117,10 +117,13 @@ return [
     */
 
     'attributes' => [
+        'created_at' => 'Created At',
         'email' => 'Email',
         'guard_name' => 'Guard Name',
+        'mime_type' => 'Mime Type',
         'name' => 'Name',
         'password' => 'Password',
+        'title' => 'Title',
         'value' => 'Value',
     ],
 

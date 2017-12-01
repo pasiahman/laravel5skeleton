@@ -117,10 +117,13 @@ return [
     */
 
     'attributes'          => [
+        'created_at' => 'Dibuat Pada',
         'email' => 'Email',
         'guard_name' => 'Nama Penjaga',
+        'mime_type' => 'Tipe Mime',
         'name' => 'Nama',
         'password' => 'Kata Sandi',
+        'title' => 'Judul',
         'value' => 'Nilai',
     ],
 

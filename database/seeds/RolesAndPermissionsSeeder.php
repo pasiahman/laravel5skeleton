@@ -21,12 +21,18 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend options']);
         Permission::create(['name' => 'backend permissions']);
         Permission::create(['name' => 'backend roles']);
+        Permission::create(['name' => 'backend media']);
+        Permission::create(['name' => 'backend media all']);
+        Permission::create(['name' => 'backend media role']);
         Permission::create(['name' => 'backend users']);
 
         // create roles and assign existing permissions
         $role = Role::create(['name' => 'superadmin']);
         $role->givePermissionTo([
             'backend options',
+            'backend media',
+            'backend media all',
+            'backend media role',
             'backend permissions',
             'backend roles',
             'backend users',
@@ -34,6 +40,8 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo([
+            'backend media',
+            'backend media role',
             'backend roles',
             'backend users',
         ]);
@@ -41,5 +49,8 @@ class RolesAndPermissionsSeeder extends Seeder
         // assign roles to user
         $user = Users::where('email', 'superadmin@email.com')->first();
         $user->assignRole('superadmin');
+
+        $user = Users::where('email', 'admin@email.com')->first();
+        $user->assignRole('admin');
     }
 }

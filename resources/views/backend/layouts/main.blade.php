@@ -12,7 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/backend-app.css') }}" rel="stylesheet">
-    @yield('styles')
+    @stack('styles')
 </head>
 <body class="hold-transition pjax-container sidebar-mini skin-purple">
     <header class="main-header">
@@ -113,6 +113,7 @@
                         <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                     </ul>
                 </li>
+                <li><a href="{{ route('backendMedia') }}"><i class="fa fa-picture-o"></i> <span>@lang('cms.media')</span></a></li>
 
                 <li class="header">Masters</li>
                 <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
@@ -148,6 +149,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/backend-app.js') }}"></script>
-    @yield('scripts')
+    @stack('scripts')
 </body>
 </html>
