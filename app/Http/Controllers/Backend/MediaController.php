@@ -43,7 +43,7 @@ class MediaController extends Controller
 
     public function delete($id)
     {
-        $medium = Media::find($id) ?: abort(404);
+        $medium = Media::search(['id' => $id])->firstOrFail();
 
         $medium->delete();
         flash(__('cms.data_has_been_deleted'))->success()->important();
@@ -74,7 +74,7 @@ class MediaController extends Controller
 
     public function update(Request $request)
     {
-        $data['medium'] = $medium = Media::find($request->input('id'));
+        $data['medium'] = $medium = Media::search(['id' => $request->input('id')])->firstOrFail();
 
         if ($request->input('update')) {
             $validator = $medium->validate($request->input(), 'update');

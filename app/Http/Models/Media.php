@@ -3,7 +3,9 @@
 namespace App\Http\Models;
 
 use App\Http\Models\Posts;
+use App\Http\Models\Users;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
@@ -81,8 +83,12 @@ class Media extends Posts
         $mimeType = Storage::mimeType($attachedFile);
 
         if (in_array($mimeType, $this->mimeTypeImages)) {
+            Storage::exists($attachedFileThumbnail) ? Storage::delete($attachedFileThumbnail) : '';
             Storage::copy($attachedFile, $attachedFileThumbnail);
-            $image = Image::make($attachedFile)->resize(Config::get('image.thumbnail_size'), Config::get('image.thumbnail_size'));
+
+            $image = Image::make($attachedFile);
+
+            $image->resize(Config::get('image.thumbnail_size'), Config::get('image.thumbnail_size'));
 
             if (Config::get('image.watermark')) {
                 $watermark = Image::make(Config::get('image.watermark_image_thumbnail'));
@@ -99,6 +105,16 @@ class Media extends Posts
 
     public function scopeSearch($query, $params)
     {
+        isset($params['id']) ? $query->where('id', $params['id']) : '';
+        if (Auth::user()->can('backend media all')) {
+            // all
+        } else if (Auth::user()->can('backend media role')) {
+            $roles = Auth::user()->getRoleNames();
+            $authors = Users::role($roles)->get()->pluck('id', 'id');
+            $query->whereIn('author', $authors); // group
+        } else if (Auth::user()->can('backend media')) {
+            $query->where('author', Auth::user()->id);  // self
+        }
         isset($params['title']) ? $query->where('title', 'like', '%'.$params['title'].'%') : '';
         isset($params['mime_type']) ? $query->where('mime_type', 'like', '%'.$params['mime_type'].'%') : '';
         isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
