@@ -4,7 +4,7 @@
 @section('content_header', __('cms.update'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('backendMedia') }}"><i class="fa fa-sliders"></i>@lang('cms.media')</a></li>
+        <li><a href="{{ route('backendMedia') }}"><i class="fa fa-upload"></i>@lang('cms.media')</a></li>
         <li class="active">@lang('cms.update')</li>
     </ol>
 @endsection
