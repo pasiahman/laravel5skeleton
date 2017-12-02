@@ -27,6 +27,7 @@ mix.styles([
 
 mix.combine([
     'resources/bower/jquery/dist/jquery.min.js',
+    'resources/assets/js/core.js',
     'resources/bower/bootstrap/dist/js/bootstrap.min.js',
     'resources/bower/admin-lte/dist/js/adminlte.min.js',
     'resources/bower/fancybox/dist/jquery.fancybox.min.js',
@@ -51,6 +52,7 @@ mix.styles([
 
 mix.combine([
     'resources/bower/jquery/dist/jquery.min.js',
+    'resources/assets/js/core.js',
     'resources/bower/bootstrap/dist/js/bootstrap.min.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',

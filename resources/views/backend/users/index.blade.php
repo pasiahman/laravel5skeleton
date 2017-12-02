@@ -33,19 +33,22 @@
                         </th>
                     </tr>
                     <tr>
-                        <th></th>
+                        <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                         <th>@lang('validation.attributes.name') {{ Form::text('name', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
                         <th>@lang('validation.attributes.email') {{ Form::text('email', $request->query('email'), ['class' => 'form-control input-sm']) }}</th>
                         @can('backend roles')
                             <th>@lang('cms.roles') {{ Form::select('role_id', $role->name_options, $request->query('role_id'), ['class' => 'form-control input-sm']) }}</th>
                         @endcan
-                        <th>@lang('cms.action') <button class="btn btn-block btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button></th>
+                        <th>
+                            <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
+                            <a class="btn btn-default btn-xs" href="{{ route('backendUsers') }}"><i class="fa fa-repeat"></i></a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     @forelse ($users as $i => $user)
                         <tr>
-                            <td align="center">{{ ($users->currentPage() - 1) * $users->perPage() + $i + 1 }}</td>
+                            <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $user->id }}" /></td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->email }}</td>
                             @can('backend roles')
@@ -56,7 +59,7 @@
                                 </td>
                             @endcan
                             <td align="center">
-                                <a class="btn btn-primary btn-xs" href="{{ route('backendUserUpdate', ['id' => $user->id]) }}"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-default btn-xs" href="{{ route('backendUserUpdate', ['id' => $user->id]) }}"><i class="fa fa-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs" href="{{ route('backendUserDelete', $user->id) }}" onclick="return confirm('Are you sure to delete this?')"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>

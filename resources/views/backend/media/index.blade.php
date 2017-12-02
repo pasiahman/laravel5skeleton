@@ -33,12 +33,15 @@
                         </th>
                     </tr>
                     <tr>
-                        <th></th>
+                        <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                         <th></th>
                         <th>@lang('validation.attributes.name') {{ Form::text('title', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
                         <th>@lang('validation.attributes.mime_type') {{ Form::select('mime_type', $mime_type_options, $request->query('value'), ['class' => 'form-control input-sm']) }}</th>
                         <th>@lang('validation.attributes.created_at') {{ Form::text('created_at', $request->query('value'), ['class' => 'form-control input-sm']) }}</th>
-                        <th>@lang('cms.action') <button class="btn btn-block btn-default btn-sm" type="submit"><i class="fa fa-search"></i></button></th>
+                        <th>
+                            <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
+                            <a class="btn btn-default btn-xs" href="{{ route('backendMedia') }}"><i class="fa fa-repeat"></i></a>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,7 +49,7 @@
                         @php ($attached_file = $medium->postmetas->where('key', 'attached_file')->first()->value)
                         @php ($attached_file_thumbnail = $medium->postmetas->where('key', 'attached_file_thumbnail')->first()->value)
                         <tr>
-                            <td align="center">{{ ($media->currentPage() - 1) * $media->perPage() + $i + 1 }}</td>
+                            <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $medium->id }}" /></td>
                             <td>
                                 <a
                                     @if (in_array($medium->mime_type, $medium->mimeTypeImages)) data-fancybox="group" @endif
@@ -59,7 +62,7 @@
                             <td>{{ $medium->mime_type }}</td>
                             <td>{{ $medium->created_at }}</td>
                             <td align="center">
-                                <a class="btn btn-primary btn-xs" href="{{ route('backendMediumUpdate', ['id' => $medium->id]) }}"><i class="fa fa-pencil"></i></a>
+                                <a class="btn btn-default btn-xs" href="{{ route('backendMediumUpdate', ['id' => $medium->id]) }}"><i class="fa fa-pencil"></i></a>
                                 <a class="btn btn-danger btn-xs" href="{{ route('backendMediumDelete', $medium->id) }}" onclick="return confirm('Are you sure to delete this?')"><i class="fa fa-trash-o"></i></a>
                             </td>
                         </tr>
