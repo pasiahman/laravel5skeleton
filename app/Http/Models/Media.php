@@ -26,14 +26,7 @@ class Media extends Posts
     {
         parent::boot();
 
-        self::deleting(function ($model) {
-            $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
-        });
-
-        static::addGlobalScope('type', function (Builder $builder) {
-            $builder->where('type', 'attachment');
-            if (! Auth::user()->can('backend posts deleted')) { $builder->where('status', '<>', 'deleted'); }
-        });
+        static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'attachment'); });
     }
 
     public function validate($input, $scenario)
@@ -50,19 +43,6 @@ class Media extends Posts
     public function getMimeTypeOptionsAttribute()
     {
         return self::orderBy('mime_type')->pluck('mime_type', 'mime_type')->toArray();
-    }
-
-    public function getStatusOptionsAttribute()
-    {
-        $statusOptions = $this->getStatusOptions();
-        $options = self::pluck('status', 'status')->toArray();
-        $options = array_intersect_key($statusOptions, $options);
-        return $options;
-    }
-
-    public function postmetas()
-    {
-        return $this->hasMany('App\Http\Models\Postmeta', 'post_id', 'id');
     }
 
     public function setAttachedFile($attachedFile)
@@ -109,19 +89,10 @@ class Media extends Posts
         return $attachedFileThumbnail;
     }
 
-    public function scopeAction($query, $params)
-    {
-        if (array_key_exists($params['action'], $this->getStatusOptions())) {
-            isset($params['action_id']) ? $this->search(['id_in' => $params['action_id']])->update(['status' => $params['action']]) : '';
-            flash(__('cms.data_has_been_updated'))->success()->important();
-        }
-        return $query;
-    }
-
     public function scopeSearch($query, $params)
     {
-        isset($params['id']) ? $query->where('id', $params['id']) : '';
-        isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
+        $query = parent::scopeSearch($query, $params);
+
         if (Auth::user()->can('backend media all')) {
             // all
         } else if (Auth::user()->can('backend media role')) {
@@ -130,14 +101,6 @@ class Media extends Posts
             $query->whereIn('author', $authors); // group
         } else if (Auth::user()->can('backend media')) {
             $query->where('author', Auth::user()->id);  // self
-        }
-        isset($params['title']) ? $query->where('title', 'like', '%'.$params['title'].'%') : '';
-        isset($params['mime_type']) ? $query->where('mime_type', 'like', '%'.$params['mime_type'].'%') : '';
-        isset($params['status']) ? $query->where('status', $params['status']) : '';
-        isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
-        isset($params['created_at_date']) ? $query->whereDate('created_at', '=', $params['created_at_date']) : '';
-        if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {
-            count($sort) == 2 ? $query->orderBy($sort[0], $sort[1]) : '';
         }
 
         return $query;
