@@ -18,7 +18,7 @@
             <table class="table table-bordered table-condensed table-striped">
                 <thead>
                     <tr>
-                        <th class="text-right" colspan="6">
+                        <th class="text-right" colspan="7">
                             <div class="form-inline">
                                 <div class="form-group">
                                     @lang('cms.per_page')
@@ -36,8 +36,9 @@
                         <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                         <th></th>
                         <th>@lang('validation.attributes.name') {{ Form::text('title', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
-                        <th>@lang('validation.attributes.mime_type') {{ Form::select('mime_type', $mime_type_options, $request->query('value'), ['class' => 'form-control input-sm']) }}</th>
-                        <th>@lang('validation.attributes.created_at') {{ Form::text('created_at', $request->query('value'), ['class' => 'form-control input-sm']) }}</th>
+                        <th>@lang('validation.attributes.mime_type') {{ Form::select('mime_type', ['' => ''] + $mime_type_options, $request->query('mime_type'), ['class' => 'form-control input-sm']) }}</th>
+                        <th>@lang('validation.attributes.status') {{ Form::select('status', ['' => ''] + $status_options, $request->query('status'), ['class' => 'form-control input-sm']) }}</th>
+                        <th>@lang('validation.attributes.created_at') {{ Form::text('created_at', $request->query('created_at'), ['class' => 'form-control input-sm']) }}</th>
                         <th>
                             <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
                             <a class="btn btn-default btn-xs" href="{{ route('backendMedia') }}"><i class="fa fa-repeat"></i></a>
@@ -60,6 +61,7 @@
                             </td>
                             <td>{{ $medium->title }}</td>
                             <td>{{ $medium->mime_type }}</td>
+                            <td>@lang('cms.'.$medium->status)</td>
                             <td>{{ $medium->created_at }}</td>
                             <td align="center">
                                 <a class="btn btn-default btn-xs" href="{{ route('backendMediumUpdate', ['id' => $medium->id]) }}"><i class="fa fa-pencil"></i></a>
@@ -67,10 +69,20 @@
                             </td>
                         </tr>
                     @empty
-                        <tr><td align="center" colspan="6">@lang('cms.no_data')</td></tr>
+                        <tr><td align="center" colspan="7">@lang('cms.no_data')</td></tr>
                     @endforelse
                 </tbody>
-                <tfoot><tr><td align="center" colspan="6">{!! $media->appends($request->query())->links('vendor.pagination.default') !!}</td></tr></tfoot>
+                <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            {!! Form::select('action', ['' => __('cms.action')] + $action_options, '', ['class' => 'input-sm']) !!}
+                            <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="7">{!! $media->appends($request->query())->links('vendor.pagination.default') !!}</td>
+                    </tr>
+                </tfoot>
             </table>
             {!! Form::close() !!}
         </div>

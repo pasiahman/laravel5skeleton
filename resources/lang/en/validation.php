@@ -123,6 +123,7 @@ return [
         'mime_type' => 'Mime Type',
         'name' => 'Name',
         'password' => 'Password',
+        'status' => 'Status',
         'title' => 'Title',
         'value' => 'Value',
     ],

@@ -32,6 +32,7 @@ class Media extends Posts
 
         static::addGlobalScope('type', function (Builder $builder) {
             $builder->where('type', 'attachment');
+            if (! Auth::user()->can('backend posts deleted')) { $builder->where('status', '<>', 'deleted'); }
         });
     }
 
@@ -48,9 +49,14 @@ class Media extends Posts
 
     public function getMimeTypeOptionsAttribute()
     {
-        $options = ['' => ''];
-        $mimeTypes = self::orderBy('mime_type')->pluck('mime_type', 'mime_type')->toArray();
-        $mimeTypes ? $options += $mimeTypes : '';
+        return self::orderBy('mime_type')->pluck('mime_type', 'mime_type')->toArray();
+    }
+
+    public function getStatusOptionsAttribute()
+    {
+        $statusOptions = $this->getStatusOptions();
+        $options = self::pluck('status', 'status')->toArray();
+        $options = array_intersect_key($statusOptions, $options);
         return $options;
     }
 
@@ -103,9 +109,18 @@ class Media extends Posts
         return $attachedFileThumbnail;
     }
 
+    public function scopeAction($query, $params)
+    {
+        if (array_key_exists($params['action'], $this->getStatusOptions())) {
+            isset($params['action_id']) ? $this->search(['id_in' => $params['action_id']])->update(['status' => $params['action']]) : '';
+            flash(__('cms.data_has_been_updated'))->success()->important();
+        }
+    }
+
     public function scopeSearch($query, $params)
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';
+        isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
         if (Auth::user()->can('backend media all')) {
             // all
         } else if (Auth::user()->can('backend media role')) {
@@ -117,6 +132,7 @@ class Media extends Posts
         }
         isset($params['title']) ? $query->where('title', 'like', '%'.$params['title'].'%') : '';
         isset($params['mime_type']) ? $query->where('mime_type', 'like', '%'.$params['mime_type'].'%') : '';
+        isset($params['status']) ? $query->where('status', $params['status']) : '';
         isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {
             count($sort) == 2 ? $query->orderBy($sort[0], $sort[1]) : '';

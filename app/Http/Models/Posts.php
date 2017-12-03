@@ -17,4 +17,15 @@ class Posts extends Model
     ];
 
     protected $table = 'posts';
+
+    public function getStatusOptions()
+    {
+        $options = [
+            'draft' => __('cms.draft'),
+            'publish' => __('cms.publish'),
+            'trash' => __('cms.trash'),
+            'deleted' => __('cms.delete'),
+        ];
+        return $options;
+    }
 }
