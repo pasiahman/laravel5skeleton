@@ -17,6 +17,7 @@
   ],
   "dependencies": {
     "bootstrap": "boostrap#^3.3.7",
+    "bootstrap-datepicker": "^1.7.1",
     "bootstrap-social": "^5.1.1",
     "fancybox": "^3.2.5",
     "fine-uploader": "^5.13.0",

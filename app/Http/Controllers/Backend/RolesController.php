@@ -17,6 +17,8 @@ class RolesController extends Controller
         $data['request'] = $request;
         $data['roles'] = Role::search($request->query())->paginate($request->query('limit'));
 
+        if ($request->query('action')) { (new Role)->action($request->query()); return redirect()->back(); }
+
         return view('backend/roles/index', $data);
     }
 
@@ -43,7 +45,7 @@ class RolesController extends Controller
 
     public function delete($id)
     {
-        $role = Role::find($id) ?: abort(404);
+        $role = Role::search(['id' => $id])->firstOrFail();
 
         $role->syncPermissions()->delete($id);
         flash(__('cms.data_has_been_deleted'))->success()->important();
@@ -52,7 +54,7 @@ class RolesController extends Controller
 
     public function update(Request $request)
     {
-        $role = Role::find($request->input('id')) ?: abort(404);
+        $role = Role::search(['id' => $request->input('id')])->firstOrFail();
 
         $data['permissions'] = Permission::orderBy('name')->get();
         $data['role'] = $role;

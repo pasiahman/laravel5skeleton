@@ -123,6 +123,7 @@ return [
         'mime_type' => 'Tipe Mime',
         'name' => 'Nama',
         'password' => 'Kata Sandi',
+        'status' => 'Keadaan',
         'title' => 'Judul',
         'value' => 'Nilai',
     ],

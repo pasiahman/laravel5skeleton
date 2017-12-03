@@ -52,15 +52,22 @@ class Role extends \Spatie\Permission\Models\Role
 
     public function getNameOptionsAttribute()
     {
-        $options = ['' => ''];
-        if ($roles = self::orderBy('name')->get()) {
-            $options += $roles->pluck('name', 'id')->toArray();
+        return self::orderBy('name')->pluck('name', 'id')->toArray();
+    }
+
+    public function scopeAction($query, $params)
+    {
+        if ($params['action'] == 'delete') {
+            isset($params['action_id']) ? $this->search(['id_in' => $params['action_id']])->delete() : '';
+            flash(__('cms.data_has_been_updated'))->success()->important();
         }
-        return $options;
+        return $query;
     }
 
     public function scopeSearch($query, $params)
     {
+        isset($params['id']) ? $query->where('id', $params['id']) : '';
+        isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
         isset($params['name']) ? $query->where('name', 'like', '%'.$params['name'].'%') : '';
         isset($params['guard_name']) ? $query->where('guard_name', 'like', '%'.$params['guard_name'].'%') : '';
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {

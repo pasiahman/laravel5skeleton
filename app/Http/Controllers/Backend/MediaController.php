@@ -15,9 +15,13 @@ class MediaController extends Controller
         $request->query('sort') ?: $request->query->set('sort', 'created_at,DESC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
+        $data['action_options'] = (new Media)->getStatusOptions();
         $data['media'] = Media::search($request->query())->paginate($request->query('limit'));
         $data['mime_type_options'] = (new Media)->mime_type_options;
         $data['request'] = $request;
+        $data['status_options'] = (new Media)->status_options;
+
+        if ($request->query('action')) { (new Media)->action($request->query()); return redirect()->back(); }
 
         return view('backend/media/index', $data);
     }
