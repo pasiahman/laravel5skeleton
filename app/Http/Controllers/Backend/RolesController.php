@@ -17,6 +17,8 @@ class RolesController extends Controller
         $data['request'] = $request;
         $data['roles'] = Role::search($request->query())->paginate($request->query('limit'));
 
+        if ($request->query('action')) { (new Role)->action($request->query()); return redirect()->back(); }
+
         return view('backend/roles/index', $data);
     }
 

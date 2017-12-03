@@ -57,7 +57,17 @@
                         <tr><td align="center" colspan="4">@lang('cms.no_data')</td></tr>
                     @endforelse
                 </tbody>
-                <tfoot><tr><td align="center" colspan="4">{!! $roles->appends($request->query())->links('vendor.pagination.default') !!}</td></tr></tfoot>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            {!! Form::select('action', ['' => __('cms.action'), 'delete' => __('cms.delete')], '', ['class' => 'input-sm']) !!}
+                            <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="4">{!! $roles->appends($request->query())->links('vendor.pagination.default') !!}</td>
+                    </tr>
+                </tfoot>
             </table>
             {!! Form::close() !!}
         </div>
