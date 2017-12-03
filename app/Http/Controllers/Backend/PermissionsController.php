@@ -16,6 +16,8 @@ class PermissionsController extends Controller
         $data['request'] = $request;
         $data['permissions'] = Permission::search($request->query())->paginate($request->query('limit'));
 
+        if ($request->query('action')) { (new Permission)->action($request->query()); return redirect()->back(); }
+
         return view('backend/permissions/index', $data);
     }
 

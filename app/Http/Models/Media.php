@@ -115,6 +115,7 @@ class Media extends Posts
             isset($params['action_id']) ? $this->search(['id_in' => $params['action_id']])->update(['status' => $params['action']]) : '';
             flash(__('cms.data_has_been_updated'))->success()->important();
         }
+        return $query;
     }
 
     public function scopeSearch($query, $params)

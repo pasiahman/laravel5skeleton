@@ -45,7 +45,7 @@
                 <tbody>
                     @forelse ($permissions as $i => $permission)
                         <tr>
-                            <td align="center"><input class="table_row_checkbox" type="checkbox" /></td>
+                            <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $permission->id }}" /></td>
                             <td>{{ $permission->name }}</td>
                             <td>{{ $permission->guard_name }}</td>
                             <td align="center">
@@ -57,7 +57,17 @@
                         <tr><td align="center" colspan="4">@lang('cms.no_data')</td></tr>
                     @endforelse
                 </tbody>
-                <tfoot><tr><td align="center" colspan="4">{!! $permissions->appends($request->query())->links('vendor.pagination.default') !!}</td></tr></tfoot>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            {!! Form::select('action', ['' => __('cms.action'), 'delete' => __('cms.delete')], '', ['class' => 'input-sm']) !!}
+                            <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="4">{!! $permissions->appends($request->query())->links('vendor.pagination.default') !!}</td>
+                    </tr>
+                </tfoot>
             </table>
             {!! Form::close() !!}
         </div>
