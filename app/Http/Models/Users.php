@@ -55,9 +55,19 @@ class Users extends \App\User
         return Validator::make($input, $rules);
     }
 
+    public function scopeAction($query, $params)
+    {
+        if ($params['action'] == 'delete') {
+            isset($params['action_id']) ? $this->search(['id_in' => $params['action_id']])->delete() : '';
+            flash(__('cms.data_has_been_updated'))->success()->important();
+        }
+        return $query;
+    }
+
     public function scopeSearch($query, $params)
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';
+        isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
         isset($params['name']) ? $query->where('name', 'like', '%'.$params['name'].'%') : '';
         isset($params['email']) ? $query->where('email', 'like', '%'.$params['email'].'%') : '';
         isset($params['role_id']) ? $query->whereHas('roles', function ($query) use ($params) { $query->where('id', $params['role_id']); }) : '';

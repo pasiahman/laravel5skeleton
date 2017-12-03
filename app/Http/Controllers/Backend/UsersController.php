@@ -21,6 +21,8 @@ class UsersController extends Controller
         $data['role'] = new Role;
         $data['users'] = Users::with('roles')->search($request->query())->paginate($request->query('limit'));
 
+        if ($request->query('action')) { (new Users)->action($request->query()); return redirect()->back(); }
+
         return view('backend/users/index', $data);
     }
 

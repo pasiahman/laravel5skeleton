@@ -52,11 +52,7 @@ class Role extends \Spatie\Permission\Models\Role
 
     public function getNameOptionsAttribute()
     {
-        $options = ['' => ''];
-        if ($roles = self::orderBy('name')->get()) {
-            $options += $roles->pluck('name', 'id')->toArray();
-        }
-        return $options;
+        return self::orderBy('name')->pluck('name', 'id')->toArray();
     }
 
     public function scopeAction($query, $params)

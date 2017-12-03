@@ -37,7 +37,7 @@
                         <th>@lang('validation.attributes.name') {{ Form::text('name', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
                         <th>@lang('validation.attributes.email') {{ Form::text('email', $request->query('email'), ['class' => 'form-control input-sm']) }}</th>
                         @can('backend roles')
-                            <th>@lang('cms.roles') {{ Form::select('role_id', $role->name_options, $request->query('role_id'), ['class' => 'form-control input-sm']) }}</th>
+                            <th>@lang('cms.roles') {{ Form::select('role_id', ['' => ''] + $role->name_options, $request->query('role_id'), ['class' => 'form-control input-sm']) }}</th>
                         @endcan
                         <th>
                             <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
@@ -67,7 +67,17 @@
                         <tr><td align="center" colspan="4">@lang('cms.no_data')</td></tr>
                     @endforelse
                 </tbody>
-                <tfoot><tr><td align="center" colspan="5">{!! $users->appends($request->query())->links('vendor.pagination.default') !!}</td></tr></tfoot>
+                <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            {!! Form::select('action', ['' => __('cms.action'), 'delete' => __('cms.delete')], '', ['class' => 'input-sm']) !!}
+                            <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" colspan="5">{!! $users->appends($request->query())->links('vendor.pagination.default') !!}</td>
+                    </tr>
+                </tfoot>
             </table>
             {!! Form::close() !!}
         </div>
