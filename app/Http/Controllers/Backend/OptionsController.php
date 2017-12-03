@@ -16,6 +16,8 @@ class OptionsController extends Controller
         $data['request'] = $request;
         $data['options'] = Options::search($request->query())->paginate($request->query('limit'));
 
+        if ($request->query('action')) { (new Options)->action($request->query()); return redirect()->back(); }
+
         return view('backend/options/index', $data);
     }
 
