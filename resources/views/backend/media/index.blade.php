@@ -38,7 +38,7 @@
                         <th>@lang('validation.attributes.name') {{ Form::text('title', $request->query('name'), ['class' => 'form-control input-sm']) }}</th>
                         <th>@lang('validation.attributes.mime_type') {{ Form::select('mime_type', ['' => ''] + $mime_type_options, $request->query('mime_type'), ['class' => 'form-control input-sm']) }}</th>
                         <th>@lang('validation.attributes.status') {{ Form::select('status', ['' => ''] + $status_options, $request->query('status'), ['class' => 'form-control input-sm']) }}</th>
-                        <th>@lang('validation.attributes.created_at') {{ Form::text('created_at', $request->query('created_at'), ['class' => 'form-control input-sm']) }}</th>
+                        <th>@lang('validation.attributes.created_at') {{ Form::text('created_at_date', $request->query('created_at_date'), ['class' => 'datepicker form-control input-sm']) }}</th>
                         <th>
                             <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
                             <a class="btn btn-default btn-xs" href="{{ route('backendMedia') }}"><i class="fa fa-repeat"></i></a>
