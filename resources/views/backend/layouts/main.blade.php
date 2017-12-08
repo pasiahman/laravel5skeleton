@@ -44,7 +44,9 @@
                         @if ($languages)
                             <ul class="dropdown-menu" role="menu">
                                 @foreach ($languages as $languageCode => $languageName)
-                                    <li><a href="{{ route('locale.setlocale', $languageCode) }}" class="language"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /> <span>{{ $languageName }}</span></a></li>
+                                    <li>
+                                        <a href="{{ route('locale.setlocale', $languageCode) }}" class="language"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /> {{ $languageName }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         @endif
