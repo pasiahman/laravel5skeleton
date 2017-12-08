@@ -3,6 +3,8 @@
 return [
     'action' => 'Action',
     'caption' => 'Caption',
+    'categories' => 'Categories',
+    'category' => 'Category',
     'create' => 'Create',
     'delete' => 'Delete',
     'deleted' => 'Deleted',
@@ -23,6 +25,8 @@ return [
     'overwrite_permissions' => 'Overwrite permissions',
     'per_page' => 'Per page',
     'permissions' => 'Permissions',
+    'post' => 'Post',
+    'posts' => 'Posts',
     'publish' => 'Publish',
     'role_permissions' => 'Role permissions',
     'roles' => 'Roles',

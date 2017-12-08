@@ -18,22 +18,24 @@ class RolesAndPermissionsSeeder extends Seeder
         app()['cache']->forget('spatie.permission.cache');
 
         // create permissions
-        Permission::create(['name' => 'backend options']);
-        Permission::create(['name' => 'backend permissions']);
-        Permission::create(['name' => 'backend roles']);
+        Permission::create(['name' => 'backend categories']);
         Permission::create(['name' => 'backend media']);
         Permission::create(['name' => 'backend media all']);
         Permission::create(['name' => 'backend media role']);
+        Permission::create(['name' => 'backend options']);
+        Permission::create(['name' => 'backend permissions']);
         Permission::create(['name' => 'backend posts deleted']);
+        Permission::create(['name' => 'backend roles']);
         Permission::create(['name' => 'backend users']);
 
         // create roles and assign existing permissions
         $role = Role::create(['name' => 'superadmin']);
         $role->givePermissionTo([
-            'backend options',
+            'backend categories',
             'backend media',
             'backend media all',
             'backend media role',
+            'backend options',
             'backend permissions',
             'backend posts deleted',
             'backend roles',
@@ -42,6 +44,7 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo([
+            'backend categories',
             'backend media',
             'backend media role',
             'backend roles',
