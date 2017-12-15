@@ -122,6 +122,7 @@ return [
         'description' => 'Deskripsi',
         'email' => 'Email',
         'guard_name' => 'Nama Penjaga',
+        'locale' => 'Lokal',
         'mime_type' => 'Tipe Mime',
         'name' => 'Nama',
         'parent' => 'Induk',

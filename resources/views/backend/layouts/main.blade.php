@@ -45,7 +45,7 @@
                             <ul class="dropdown-menu" role="menu">
                                 @foreach ($languages as $languageCode => $languageName)
                                     <li>
-                                        <a href="{{ route('locale.setlocale', $languageCode) }}" class="language"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /> {{ $languageName }}</a>
+                                        <a href="{{ route('locale.setlocale', $languageCode) }}"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /> {{ $languageName }}</a>
                                     </li>
                                 @endforeach
                             </ul>

@@ -10,6 +10,7 @@ class CategoriesController extends Controller
 {
     public function index(Request $request)
     {
+        $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'name,ASC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
@@ -24,12 +25,14 @@ class CategoriesController extends Controller
     public function create(Request $request)
     {
         $data['category'] = $category = new Categories;
-        $data['parent_options'] = $category->getParentOptions();
+        $data['category_translation'] = $category;
+        $data['parent_options'] = (new Categories)->getParentOptions();
 
         if ($request->input('create')) {
             $validator = $category->validate($request->input(), 'create');
             if ($validator->passes()) {
-                $category->fill($request->input())->save();
+                $fill = ['parent_id' => $request->input('parent_id'), $request->input('locale') => $request->input()];
+                $category->fill($fill)->save();
                 flash(__('cms.data_has_been_created'))->success()->important();
                 return redirect()->route('backendCategories');
             } else {
@@ -43,7 +46,7 @@ class CategoriesController extends Controller
 
     public function delete($id)
     {
-        $category = Categories::search($id)->firstOrFail();
+        $category = Categories::search(['id' => $id])->firstOrFail();
 
         $category->delete();
         flash(__('cms.data_has_been_deleted'))->success()->important();
@@ -53,12 +56,14 @@ class CategoriesController extends Controller
     public function update(Request $request)
     {
         $data['category'] = $category = Categories::search(['id' => $request->input('id')])->firstOrFail();
-        $data['parent_options'] = $category->getParentOptions();
+        $data['category_translation'] = $category->translateOrNew($request->input('locale'));
+        $data['parent_options'] = (new Categories)->getParentOptions();
 
         if ($request->input('update')) {
             $validator = $category->validate($request->input(), 'update');
             if ($validator->passes()) {
-                $category->fill($request->input())->save();
+                $fill = ['parent_id' => $request->input('parent_id'), $request->input('locale') => $request->input()];
+                $category->fill($fill)->save();
                 flash(__('cms.data_has_been_updated'))->success()->important();
                 return redirect()->route('backendCategories');
             } else {

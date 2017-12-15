@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 class Categories extends Terms
 {
-    protected $attributes = [
-        'taxonomy' => 'category',
-    ];
+    protected $attributes = ['taxonomy' => 'category'];
 
     protected static function boot()
     {
@@ -25,13 +23,11 @@ class Categories extends Terms
         if ($scenario == 'create') {
             $rules = [
                 'name' => ['required', 'between:0,200'],
-                'slug' => ['between:0,200'],
             ];
         } else if ($scenario == 'update') {
             $rules = [
                 'id' => ['required', 'integer', 'digits_between:1,20'],
                 'name' => ['required', 'between:0,200'],
-                'slug' => ['between:0,200'],
             ];
         }
 

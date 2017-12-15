@@ -122,6 +122,7 @@ return [
         'description' => 'Description',
         'email' => 'Email',
         'guard_name' => 'Guard Name',
+        'locale' => 'Locale',
         'mime_type' => 'Mime Type',
         'name' => 'Name',
         'parent' => 'Parent',

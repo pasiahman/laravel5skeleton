@@ -15,10 +15,7 @@ class Terms extends Migration
     {
         Schema::create('terms', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 200);
-            $table->string('slug', 200)->nullable()->default('');
             $table->string('taxonomy', 100);
-            $table->longText('description')->nullable();
             $table->bigInteger('parent_id')->default('0');
             $table->bigInteger('count')->default('0');
             $table->timestamps();
