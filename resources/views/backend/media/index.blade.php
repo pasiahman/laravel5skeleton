@@ -14,7 +14,7 @@
             <a class="btn btn-default" href="{{ route('backendMediumCreate') }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
-            {!! Form::open(['method' => 'GET', 'route' => 'backendMedia']) !!}
+            {{ Form::open(['method' => 'GET', 'route' => 'backendMedia']) }}
             <table class="table table-bordered table-condensed table-striped">
                 <thead>
                     <tr>
@@ -23,11 +23,11 @@
                                 <div class="form-group">
                                     @lang('cms.per_page')
                                     @php ($limitMedia = ['10' => '10', '25' => '25', '50' => '50', '100' => '100'])
-                                    {!! Form::select('limit', $limitMedia, $request->query('limit'), ['class' => 'input-sm']) !!}
+                                    {{ Form::select('limit', $limitMedia, $request->query('limit'), ['class' => 'input-sm']) }}
 
                                     @lang('cms.sort')
                                     @php ($sortMedia = ['title,ASC' => __('validation.attributes.name').' (A-Z)', 'title,DESC' => __('validation.attributes.name').' (Z-A)', 'mime_type,ASC' => __('validation.attributes.mime_type').' (A-Z)', 'mime_type,DESC' => __('validation.attributes.mime_type').' (Z-A)', 'created_at,DESC' => __('validation.attributes.created_at').' (↑)', 'created_at,ASC' => __('validation.attributes.created_at').' (↓)'])
-                                    {!! Form::select('sort', $sortMedia, $request->query('sort'), ['class' => 'input-sm']) !!}
+                                    {{ Form::select('sort', $sortMedia, $request->query('sort'), ['class' => 'input-sm']) }}
                                 </div>
                             </div>
                         </th>
@@ -75,16 +75,16 @@
                 <tfoot>
                     <tr>
                         <td colspan="7">
-                            {!! Form::select('action', ['' => __('cms.action')] + $action_options, '', ['class' => 'input-sm']) !!}
+                            {{ Form::select('action', ['' => __('cms.action')] + $action_options, '', ['class' => 'input-sm']) }}
                             <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
-                        <td align="center" colspan="7">{!! $media->appends($request->query())->links('vendor.pagination.default') !!}</td>
+                        <td align="center" colspan="7">{{ $media->appends($request->query())->links('vendor.pagination.default') }}</td>
                     </tr>
                 </tfoot>
             </table>
-            {!! Form::close() !!}
+            {{ Form::close() }}
         </div>
     </div>
 @endsection

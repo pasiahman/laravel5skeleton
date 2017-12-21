@@ -14,7 +14,7 @@
             <a class="btn btn-default" href="{{ route('backendUserCreate') }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
-            {!! Form::open(['method' => 'GET', 'route' => 'backendUsers']) !!}
+            {{ Form::open(['method' => 'GET', 'route' => 'backendUsers']) }}
             <table class="table table-bordered table-condensed table-striped">
                 <thead>
                     <tr>
@@ -23,11 +23,11 @@
                                 <div class="form-group">
                                     @lang('cms.per_page')
                                     @php ($limitOptions = ['10' => '10', '25' => '25', '50' => '50', '100' => '100'])
-                                    {!! Form::select('limit', $limitOptions, $request->query('limit'), ['class' => 'input-sm']) !!}
+                                    {{ Form::select('limit', $limitOptions, $request->query('limit'), ['class' => 'input-sm']) }}
 
                                     @lang('cms.sort')
                                     @php ($sortOptions = ['name,ASC' => __('validation.attributes.name').' (A-Z)', 'name,DESC' => __('validation.attributes.name').' (Z-A)', 'email,ASC' => __('validation.attributes.email').' (A-Z)', 'email,DESC' => __('validation.attributes.email').' (Z-A)'])
-                                    {!! Form::select('sort', $sortOptions, $request->query('sort'), ['class' => 'input-sm']) !!}
+                                    {{ Form::select('sort', $sortOptions, $request->query('sort'), ['class' => 'input-sm']) }}
                                 </div>
                             </div>
                         </th>
@@ -70,16 +70,16 @@
                 <tfoot>
                     <tr>
                         <td colspan="5">
-                            {!! Form::select('action', ['' => __('cms.action'), 'delete' => __('cms.delete')], '', ['class' => 'input-sm']) !!}
+                            {{ Form::select('action', ['' => __('cms.action'), 'delete' => __('cms.delete')], '', ['class' => 'input-sm']) }}
                             <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                         </td>
                     </tr>
                     <tr>
-                        <td align="center" colspan="5">{!! $users->appends($request->query())->links('vendor.pagination.default') !!}</td>
+                        <td align="center" colspan="5">{{ $users->appends($request->query())->links('vendor.pagination.default') }}</td>
                     </tr>
                 </tfoot>
             </table>
-            {!! Form::close() !!}
+            {{ Form::close() }}
         </div>
     </div>
 @endsection

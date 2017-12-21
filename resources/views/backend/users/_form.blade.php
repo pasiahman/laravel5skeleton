@@ -1,24 +1,24 @@
 @if ($user->id)
-    {!! Form::model($user, ['method' => 'put', 'route' => ['backendUserUpdate']]) !!}
-    {!! Form::hidden('id', $user->id) !!}
+    {{ Form::model($user, ['method' => 'put', 'route' => ['backendUserUpdate']]) }}
+    {{ Form::hidden('id', $user->id) }}
 @else
-    {!! Form::model($user, ['route' => 'backendUserCreate']) !!}
+    {{ Form::model($user, ['route' => 'backendUserCreate']) }}
 @endif
 <div class="box">
     <div class="box-body">
         <div class="form-group">
-            {!! Form::label(__('validation.attributes.name').' (*)') !!}
-            {!! Form::text('name', old('name', $user->name), ['class' => 'form-control', 'required']) !!}
+            {{ Form::label(__('validation.attributes.name').' (*)') }}
+            {{ Form::text('name', old('name', $user->name), ['class' => 'form-control', 'required']) }}
             <i class="text-danger">{{ $errors->first('name') }}</i>
         </div>
         <div class="form-group">
-            {!! Form::label(__('validation.attributes.email').' (*)') !!}
-            {!! Form::email('email', old('email', $user->email), ['class' => 'form-control', 'required']) !!}
+            {{ Form::label(__('validation.attributes.email').' (*)') }}
+            {{ Form::email('email', old('email', $user->email), ['class' => 'form-control', 'required']) }}
             <i class="text-danger">{{ $errors->first('email') }}</i>
         </div>
         <div class="form-group">
-            {!! Form::label(__('validation.attributes.password')) !!}
-            {!! Form::password('password', ['class' => 'form-control']) !!}
+            {{ Form::label(__('validation.attributes.password')) }}
+            {{ Form::password('password', ['class' => 'form-control']) }}
             <i class="text-danger">{{ $errors->first('password') }}</i>
         </div>
 
@@ -31,8 +31,8 @@
                             @forelse ($roles as $role)
                                 <div class="checkbox">
                                     <label>
-                                        {!! Form::checkbox('roles[]', $role->name, old('roles[]', $user->hasRole($role->name))) !!}
-                                        {!! $role->name !!}
+                                        {{ Form::checkbox('roles[]', $role->name, old('roles[]', $user->hasRole($role->name))) }}
+                                        {{ $role->name }}
                                     </label>
                                 </div>
                             @empty
@@ -61,16 +61,16 @@
                                             <td>
                                                 <div class="checkbox">
                                                     <label>
-                                                        {!! Form::checkbox('user_permissions[]', $permission->name, in_array($permission->name, $user_roles), ['disabled']) !!}
-                                                        {!! $permission->name !!}
+                                                        {{ Form::checkbox('user_permissions[]', $permission->name, in_array($permission->name, $user_roles), ['disabled']) }}
+                                                        {{ $permission->name }}
                                                     </label>
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="checkbox">
                                                     <label>
-                                                        {!! Form::checkbox('permissions[]', $permission->name, old('permissions[]', in_array($permission->name, $user_permissions))) !!}
-                                                        {!! $permission->name !!}
+                                                        {{ Form::checkbox('permissions[]', $permission->name, old('permissions[]', in_array($permission->name, $user_permissions))) }}
+                                                        {{ $permission->name }}
                                                     </label>
                                                 </div>
                                             </td>
@@ -94,4 +94,4 @@
         @endif
     </div>
 </div>
-{!! Form::close() !!}
+{{ Form::close() }}

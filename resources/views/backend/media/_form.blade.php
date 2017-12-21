@@ -1,29 +1,29 @@
 @if ($medium->id)
-    {!! Form::model($medium, ['method' => 'put', 'route' => ['backendMediumUpdate']]) !!}
-    {!! Form::hidden('id', $medium->id) !!}
+    {{ Form::model($medium, ['method' => 'put', 'route' => ['backendMediumUpdate']]) }}
+    {{ Form::hidden('id', $medium->id) }}
 @else
-    {!! Form::model($medium, ['route' => 'backendMediumCreate']) !!}
+    {{ Form::model($medium, ['route' => 'backendMediumCreate']) }}
 @endif
 <div class="box">
     <div class="box-body">
         <div class="form-group">
-            {!! Form::label(__('validation.attributes.title').' (*)') !!}
-            {!! Form::text('title', old('title', $medium->title), ['class' => 'form-control', 'required']) !!}
+            {{ Form::label(__('validation.attributes.title').' (*)') }}
+            {{ Form::text('title', old('title', $medium->title), ['class' => 'form-control', 'required']) }}
             <i class="text-danger">{{ $errors->first('title') }}</i>
         </div>
         <div class="form-group">
-            {!! Form::label(__('validation.attributes.name').' (*)') !!}
-            {!! Form::text('name', old('title', $medium->name), ['class' => 'form-control', 'readonly', 'required']) !!}
+            {{ Form::label(__('validation.attributes.name').' (*)') }}
+            {{ Form::text('name', old('title', $medium->name), ['class' => 'form-control', 'readonly', 'required']) }}
             <i class="text-danger">{{ $errors->first('name') }}</i>
         </div>
         <div class="form-group">
-            {!! Form::label(__('cms.caption')) !!}
-            {!! Form::textarea('excerpt', old('excerpt', $medium->excerpt), ['class' => 'form-control', 'rows' => 3]) !!}
+            {{ Form::label(__('cms.caption')) }}
+            {{ Form::textarea('excerpt', old('excerpt', $medium->excerpt), ['class' => 'form-control', 'rows' => 3]) }}
             <i class="text-danger">{{ $errors->first('excerpt') }}</i>
         </div>
         <div class="form-group">
-            {!! Form::label(__('cms.description')) !!}
-            {!! Form::textarea('content', old('content', $medium->content), ['class' => 'form-control', 'rows' => 3]) !!}
+            {{ Form::label(__('cms.description')) }}
+            {{ Form::textarea('content', old('content', $medium->content), ['class' => 'form-control', 'rows' => 3]) }}
             <i class="text-danger">{{ $errors->first('content') }}</i>
         </div>
         @if ($medium->id)
@@ -80,4 +80,4 @@
         @endif
     </div>
 </div>
-{!! Form::close() !!}
+{{ Form::close() }}
