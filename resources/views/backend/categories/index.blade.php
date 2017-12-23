@@ -11,10 +11,10 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backendCategoryCreate') }}">@lang('cms.create')</a>
+            <a class="btn btn-default" href="{{ route('backend.categories.create') }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
-            <form action="{{ route('backendCategories') }}" method="get">
+            <form action="{{ route('backend.categories.index') }}" method="get">
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr>
@@ -71,7 +71,7 @@
                             </th>
                             <th>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
-                                <a class="btn btn-default btn-xs" href="{{ route('backendCategories') }}"><i class="fa fa-repeat"></i></a>
+                                <a class="btn btn-default btn-xs" href="{{ route('backend.categories.index') }}"><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
                     </thead>
@@ -82,20 +82,20 @@
                                 <td>
                                     @foreach (config('app.languages') as $languageCode => $languageName)
                                         @if ($category->hasTranslation($languageCode))
-                                            <a href="{{ route('backendCategoryUpdate', ['id' => $category->id, 'locale' => $languageCode]) }}"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /></a>
+                                            <a href="{{ route('backend.categories.edit', [$category->id, 'locale' => $languageCode]) }}"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /></a>
                                         @else
-                                            <a href="{{ route('backendCategoryUpdate', ['id' => $category->id, 'locale' => $languageCode]) }}"><i class="fa fa-plus-square"></i></a>
+                                            <a href="{{ route('backend.categories.edit', [$category->id, 'locale' => $languageCode]) }}"><i class="fa fa-plus-square"></i></a>
                                         @endif
                                     @endforeach
                                 </td>
                                 <td>{{ $category->name }}</td>
                                 <td>{{ $category->slug }}</td>
                                 <td>{{ $category->description }}</td>
-                                <td>{{ $category->parent_id ? $category->parent->name : '' }}</td>
+                                <td>{{ $category->parent ? $category->parent->name : '' }}</td>
                                 <td align="right">{{ $category->count }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backendCategoryUpdate', ['id' => $category->id]) }}"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs" href="{{ route('backendCategoryDelete', $category->id) }}" onclick="return confirm('Are you sure to delete this?')"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('backend.categories.edit', $category->id) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.categories.delete', $category->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @empty

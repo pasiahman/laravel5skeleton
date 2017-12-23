@@ -2,6 +2,7 @@
 
 return [
     'action' => 'Aksi',
+    'are_you_sure_to_delete_this' => 'Apakah kamu yakin untuk menghapus ini',
     'caption' => 'Keterangan',
     'categories' => 'Kategori',
     'category' => 'Kategori',

@@ -17,20 +17,4 @@ class Categories extends Terms
         $table = (new Terms)->getTable();
         static::addGlobalScope('taxonomy', function (Builder $builder) use ($table) { $builder->where($table.'.taxonomy', 'category'); });
     }
-
-    public function validate($input, $scenario = '')
-    {
-        if ($scenario == 'create') {
-            $rules = [
-                'name' => ['required', 'between:0,200'],
-            ];
-        } else if ($scenario == 'update') {
-            $rules = [
-                'id' => ['required', 'integer', 'digits_between:1,20'],
-                'name' => ['required', 'between:0,200'],
-            ];
-        }
-
-        return Validator::make($input, $rules);
-    }
 }
