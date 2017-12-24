@@ -29,17 +29,6 @@ class Media extends Posts
         static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'attachment'); });
     }
 
-    public function validate($input, $scenario)
-    {
-        if ($scenario == 'update') {
-            $rules = [
-                'title' => ['required'],
-            ];
-        }
-
-        return Validator::make($input, $rules);
-    }
-
     public function getMimeTypeOptionsAttribute()
     {
         return self::orderBy('mime_type')->pluck('mime_type', 'mime_type')->toArray();

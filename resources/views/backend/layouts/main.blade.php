@@ -117,7 +117,7 @@
                 </li>
                 {{-- <li class="header">@lang('cms.posts')</li> --}}
                 <li><a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.categories')</span></a></li>
-                <li><a href="{{ route('backendMedia') }}"><i class="fa fa-upload"></i> <span>@lang('cms.media')</span></a></li>
+                <li><a href="{{ route('backend.media.index') }}"><i class="fa fa-upload"></i> <span>@lang('cms.media')</span></a></li>
 
                 <li class="header">Masters</li>
                 <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>

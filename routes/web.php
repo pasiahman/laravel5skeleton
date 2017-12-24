@@ -20,6 +20,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('backend/categories', 'Backend\CategoriesController', ['as' => 'backend']);
         Route::get('backend/categories/{id}/delete', ['as' => 'backend.categories.delete', 'uses' => 'Backend\CategoriesController@delete']);
     });
+    Route::group(['middleware' => ['permission:backend media']], function () {
+        Route::resource('backend/media', 'Backend\MediaController', ['as' => 'backend']);
+        Route::get('backend/media/{id}/delete', ['as' => 'backend.media.delete', 'uses' => 'Backend\MediaController@delete']);
+    });
     Route::group(['middleware' => ['permission:backend options']], function () {
         Route::resource('backend/options', 'Backend\OptionsController', ['as' => 'backend']);
         Route::get('backend/options/{id}/delete', ['as' => 'backend.options.delete', 'uses' => 'Backend\OptionsController@delete']);
@@ -39,14 +43,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('backend/role/update', ['as' => 'backendRoleUpdate', 'uses' => 'Backend\RolesController@update']);
         Route::put('backend/role/update', ['as' => 'backendRoleUpdate', 'uses' => 'Backend\RolesController@update']);
         Route::get('backend/roles', ['as' => 'backendRoles', 'uses' => 'Backend\RolesController@index']);
-    });
-    Route::group(['middleware' => ['permission:backend media']], function () {
-        Route::get('backend/media', ['as' => 'backendMedia', 'uses' => 'Backend\MediaController@index']);
-        Route::get('backend/medium/create', ['as' => 'backendMediumCreate', 'uses' => 'Backend\MediaController@create']);
-        Route::post('backend/medium/store', ['as' => 'backendMediumStore', 'uses' => 'Backend\MediaController@store']);
-        Route::get('backend/medium/delete/{id}', ['as' => 'backendMediumDelete', 'uses' => 'Backend\MediaController@delete']);
-        Route::get('backend/medium/update', ['as' => 'backendMediumUpdate', 'uses' => 'Backend\MediaController@update']);
-        Route::put('backend/medium/update', ['as' => 'backendMediumUpdate', 'uses' => 'Backend\MediaController@update']);
     });
     Route::group(['middleware' => ['permission:backend users']], function () {
         Route::get('backend/user/create', ['as' => 'backendUserCreate', 'uses' => 'Backend\UsersController@create']);
