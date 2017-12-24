@@ -4,11 +4,11 @@
 @section('content_header', __('cms.create'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('backendMedia') }}"><i class="fa fa-upload"></i>@lang('cms.media')</a></li>
+        <li><a href="{{ route('backend.media.index') }}"><i class="fa fa-upload"></i>@lang('cms.media')</a></li>
         <li class="active">@lang('cms.create')</li>
     </ol>
 @endsection
 
 @section('content')
-    @include('backend.media._upload', ['medium' => $medium])
+    @include('backend/media/_upload', ['medium' => $medium])
 @endsection

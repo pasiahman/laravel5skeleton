@@ -117,13 +117,19 @@ return [
     */
 
     'attributes'          => [
+        'count' => 'Jumlah',
         'created_at' => 'Dibuat Pada',
+        'description' => 'Deskripsi',
         'email' => 'Email',
         'guard_name' => 'Nama Penjaga',
+        'locale' => 'Lokal',
         'mime_type' => 'Tipe Mime',
         'name' => 'Nama',
+        'parent' => 'Induk',
         'password' => 'Kata Sandi',
+        'slug' => 'Slug',
         'status' => 'Keadaan',
+        'taxonomy' => 'Taksonomi',
         'title' => 'Judul',
         'value' => 'Nilai',
     ],

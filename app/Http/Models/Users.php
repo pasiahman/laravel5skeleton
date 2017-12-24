@@ -29,32 +29,6 @@ class Users extends \App\User
         'password', 'remember_token',
     ];
 
-    public function validate($input, $scenario = 'create')
-    {
-        $rules = [
-            'id' => ['required', 'integer', 'digits_between:1,10'],
-            'name' => ['required', 'digits_between:0,191'],
-            'email' => ['required', 'email', 'digits_between:0,191'],
-            'password' => ['required', 'digits_between:0,191'],
-        ];
-
-        if ($scenario == 'create') {
-            $rules = [
-                'name' => ['required'],
-                'email' => ['required', 'email', 'unique:users,email'],
-                'password' => ['required'],
-            ];
-        } else if ($scenario == 'update') {
-            $rules = [
-                'id' => ['required', 'integer', 'digits_between:1,10'],
-                'name' => ['required'],
-                'email' => ['required', 'email', 'unique:users,email,'.$this->id],
-            ];
-        }
-
-        return Validator::make($input, $rules);
-    }
-
     public function scopeAction($query, $params)
     {
         if ($params['action'] == 'delete') {

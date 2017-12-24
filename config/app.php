@@ -183,7 +183,7 @@ return [
 
         Abhimanyu003\Conversion\ConversionServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Collective\Html\HtmlServiceProvider::class,
+        Dimsav\Translatable\TranslatableServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
@@ -241,8 +241,6 @@ return [
 
         'Conversion'  => Abhimanyu003\Conversion\Facades\Conversion::class,
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
 
     ],

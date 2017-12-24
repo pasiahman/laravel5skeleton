@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Media;
 use App\Http\Models\Postmeta;
+use App\Http\Requests\Backend\Media\UpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +19,6 @@ class MediaController extends Controller
         $data['action_options'] = (new Media)->getStatusOptions();
         $data['media'] = Media::search($request->query())->paginate($request->query('limit'));
         $data['mime_type_options'] = (new Media)->mime_type_options;
-        $data['request'] = $request;
         $data['status_options'] = (new Media)->status_options;
 
         if ($request->query('action')) { (new Media)->action($request->query()); return redirect()->back(); }
@@ -45,15 +45,6 @@ class MediaController extends Controller
         return view('backend/media/create', $data);
     }
 
-    public function delete($id)
-    {
-        $medium = Media::search(['id' => $id])->firstOrFail();
-
-        $medium->delete();
-        flash(__('cms.data_has_been_deleted'))->success()->important();
-        return back();
-    }
-
     public function store(Request $request)
     {
         if ($file = $request->file('qqfile')) {
@@ -76,23 +67,50 @@ class MediaController extends Controller
         return response()->json(['success' => true, 'thumbnailUrl' => Storage::url($thumbnailPath)]);
     }
 
-    public function update(Request $request)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $data['medium'] = $medium = Media::search(['id' => $request->input('id')])->firstOrFail();
+        //
+    }
 
-        if ($request->input('update')) {
-            $validator = $medium->validate($request->input(), 'update');
-            if ($validator->passes()) {
-                $request->merge(['name' => str_slug($request->input('title'))]);
-                $medium->fill($request->input())->save();
-                flash(__('cms.data_has_been_updated'))->success()->important();
-                return redirect()->route('backendMedia');
-            } else {
-                $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
-                $data['errors'] = $validator->errors();
-            }
-        }
-
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id, Request $request)
+    {
+        $data['medium'] = Media::search(['id' => $id])->firstOrFail();
         return view('backend/media/update', $data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateRequest $request, $id)
+    {
+        $request->merge(['name' => str_slug($request->input('title'))]);
+        $medium = Media::search(['id' => $id])->firstOrFail();
+        $medium->fill($request->input())->save();
+        flash(__('cms.data_has_been_updated'))->success()->important();
+        return redirect()->back();
+    }
+
+    public function delete($id)
+    {
+        $medium = Media::search(['id' => $id])->firstOrFail();
+        $medium->delete();
+        flash(__('cms.data_has_been_deleted'))->success()->important();
+        return redirect()->back();
     }
 }

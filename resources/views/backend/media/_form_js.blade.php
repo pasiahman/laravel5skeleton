@@ -6,7 +6,7 @@
             customHeaders: {
                 'X-CSRF-Token': '{{ csrf_token() }}',
             },
-            endpoint: '{{ route('backendMediumStore') }}',
+            endpoint: '{{ route('backend.media.store') }}',
         },
         template: 'qq-template',
         validation: {

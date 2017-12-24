@@ -16,35 +16,6 @@ class Options extends Model
         'name', 'value',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [];
-
-    public function validate($input, $scenario = 'create')
-    {
-        $rules = [
-            'id' => ['required', 'integer', 'digits_between:1,10'],
-            'name' => ['required', 'between:0,191'],
-            'guard_name' => ['required'],
-        ];
-
-        if ($scenario == 'create') {
-            $rules = [
-                'name' => ['required', 'between:0,191', 'unique:options,name'],
-            ];
-        } else if ($scenario == 'update') {
-            $rules = [
-                'id' => ['required', 'integer', 'digits_between:1,10'],
-                'name' => ['required', 'between:0,191', 'unique:options,name,'.$this->id],
-            ];
-        }
-
-        return Validator::make($input, $rules);
-    }
-
     public function scopeAction($query, $params)
     {
         if ($params['action'] == 'delete') {

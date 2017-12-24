@@ -44,7 +44,9 @@
                         @if ($languages)
                             <ul class="dropdown-menu" role="menu">
                                 @foreach ($languages as $languageCode => $languageName)
-                                    <li><a href="{{ route('locale.setlocale', $languageCode) }}" class="language"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /> <span>{{ $languageName }}</span></a></li>
+                                    <li>
+                                        <a href="{{ route('locale.setlocale', $languageCode) }}"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /> {{ $languageName }}</a>
+                                    </li>
                                 @endforeach
                             </ul>
                         @endif
@@ -113,13 +115,15 @@
                         <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
                     </ul>
                 </li>
-                <li><a href="{{ route('backendMedia') }}"><i class="fa fa-upload"></i> <span>@lang('cms.media')</span></a></li>
+                {{-- <li class="header">@lang('cms.posts')</li> --}}
+                <li><a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.categories')</span></a></li>
+                <li><a href="{{ route('backend.media.index') }}"><i class="fa fa-upload"></i> <span>@lang('cms.media')</span></a></li>
 
                 <li class="header">Masters</li>
-                <li><a href="{{ route('backendPermissions') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
-                <li><a href="{{ route('backendRoles') }}"><i class="fa fa-user"></i> <span>@lang('cms.roles')</span></a></li>
-                <li><a href="{{ route('backendUsers') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
-                <li><a href="{{ route('backendOptions') }}"><i class="fa fa-sliders"></i> <span>@lang('cms.options')</span></a></li>
+                <li><a href="{{ route('backend.permissions.index') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
+                <li><a href="{{ route('backend.roles.index') }}"><i class="fa fa-user"></i> <span>@lang('cms.roles')</span></a></li>
+                <li><a href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
+                <li><a href="{{ route('backend.options.index') }}"><i class="fa fa-sliders"></i> <span>@lang('cms.options')</span></a></li>
             </ul>
         </section>
         <!-- /.sidebar -->

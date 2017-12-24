@@ -2,7 +2,10 @@
 
 return [
     'action' => 'Action',
+    'are_you_sure_to_delete_this' => 'Are you sure to delete this',
     'caption' => 'Caption',
+    'categories' => 'Categories',
+    'category' => 'Category',
     'create' => 'Create',
     'delete' => 'Delete',
     'deleted' => 'Deleted',
@@ -23,9 +26,12 @@ return [
     'overwrite_permissions' => 'Overwrite permissions',
     'per_page' => 'Per page',
     'permissions' => 'Permissions',
+    'post' => 'Post',
+    'posts' => 'Posts',
     'publish' => 'Publish',
     'role_permissions' => 'Role permissions',
     'roles' => 'Roles',
+    'save' => 'Save',
     'sort' => 'Sort',
     'trash' => 'Trash',
     'update' => 'Update',

@@ -2,7 +2,10 @@
 
 return [
     'action' => 'Aksi',
+    'are_you_sure_to_delete_this' => 'Apakah kamu yakin untuk menghapus ini',
     'caption' => 'Keterangan',
+    'categories' => 'Kategori',
+    'category' => 'Kategori',
     'create' => 'Buat',
     'delete' => 'Hapus',
     'deleted' => 'Dihapus',
@@ -23,9 +26,12 @@ return [
     'overwrite_permissions' => 'Menimpa izin',
     'per_page' => 'Per halaman',
     'permissions' => 'Izin',
+    'post' => 'Posting',
+    'posts' => 'Posting',
     'publish' => 'Terbit',
     'role_permissions' => 'Izin peran',
     'roles' => 'Peran',
+    'save' => 'Simpan',
     'sort' => 'Urut',
     'trash' => 'Sampah',
     'update' => 'Perbarui',
