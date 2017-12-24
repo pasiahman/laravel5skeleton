@@ -11,12 +11,12 @@
         <div class="box-body">
             <div class="form-group">
                 <label>@lang('validation.attributes.name') (*)</label>
-                <input class="form-control" name="name" type="text" value="{{ request()->old('name', $user->name) }}" />
+                <input class="form-control" name="name" required type="text" value="{{ request()->old('name', $user->name) }}" />
                 <i class="text-danger">{{ $errors->first('name') }}</i>
             </div>
             <div class="form-group">
                 <label>@lang('validation.attributes.email') (*)</label>
-                <input class="form-control" name="email" type="email" value="{{ request()->old('email', $user->email) }}" />
+                <input class="form-control" name="email" required type="email" value="{{ request()->old('email', $user->email) }}" />
                 <i class="text-danger">{{ $errors->first('email') }}</i>
             </div>
             <div class="form-group">

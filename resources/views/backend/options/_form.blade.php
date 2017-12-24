@@ -11,7 +11,7 @@
         <div class="box-body">
             <div class="form-group">
                 <label>@lang('validation.attributes.name') (*)</label>
-                <input class="form-control" name="name" type="text" value="{{ request()->old('name', $option->name) }}" />
+                <input class="form-control" name="name" required type="text" value="{{ request()->old('name', $option->name) }}" />
                 <i class="text-danger">{{ $errors->first('name') }}</i>
             </div>
             <div class="form-group">
