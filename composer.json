@@ -14,7 +14,6 @@
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
-        "laravelcollective/html": "^5.5",
         "redzjovi/php": "dev-master",
         "renatomarinho/laravel-page-speed": "^1.8",
         "spatie/laravel-permission": "^2.7",

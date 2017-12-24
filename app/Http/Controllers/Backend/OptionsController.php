@@ -20,7 +20,6 @@ class OptionsController extends Controller
         $request->query('sort') ?: $request->query->set('sort', 'name,ASC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
-        $data['request'] = $request;
         $data['options'] = Options::search($request->query())->paginate($request->query('limit'));
 
         if ($request->query('action')) { (new Options)->action($request->query()); return redirect()->back(); }
