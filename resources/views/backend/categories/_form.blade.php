@@ -59,11 +59,7 @@
             </div>
         </div>
         <div class="box-footer">
-            @if ($category->id)
-                <input class="btn btn-default" name="update" type="submit" value="@lang('cms.update')" />
-            @else
-                <input class="btn btn-default" name="create" type="submit" value="@lang('cms.create')" />
-            @endif
+            <input class="btn btn-default" type="submit" value="@lang('cms.save')" />
         </div>
     </div>
 </form>

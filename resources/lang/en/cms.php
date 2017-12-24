@@ -31,6 +31,7 @@ return [
     'publish' => 'Publish',
     'role_permissions' => 'Role permissions',
     'roles' => 'Roles',
+    'save' => 'Save',
     'sort' => 'Sort',
     'trash' => 'Trash',
     'update' => 'Update',

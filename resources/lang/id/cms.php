@@ -31,6 +31,7 @@ return [
     'publish' => 'Terbit',
     'role_permissions' => 'Izin peran',
     'roles' => 'Peran',
+    'save' => 'Simpan',
     'sort' => 'Urut',
     'trash' => 'Sampah',
     'update' => 'Perbarui',
