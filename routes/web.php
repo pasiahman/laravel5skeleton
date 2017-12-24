@@ -29,12 +29,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('backend/options/{id}/delete', ['as' => 'backend.options.delete', 'uses' => 'Backend\OptionsController@delete']);
     });
     Route::group(['middleware' => ['permission:backend permissions']], function () {
-        Route::get('backend/permission/create', ['as' => 'backendPermissionCreate', 'uses' => 'Backend\PermissionsController@create']);
-        Route::post('backend/permission/create', ['as' => 'backendPermissionCreate', 'uses' => 'Backend\PermissionsController@create']);
-        Route::get('backend/permission/delete/{id}', ['as' => 'backendPermissionDelete', 'uses' => 'Backend\PermissionsController@delete']);
-        Route::get('backend/permission/update', ['as' => 'backendPermissionUpdate', 'uses' => 'Backend\PermissionsController@update']);
-        Route::put('backend/permission/update', ['as' => 'backendPermissionUpdate', 'uses' => 'Backend\PermissionsController@update']);
-        Route::get('backend/permissions', ['as' => 'backendPermissions', 'uses' => 'Backend\PermissionsController@index']);
+        Route::resource('backend/permissions', 'Backend\PermissionsController', ['as' => 'backend']);
+        Route::get('backend/permissions/{id}/delete', ['as' => 'backend.permissions.delete', 'uses' => 'Backend\PermissionsController@delete']);
     });
     Route::group(['middleware' => ['permission:backend roles']], function () {
         Route::get('backend/role/create', ['as' => 'backendRoleCreate', 'uses' => 'Backend\RolesController@create']);

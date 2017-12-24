@@ -1,28 +1,27 @@
 @if ($permission->id)
-    {{ Form::model($permission, ['method' => 'put', 'route' => ['backendPermissionUpdate']]) }}
-    {{ Form::hidden('id', $permission->id) }}
+    <form action="{{ route('backend.permissions.update', $permission->id) }}" method="post">
+        {{ method_field('PUT') }}
+        <input name="id" type="hidden" value="{{ $permission->id }}" />
 @else
-    {{ Form::model($permission, ['route' => 'backendPermissionCreate']) }}
+    <form action="{{ route('backend.permissions.store') }}" method="post">
 @endif
-<div class="box">
-    <div class="box-body">
-        <div class="form-group">
-            {{ Form::label(__('validation.attributes.name').' (*)') }}
-            {{ Form::text('name', old('name', $permission->name), ['class' => 'form-control', 'required']) }}
-            <i class="text-danger">{{ $errors->first('name') }}</i>
+
+    {{ csrf_field() }}
+    <div class="box">
+        <div class="box-body">
+            <div class="form-group">
+                <label>@lang('validation.attributes.name') (*)</label>
+                <input class="form-control" name="name" required type="text" value="{{ request()->old('name', $permission->name) }}" />
+                <i class="text-danger">{{ $errors->first('name') }}</i>
+            </div>
+            <div class="form-group">
+                <label>@lang('validation.attributes.guard_name') (*)</label>
+                <input class="form-control" name="guard_name" readonly required type="text" value="{{ request()->old('guard_name', $permission->guard_name) }}" />
+                <i class="text-danger">{{ $errors->first('guard_name') }}</i>
+            </div>
         </div>
-        <div class="form-group">
-            {{ Form::label(__('validation.attributes.guard_name').' (*)') }}
-            {{ Form::text('guard_name', old('guard_name', $permission->guard_name), ['class' => 'form-control', 'readonly', 'required']) }}
-            <i class="text-danger">{{ $errors->first('guard_name') }}</i>
+        <div class="box-footer">
+            <input class="btn btn-default" type="submit" value="@lang('cms.save')" />
         </div>
     </div>
-    <div class="box-footer">
-        @if ($permission->id)
-            <input class="btn btn-default" name="update" type="submit" value="@lang('cms.update')" />
-        @else
-            <input class="btn btn-default" name="create" type="submit" value="@lang('cms.create')" />
-        @endif
-    </div>
-</div>
-{{ Form::close() }}
+</form>

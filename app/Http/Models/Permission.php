@@ -26,30 +26,6 @@ class Permission extends \Spatie\Permission\Models\Permission
      */
     protected $hidden = [];
 
-    public function validate($input, $scenario = 'create')
-    {
-        $rules = [
-            'id' => ['required', 'integer', 'digits_between:1,10'],
-            'name' => ['required', 'between:0,191'],
-            'guard_name' => ['required', 'between:0,191'],
-        ];
-
-        if ($scenario == 'create') {
-            $rules = [
-                'name' => ['required', 'between:0,191', 'unique:permissions,name'],
-                'guard_name' => ['required', 'between:0,191'],
-            ];
-        } else if ($scenario == 'update') {
-            $rules = [
-                'id' => ['required', 'integer', 'digits_between:1,10'],
-                'name' => ['required', 'between:0,191', 'unique:permissions,name,'.$this->id],
-                'guard_name' => ['required', 'between:0,191'],
-            ];
-        }
-
-        return Validator::make($input, $rules);
-    }
-
     public function scopeAction($query, $params)
     {
         if ($params['action'] == 'delete') {
