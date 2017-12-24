@@ -121,8 +121,8 @@
 
                 <li class="header">Masters</li>
                 <li><a href="{{ route('backend.permissions.index') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
-                <li><a href="{{ route('backendUsers') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
                 <li><a href="{{ route('backend.roles.index') }}"><i class="fa fa-user"></i> <span>@lang('cms.roles')</span></a></li>
+                <li><a href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
                 <li><a href="{{ route('backend.options.index') }}"><i class="fa fa-sliders"></i> <span>@lang('cms.options')</span></a></li>
             </ul>
         </section>
