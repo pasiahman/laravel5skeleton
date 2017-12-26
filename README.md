@@ -71,9 +71,17 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
 - [spatie/laravel-pjax](https://github.com/spatie/laravel-pjax)
 
-## Installation
+## Installation for Development
 - Run command, composer update
 - Run command, bower update
 - Run command, npm run production (to run laravel mix)
 - Rename .env.example to .env, and update all setting
 - Run command, php artisan migrate:refresh --seed
+
+## Installation for Production
+- Run command, composer update
+- Rename .env.example to .env, and update all setting
+- Run command, php artisan migrate:refresh --seed
+
+## Demo, Email, Password
+[http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin
