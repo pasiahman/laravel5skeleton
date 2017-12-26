@@ -22,8 +22,8 @@ class Posts extends Migration
             $table->longText('content')->nullable();
             $table->enum('type', ['attachment', 'page', 'post']);
             $table->string('mime_type', 100);
-            $table->enum('status', ['draft', 'publish', 'trash', 'deleted']);
-            $table->enum('comment_status', ['closed', 'open']);
+            $table->enum('status', ['draft', 'publish', 'trash', 'deleted'])->default('publish');
+            $table->enum('comment_status', ['closed', 'open'])->default('open');
             $table->bigInteger('comment_count')->default('0');
             $table->timestamps();
         });

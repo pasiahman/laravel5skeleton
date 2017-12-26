@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Categories;
+use App\Http\Models\Termmeta;
 use App\Http\Requests\Backend\Categories\StoreRequest;
 use App\Http\Requests\Backend\Categories\UpdateRequest;
 use Illuminate\Http\Request;
@@ -50,9 +51,9 @@ class CategoriesController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
         $attributes = ['parent_id' => $request->input('parent_id'), $request->input('locale') => $request->input()];
-        Categories::create($attributes);
+        $category = Categories::create($attributes);
+        (new Termmeta)->sync($request->input('termmeta'), $category->id);
         flash(__('cms.data_has_been_created'))->success()->important();
         return redirect()->back();
     }
@@ -94,6 +95,7 @@ class CategoriesController extends Controller
         $category = Categories::findOrFail($id);
         $attributes = ['parent_id' => $request->input('parent_id'), $request->input('locale') => $request->input()];
         $category->fill($attributes)->save();
+        (new Termmeta)->sync($request->input('termmeta'), $category->id);
         flash(__('cms.data_has_been_updated'))->success()->important();
         return redirect()->back();
     }
