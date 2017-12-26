@@ -23,6 +23,7 @@ mix.styles([
     'resources/bower/bootstrap-social/bootstrap-social.css',
     'resources/bower/fancybox/dist/jquery.fancybox.min.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
+    'resources/bower/toastr/toastr.min.css',
     'resources/vendor/admin-lte/AdminLTE-custom.css',
 ], 'public/css/backend-app.css')
 .copy('resources/bower/font-awesome/fonts', 'public/fonts');
@@ -37,6 +38,7 @@ mix.combine([
     'resources/bower/fastclick/lib/fastclick.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
     'resources/bower/Sortable/Sortable.min.js',
+    'resources/bower/toastr/toastr.min.js',
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
     'resources/vendor/laracasts/flash/custom.js',

@@ -9,6 +9,9 @@ $('.media_choose').each(function () {
         window.parent.document
             .getElementById(this.getAttribute('data-fancybox_to'))
             .innerHTML += content;
+
+        toastr.options = { closeButton: true, positionClass: 'toast-bottom-center', progressBar: true, timeOut: '2000' }
+        toastr.success(this.getAttribute('data-success-message'));
     });
 });
 </script>

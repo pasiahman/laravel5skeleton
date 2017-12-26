@@ -96,6 +96,7 @@
                                             data-attached_file_thumbnail="{{ Storage::url($attached_file_thumbnail) }}"
                                             data-fancybox_to="{{ request()->query('fancybox_to') }}"
                                             data-media_id="{{ $medium->id }}"
+                                            data-success-message="@lang('cms.added')"
                                             type="button"
                                         >@lang('cms.choose')</button>
                                     @endif

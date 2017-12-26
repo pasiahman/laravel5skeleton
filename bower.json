@@ -23,6 +23,7 @@
     "fine-uploader": "^5.13.0",
     "font-awesome": "~4.7",
     "jquery-pjax": "^2.0.1",
-    "Sortable": "sortablejs#^1.6.0"
+    "Sortable": "sortablejs#^1.6.0",
+    "toastr": "^2.1.3"
   }
 }
