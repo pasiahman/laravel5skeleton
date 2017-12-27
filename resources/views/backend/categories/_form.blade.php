@@ -61,7 +61,7 @@
                             <a
                                 data-fancybox
                                 data-type="iframe"
-                                href="{{ route('backend.media.index', ['fancybox_to' => 'images', 'layout' => 'media_iframe']) }}"
+                                href="{{ route('backend.media.index', ['fancybox_to' => 'images', 'layout' => 'media_iframe', 'mime_type_like' => 'image/']) }}"
                             >@lang('cms.choose')</a>
                         </u>
                         <ul class="list-inline sortable-list-group" id="images">

@@ -74,7 +74,8 @@ class Posts extends Model
         isset($params['id']) ? $query->where('id', $params['id']) : '';
         isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
         isset($params['title']) ? $query->where('title', 'like', '%'.$params['title'].'%') : '';
-        isset($params['mime_type']) ? $query->where('mime_type', 'like', '%'.$params['mime_type'].'%') : '';
+        isset($params['mime_type']) ? $query->where('mime_type', $params['mime_type']) : '';
+        isset($params['mime_type_like']) ? $query->where('mime_type', 'like', '%'.$params['mime_type_like'].'%') : '';
         isset($params['status']) ? $query->where('status', $params['status']) : '';
         isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
         isset($params['created_at_date']) ? $query->whereDate('created_at', '=', $params['created_at_date']) : '';

@@ -21,16 +21,18 @@ class Termmeta extends Model
     {
         $ids = [];
 
-        foreach ($metas as $key => $value) {
-            $value = is_array($value) ? json_encode($value) : $value;
+        if ($metas) {
+            foreach ($metas as $key => $value) {
+                $value = is_array($value) ? json_encode($value) : $value;
 
-            if ($meta = self::where('term_id', $postId)->where('key', $key)->first()) {
-                $meta->fill(['value' => $value])->save(); // update
-            } else {
-                $meta = self::create(['term_id' => $postId, 'key' => $key, 'value' => $value]); // insert
+                if ($meta = self::where('term_id', $postId)->where('key', $key)->first()) {
+                    $meta->fill(['value' => $value])->save(); // update
+                } else {
+                    $meta = self::create(['term_id' => $postId, 'key' => $key, 'value' => $value]); // insert
+                }
+
+                $ids[] = $meta->id;
             }
-
-            $ids[] = $meta->id;
         }
 
         self::whereNotIn('id', $ids)->where('term_id', $postId)->delete();

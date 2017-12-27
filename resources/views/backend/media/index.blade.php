@@ -18,6 +18,7 @@
                 @if (request()->query('layout') == 'media_iframe')
                     <input name="fancybox_to" type="hidden" value="{{ request()->query('fancybox_to') }}" />
                     <input name="layout" type="hidden" value="{{ request()->query('layout') }}" />
+                    <input name="mime_type_like" type="hidden" value="{{ request()->query('mime_type_like') }}" />
                 @endif
 
                 <table class="table table-bordered table-condensed table-striped">
@@ -64,7 +65,7 @@
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a
                                     class="btn btn-default btn-xs"
-                                    href="{{ route('backend.media.index', ['fancybox_to' => request()->query('fancybox_to'), 'layout' => request()->query('layout')]) }}"
+                                    href="{{ route('backend.media.index', array_except(request()->query(), ['limit', 'sort', 'title', 'mime_type', 'created_at'])) }}"
                                 ><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
