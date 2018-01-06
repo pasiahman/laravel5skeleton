@@ -36,6 +36,8 @@ return [
     'roles' => 'Roles',
     'save' => 'Save',
     'sort' => 'Sort',
+    'tag' => 'Tag',
+    'tags' => 'Tags',
     'trash' => 'Trash',
     'update' => 'Update',
     'users' => 'Users',

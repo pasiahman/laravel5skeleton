@@ -26,6 +26,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend permissions']);
         Permission::create(['name' => 'backend posts deleted']);
         Permission::create(['name' => 'backend roles']);
+        Permission::create(['name' => 'backend tags']);
         Permission::create(['name' => 'backend users']);
 
         // create roles and assign existing permissions
@@ -39,6 +40,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'backend permissions',
             'backend posts deleted',
             'backend roles',
+            'backend tags',
             'backend users',
         ]);
 
@@ -48,6 +50,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'backend media',
             'backend media role',
             'backend roles',
+            'backend tags',
             'backend users',
         ]);
 

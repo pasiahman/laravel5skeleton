@@ -36,6 +36,8 @@ return [
     'roles' => 'Peran',
     'save' => 'Simpan',
     'sort' => 'Urut',
+    'tag' => 'Tag',
+    'tags' => 'Tag',
     'trash' => 'Sampah',
     'update' => 'Perbarui',
     'users' => 'Pengguna',

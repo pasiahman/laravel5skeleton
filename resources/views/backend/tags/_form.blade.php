@@ -1,9 +1,9 @@
-@if ($category->id)
-    <form action="{{ route('backend.categories.update', $category->id) }}" method="post">
+@if ($tag->id)
+    <form action="{{ route('backend.tags.update', $tag->id) }}" method="post">
         {{ method_field('PUT') }}
-        <input name="id" type="hidden" value="{{ $category->id }}" />
+        <input name="id" type="hidden" value="{{ $tag->id }}" />
 @else
-    <form action="{{ route('backend.categories.store') }}" method="post">
+    <form action="{{ route('backend.tags.store') }}" method="post">
 @endif
 
     {{ csrf_field() }}
@@ -13,10 +13,10 @@
                 <div class="col-md-12">
                     <input name="locale" type="hidden" value="{{ request()->old('locale', request()->query('locale', config('app.locale'))) }}" />
                     @foreach (config('app.languages') as $languageCode => $languageName)
-                        @if ($category->id)
-                            <a href="{{ route('backend.categories.edit', ['id' => $category->id, 'locale' => $languageCode]) }}">
+                        @if ($tag->id)
+                            <a href="{{ route('backend.tags.edit', ['id' => $tag->id, 'locale' => $languageCode]) }}">
                         @else
-                            <a href="{{ route('backend.categories.create', ['locale' => $languageCode]) }}">
+                            <a href="{{ route('backend.tags.create', ['locale' => $languageCode]) }}">
                         @endif
 
                             <img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" />
@@ -30,31 +30,21 @@
                 <div class="col-md-9">
                     <div class="form-group">
                         <label>@lang('validation.attributes.name') (*)</label>
-                        <input class="form-control" name="name" required type="text" value="{{ request()->old('name', $category_translation->name) }}" />
+                        <input class="form-control" name="name" required type="text" value="{{ request()->old('name', $tag_translation->name) }}" />
                         <i class="text-danger">{{ $errors->first('name') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.slug')</label>
-                        <input class="form-control" readonly type="text" value="{{ request()->old('slug', $category_translation->slug) }}" />
+                        <input class="form-control" readonly type="text" value="{{ request()->old('slug', $tag_translation->slug) }}" />
                         <i class="text-danger">{{ $errors->first('slug') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.description')</label>
-                        <textarea class="form-control" name="description" rows="3">{{ request()->old('description', $category_translation->description) }}</textarea>
+                        <textarea class="form-control" name="description" rows="3">{{ request()->old('description', $tag_translation->description) }}</textarea>
                         <i class="text-danger">{{ $errors->first('description') }}</i>
                     </div>
                 </div>
                 <div class="col-md-3">
-                    <div class="form-group">
-                        <label>@lang('validation.attributes.parent')</label>
-                        <select class="form-control" name="parent_id">
-                            <option value="0"></option>
-                            @foreach ($parent_options as $id => $parent)
-                                <option {{ $id == $category->id ? 'disabled' : '' }} {{ $id == request()->old('parent_id', $category->parent_id) ? 'selected' : '' }} value="{{ $id }}">{{ $parent }}</option>
-                            @endforeach
-                        </select>
-                        <i class="text-danger">{{ $errors->first('parent_id') }}</i>
-                    </div>
                     <div class="form-group">
                         <label>@lang('cms.images')</label>
                         <u>
@@ -79,7 +69,7 @@
 
                             @php
                                 $images = [];
-                                $images = $category->id && isset($category->termmetas->where('key', 'images')->first()->value) ? json_decode($category->termmetas->where('key', 'images')->first()->value, true) : $images;
+                                $images = $tag->id && isset($tag->termmetas->where('key', 'images')->first()->value) ? json_decode($tag->termmetas->where('key', 'images')->first()->value, true) : $images;
                                 $images = is_array(request()->old('termmeta.images')) ? request()->old('termmeta.images') : $images;
                             @endphp
 
