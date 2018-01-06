@@ -39,13 +39,6 @@
                         <i class="text-danger">{{ $errors->first('slug') }}</i>
                     </div>
                     <div class="form-group">
-                        <label>@lang('validation.attributes.description')</label>
-                        <textarea class="form-control" name="description" rows="3">{{ request()->old('description', $category_translation->description) }}</textarea>
-                        <i class="text-danger">{{ $errors->first('description') }}</i>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="form-group">
                         <label>@lang('validation.attributes.parent')</label>
                         <select class="form-control" name="parent_id">
                             <option value="0"></option>
@@ -55,6 +48,13 @@
                         </select>
                         <i class="text-danger">{{ $errors->first('parent_id') }}</i>
                     </div>
+                    <div class="form-group">
+                        <label>@lang('validation.attributes.description')</label>
+                        <textarea class="form-control" name="description" rows="3">{{ request()->old('description', $category_translation->description) }}</textarea>
+                        <i class="text-danger">{{ $errors->first('description') }}</i>
+                    </div>
+                </div>
+                <div class="col-md-3">
                     <div class="form-group">
                         <label>@lang('cms.images')</label>
                         <u>
