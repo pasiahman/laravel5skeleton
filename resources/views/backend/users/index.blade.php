@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backend.users.create') }}">@lang('cms.create')</a>
+            <a class="btn btn-default" href="{{ route('backend.users.create', request()->input()) }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.users.index') }}" method="get">
@@ -69,12 +69,13 @@
                                 @can('backend roles')
                                     <td>
                                         @foreach ($user->roles as $role)
-                                            <a href="{{ route('backend.roles.edit', $role->id) }}">{{ $role->name }}</a><br />
+                                            <a href="{{ route('backend.roles.edit', $role->id) }}">{{ $role->name }}</a>
+                                            <br />
                                         @endforeach
                                     </td>
                                 @endcan
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.users.edit', $user->id) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('backend.users.edit', [$user->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs" href="{{ route('backend.users.delete', $user->id) }}" onclick="return confirm('Are you sure to delete this?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
