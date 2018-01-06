@@ -2,10 +2,12 @@
 
 return [
     'action' => 'Action',
+    'added' => 'Added',
     'are_you_sure_to_delete_this' => 'Are you sure to delete this',
     'caption' => 'Caption',
     'categories' => 'Categories',
     'category' => 'Category',
+    'choose' => 'Choose',
     'create' => 'Create',
     'delete' => 'Delete',
     'deleted' => 'Deleted',
@@ -18,6 +20,7 @@ return [
     'file_size' => 'File Size',
     'file_type' => 'File Type',
     'file_url' => 'File Url',
+    'images' => 'Images',
     'logout' => 'Logout',
     'media' => 'Media',
     'name' => 'Name',

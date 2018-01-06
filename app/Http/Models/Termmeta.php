@@ -16,4 +16,25 @@ class Termmeta extends Model
     ];
 
     protected $table = 'termmeta';
+
+    public function sync($metas = [], $postId)
+    {
+        $ids = [];
+
+        if ($metas) {
+            foreach ($metas as $key => $value) {
+                $value = is_array($value) ? json_encode($value) : $value;
+
+                if ($meta = self::where('term_id', $postId)->where('key', $key)->first()) {
+                    $meta->fill(['value' => $value])->save(); // update
+                } else {
+                    $meta = self::create(['term_id' => $postId, 'key' => $key, 'value' => $value]); // insert
+                }
+
+                $ids[] = $meta->id;
+            }
+        }
+
+        self::whereNotIn('id', $ids)->where('term_id', $postId)->delete();
+    }
 }

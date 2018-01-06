@@ -9,7 +9,6 @@ use App\Http\Models\Users;
 use App\Http\Requests\Backend\Users\StoreRequest;
 use App\Http\Requests\Backend\Users\UpdateRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -52,8 +51,8 @@ class UsersController extends Controller
 
         $user = new Users;
         $user->fill($request->input())->save();
-        Auth::user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
-        Auth::user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
+        auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
+        auth()->user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
         flash(__('cms.data_has_been_created'))->success()->important();
         return redirect()->back();
     }
@@ -84,8 +83,8 @@ class UsersController extends Controller
         $user = Users::findOrFail($id);
         $request->input('password') ? $request->merge(['password' => Hash::make($request->input('password'))]) : $request->request->remove('password');
         $user->fill($request->input())->save();
-        Auth::user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
-        Auth::user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
+        auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
+        auth()->user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
         flash(__('cms.data_has_been_updated'))->success()->important();
         return redirect()->back();
     }

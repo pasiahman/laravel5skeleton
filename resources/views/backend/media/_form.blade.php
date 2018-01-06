@@ -66,7 +66,7 @@
                                     <td>:</td>
                                     <td>
                                         {{ Conversion::convert($attachment_metadata['size'], 'byte')->to('megabyte') }} MB
-                                        ({{ $attachment_metadata['size'] }} B)
+                                        ({{ number_format($attachment_metadata['size']) }} B)
                                     </td>
                                 </tr>
                             </tbody>

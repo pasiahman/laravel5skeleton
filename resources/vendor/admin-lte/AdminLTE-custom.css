@@ -1,8 +1,10 @@
-th {
-    text-align: center;
-}
-
 @media (max-width: 767px) {
     .skin-purple .main-header .navbar .dropdown-menu li a { color: #777; }
     .skin-purple .main-header .navbar .dropdown-menu li a:hover { color: #fff; }
 }
+
+th {
+    text-align: center;
+}
+
+.template_close { line-height: 10px; position: absolute; right: 0; top: 0; }

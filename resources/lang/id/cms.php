@@ -2,10 +2,12 @@
 
 return [
     'action' => 'Aksi',
+    'added' => 'Ditambahkan',
     'are_you_sure_to_delete_this' => 'Apakah kamu yakin untuk menghapus ini',
     'caption' => 'Keterangan',
     'categories' => 'Kategori',
     'category' => 'Kategori',
+    'choose' => 'Pilih',
     'create' => 'Buat',
     'delete' => 'Hapus',
     'deleted' => 'Dihapus',
@@ -18,6 +20,7 @@ return [
     'file_size' => 'Ukuran Berkas',
     'file_type' => 'Tipe Berkas',
     'file_url' => 'Url Berkas',
+    'images' => 'Gambar',
     'logout' => 'Keluar',
     'media' => 'Media',
     'name' => 'Nama',

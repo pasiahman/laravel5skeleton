@@ -23,13 +23,13 @@ mix.styles([
     'resources/bower/bootstrap-social/bootstrap-social.css',
     'resources/bower/fancybox/dist/jquery.fancybox.min.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
+    'resources/bower/toastr/toastr.min.css',
     'resources/vendor/admin-lte/AdminLTE-custom.css',
 ], 'public/css/backend-app.css')
 .copy('resources/bower/font-awesome/fonts', 'public/fonts');
 
 mix.combine([
     'resources/bower/jquery/dist/jquery.min.js',
-    'resources/assets/js/core.js',
     'resources/bower/bootstrap/dist/js/bootstrap.min.js',
     'resources/bower/admin-lte/dist/js/adminlte.min.js',
 
@@ -37,9 +37,12 @@ mix.combine([
     'resources/bower/fancybox/dist/jquery.fancybox.min.js',
     'resources/bower/fastclick/lib/fastclick.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
+    'resources/bower/Sortable/Sortable.min.js',
+    'resources/bower/toastr/toastr.min.js',
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
     'resources/vendor/laracasts/flash/custom.js',
+    'resources/assets/js/core.js',
 ], 'public/js/backend-app.js');
 
 mix.styles([
@@ -58,7 +61,6 @@ mix.styles([
 
 mix.combine([
     'resources/bower/jquery/dist/jquery.min.js',
-    'resources/assets/js/core.js',
     'resources/bower/bootstrap/dist/js/bootstrap.min.js',
 
     'resources/bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
@@ -66,4 +68,5 @@ mix.combine([
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
     'resources/vendor/laracasts/flash/custom.js',
+    'resources/assets/js/core.js',
 ], 'public/js/app.js');

@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backend.permissions.create') }}">@lang('cms.create')</a>
+            <a class="btn btn-default" href="{{ route('backend.permissions.create', request()->query()) }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.permissions.index') }}" method="get">
@@ -56,7 +56,7 @@
                                 <td>{{ $permission->name }}</td>
                                 <td>{{ $permission->guard_name }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.permissions.edit', ['id' => $permission->id]) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('backend.permissions.edit', [$permission->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs" href="{{ route('backend.permissions.delete', $permission->id) }}" onclick="return confirm('Are you sure to delete this?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>

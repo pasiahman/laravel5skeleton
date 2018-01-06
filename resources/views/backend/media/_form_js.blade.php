@@ -9,9 +9,6 @@
             endpoint: '{{ route('backend.media.store') }}',
         },
         template: 'qq-template',
-        validation: {
-            // allowedExtensions: ['gif', 'jpeg', 'jpg', 'png'],
-        },
     });
     </script>
 @endpush

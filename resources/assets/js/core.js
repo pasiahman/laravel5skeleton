@@ -13,3 +13,10 @@ $(document).on('click', '.table_row_checkbox_all', function () {
     if (self.is(':checked')) { self.closest('table').find('tbody tr').addClass('info').find('.table_row_checkbox').prop('checked', true); }
     else { self.closest('table').find('tbody tr').removeClass('info').find('.table_row_checkbox').prop('checked', false); }
 });
+
+$(document).on('click', '.template_close', function () { $(this).closest('li').remove(); });
+
+$(document).ready(function () {
+    var sortables = document.querySelectorAll('.sortable-list-group');
+    Array.prototype.forEach.call(sortables, function(element, index) { Sortable.create(element); });
+});

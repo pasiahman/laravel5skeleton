@@ -62,8 +62,11 @@ class Posts extends Model
 
     public function scopeAction($query, $params)
     {
-        if (array_key_exists($params['action'], $this->getStatusOptions())) {
-            isset($params['action_id']) ? $this->search(['id_in' => $params['action_id']])->update(['status' => $params['action']]) : '';
+        if (
+            array_key_exists($params['action'], $this->getStatusOptions())
+            && isset($params['action_id'])
+        ) {
+            $this->search(['id_in' => $params['action_id']])->update(['status' => $params['action']]);
             flash(__('cms.data_has_been_updated'))->success()->important();
         }
         return $query;
@@ -74,7 +77,8 @@ class Posts extends Model
         isset($params['id']) ? $query->where('id', $params['id']) : '';
         isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
         isset($params['title']) ? $query->where('title', 'like', '%'.$params['title'].'%') : '';
-        isset($params['mime_type']) ? $query->where('mime_type', 'like', '%'.$params['mime_type'].'%') : '';
+        isset($params['mime_type']) ? $query->where('mime_type', $params['mime_type']) : '';
+        isset($params['mime_type_like']) ? $query->where('mime_type', 'like', '%'.$params['mime_type_like'].'%') : '';
         isset($params['status']) ? $query->where('status', $params['status']) : '';
         isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
         isset($params['created_at_date']) ? $query->whereDate('created_at', '=', $params['created_at_date']) : '';

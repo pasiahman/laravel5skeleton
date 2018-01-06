@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backend.roles.create') }}">@lang('cms.create')</a>
+            <a class="btn btn-default" href="{{ route('backend.roles.create', request()->query()) }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.roles.index') }}" method="get">
@@ -56,12 +56,14 @@
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->guard_name }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.roles.edit', $role->id) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('backend.roles.edit', [$role->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs" href="{{ route('backend.roles.delete', $role->id) }}" onclick="return confirm('Are you sure to delete this?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @empty
-                            <tr><td align="center" colspan="4">@lang('cms.no_data')</td></tr>
+                            <tr>
+                                <td align="center" colspan="4">@lang('cms.no_data')</td>
+                            </tr>
                         @endforelse
                     </tbody>
                     <tfoot>

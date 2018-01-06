@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+@extends(request()->query('layout') ? 'backend.layouts.'.request()->query('layout') : 'backend.layouts.main')
 
 @section('title', __('cms.media'))
 @section('content_header', __('cms.media'))
@@ -11,10 +11,16 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backend.media.create') }}">@lang('cms.create')</a>
+            <a class="btn btn-default" href="{{ route('backend.media.create', request()->query()) }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.media.index') }}" method="get">
+                @if (request()->query('layout') == 'media_iframe')
+                    <input name="fancybox_to" type="hidden" value="{{ request()->query('fancybox_to') }}" />
+                    <input name="layout" type="hidden" value="{{ request()->query('layout') }}" />
+                    <input name="mime_type_like" type="hidden" value="{{ request()->query('mime_type_like') }}" />
+                @endif
+
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr>
@@ -57,7 +63,10 @@
                             <th>@lang('validation.attributes.created_at') <input class="datepicker form-control input-sm" name="created_at_date" type="text" value="{{ request()->query('created_at_date') }}" /></th>
                             <th>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
-                                <a class="btn btn-default btn-xs" href="{{ route('backend.media.index') }}"><i class="fa fa-repeat"></i></a>
+                                <a
+                                    class="btn btn-default btn-xs"
+                                    href="{{ route('backend.media.index', array_except(request()->query(), ['page', 'limit', 'sort', 'title', 'mime_type', 'created_at_date'])) }}"
+                                ><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
                     </thead>
@@ -79,8 +88,19 @@
                                 <td>{{ $medium->mime_type }}</td>
                                 <td>{{ $medium->created_at }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.media.edit', $medium->id) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('backend.media.edit', ['id' => $medium->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs" href="{{ route('backend.media.delete', $medium->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
+                                    @if (request()->query('layout') == 'media_iframe')
+                                        <button
+                                            class="btn btn-success btn-xs media_choose"
+                                            data-attached_file="{{ Storage::url($attached_file) }}"
+                                            data-attached_file_thumbnail="{{ Storage::url($attached_file_thumbnail) }}"
+                                            data-fancybox_to="{{ request()->query('fancybox_to') }}"
+                                            data-media_id="{{ $medium->id }}"
+                                            data-success-message="@lang('cms.added')"
+                                            type="button"
+                                        >@lang('cms.choose')</button>
+                                    @endif
                                 </td>
                             </tr>
                         @empty

@@ -4,7 +4,11 @@
 @section('content_header', __('cms.update'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('backend.roles.index') }}"><i class="fa fa-user"></i>@lang('cms.roles')</a></li>
+        <li>
+            <a href="{{ route('backend.roles.index', request()->query()) }}">
+                <i class="fa fa-user"></i>@lang('cms.roles')
+            </a>
+        </li>
         <li class="active">@lang('cms.update')</li>
     </ol>
 @endsection
