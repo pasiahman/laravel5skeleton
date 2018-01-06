@@ -4,7 +4,11 @@
 @section('content_header', __('cms.update'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li><a href="{{ route('backend.permissions.index') }}"><i class="fa fa-ban"></i>@lang('cms.permissions')</a></li>
+        <li>
+            <a href="{{ route('backend.permissions.index', request()->query()) }}">
+                <i class="fa fa-ban"></i>@lang('cms.permissions')
+            </a>
+        </li>
         <li class="active">@lang('cms.update')</li>
     </ol>
 @endsection

@@ -65,7 +65,7 @@
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a
                                     class="btn btn-default btn-xs"
-                                    href="{{ route('backend.media.index', array_except(request()->query(), ['limit', 'sort', 'title', 'mime_type', 'created_at'])) }}"
+                                    href="{{ route('backend.media.index', array_except(request()->query(), ['page', 'limit', 'sort', 'title', 'mime_type', 'created_at_date'])) }}"
                                 ><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
