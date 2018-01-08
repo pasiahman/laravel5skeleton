@@ -13,13 +13,14 @@ class MediaController extends Controller
 {
     public function index(Request $request)
     {
+        $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'created_at,DESC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['action_options'] = (new Media)->getStatusOptions();
         $data['media'] = Media::search($request->query())->paginate($request->query('limit'));
-        $data['mime_type_options'] = (new Media)->mime_type_options;
-        $data['status_options'] = (new Media)->status_options;
+        $data['mime_type_options'] = (new Media)->getMimeTypeOptionsAttribute();
+        $data['status_options'] = (new Media)->getStatusOptionsAttribute();
 
         if ($request->query('action')) { (new Media)->action($request->query()); return redirect()->back(); }
 
@@ -51,7 +52,12 @@ class MediaController extends Controller
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
 
-            $medium = Media::create(['author' => auth()->user()->id, 'title' => $filename, 'name' => str_slug($filename), 'mime_type' => $file->getMimeType()]);
+            $attributes = ['author' => auth()->user()->id, 'mime_type' => $file->getMimeType()];
+            foreach (config('app.languages') as $languageCode => $languageName) {
+                $attributes += [$languageCode => ['title' => $filename, 'name' => str_slug($filename)]];
+            }
+
+            $medium = Media::create($attributes);
             $originalPath = 'media/original/'.$medium->id.'/'.str_slug($filename).'.'.$extension;
             $thumbnailPath = 'media/thumbnail/'.$medium->id.'/'.str_slug($filename).'.'.$extension;
             $file->storeAs('', $originalPath);
@@ -86,7 +92,8 @@ class MediaController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $data['medium'] = Media::search(['id' => $id])->firstOrFail();
+        $data['medium'] = $medium = Media::search(['id' => $id])->firstOrFail();
+        $data['medium_translation'] = $medium->translateOrNew($request->query('locale'));
         return view('backend/media/update', $data);
     }
 
@@ -99,11 +106,22 @@ class MediaController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $request->merge(['name' => str_slug($request->input('title'))]);
+        $attributes = [$request->input('locale') => $request->input()];
         $medium = Media::search(['id' => $id])->firstOrFail();
-        $medium->fill($request->input())->save();
+        $medium->fill($attributes)->save();
         flash(__('cms.data_has_been_updated'))->success()->important();
         return redirect()->back();
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
     }
 
     public function delete($id)

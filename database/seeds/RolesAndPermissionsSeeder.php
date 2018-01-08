@@ -21,6 +21,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend categories']);
         Permission::create(['name' => 'backend media']);
         Permission::create(['name' => 'backend media all']);
+        Permission::create(['name' => 'backend media deleted']);
         Permission::create(['name' => 'backend media role']);
         Permission::create(['name' => 'backend options']);
         Permission::create(['name' => 'backend permissions']);

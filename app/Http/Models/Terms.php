@@ -2,14 +2,13 @@
 
 namespace App\Http\Models;
 
-use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Validator;
 use redzjovi\php\ArrayHelper;
 
 class Terms extends Model
 {
-    use Translatable;
+    use \Dimsav\Translatable\Translatable;
 
     /**
      * The attributes that are mass assignable.
@@ -85,7 +84,8 @@ class Terms extends Model
         // term_translations
         isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';
         isset($params['name']) ? $query->whereTranslationLike('name', '%'.$params['name'].'%') : '';
-        isset($params['slug']) ? $query->whereTranslationLike('slug', '%'.$params['slug'].'%') : '';
+        isset($params['slug']) ? $query->whereTranslation('slug', $params['slug']) : '';
+        isset($params['slug_like']) ? $query->whereTranslationLike('slug', '%'.$params['slug_like'].'%') : '';
         isset($params['description']) ? $query->whereTranslationLike('description', '%'.$params['description'].'%') : '';
 
         if (isset($params['count'])) {

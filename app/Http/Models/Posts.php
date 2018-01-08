@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Validator;
 
 class Posts extends Model
 {
+    use \Dimsav\Translatable\Translatable;
+
     protected $attributes = [
         'type' => 'post',
     ];
@@ -19,10 +21,16 @@ class Posts extends Model
      * @var array
      */
     protected $fillable = [
-        'author', 'title', 'name', 'excerpt', 'content', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
+        'author', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
     ];
 
     protected $table = 'posts';
+
+    protected $with = ['translations'];
+
+    public $translatedAttributes = ['title', 'name', 'excerpt', 'content'];
+    public $translationForeignKey = 'post_id';
+    public $translationModel = 'App\Http\Models\PostTranslations';
 
     protected static function boot()
     {
@@ -76,14 +84,34 @@ class Posts extends Model
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';
         isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
-        isset($params['title']) ? $query->where('title', 'like', '%'.$params['title'].'%') : '';
+        isset($params['author']) ? $query->where('author', $params['author']) : '';
+        isset($params['type']) ? $query->where('type', $params['type']) : '';
         isset($params['mime_type']) ? $query->where('mime_type', $params['mime_type']) : '';
         isset($params['mime_type_like']) ? $query->where('mime_type', 'like', '%'.$params['mime_type_like'].'%') : '';
         isset($params['status']) ? $query->where('status', $params['status']) : '';
         isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
         isset($params['created_at_date']) ? $query->whereDate('created_at', '=', $params['created_at_date']) : '';
+
+        // post_translations
+        isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';
+        isset($params['title']) ? $query->whereTranslationLike('title', '%'.$params['title'].'%') : '';
+        isset($params['name']) ? $query->whereTranslation('name', $params['name']) : '';
+        isset($params['name_like']) ? $query->whereTranslationLike('name', '%'.$params['name_like'].'%') : '';
+        isset($params['excerpt']) ? $query->whereTranslationLike('excerpt', '%'.$params['excerpt'].'%') : '';
+        isset($params['content']) ? $query->whereTranslationLike('content', '%'.$params['content'].'%') : '';
+
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {
-            count($sort) == 2 ? $query->orderBy($sort[0], $sort[1]) : '';
+            if (in_array($sort[0], ['title', 'name', 'excerpt', 'content'])) {
+                $query->join($this->getTranslationsTable().' AS translation', function ($join) {
+                    $join->on('translation.post_id', '=', self::getTable().'.id');
+                    isset($params['locale']) ? $query->where('translation.locale', $params['locale']) : '';
+                })
+                ->groupBy(self::getTable().'.id')
+                ->orderBy('translation.'.$sort[0], $sort[1])
+                ->select(self::getTable().'.*');
+            } else {
+                count($sort) == 2 ? $query->orderBy($sort[0], $sort[1]) : '';
+            }
         }
 
         return $query;

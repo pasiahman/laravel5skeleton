@@ -16,10 +16,6 @@ class Posts extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('author');
-            $table->text('title');
-            $table->string('name', 200);
-            $table->text('excerpt')->nullable();
-            $table->longText('content')->nullable();
             $table->enum('type', ['attachment', 'page', 'post']);
             $table->string('mime_type', 100);
             $table->enum('status', ['draft', 'publish', 'trash', 'deleted'])->default('publish');

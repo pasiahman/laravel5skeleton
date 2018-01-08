@@ -47,7 +47,7 @@
                             <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                             <th>@lang('validation.attributes.locale')</th>
                             <th>@lang('validation.attributes.name') <input class="form-control input-sm" name="name" type="text" value="{{ request()->query('name') }}" /></th>
-                            <th>@lang('validation.attributes.slug') <input class="form-control input-sm" name="slug" type="text" value="{{ request()->query('slug') }}" /></th>
+                            <th>@lang('validation.attributes.slug') <input class="form-control input-sm" name="slug_like" type="text" value="{{ request()->query('slug_like') }}" /></th>
                             <th>@lang('validation.attributes.description') <input class="form-control input-sm" name="description" type="text" value="{{ request()->query('description') }}" /></th>
                             <th>
                                 @lang('validation.attributes.count')

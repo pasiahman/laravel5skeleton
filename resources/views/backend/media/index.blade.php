@@ -24,7 +24,7 @@
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th class="text-right" colspan="6">
+                            <th class="text-right" colspan="8">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         @lang('cms.per_page')
@@ -40,6 +40,10 @@
                                             <option {{ request()->query('sort') == 'title,DESC' ? 'selected' : '' }} value="title,DESC">@lang('validation.attributes.name') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'mime_type,ASC' ? 'selected' : '' }} value="mime_type,ASC">@lang('validation.attributes.mime_type') (A-Z)</option>
                                             <option {{ request()->query('sort') == 'mime_type,DESC' ? 'selected' : '' }} value="mime_type,DESC">@lang('validation.attributes.mime_type') (Z-A)</option>
+                                            @can('backend media deleted')
+                                                <option {{ request()->query('sort') == 'status,ASC' ? 'selected' : '' }} value="status,ASC">@lang('validation.attributes.status') (↓)</option>
+                                                <option {{ request()->query('sort') == 'status,DESC' ? 'selected' : '' }} value="status,DESC">@lang('validation.attributes.status') (↑)</option>
+                                            @endcan
                                             <option {{ request()->query('sort') == 'created_at,ASC' ? 'selected' : '' }} value="created_at,ASC">@lang('validation.attributes.created_at') (↓)</option>
                                             <option {{ request()->query('sort') == 'created_at,DESC' ? 'selected' : '' }} value="created_at,DESC">@lang('validation.attributes.created_at') (↑)</option>
                                         </select>
@@ -50,6 +54,7 @@
                         <tr>
                             <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                             <th></th>
+                            <th>@lang('validation.attributes.locale')</th>
                             <th>@lang('validation.attributes.name') <input class="form-control input-sm" name="title" type="text" value="{{ request()->query('title') }}" /></th>
                             <th>
                                 @lang('validation.attributes.mime_type')
@@ -60,7 +65,18 @@
                                     @endforeach
                                 </select>
                             </th>
-                            <th>@lang('validation.attributes.created_at') <input class="datepicker form-control input-sm" name="created_at_date" type="text" value="{{ request()->query('created_at_date') }}" /></th>
+                            @can('backend media deleted')
+                                <th>
+                                    @lang('validation.attributes.status')
+                                    <select class="form-control input-sm" name="status">
+                                        <option value=""></option>
+                                        @foreach ($status_options as $key => $option)
+                                            <option {{ $key == request()->query('status') ? 'selected' : '' }} value="{{ $key }}">{{ $option }}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
+                            @endcan
+                            <th>@lang('validation.attributes.created_at') <input class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="created_at_date" type="text" value="{{ request()->query('created_at_date') }}" /></th>
                             <th>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a
@@ -84,8 +100,24 @@
                                         <img class="media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="height: 32px; width: 32px;" />
                                     </a>
                                 </td>
+                                <td>
+                                    @foreach (config('app.languages') as $languageCode => $languageName)
+                                        @if ($medium->hasTranslation($languageCode))
+                                            <a href="{{ route('backend.media.edit', [$medium->id] + ['locale' => $languageCode] + request()->query()) }}">
+                                                <img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" />
+                                            </a>
+                                        @else
+                                            <a href="{{ route('backend.media.edit', [$medium->id] + ['locale' => $languageCode] + request()->query()) }}">
+                                                <i class="fa fa-plus-square"></i>
+                                            </a>
+                                        @endif
+                                    @endforeach
+                                </td>
                                 <td>{{ $medium->title }}</td>
                                 <td>{{ $medium->mime_type }}</td>
+                                @can('backend media deleted')
+                                    <td>@lang('cms.'.$medium->status)</td>
+                                @endcan
                                 <td>{{ $medium->created_at }}</td>
                                 <td align="center">
                                     <a class="btn btn-default btn-xs" href="{{ route('backend.media.edit', ['id' => $medium->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
@@ -104,21 +136,21 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr><td align="center" colspan="6">@lang('cms.no_data')</td></tr>
+                            <tr><td align="center" colspan="8">@lang('cms.no_data')</td></tr>
                         @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="7">
+                            <td colspan="8">
                                 <select class="input-sm" name="action">
                                     <option value="">@lang('cms.action')</option>
-                                    <option value="delete">@lang('cms.delete')</option>
+                                    <option value="deleted">@lang('cms.delete')</option>
                                 </select>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="6">{{ $media->appends(request()->query())->links('vendor.pagination.default') }}</td>
+                            <td align="center" colspan="8">{{ $media->appends(request()->query())->links('vendor.pagination.default') }}</td>
                         </tr>
                     </tfoot>
                 </table>

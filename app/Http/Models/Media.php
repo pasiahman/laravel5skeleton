@@ -27,6 +27,7 @@ class Media extends Posts
         parent::boot();
 
         static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'attachment'); });
+        static::addGlobalScope('status_deleted', function (Builder $builder) { if (! Auth::user()->can('backend media deleted')) { $builder->where('status', '<>', 'deleted'); } });
     }
 
     public function getMimeTypeOptionsAttribute()

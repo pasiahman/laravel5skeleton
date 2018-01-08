@@ -4,7 +4,7 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TermTranslations extends Model
+class PostTranslations extends Model
 {
     use \Cviebrock\EloquentSluggable\Sluggable;
 
@@ -13,14 +13,14 @@ class TermTranslations extends Model
      *
      * @var array
      */
-    protected $fillable = ['term_id', 'name', 'slug', 'description'];
+    protected $fillable = ['post_id', 'title', 'name', 'excerpt', 'content'];
 
-    protected $table = 'term_translations';
+    protected $table = 'post_translations';
 
     public function sluggable()
     {
         return [
-            'slug' => ['source' => 'name'],
+            'name' => ['source' => 'title'],
         ];
     }
 }
