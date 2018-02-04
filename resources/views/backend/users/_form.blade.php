@@ -11,12 +11,12 @@
         <div class="box-body">
             <div class="form-group">
                 <label>@lang('validation.attributes.name') (*)</label>
-                <input class="form-control" name="name" required type="text" value="{{ request()->old('name', $user->name) }}" />
+                <input class="form-control input-sm" name="name" required type="text" value="{{ request()->old('name', $user->name) }}" />
                 <i class="text-danger">{{ $errors->first('name') }}</i>
             </div>
             <div class="form-group">
                 <label>@lang('validation.attributes.email') (*)</label>
-                <input class="form-control" name="email" required type="email" value="{{ request()->old('email', $user->email) }}" />
+                <input class="form-control input-sm" name="email" required type="email" value="{{ request()->old('email', $user->email) }}" />
                 <i class="text-danger">{{ $errors->first('email') }}</i>
             </div>
             <div class="form-group">
@@ -24,7 +24,7 @@
                     @lang('validation.attributes.password')
                     @if (! $user->id) (*) @endif
                 </label>
-                <input class="form-control" name="password" type="password" />
+                <input class="form-control input-sm" name="password" type="password" />
                 <i class="text-danger">{{ $errors->first('password') }}</i>
             </div>
 
@@ -107,7 +107,7 @@
             </div>
         </div>
         <div class="box-footer">
-            <input class="btn btn-default" type="submit" value="@lang('cms.save')" />
+            <input class="btn btn-default btn-sm" type="submit" value="@lang('cms.save')" />
         </div>
     </div>
 </form>
