@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backend.tags.create', request()->query()) }}">@lang('cms.create')</a>
+            <a class="btn btn-default btn-sm" href="{{ route('backend.tags.create', request()->query()) }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.tags.index') }}" method="get">
