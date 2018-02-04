@@ -34,6 +34,8 @@
                                             <option {{ request()->query('sort') == 'name_like,DESC' ? 'selected' : '' }} value="name_like,DESC">@lang('validation.attributes.name') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'author.name,ASC' ? 'selected' : '' }} value="author.name,ASC">@lang('validation.attributes.author') (A-Z)</option>
                                             <option {{ request()->query('sort') == 'author.name,DESC' ? 'selected' : '' }} value="author.name,DESC">@lang('validation.attributes.author') (Z-A)</option>
+                                            <option {{ request()->query('sort') == 'status,ASC' ? 'selected' : '' }} value="status,ASC">@lang('validation.attributes.status') (↓)</option>
+                                            <option {{ request()->query('sort') == 'status,DESC' ? 'selected' : '' }} value="status,DESC">@lang('validation.attributes.status') (↑)</option>
                                             <option {{ request()->query('sort') == 'updated_at,ASC' ? 'selected' : '' }} value="updated_at,ASC">@lang('validation.attributes.updated_at') (↓)</option>
                                             <option {{ request()->query('sort') == 'updated_at,DESC' ? 'selected' : '' }} value="updated_at,DESC">@lang('validation.attributes.updated_at') (↑)</option>
                                         </select>

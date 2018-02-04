@@ -24,7 +24,7 @@ class PostsController extends Controller
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['model'] = $model = new Posts;
-        $data['posts'] = Posts::search($request->query())->paginate($request->query('limit'));
+        $data['posts'] = Posts::select((new Posts)->getTable().'.*')->search($request->query())->paginate($request->query('limit'));
 
         if ($request->query('action')) { (new Posts)->action($request->query()); return redirect()->back(); }
 
