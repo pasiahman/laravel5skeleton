@@ -14,11 +14,12 @@
                     <input name="locale" type="hidden" value="{{ request()->old('locale', request()->query('locale', config('app.locale'))) }}" />
                     @foreach (config('app.languages') as $languageCode => $languageName)
                         @if ($medium->id)
-                            <a href="{{ route('backend.media.edit', ['id' => $medium->id, 'locale' => $languageCode]) }}">
+                            @php $languageHref = route('backend.media.edit', ['id' => $medium->id, 'locale' => $languageCode]) @endphp
                         @else
-                            <a href="{{ route('backend.media.create', ['locale' => $languageCode]) }}">
+                            @php $languageHref = route('backend.media.create', ['locale' => $languageCode]) @endphp
                         @endif
 
+                        <a href="{{ $languageHref }}">
                             <img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" />
                         </a>
                         {{ $languageCode == request()->old('locale', request()->query('locale', config('app.locale'))) ? $languageName : '' }}
@@ -30,22 +31,22 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label>@lang('validation.attributes.title') (*)</label>
-                        <input class="form-control" name="title" required type="text" value="{{ request()->old('title', $medium_translation->title) }}" />
+                        <input class="form-control input-sm" name="title" required type="text" value="{{ request()->old('title', $medium_translation->title) }}" />
                         <i class="text-danger">{{ $errors->first('title') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.name') (*)</label>
-                        <input class="form-control" name="name" readonly required type="text" value="{{ request()->old('name', $medium_translation->name) }}" />
+                        <input class="form-control input-sm" name="name" readonly required type="text" value="{{ request()->old('name', $medium_translation->name) }}" />
                         <i class="text-danger">{{ $errors->first('name') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('cms.caption')</label>
-                        <textarea class="form-control" name="excerpt" rows="3">{{ request()->old('excerpt', $medium_translation->excerpt) }}</textarea>
+                        <textarea class="form-control input-sm" name="excerpt" rows="3">{{ request()->old('excerpt', $medium_translation->excerpt) }}</textarea>
                         <i class="text-danger">{{ $errors->first('excerpt') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('cms.description')</label>
-                        <textarea class="form-control" name="content" rows="3">{{ request()->old('content', $medium_translation->content) }}</textarea>
+                        <textarea class="form-control input-sm" name="content" rows="3">{{ request()->old('content', $medium_translation->content) }}</textarea>
                         <i class="text-danger">{{ $errors->first('content') }}</i>
                     </div>
                     @if ($medium->id)
@@ -97,7 +98,7 @@
             </div>
         </div>
         <div class="box-footer">
-            <input class="btn btn-default" type="submit" value="@lang('cms.save')" />
+            <input class="btn btn-default btn-sm" type="submit" value="@lang('cms.save')" />
         </div>
     </div>
 </form>

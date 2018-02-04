@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backend.media.create', request()->query()) }}">@lang('cms.create')</a>
+            <a class="btn btn-default btn-sm" href="{{ route('backend.media.create', request()->query()) }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.media.index') }}" method="get">
@@ -40,12 +40,12 @@
                                             <option {{ request()->query('sort') == 'title,DESC' ? 'selected' : '' }} value="title,DESC">@lang('validation.attributes.name') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'mime_type,ASC' ? 'selected' : '' }} value="mime_type,ASC">@lang('validation.attributes.mime_type') (A-Z)</option>
                                             <option {{ request()->query('sort') == 'mime_type,DESC' ? 'selected' : '' }} value="mime_type,DESC">@lang('validation.attributes.mime_type') (Z-A)</option>
-                                            @can('backend media deleted')
+                                            @can('backend media trash')
                                                 <option {{ request()->query('sort') == 'status,ASC' ? 'selected' : '' }} value="status,ASC">@lang('validation.attributes.status') (↓)</option>
                                                 <option {{ request()->query('sort') == 'status,DESC' ? 'selected' : '' }} value="status,DESC">@lang('validation.attributes.status') (↑)</option>
                                             @endcan
-                                            <option {{ request()->query('sort') == 'created_at,ASC' ? 'selected' : '' }} value="created_at,ASC">@lang('validation.attributes.created_at') (↓)</option>
-                                            <option {{ request()->query('sort') == 'created_at,DESC' ? 'selected' : '' }} value="created_at,DESC">@lang('validation.attributes.created_at') (↑)</option>
+                                            <option {{ request()->query('sort') == 'updated_at,ASC' ? 'selected' : '' }} value="updated_at,ASC">@lang('validation.attributes.updated_at') (↓)</option>
+                                            <option {{ request()->query('sort') == 'updated_at,DESC' ? 'selected' : '' }} value="updated_at,DESC">@lang('validation.attributes.updated_at') (↑)</option>
                                         </select>
                                     </div>
                                 </div>
@@ -65,7 +65,7 @@
                                     @endforeach
                                 </select>
                             </th>
-                            @can('backend media deleted')
+                            @can('backend media trash')
                                 <th>
                                     @lang('validation.attributes.status')
                                     <select class="form-control input-sm" name="status">
@@ -76,12 +76,12 @@
                                     </select>
                                 </th>
                             @endcan
-                            <th>@lang('validation.attributes.created_at') <input class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="created_at_date" type="text" value="{{ request()->query('created_at_date') }}" /></th>
+                            <th>@lang('validation.attributes.updated_at') <input class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="updated_at_date" type="text" value="{{ request()->query('updated_at_date') }}" /></th>
                             <th>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a
                                     class="btn btn-default btn-xs"
-                                    href="{{ route('backend.media.index', array_except(request()->query(), ['page', 'limit', 'sort', 'title', 'mime_type', 'created_at_date'])) }}"
+                                    href="{{ route('backend.media.index', array_except(request()->query(), ['page', 'limit', 'sort', 'title', 'mime_type', 'updated_at_date'])) }}"
                                 ><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
@@ -115,13 +115,16 @@
                                 </td>
                                 <td>{{ $medium->title }}</td>
                                 <td>{{ $medium->mime_type }}</td>
-                                @can('backend media deleted')
+                                @can('backend media trash')
                                     <td>@lang('cms.'.$medium->status)</td>
                                 @endcan
-                                <td>{{ $medium->created_at }}</td>
+                                <td>{{ $medium->updated_at }}</td>
                                 <td align="center">
                                     <a class="btn btn-default btn-xs" href="{{ route('backend.media.edit', ['id' => $medium->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.media.delete', $medium->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.media.trash', $medium->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
+                                    @can('backend media delete')
+                                        <a class="btn btn-danger btn-xs" href="{{ route('backend.media.delete', $medium->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
+                                    @endcan
                                     @if (request()->query('layout') == 'media_iframe')
                                         <button
                                             class="btn btn-success btn-xs media_choose"
@@ -144,7 +147,13 @@
                             <td colspan="8">
                                 <select class="input-sm" name="action">
                                     <option value="">@lang('cms.action')</option>
-                                    <option value="deleted">@lang('cms.delete')</option>
+                                    @can('backend media trash')
+                                        <option value="publish">@lang('cms.publish')</option>
+                                    @endcan
+                                    <option value="trash">@lang('cms.trash')</option>
+                                    @can('backend media delete')
+                                        <option value="delete">@lang('cms.delete')</option>
+                                    @endcan
                                 </select>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>

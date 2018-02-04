@@ -52,14 +52,15 @@ class MediaController extends Controller
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
             $extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
 
-            $attributes = ['author' => auth()->user()->id, 'mime_type' => $file->getMimeType()];
+            $attributes['author_id'] = auth()->user()->id;
+            $attributes['mime_type'] = $file->getMimeType();
             foreach (config('app.languages') as $languageCode => $languageName) {
-                $attributes += [$languageCode => ['title' => $filename, 'name' => str_slug($filename)]];
+                $attributes[$languageCode] = ['title' => $filename];
             }
 
             $medium = Media::create($attributes);
-            $originalPath = 'media/original/'.$medium->id.'/'.str_slug($filename).'.'.$extension;
-            $thumbnailPath = 'media/thumbnail/'.$medium->id.'/'.str_slug($filename).'.'.$extension;
+            $originalPath = 'media/original/'.$medium->id.'/'.$medium->name.'.'.$extension;
+            $thumbnailPath = 'media/thumbnail/'.$medium->id.'/'.$medium->name.'.'.$extension;
             $file->storeAs('', $originalPath);
 
             $medium->setAttachedFile($originalPath);
@@ -106,7 +107,7 @@ class MediaController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $attributes = [$request->input('locale') => $request->input()];
+        $attributes[$request->input('locale')] = $request->input();
         $medium = Media::search(['id' => $id])->firstOrFail();
         $medium->fill($attributes)->save();
         flash(__('cms.data_has_been_updated'))->success()->important();
@@ -128,6 +129,14 @@ class MediaController extends Controller
     {
         $medium = Media::search(['id' => $id])->firstOrFail();
         $medium->delete();
+        flash(__('cms.data_has_been_deleted'))->success()->important();
+        return redirect()->back();
+    }
+
+    public function trash($id)
+    {
+        $post = Media::findOrFail($id);
+        $post->fill(['status' => 'trash'])->save();
         flash(__('cms.data_has_been_deleted'))->success()->important();
         return redirect()->back();
     }

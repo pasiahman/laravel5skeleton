@@ -8,6 +8,7 @@ use App\Http\Models\Users;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use redzjovi\php\ArrayHelper;
 
@@ -44,6 +45,8 @@ class Posts extends Model
         self::deleting(function ($model) {
             $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
             $model->translations->each(function ($translation) { $translation->delete(); });
+            Storage::deleteDirectory('media/original/'.$model->id);
+            Storage::deleteDirectory('media/thumbnail/'.$model->id);
         });
 
         static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'post'); });
@@ -106,7 +109,7 @@ class Posts extends Model
                 if ($posts = self::whereIn('id', $params['action_id'])->get()) {
                     $posts->each(function ($post) { $post->delete(); });
                 }
-                flash(__('cms.data_has_been_deleted'))->success()->important();
+                flash(__('cms.data_has_been_deleted').' ('.$posts->count().')')->success()->important();
             }
         }
         return $query;

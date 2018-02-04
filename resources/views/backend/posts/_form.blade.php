@@ -106,8 +106,8 @@
                         @foreach ($images as $imageId)
                             @php
                             $medium = \App\Http\Models\Media::find($imageId);
-                            $attached_file = $medium->postmetas->where('key', 'attached_file')->first()->value;
-                            $attached_file_thumbnail = $medium->postmetas->where('key', 'attached_file_thumbnail')->first()->value;
+                            $attached_file = $medium ? $medium->postmetas->where('key', 'attached_file')->first()->value : '';
+                            $attached_file_thumbnail = $medium ? $medium->postmetas->where('key', 'attached_file_thumbnail')->first()->value : '';
                             @endphp
 
                             <li>
