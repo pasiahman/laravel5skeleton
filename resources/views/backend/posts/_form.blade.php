@@ -60,7 +60,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <input class="btn btn-default" type="submit" value="@lang('cms.save')" />
+                        <input class="btn btn-default btn-sm" type="submit" value="@lang('cms.save')" />
                     </div>
                 </div>
             </div>

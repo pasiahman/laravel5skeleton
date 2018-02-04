@@ -7,10 +7,10 @@
 @endif
 
     {{ csrf_field() }}
-    <div class="box">
-        <div class="box-body">
-            <div class="row">
-                <div class="col-md-12">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-body">
                     <input name="locale" type="hidden" value="{{ request()->old('locale', request()->query('locale', config('app.locale'))) }}" />
                     @foreach (config('app.languages') as $languageCode => $languageName)
                         @if ($medium->id)
@@ -25,10 +25,6 @@
                         {{ $languageCode == request()->old('locale', request()->query('locale', config('app.locale'))) ? $languageName : '' }}
                     @endforeach
                     <hr />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
                     <div class="form-group">
                         <label>@lang('validation.attributes.title') (*)</label>
                         <input class="form-control input-sm" name="title" required type="text" value="{{ request()->old('title', $medium_translation->title) }}" />
@@ -95,10 +91,24 @@
                         </div>
                     @endif
                 </div>
+                <div class="box-footer">
+                    <div class="form-group">
+                        <label>@lang('validation.attributes.status')</label>
+                        <select class="form-control input-sm" name="status">
+                            @foreach (collect($medium->getStatusOptions())->except('draft') as $optionValue => $optionName)
+                                <option
+                                    {{ 'trash' == request()->old('status', $medium->status) ? 'selected' : '' }}
+                                    value="{{ $optionValue }}"
+                                >{{ $optionName }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-default btn-sm" type="submit" value="@lang('cms.save')" />
+                    </div>
+
+                </div>
             </div>
-        </div>
-        <div class="box-footer">
-            <input class="btn btn-default btn-sm" type="submit" value="@lang('cms.save')" />
         </div>
     </div>
 </form>
