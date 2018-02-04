@@ -86,3 +86,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Demo, Email, Password
 [http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin
+
+## Roadmap
+1. Web Master
+    https://developers.google.com/webmasters/googleforwebmasters/
+    1.1 Sitemap generator, TBA
+    https://support.google.com/webmasters/answer/156184
+    1.2 Image publishing guidelines
+    https://support.google.com/webmasters/answer/114016
+    1.3 SEO
+    https://support.google.com/webmasters/answer/35291?hl=en

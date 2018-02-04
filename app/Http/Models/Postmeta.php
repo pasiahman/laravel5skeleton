@@ -16,4 +16,25 @@ class Postmeta extends Model
     ];
 
     protected $table = 'postmeta';
+
+    public function sync($metas = [], $postId)
+    {
+        $ids = [];
+
+        if ($metas) {
+            foreach ($metas as $key => $value) {
+                $value = is_array($value) ? json_encode($value) : $value;
+
+                if ($meta = self::where('post_id', $postId)->where('key', $key)->first()) {
+                    $meta->fill(['value' => $value])->save(); // update
+                } else {
+                    $meta = self::create(['post_id' => $postId, 'key' => $key, 'value' => $value]); // insert
+                }
+
+                $ids[] = $meta->id;
+            }
+        }
+
+        self::whereNotIn('id', $ids)->where('post_id', $postId)->delete();
+    }
 }

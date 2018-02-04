@@ -32,6 +32,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('backend/permissions', 'Backend\PermissionsController', ['as' => 'backend']);
         Route::get('backend/permissions/{id}/delete', ['as' => 'backend.permissions.delete', 'uses' => 'Backend\PermissionsController@delete']);
     });
+    Route::group(['middleware' => ['permission:backend posts']], function () {
+        Route::resource('backend/posts', 'Backend\PostsController', ['as' => 'backend']);
+        Route::get('backend/posts/{id}/delete', ['as' => 'backend.posts.delete', 'uses' => 'Backend\PostsController@delete']);
+        Route::get('backend/posts/{id}/trash', ['as' => 'backend.posts.trash', 'uses' => 'Backend\PostsController@trash']);
+    });
     Route::group(['middleware' => ['permission:backend roles']], function () {
         Route::resource('backend/roles', 'Backend\RolesController', ['as' => 'backend']);
         Route::get('backend/roles/{id}/delete', ['as' => 'backend.roles.delete', 'uses' => 'Backend\RolesController@delete']);

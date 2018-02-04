@@ -52,13 +52,25 @@ class Terms extends Model
 
     public function getParentOptions()
     {
-        $parents = self::all()->sortBy(function ($row, $key) { return $row['name']; })->toArray();
+        $search = [];
+        request()->query('locale') ? $search['locale'] = request()->query('locale') : '';
+        $parents = self::search($search)->get()->sortBy(function ($row, $key) { return $row['name']; })->toArray();
         $parents = ArrayHelper::copyKeyName($parents, 'parent_id', 'parent');
         $tree = ArrayHelper::buildTree($parents);
         $tree = ArrayHelper::printTree($tree);
         $options = collect($tree)->pluck('tree_name', 'id')->toArray();
 
         return $options;
+    }
+
+    public function getTermsTree()
+    {
+        $tree = self::all()->sortBy(function ($row, $key) { return $row['name']; })->toArray();
+        $tree = ArrayHelper::copyKeyName($tree, 'parent_id', 'parent');
+        $tree = ArrayHelper::buildTree($tree);
+        $tree = ArrayHelper::printTree($tree, '&nbsp;&nbsp;');
+
+        return $tree;
     }
 
     public function parent()
@@ -78,7 +90,7 @@ class Terms extends Model
     public function scopeSearch($query, $params)
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';
-        isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
+        isset($params['id_in']) ? $query->whereIn(self::getTable().'.id', $params['id_in']) : '';
         isset($params['parent_id']) ? $query->where('parent_id', $params['parent_id']) : '';
 
         // term_translations

@@ -2,10 +2,14 @@
 
 namespace App\Http\Models;
 
+use App\Http\Models\Categories;
+use App\Http\Models\Postmeta;
+use App\Http\Models\Users;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use redzjovi\php\ArrayHelper;
 
 class Posts extends Model
 {
@@ -13,6 +17,7 @@ class Posts extends Model
 
     protected $attributes = [
         'type' => 'post',
+        'status' => 'publish',
     ];
 
     /**
@@ -21,12 +26,12 @@ class Posts extends Model
      * @var array
      */
     protected $fillable = [
-        'author', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
+        'author_id', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
     ];
 
     protected $table = 'posts';
 
-    protected $with = ['translations'];
+    protected $with = ['author', 'postmetas', 'translations'];
 
     public $translatedAttributes = ['title', 'name', 'excerpt', 'content'];
     public $translationForeignKey = 'post_id';
@@ -38,10 +43,34 @@ class Posts extends Model
 
         self::deleting(function ($model) {
             $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
+            $model->translations->each(function ($translation) { $translation->delete(); });
         });
 
         static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'post'); });
-        static::addGlobalScope('status_deleted', function (Builder $builder) { if (! Auth::user()->can('backend posts deleted')) { $builder->where('status', '<>', 'deleted'); } });
+        static::addGlobalScope('status_deleted', function (Builder $builder) { if (! Auth::user()->can('backend posts trash')) { $builder->where('status', '<>', 'trash'); } });
+    }
+
+    public function author()
+    {
+        return $this->hasOne('App\Http\Models\Users', 'id', 'author_id');
+    }
+
+    public function getAuthorIdOptions()
+    {
+        $options = self::search(['sort' => 'author.name,ASC'])->select(['author_id', 'author.name AS author_name'])->get()->pluck('author_name', 'author_id')->toArray();
+        return $options;
+    }
+
+    public function getCategoriesTree()
+    {
+        $tree = (new Categories)->getTermsTree();
+        return $tree;
+    }
+
+    public function getCategoryIdOptions()
+    {
+        $options = (new Categories)->getParentOptions();
+        return $options;
     }
 
     public function getStatusOptions()
@@ -50,7 +79,6 @@ class Posts extends Model
             'draft' => __('cms.draft'),
             'publish' => __('cms.publish'),
             'trash' => __('cms.trash'),
-            'deleted' => __('cms.delete'),
         ];
         return $options;
     }
@@ -70,12 +98,16 @@ class Posts extends Model
 
     public function scopeAction($query, $params)
     {
-        if (
-            array_key_exists($params['action'], $this->getStatusOptions())
-            && isset($params['action_id'])
-        ) {
-            $this->search(['id_in' => $params['action_id']])->update(['status' => $params['action']]);
-            flash(__('cms.data_has_been_updated'))->success()->important();
+        if (isset($params['action_id'])) {
+            if (array_key_exists($params['action'], $this->getStatusOptions())) {
+                $this->search(['id_in' => $params['action_id']])->update(['status' => $params['action']]);
+                flash(__('cms.data_has_been_updated'))->success()->important();
+            } else if ($params['action'] == 'delete' ) {
+                if ($posts = self::whereIn('id', $params['action_id'])->get()) {
+                    $posts->each(function ($post) { $post->delete(); });
+                }
+                flash(__('cms.data_has_been_deleted'))->success()->important();
+            }
         }
         return $query;
     }
@@ -84,13 +116,17 @@ class Posts extends Model
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';
         isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
-        isset($params['author']) ? $query->where('author', $params['author']) : '';
+        isset($params['author_id']) ? $query->where('author_id', $params['author_id']) : '';
         isset($params['type']) ? $query->where('type', $params['type']) : '';
         isset($params['mime_type']) ? $query->where('mime_type', $params['mime_type']) : '';
         isset($params['mime_type_like']) ? $query->where('mime_type', 'like', '%'.$params['mime_type_like'].'%') : '';
         isset($params['status']) ? $query->where('status', $params['status']) : '';
         isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
         isset($params['created_at_date']) ? $query->whereDate('created_at', '=', $params['created_at_date']) : '';
+        isset($params['updated_at_date']) ? $query->whereDate(self::getTable().'.updated_at', '=', $params['updated_at_date']) : '';
+
+        // postmeta
+        isset($params['category_id']) ? $query->join((new Postmeta)->getTable().' AS postmetas_category_id', 'postmetas_category_id.post_id', '=', self::getTable().'.id')->where('postmetas_category_id.key', 'categories')->where('postmetas_category_id.value', 'LIKE', '%"'.$params['category_id'].'"%') : ('');
 
         // post_translations
         isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';
@@ -101,7 +137,9 @@ class Posts extends Model
         isset($params['content']) ? $query->whereTranslationLike('content', '%'.$params['content'].'%') : '';
 
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {
-            if (in_array($sort[0], ['title', 'name', 'excerpt', 'content'])) {
+            if (in_array($sort[0], ['updated_at'])) {
+                $query->orderBy(self::getTable().'.'.$sort[0], $sort[1]);
+            } else if (in_array($sort[0], ['title', 'name', 'excerpt', 'content'])) {
                 $query->join($this->getTranslationsTable().' AS translation', function ($join) {
                     $join->on('translation.post_id', '=', self::getTable().'.id');
                     isset($params['locale']) ? $query->where('translation.locale', $params['locale']) : '';
@@ -109,6 +147,12 @@ class Posts extends Model
                 ->groupBy(self::getTable().'.id')
                 ->orderBy('translation.'.$sort[0], $sort[1])
                 ->select(self::getTable().'.*');
+            } else if (in_array($sort[0], ['author.name'])) {
+                $query->join((new Users)->getTable().' AS author', function ($join) {
+                    $join->on('author.id', '=', self::getTable().'.author_id');
+                })
+                ->orderBy($sort[0], $sort[1])
+                ->select([self::getTable().'.*', 'author.name AS author_name']);
             } else {
                 count($sort) == 2 ? $query->orderBy($sort[0], $sort[1]) : '';
             }

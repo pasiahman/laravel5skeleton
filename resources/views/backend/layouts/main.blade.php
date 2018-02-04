@@ -116,8 +116,19 @@
                     </ul>
                 </li>
                 {{-- <li class="header">@lang('cms.posts')</li> --}}
-                <li><a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.categories')</span></a></li>
-                <li><a href="{{ route('backend.tags.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.tags')</span></a></li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-book"></i> <span>@lang('cms.posts')</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('backend.posts.index') }}"><i class="fa fa-book"></i> <span>@lang('cms.posts')</span></a></li>
+                        <li><a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.categories')</span></a></li>
+                        <li><a href="{{ route('backend.tags.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.tags')</span></a></li>
+                    </ul>
+                </li>
                 <li><a href="{{ route('backend.media.index') }}"><i class="fa fa-upload"></i> <span>@lang('cms.media')</span></a></li>
 
                 <li class="header">Masters</li>
