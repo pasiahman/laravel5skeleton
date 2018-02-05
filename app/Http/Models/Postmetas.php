@@ -4,7 +4,7 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Postmeta extends Model
+class Postmetas extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -15,7 +15,7 @@ class Postmeta extends Model
         'post_id', 'key', 'value',
     ];
 
-    protected $table = 'postmeta';
+    protected $table = 'postmetas';
 
     public function sync($metas = [], $postId)
     {

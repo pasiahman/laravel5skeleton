@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Media;
-use App\Http\Models\Postmeta;
+use App\Http\Models\Postmetas;
 use App\Http\Requests\Backend\Media\UpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -66,9 +66,9 @@ class MediaController extends Controller
             $medium->setAttachedFile($originalPath);
             $thumbnailPath = $medium->setAttachedFileThumbnail($originalPath, $thumbnailPath);
 
-            Postmeta::create(['post_id' => $medium->id, 'key' => 'attached_file', 'value' => $originalPath]);
-            Postmeta::create(['post_id' => $medium->id, 'key' => 'attached_file_thumbnail', 'value' => $thumbnailPath]);
-            Postmeta::create(['post_id' => $medium->id, 'key' => 'attachment_metadata', 'value' => json_encode(['extension' => $extension, 'size' => $file->getClientSize()])]);
+            Postmetas::create(['post_id' => $medium->id, 'key' => 'attached_file', 'value' => $originalPath]);
+            Postmetas::create(['post_id' => $medium->id, 'key' => 'attached_file_thumbnail', 'value' => $thumbnailPath]);
+            Postmetas::create(['post_id' => $medium->id, 'key' => 'attachment_metadata', 'value' => json_encode(['extension' => $extension, 'size' => $file->getClientSize()])]);
         }
 
         return response()->json(['success' => true, 'thumbnailUrl' => Storage::url($thumbnailPath)]);
