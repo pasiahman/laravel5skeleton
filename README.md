@@ -52,6 +52,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Included Css
 - [lipis/bootstrap-social](https://github.com/lipis/bootstrap-social)
+- [select2/select2-bootstrap-theme](https://github.com/select2/select2-bootstrap-theme)
 - [twbs/bootstrap](https://github.com/twbs/bootstrap)
 
 ## Included Js

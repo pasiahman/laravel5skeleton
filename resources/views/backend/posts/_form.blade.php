@@ -27,17 +27,17 @@
                     <hr />
                     <div class="form-group">
                         <label>@lang('validation.attributes.title') (*)</label>
-                        <input class="form-control" maxlength=200 name="title" required type="text" value="{{ request()->old('title', $post_translation->title) }}" />
+                        <input class="form-control input-sm" maxlength=200 name="title" required type="text" value="{{ request()->old('title', $post_translation->title) }}" />
                         <i class="text-danger">{{ $errors->first('title') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.slug')</label>
-                        <input class="form-control" readonly type="name" value="{{ request()->old('name', $post_translation->name) }}" />
+                        <input class="form-control input-sm" readonly type="name" value="{{ request()->old('name', $post_translation->name) }}" />
                         <i class="text-danger">{{ $errors->first('name') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.excerpt')</label>
-                        <textarea class="form-control" name="excerpt" rows="3">{{ request()->old('excerpt', $post_translation->excerpt) }}</textarea>
+                        <textarea class="form-control input-sm" name="excerpt" rows="3">{{ request()->old('excerpt', $post_translation->excerpt) }}</textarea>
                         <i class="text-danger">{{ $errors->first('excerpt') }}</i>
                     </div>
                     <div class="form-group">
@@ -149,8 +149,32 @@
                                 </label>
                             </div>
                         @endforeach
-                        <i class="text-danger">{{ $errors->first('parent_id') }}</i>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@lang('cms.tags')</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    @php
+                    $tags = [];
+                    $tags = $post->id && isset($post->postmetas->where('key', 'tags')->first()->value) ? json_decode($post->postmetas->where('key', 'tags')->first()->value, true) : $tags;
+                    $tags = is_array(request()->old('postmetas.tags')) ? request()->old('postmetas.tags') : $tags;
+                    @endphp
+
+                    <select class="form-control input-sm select2" multiple="multiple" name="postmetas[tags][]">
+                        @foreach ($post->getTagOptions() as $tagId => $tagName)
+                            <option {{ in_array($tagId, $tags) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
         </div>

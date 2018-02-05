@@ -16,14 +16,16 @@ let mix = require('laravel-mix');
 
 mix.styles([
     'resources/bower/bootstrap/dist/css/bootstrap.min.css',
-    'resources/bower/admin-lte/dist/css/AdminLTE.min.css',
-    'resources/bower/admin-lte/dist/css/skins/_all-skins.min.css',
-
     'resources/bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
     'resources/bower/bootstrap-social/bootstrap-social.css',
     'resources/bower/fancybox/dist/jquery.fancybox.min.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
+    'resources/bower/select2/dist/css/select2.min.css',
+    'resources/bower/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
     'resources/bower/toastr/toastr.min.css',
+
+    'resources/bower/admin-lte/dist/css/AdminLTE.min.css',
+    'resources/bower/admin-lte/dist/css/skins/_all-skins.min.css',
     'resources/vendor/admin-lte/AdminLTE-custom.css',
 ], 'public/css/backend-app.css')
 .copy('resources/bower/font-awesome/fonts', 'public/fonts');
@@ -43,6 +45,7 @@ mix.combine([
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
     'resources/vendor/laracasts/flash/custom.js',
+    'resources/vendor/select2/select2-custom.js',
     'resources/assets/js/core.js',
 ], 'public/js/backend-app.js');
 
@@ -51,6 +54,8 @@ mix.styles([
     'resources/bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
     'resources/bower/bootstrap-social/bootstrap-social.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
+    'resources/bower/select2/dist/css/select2.min.css',
+    'resources/bower/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
 ], 'public/css/app.css')
 // .copy('resources/bower/fine-uploader', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/edit.gif', 'public/bower/fine-uploader')
@@ -70,5 +75,6 @@ mix.combine([
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
     'resources/vendor/laracasts/flash/custom.js',
+    'resources/vendor/select2/select2-custom.js',
     'resources/assets/js/core.js',
 ], 'public/js/app.js');

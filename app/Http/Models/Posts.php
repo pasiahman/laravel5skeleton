@@ -4,6 +4,7 @@ namespace App\Http\Models;
 
 use App\Http\Models\Categories;
 use App\Http\Models\Postmetas;
+use App\Http\Models\Tags;
 use App\Http\Models\Users;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -91,6 +92,12 @@ class Posts extends Model
         $statusOptions = $this->getStatusOptions();
         $options = self::pluck('status', 'status')->toArray();
         $options = array_intersect_key($statusOptions, $options);
+        return $options;
+    }
+
+    public function getTagOptions()
+    {
+        $options = Tags::search(['sort' => 'name,ASC'])->get()->pluck('name', 'id')->toArray();
         return $options;
     }
 
