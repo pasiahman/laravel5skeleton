@@ -4,7 +4,7 @@ namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Termmeta extends Model
+class Termmetas extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -15,7 +15,7 @@ class Termmeta extends Model
         'term_id', 'key', 'value',
     ];
 
-    protected $table = 'termmeta';
+    protected $table = 'termmetas';
 
     public function sync($metas = [], $postId)
     {

@@ -86,7 +86,7 @@
                     <ul class="list-inline sortable-list-group" id="images">
                         <template class="hidden" id="images_template">
                             <li>
-                                <input class="images_media_id" name="postmeta[images][]" type="hidden" value="$images_media_id" />
+                                <input class="images_media_id" name="postmetas[images][]" type="hidden" value="$images_media_id" />
                                 <div style="position: relative;">
                                     <a class="images_media_attached_file" data-fancybox="group" href="$images_media_attached_file" target="_blank">
                                         <img class="images_media_attached_file_thumbnail media-object" src="$images_media_attached_file_thumbnail" style="height: 64px; width: 64px;" />
@@ -99,7 +99,7 @@
                         @php
                         $images = [];
                         $images = $post->id && isset($post->postmetas->where('key', 'images')->first()->value) ? json_decode($post->postmetas->where('key', 'images')->first()->value, true) : $images;
-                        $images = is_array(request()->old('postmeta.images')) ? request()->old('postmeta.images') : $images;
+                        $images = is_array(request()->old('postmetas.images')) ? request()->old('postmetas.images') : $images;
                         @endphp
 
                         @foreach ($images as $imageId)
@@ -110,7 +110,7 @@
                             @endphp
 
                             <li>
-                                <input class="images_media_id" name="postmeta[images][]" type="hidden" value="{{ $imageId }}" />
+                                <input class="images_media_id" name="postmetas[images][]" type="hidden" value="{{ $imageId }}" />
                                 <div style="position: relative;">
                                     <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($attached_file) }}" target="_blank">
                                         <img class="images_media_attached_file_thumbnail media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="height: 64px; width: 64px;" />
@@ -138,14 +138,14 @@
                         @php
                         $categories = [];
                         $categories = $post->id && isset($post->postmetas->where('key', 'categories')->first()->value) ? json_decode($post->postmetas->where('key', 'categories')->first()->value, true) : $categories;
-                        $categories = is_array(request()->old('postmeta.categories')) ? request()->old('postmeta.categories') : $categories;
+                        $categories = is_array(request()->old('postmetas.categories')) ? request()->old('postmetas.categories') : $categories;
                         @endphp
 
                         @foreach ($post->getCategoriesTree() as $category_tree)
                             <div class="checkbox">
                                 {{ $category_tree['tree_prefix'] }}
                                 <label>
-                                    <input name="postmeta[categories][]" {{ in_array($category_tree['id'], $categories) ? 'checked' : '' }} type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
+                                    <input name="postmetas[categories][]" {{ in_array($category_tree['id'], $categories) ? 'checked' : '' }} type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
                                 </label>
                             </div>
                         @endforeach

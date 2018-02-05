@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Http\Models\Categories;
 use App\Http\Models\Posts;
-use App\Http\Models\Postmeta;
+use App\Http\Models\Postmetas;
 use App\Http\Requests\Backend\Posts\StoreRequest;
 use App\Http\Requests\Backend\Posts\UpdateRequest;
 use Illuminate\Http\Request;
@@ -56,7 +56,7 @@ class PostsController extends Controller
         $attributes['author_id'] = auth()->user()->id;
         $attributes[$request->input('locale')] = $request->input();
         $post->fill($attributes)->save();
-        (new Postmeta)->sync($request->input('postmeta'), $post->id);
+        (new Postmetas)->sync($request->input('postmetas'), $post->id);
         flash(__('cms.data_has_been_created'))->success()->important();
         return redirect()->back();
     }
@@ -99,7 +99,7 @@ class PostsController extends Controller
         $attributes['author_id'] = auth()->user()->id;
         $attributes[$request->input('locale')] = $request->input();
         $post->fill($attributes)->save();
-        (new Postmeta)->sync($request->input('postmeta'), $post->id);
+        (new Postmetas)->sync($request->input('postmetas'), $post->id);
         flash(__('cms.data_has_been_updated'))->success()->important();
         if ($post->status == 'trash' && ! auth()->user()->can('backend posts trash')) { return redirect()->route('backend.posts.index'); }
         return redirect()->back();

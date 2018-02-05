@@ -3,7 +3,7 @@
 namespace App\Http\Models;
 
 use App\Http\Models\Categories;
-use App\Http\Models\Postmeta;
+use App\Http\Models\Postmetas;
 use App\Http\Models\Users;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -96,7 +96,7 @@ class Posts extends Model
 
     public function postmetas()
     {
-        return $this->hasMany('App\Http\Models\Postmeta', 'post_id', 'id');
+        return $this->hasMany('App\Http\Models\Postmetas', 'post_id', 'id');
     }
 
     public function scopeAction($query, $params)
@@ -128,8 +128,8 @@ class Posts extends Model
         isset($params['created_at_date']) ? $query->whereDate('created_at', '=', $params['created_at_date']) : '';
         isset($params['updated_at_date']) ? $query->whereDate(self::getTable().'.updated_at', '=', $params['updated_at_date']) : '';
 
-        // postmeta
-        isset($params['category_id']) ? $query->join((new Postmeta)->getTable().' AS postmetas_category_id', 'postmetas_category_id.post_id', '=', self::getTable().'.id')->where('postmetas_category_id.key', 'categories')->where('postmetas_category_id.value', 'LIKE', '%"'.$params['category_id'].'"%') : ('');
+        // postmetas
+        isset($params['category_id']) ? $query->join((new Postmetas)->getTable().' AS postmetas_category_id', 'postmetas_category_id.post_id', '=', self::getTable().'.id')->where('postmetas_category_id.key', 'categories')->where('postmetas_category_id.value', 'LIKE', '%"'.$params['category_id'].'"%') : ('');
 
         // post_translations
         isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';
