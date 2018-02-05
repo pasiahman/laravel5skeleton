@@ -60,6 +60,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [fancyapps/fancybox](https://github.com/fancyapps/fancybox)
 - [FineUploader/fine-uploader](https://github.com/FineUploader/fine-uploader)
 - [RubaXa/Sortable](https://github.com/RubaXa/Sortable)
+- [select2/select2](https://github.com/select2/select2)
 - [uxsolutions/bootstrap-datepicker](https://github.com/uxsolutions/bootstrap-datepicker)
 
 # Included Packages

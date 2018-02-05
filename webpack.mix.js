@@ -37,6 +37,7 @@ mix.combine([
     'resources/bower/fancybox/dist/jquery.fancybox.min.js',
     'resources/bower/fastclick/lib/fastclick.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
+    'resources/bower/select2/dist/js/select2.min.js',
     'resources/bower/Sortable/Sortable.min.js',
     'resources/bower/toastr/toastr.min.js',
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
@@ -65,6 +66,7 @@ mix.combine([
 
     'resources/bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
+    'resources/bower/select2/dist/js/select2.min.js',
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
     'resources/vendor/laracasts/flash/custom.js',
