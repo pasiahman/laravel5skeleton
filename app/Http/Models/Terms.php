@@ -30,7 +30,7 @@ class Terms extends Model
         parent::boot();
 
         self::deleting(function ($model) {
-            $model->Termmetas->each(function ($Termmeta) { $Termmeta->delete(); });
+            $model->termmetas->each(function ($termmeta) { $termmeta->delete(); });
             $model->deleteTranslations();
         });
     }
@@ -135,6 +135,6 @@ class Terms extends Model
 
     public function termmetas()
     {
-        return $this->hasMany('App\Http\Models\Termmeta', 'term_id', 'id');
+        return $this->hasMany('App\Http\Models\Termmetas', 'term_id', 'id');
     }
 }

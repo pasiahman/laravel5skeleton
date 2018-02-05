@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
 use App\Http\Models\Tags;
-use App\Http\Models\Termmeta;
+use App\Http\Models\Termmetas;
 use App\Http\Requests\Backend\Tags\StoreRequest;
 use App\Http\Requests\Backend\Tags\UpdateRequest;
 use Illuminate\Http\Request;
@@ -51,7 +51,7 @@ class TagsController extends Controller
     {
         $attributes = [$request->input('locale') => $request->input()];
         $tag = Tags::create($attributes);
-        (new Termmeta)->sync($request->input('termmeta'), $tag->id);
+        (new Termmetas)->sync($request->input('termmetas'), $tag->id);
         flash(__('cms.data_has_been_created'))->success()->important();
         return redirect()->back();
     }
@@ -92,7 +92,7 @@ class TagsController extends Controller
         $tag = Tags::findOrFail($id);
         $attributes = [$request->input('locale') => $request->input()];
         $tag->fill($attributes)->save();
-        (new Termmeta)->sync($request->input('termmeta'), $tag->id);
+        (new Termmetas)->sync($request->input('termmetas'), $tag->id);
         flash(__('cms.data_has_been_updated'))->success()->important();
         return redirect()->back();
     }

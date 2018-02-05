@@ -78,7 +78,7 @@
                     <ul class="list-inline sortable-list-group" id="images">
                         <template class="hidden" id="images_template">
                             <li>
-                                <input class="images_media_id" name="termmeta[images][]" type="hidden" value="$images_media_id" />
+                                <input class="images_media_id" name="termmetas[images][]" type="hidden" value="$images_media_id" />
                                 <div style="position: relative;">
                                     <a class="images_media_attached_file" data-fancybox="group" href="$images_media_attached_file" target="_blank">
                                         <img class="images_media_attached_file_thumbnail media-object" src="$images_media_attached_file_thumbnail" style="height: 64px; width: 64px;" />
@@ -91,7 +91,7 @@
                         @php
                         $images = [];
                         $images = $category->id && isset($category->termmetas->where('key', 'images')->first()->value) ? json_decode($category->termmetas->where('key', 'images')->first()->value, true) : $images;
-                        $images = is_array(request()->old('termmeta.images')) ? request()->old('termmeta.images') : $images;
+                        $images = is_array(request()->old('termmetas.images')) ? request()->old('termmetas.images') : $images;
                         @endphp
 
                         @foreach ($images as $imageId)
@@ -102,7 +102,7 @@
                             @endphp
 
                             <li>
-                                <input class="images_media_id" name="termmeta[images][]" type="hidden" value="{{ $imageId }}" />
+                                <input class="images_media_id" name="termmetas[images][]" type="hidden" value="{{ $imageId }}" />
                                 <div style="position: relative;">
                                     <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($attached_file) }}" target="_blank">
                                         <img class="images_media_attached_file_thumbnail media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="height: 64px; width: 64px;" />
