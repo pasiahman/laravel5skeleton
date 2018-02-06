@@ -4,7 +4,6 @@ namespace App\Http\Models;
 
 use App\Http\Models\Terms;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Validator;
 
 class Tags extends Terms
 {

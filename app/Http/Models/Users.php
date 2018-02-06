@@ -2,7 +2,6 @@
 
 namespace App\Http\Models;
 
-use Illuminate\Support\Facades\Validator;
 use Spatie\Permission\Traits\HasRoles;
 
 class Users extends \App\User

@@ -2,8 +2,6 @@
 
 namespace App\Http\Models;
 
-use Illuminate\Support\Facades\Validator;
-
 class Permission extends \Spatie\Permission\Models\Permission
 {
     protected $attributes = [

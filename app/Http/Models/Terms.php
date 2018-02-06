@@ -3,7 +3,6 @@
 namespace App\Http\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Validator;
 use redzjovi\php\ArrayHelper;
 
 class Terms extends Model
@@ -33,21 +32,6 @@ class Terms extends Model
             $model->termmetas->each(function ($termmeta) { $termmeta->delete(); });
             $model->deleteTranslations();
         });
-    }
-
-    public function validate($input, $scenario = '')
-    {
-        $rules = [
-            'id' => ['required', 'integer', 'digits_between:1,20'],
-            'name' => ['required', 'between:0,200'],
-            'slug' => ['required', 'between:0,200'],
-            'taxonomy' => ['required', 'between:0,100'],
-            'description' => ['required'],
-            'parent' => ['required', 'integer', 'digits_between:1,20'],
-            'count' => ['required', 'integer', 'digits_between:1,20'],
-        ];
-
-        return Validator::make($input, $rules);
     }
 
     public function getParentOptions()
