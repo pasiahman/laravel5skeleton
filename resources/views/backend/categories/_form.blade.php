@@ -39,8 +39,8 @@
                         <label>@lang('validation.attributes.parent')</label>
                         <select class="form-control input-sm" name="parent_id">
                             <option value="0"></option>
-                            @foreach ($parent_options as $id => $parent)
-                                <option {{ $id == $category->id ? 'disabled' : '' }} {{ $id == request()->old('parent_id', $category->parent_id) ? 'selected' : '' }} value="{{ $id }}">{{ $parent }}</option>
+                            @foreach ($category->getParentOptions() as $parentId => $parentName)
+                                <option {{ $parentId == $category->id ? 'disabled' : '' }} {{ $parentId == request()->old('parent_id', $category->parent_id) ? 'selected' : '' }} value="{{ $parentId }}">{{ $parentName }}</option>
                             @endforeach
                         </select>
                         <i class="text-danger">{{ $errors->first('parent_id') }}</i>

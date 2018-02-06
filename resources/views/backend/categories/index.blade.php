@@ -55,8 +55,8 @@
                                 @lang('validation.attributes.parent')
                                 <select class="form-control input-sm" name="parent_id">
                                     <option value=""></option>
-                                    @foreach ($parent_options as $id => $parent)
-                                        <option {{ request()->input('parent_id') == $id ? 'selected' : '' }} value="{{ $id }}">{{ $parent }}</option>
+                                    @foreach ($model->getParentOptions() as $parentId => $parentName)
+                                        <option {{ request()->input('parent_id') == $parentId ? 'selected' : '' }} value="{{ $parentId }}">{{ $parentName }}</option>
                                     @endforeach
                                 </select>
                             </th>

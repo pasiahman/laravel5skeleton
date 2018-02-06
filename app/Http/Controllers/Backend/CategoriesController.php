@@ -23,7 +23,7 @@ class CategoriesController extends Controller
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['categories'] = Categories::search($request->query())->paginate($request->query('limit'));
-        $data['parent_options'] = (new Categories)->getParentOptions();
+        $data['model'] = new Categories;
 
         if ($request->query('action')) { (new Categories)->action($request->query()); return redirect()->back(); }
 
@@ -39,7 +39,6 @@ class CategoriesController extends Controller
     {
         $data['category'] = $category = new Categories;
         $data['category_translation'] = $category;
-        $data['parent_options'] = (new Categories)->getParentOptions();
         return view('backend/categories/create', $data);
     }
 
@@ -79,7 +78,6 @@ class CategoriesController extends Controller
     {
         $data['category'] = $category = Categories::findOrFail($id);
         $data['category_translation'] = $category->translateOrNew($request->query('locale'));
-        $data['parent_options'] = (new Categories)->getParentOptions();
         return view('backend/categories/update', $data);
     }
 
