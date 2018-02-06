@@ -63,6 +63,14 @@ class Terms extends Model
         return $options;
     }
 
+    public function getTemplateOptions()
+    {
+        $options = [
+            'default' => __('cms.default'),
+        ];
+        return $options;
+    }
+
     public function getTermsTree()
     {
         $tree = self::all()->sortBy(function ($row, $key) { return $row['name']; })->toArray();

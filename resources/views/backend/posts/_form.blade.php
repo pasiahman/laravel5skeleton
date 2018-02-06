@@ -68,6 +68,26 @@
         <div class="col-md-3">
             <div class="box">
                 <div class="box-header with-border">
+                    <h3 class="box-title">@lang('validation.attributes.template')</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    @php $template = isset($post->postmetas->where('key', 'template')->value) ? $post->postmetas->where('key', 'template')->value : ''; @endphp
+                    <select class="form-control input-sm" name="postmetas[template]">
+                        @foreach ($post->getTemplateOptions() as $templateId => $templateName)
+                            <option {{ $templateId == $template ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box">
+                <div class="box-header with-border">
                     <h3 class="box-title">@lang('cms.images')</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">

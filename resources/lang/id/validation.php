@@ -133,6 +133,7 @@ return [
         'slug' => 'Slug',
         'status' => 'Keadaan',
         'taxonomy' => 'Taksonomi',
+        'template' => 'Template',
         'title' => 'Judul',
         'updated_at' => 'Diperbarui Pada',
         'value' => 'Nilai',

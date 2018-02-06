@@ -101,6 +101,14 @@ class Posts extends Model
         return $options;
     }
 
+    public function getTemplateOptions()
+    {
+        $options = [
+            'default' => __('cms.default'),
+        ];
+        return $options;
+    }
+
     public function postmetas()
     {
         return $this->hasMany('App\Http\Models\Postmetas', 'post_id', 'id');

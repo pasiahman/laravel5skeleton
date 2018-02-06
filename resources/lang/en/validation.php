@@ -133,6 +133,7 @@ return [
         'slug' => 'Slug',
         'status' => 'Status',
         'taxonomy' => 'Taxonomy',
+        'template' => 'Template',
         'title' => 'Title',
         'updated_at' => 'Updated At',
         'value' => 'Value',
