@@ -60,7 +60,7 @@
                                 @lang('validation.attributes.mime_type')
                                 <select class="form-control input-sm" name="mime_type">
                                     <option value=""></option>
-                                    @foreach ($mime_type_options as $key => $option)
+                                    @foreach ($model->getMimeTypeOptionsAttribute() as $key => $option)
                                         <option {{ $key == request()->query('mime_type') ? 'selected' : '' }} value="{{ $key }}">{{ $option }}</option>
                                     @endforeach
                                 </select>
@@ -70,7 +70,7 @@
                                     @lang('validation.attributes.status')
                                     <select class="form-control input-sm" name="status">
                                         <option value=""></option>
-                                        @foreach ($status_options as $key => $option)
+                                        @foreach ($model->getStatusOptionsAttribute() as $key => $option)
                                             <option {{ $key == request()->query('status') ? 'selected' : '' }} value="{{ $key }}">{{ $option }}</option>
                                         @endforeach
                                     </select>

@@ -17,10 +17,8 @@ class MediaController extends Controller
         $request->query('sort') ?: $request->query->set('sort', 'created_at,DESC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
-        $data['action_options'] = (new Media)->getStatusOptions();
         $data['media'] = Media::search($request->query())->paginate($request->query('limit'));
-        $data['mime_type_options'] = (new Media)->getMimeTypeOptionsAttribute();
-        $data['status_options'] = (new Media)->getStatusOptionsAttribute();
+        $data['model'] = new Media;
 
         if ($request->query('action')) { (new Media)->action($request->query()); return redirect()->back(); }
 
@@ -137,7 +135,7 @@ class MediaController extends Controller
 
     public function trash($id)
     {
-        $post = Media::findOrFail($id);
+        $post = Media::search(['id' => $id])->findOrFail();
         $post->fill(['status' => 'trash'])->save();
         flash(__('cms.data_has_been_deleted'))->success()->important();
         return redirect()->back();
