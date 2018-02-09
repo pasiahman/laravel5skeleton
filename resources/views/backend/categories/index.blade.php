@@ -99,7 +99,7 @@
                                 <td align="right">{{ $category->count }}</td>
                                 <td align="center">
                                     <a class="btn btn-default btn-xs" href="{{ route('backend.categories.edit', [$category->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.categories.delete', $category->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.categories.delete', $category->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @empty
