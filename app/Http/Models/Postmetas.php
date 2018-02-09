@@ -17,6 +17,13 @@ class Postmetas extends Model
 
     protected $table = 'postmetas';
 
+    public function scopeSearch($query, $params)
+    {
+        isset($params['post_id']) ? $query->where('post_id', $params['post_id']) : '';
+
+        return $query;
+    }
+
     public function sync($metas = [], $postId)
     {
         $ids = [];

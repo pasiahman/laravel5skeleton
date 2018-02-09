@@ -109,6 +109,9 @@ class MediaController extends Controller
         $attributes = collect($request->input())->only($medium->getFillable())->toArray();
         $attributes[$request->input('locale')] = $request->input();
         $medium->fill($attributes)->save();
+
+        (new Postmetas)->sync($request->input('postmetas'), $medium->id);
+
         flash(__('cms.data_has_been_updated'))->success()->important();
         if ($medium->status == 'trash' && ! auth()->user()->can('backend media trash')) { return redirect()->route('backend.media.index'); }
         return redirect()->back();

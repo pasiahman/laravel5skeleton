@@ -88,6 +88,61 @@
         <div class="col-md-3">
             <div class="box">
                 <div class="box-header with-border">
+                    <h3 class="box-title">@lang('cms.categories')</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    <div class="categories-container">
+                        @php
+                        $categories = [];
+                        $categories = $post->id && isset($post->postmetas->where('key', 'categories')->first()->value) ? json_decode($post->postmetas->where('key', 'categories')->first()->value, true) : $categories;
+                        $categories = is_array(request()->old('postmetas.categories')) ? request()->old('postmetas.categories') : $categories;
+                        @endphp
+
+                        @foreach ($post->getCategoriesTree() as $category_tree)
+                            <div class="checkbox">
+                                {{ $category_tree['tree_prefix'] }}
+                                <label>
+                                    <input name="postmetas[categories][]" {{ in_array($category_tree['id'], $categories) ? 'checked' : '' }} type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
+                                </label>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">@lang('cms.tags')</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body">
+                    @php
+                    $tags = [];
+                    $tags = $post->id && isset($post->postmetas->where('key', 'tags')->first()->value) ? json_decode($post->postmetas->where('key', 'tags')->first()->value, true) : $tags;
+                    $tags = is_array(request()->old('postmetas.tags')) ? request()->old('postmetas.tags') : $tags;
+                    @endphp
+
+                    <select class="form-control input-sm select2" multiple="multiple" name="postmetas[tags][]">
+                        @foreach ($post->getTagOptions() as $tagId => $tagName)
+                            <option {{ in_array($tagId, $tags) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="box">
+                <div class="box-header with-border">
                     <h3 class="box-title">@lang('cms.images')</h3>
                     <div class="box-tools pull-right">
                         <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
@@ -140,61 +195,6 @@
                             </li>
                         @endforeach
                     </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">@lang('cms.categories')</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    <div class="categories-container">
-                        @php
-                        $categories = [];
-                        $categories = $post->id && isset($post->postmetas->where('key', 'categories')->first()->value) ? json_decode($post->postmetas->where('key', 'categories')->first()->value, true) : $categories;
-                        $categories = is_array(request()->old('postmetas.categories')) ? request()->old('postmetas.categories') : $categories;
-                        @endphp
-
-                        @foreach ($post->getCategoriesTree() as $category_tree)
-                            <div class="checkbox">
-                                {{ $category_tree['tree_prefix'] }}
-                                <label>
-                                    <input name="postmetas[categories][]" {{ in_array($category_tree['id'], $categories) ? 'checked' : '' }} type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
-                                </label>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="box">
-                <div class="box-header with-border">
-                    <h3 class="box-title">@lang('cms.tags')</h3>
-                    <div class="box-tools pull-right">
-                        <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
-                            <i class="fa fa-minus"></i>
-                        </button>
-                    </div>
-                </div>
-                <div class="box-body">
-                    @php
-                    $tags = [];
-                    $tags = $post->id && isset($post->postmetas->where('key', 'tags')->first()->value) ? json_decode($post->postmetas->where('key', 'tags')->first()->value, true) : $tags;
-                    $tags = is_array(request()->old('postmetas.tags')) ? request()->old('postmetas.tags') : $tags;
-                    @endphp
-
-                    <select class="form-control input-sm select2" multiple="multiple" name="postmetas[tags][]">
-                        @foreach ($post->getTagOptions() as $tagId => $tagName)
-                            <option {{ in_array($tagId, $tags) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
-                        @endforeach
-                    </select>
                 </div>
             </div>
         </div>

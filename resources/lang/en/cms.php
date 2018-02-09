@@ -26,6 +26,7 @@ return [
     'images' => 'Images',
     'logout' => 'Logout',
     'media' => 'Media',
+    'medium_categories' => 'Medium Categories',
     'no_data' => 'No data',
     'options' => 'Options',
     'overwrite_permissions' => 'Overwrite permissions',
