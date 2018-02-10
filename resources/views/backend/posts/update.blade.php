@@ -12,5 +12,5 @@
 @endsection
 
 @section('content')
-    @include('backend/posts/_form', ['post' => $post])
+    @include('backend/posts/_form')
 @endsection

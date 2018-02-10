@@ -24,6 +24,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('backend/media', 'Backend\MediaController', ['as' => 'backend']);
         Route::get('backend/media/{id}/delete', ['as' => 'backend.media.delete', 'uses' => 'Backend\MediaController@delete']);
         Route::get('backend/media/{id}/trash', ['as' => 'backend.media.trash', 'uses' => 'Backend\MediaController@trash']);
+        Route::post('backend/media/upload', ['as' => 'backend.media.upload', 'uses' => 'Backend\MediaController@upload']);
     });
     Route::group(['middleware' => ['permission:backend medium categories']], function () {
         Route::resource('backend/medium-categories', 'Backend\MediumCategoriesController', ['as' => 'backend']);

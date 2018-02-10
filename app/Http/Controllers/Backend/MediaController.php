@@ -2,49 +2,79 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Backend\PostsController;
 use App\Http\Models\Media;
 use App\Http\Models\Postmetas;
-use App\Http\Requests\Backend\Media\UpdateRequest;
+use App\Http\Requests\Backend\Posts\UpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class MediaController extends Controller
+class MediaController extends PostsController
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new Media;
+    }
+
     public function index(Request $request)
     {
         $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'created_at,DESC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
-        $data['media'] = Media::search($request->query())->paginate($request->query('limit'));
-        $data['model'] = new Media;
+        $data['model'] = $this->model;
+        $data['posts'] = $this->model::search($request->query())->paginate($request->query('limit'));
 
-        if ($request->query('action')) { (new Media)->action($request->query()); return redirect()->back(); }
+        if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
         return view('backend/media/index', $data);
     }
 
-    public function create(Request $request)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
-        $data['medium'] = $medium = new Media;
-
-        if ($request->input('create')) {
-            $validator = $medium->validate($request->input(), 'create');
-            if ($validator->passes()) {
-                $medium->fill($request->input())->save();
-                flash(__('cms.data_has_been_created'))->success()->important();
-                return redirect()->route('backendMedia');
-            } else {
-                $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
-                $data['errors'] = $validator->errors();
-            }
-        }
-
-        return view('backend/media/create', $data);
+        return view('backend/media/create');
     }
 
-    public function store(Request $request)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id, Request $request)
+    {
+        $data['post'] = $post = $this->model::search(['id' => $id])->firstOrFail();
+        $data['post_translation'] = $post->translateOrNew($request->query('locale'));
+        return view('backend/media/update', $data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdateRequest $request, $id)
+    {
+        $post = $this->model::search(['id' => $id])->firstOrFail();
+        $attributes = collect($request->input())->only($post->getFillable())->toArray();
+        $attributes[$request->input('locale')] = $request->input();
+        $post->fill($attributes)->save();
+        (new Postmetas)->sync($request->input('postmetas'), $post->id);
+        flash(__('cms.data_has_been_updated'))->success()->important();
+        if ($post->status == 'trash' && ! auth()->user()->can('backend media trash')) { return redirect()->route('backend.media.index'); }
+        return redirect()->back();
+    }
+
+    public function upload(Request $request)
     {
         if ($file = $request->file('qqfile')) {
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
@@ -70,77 +100,5 @@ class MediaController extends Controller
         }
 
         return response()->json(['success' => true, 'thumbnailUrl' => Storage::url($thumbnailPath)]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id, Request $request)
-    {
-        $data['medium'] = $medium = Media::search(['id' => $id])->firstOrFail();
-        $data['medium_translation'] = $medium->translateOrNew($request->query('locale'));
-        return view('backend/media/update', $data);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateRequest $request, $id)
-    {
-        $medium = Media::search(['id' => $id])->firstOrFail();
-        $attributes = collect($request->input())->only($medium->getFillable())->toArray();
-        $attributes[$request->input('locale')] = $request->input();
-        $medium->fill($attributes)->save();
-
-        (new Postmetas)->sync($request->input('postmetas'), $medium->id);
-
-        flash(__('cms.data_has_been_updated'))->success()->important();
-        if ($medium->status == 'trash' && ! auth()->user()->can('backend media trash')) { return redirect()->route('backend.media.index'); }
-        return redirect()->back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    public function delete($id)
-    {
-        $medium = Media::search(['id' => $id])->firstOrFail();
-        $medium->delete();
-        flash(__('cms.data_has_been_deleted'))->success()->important();
-        return redirect()->back();
-    }
-
-    public function trash($id)
-    {
-        $post = Media::search(['id' => $id])->findOrFail();
-        $post->fill(['status' => 'trash'])->save();
-        flash(__('cms.data_has_been_deleted'))->success()->important();
-        return redirect()->back();
     }
 }

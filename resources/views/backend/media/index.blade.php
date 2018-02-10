@@ -87,14 +87,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($media as $i => $medium)
-                            @php ($attached_file = $medium->postmetas->where('key', 'attached_file')->first()->value)
-                            @php ($attached_file_thumbnail = $medium->postmetas->where('key', 'attached_file_thumbnail')->first()->value)
+                        @forelse ($posts as $i => $post)
+                            @php ($attached_file = $post->postmetas->where('key', 'attached_file')->first()->value)
+                            @php ($attached_file_thumbnail = $post->postmetas->where('key', 'attached_file_thumbnail')->first()->value)
                             <tr>
-                                <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $medium->id }}" /></td>
+                                <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $post->id }}" /></td>
                                 <td>
                                     <a
-                                    @if (in_array($medium->mime_type, $medium->mimeTypeImages)) data-fancybox="group" @endif
+                                    @if (in_array($post->mime_type, $post->mimeTypeImages)) data-fancybox="group" @endif
                                         href="{{ Storage::url($attached_file) }}" target="_blank"
                                         >
                                         <img class="media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="height: 32px; width: 32px;" />
@@ -102,28 +102,28 @@
                                 </td>
                                 <td>
                                     @foreach (config('app.languages') as $languageCode => $languageName)
-                                        @if ($medium->hasTranslation($languageCode))
-                                            <a href="{{ route('backend.media.edit', [$medium->id] + ['locale' => $languageCode] + request()->query()) }}">
+                                        @if ($post->hasTranslation($languageCode))
+                                            <a href="{{ route('backend.media.edit', [$post->id] + ['locale' => $languageCode] + request()->query()) }}">
                                                 <img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" />
                                             </a>
                                         @else
-                                            <a href="{{ route('backend.media.edit', [$medium->id] + ['locale' => $languageCode] + request()->query()) }}">
+                                            <a href="{{ route('backend.media.edit', [$post->id] + ['locale' => $languageCode] + request()->query()) }}">
                                                 <i class="fa fa-plus-square"></i>
                                             </a>
                                         @endif
                                     @endforeach
                                 </td>
-                                <td>{{ $medium->title }}</td>
-                                <td>{{ $medium->mime_type }}</td>
+                                <td>{{ $post->title }}</td>
+                                <td>{{ $post->mime_type }}</td>
                                 @can('backend media trash')
-                                    <td>@lang('cms.'.$medium->status)</td>
+                                    <td>@lang('cms.'.$post->status)</td>
                                 @endcan
-                                <td>{{ $medium->updated_at }}</td>
+                                <td>{{ $post->updated_at }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.media.edit', ['id' => $medium->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.media.trash', $medium->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('backend.media.edit', ['id' => $post->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.media.trash', $post->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
                                     @can('backend media delete')
-                                        <a class="btn btn-danger btn-xs" href="{{ route('backend.media.delete', $medium->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
+                                        <a class="btn btn-danger btn-xs" href="{{ route('backend.media.delete', $post->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
                                     @endcan
                                     @if (request()->query('layout') == 'media_iframe')
                                         <button
@@ -131,7 +131,7 @@
                                             data-attached_file="{{ Storage::url($attached_file) }}"
                                             data-attached_file_thumbnail="{{ Storage::url($attached_file_thumbnail) }}"
                                             data-fancybox_to="{{ request()->query('fancybox_to') }}"
-                                            data-media_id="{{ $medium->id }}"
+                                            data-media_id="{{ $post->id }}"
                                             data-success-message="@lang('cms.added')"
                                             type="button"
                                         >@lang('cms.choose')</button>
@@ -159,7 +159,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="8">{{ $media->appends(request()->query())->links('vendor.pagination.default') }}</td>
+                            <td align="center" colspan="8">{{ $posts->appends(request()->query())->links('vendor.pagination.default') }}</td>
                         </tr>
                     </tfoot>
                 </table>

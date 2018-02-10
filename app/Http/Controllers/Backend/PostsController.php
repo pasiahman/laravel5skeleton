@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\Categories;
 use App\Http\Models\Posts;
 use App\Http\Models\Postmetas;
 use App\Http\Requests\Backend\Posts\StoreRequest;
@@ -12,6 +11,13 @@ use Illuminate\Http\Request;
 
 class PostsController extends Controller
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new Posts;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,10 +29,10 @@ class PostsController extends Controller
         $request->query('sort') ?: $request->query->set('sort', 'updated_at,DESC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
-        $data['model'] = $model = new Posts;
-        $data['posts'] = Posts::select((new Posts)->getTable().'.*')->search($request->query())->paginate($request->query('limit'));
+        $data['model'] = $this->model;
+        $data['posts'] = $this->model::select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));
 
-        if ($request->query('action')) { (new Posts)->action($request->query()); return redirect()->back(); }
+        if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
         return view('backend/posts/index', $data);
     }
@@ -38,8 +44,8 @@ class PostsController extends Controller
      */
     public function create()
     {
-        $data['post'] = $post = new Posts;
-        $data['post_translation'] = $post;
+        $data['post'] = $this->model;
+        $data['post_translation'] = $this->model;
         return view('backend/posts/create', $data);
     }
 
@@ -51,7 +57,7 @@ class PostsController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $post = new Posts;
+        $post = $this->model;
         $attributes = collect($request->input())->only($post->getFillable())->toArray();
         $attributes['author_id'] = auth()->user()->id;
         $attributes[$request->input('locale')] = $request->input();
@@ -80,7 +86,7 @@ class PostsController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $data['post'] = $post = Posts::findOrFail($id);
+        $data['post'] = $post = $this->model::findOrFail($id);
         $data['post_translation'] = $post->translateOrNew($request->query('locale'));
         return view('backend/posts/update', $data);
     }
@@ -94,7 +100,7 @@ class PostsController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $post = Posts::findOrFail($id);
+        $post = $this->model::findOrFail($id);
         $attributes = collect($request->input())->only($post->getFillable())->toArray();
         $attributes['author_id'] = auth()->user()->id;
         $attributes[$request->input('locale')] = $request->input();
@@ -118,7 +124,7 @@ class PostsController extends Controller
 
     public function delete($id)
     {
-        $post = Posts::findOrFail($id);
+        $post = $this->model::search(['id' => $id])->firstOrFail();
         $post->delete();
         flash(__('cms.data_has_been_deleted'))->success()->important();
         return redirect()->back();
@@ -126,7 +132,7 @@ class PostsController extends Controller
 
     public function trash($id)
     {
-        $post = Posts::findOrFail($id);
+        $post = $this->model::search(['id' => $id])->findOrFail();
         $post->fill(['status' => 'trash'])->save();
         flash(__('cms.data_has_been_deleted'))->success()->important();
         return redirect()->back();

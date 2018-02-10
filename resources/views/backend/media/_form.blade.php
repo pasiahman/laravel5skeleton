@@ -1,7 +1,7 @@
-@if ($medium->id)
-    <form action="{{ route('backend.media.update', $medium->id) }}" method="post">
+@if ($post->id)
+    <form action="{{ route('backend.media.update', $post->id) }}" method="post">
         {{ method_field('PUT') }}
-        <input name="id" type="hidden" value="{{ $medium->id }}" />
+        <input name="id" type="hidden" value="{{ $post->id }}" />
 @else
     <form action="{{ route('backend.media.store') }}" method="post">
 @endif
@@ -13,8 +13,8 @@
                 <div class="box-body">
                     <input name="locale" type="hidden" value="{{ request()->old('locale', request()->query('locale', config('app.locale'))) }}" />
                     @foreach (config('app.languages') as $languageCode => $languageName)
-                        @if ($medium->id)
-                            @php $languageHref = route('backend.media.edit', ['id' => $medium->id, 'locale' => $languageCode]) @endphp
+                        @if ($post->id)
+                            @php $languageHref = route('backend.media.edit', ['id' => $post->id, 'locale' => $languageCode]) @endphp
                         @else
                             @php $languageHref = route('backend.media.create', ['locale' => $languageCode]) @endphp
                         @endif
@@ -27,29 +27,29 @@
                     <hr />
                     <div class="form-group">
                         <label>@lang('validation.attributes.title') (*)</label>
-                        <input class="form-control input-sm" name="title" required type="text" value="{{ request()->old('title', $medium_translation->title) }}" />
+                        <input class="form-control input-sm" name="title" required type="text" value="{{ request()->old('title', $post_translation->title) }}" />
                         <i class="text-danger">{{ $errors->first('title') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.name') (*)</label>
-                        <input class="form-control input-sm" name="name" readonly required type="text" value="{{ request()->old('name', $medium_translation->name) }}" />
+                        <input class="form-control input-sm" name="name" readonly required type="text" value="{{ request()->old('name', $post_translation->name) }}" />
                         <i class="text-danger">{{ $errors->first('name') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('cms.caption')</label>
-                        <textarea class="form-control input-sm" name="excerpt" rows="3">{{ request()->old('excerpt', $medium_translation->excerpt) }}</textarea>
+                        <textarea class="form-control input-sm" name="excerpt" rows="3">{{ request()->old('excerpt', $post_translation->excerpt) }}</textarea>
                         <i class="text-danger">{{ $errors->first('excerpt') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('cms.description')</label>
-                        <textarea class="form-control input-sm" name="content" rows="3">{{ request()->old('content', $medium_translation->content) }}</textarea>
+                        <textarea class="form-control input-sm" name="content" rows="3">{{ request()->old('content', $post_translation->content) }}</textarea>
                         <i class="text-danger">{{ $errors->first('content') }}</i>
                     </div>
-                    @if ($medium->id)
+                    @if ($post->id)
                         @php
-                        $attached_file = $medium->postmetas->where('key', 'attached_file')->first()->value;
-                        $attached_file_thumbnail = $medium->postmetas->where('key', 'attached_file_thumbnail')->first()->value;
-                        $attachment_metadata = json_decode($medium->postmetas->where('key', 'attachment_metadata')->first()->value, true);
+                        $attached_file = $post->postmetas->where('key', 'attached_file')->first()->value;
+                        $attached_file_thumbnail = $post->postmetas->where('key', 'attached_file_thumbnail')->first()->value;
+                        $attachment_metadata = json_decode($post->postmetas->where('key', 'attachment_metadata')->first()->value, true);
                         @endphp
 
                         <div class="row">
@@ -58,7 +58,7 @@
                                 <input name="postmetas[attached_file_thumbnail]" type="hidden" value="{{ $attached_file_thumbnail }}" />
                                 <input name="postmetas[attachment_metadata]" type="hidden" value="{{ json_encode($attachment_metadata) }}" />
                                 <a
-                                    @if (in_array($medium->mime_type, $medium->mimeTypeImages)) data-fancybox="group" @endif
+                                    @if (in_array($post->mime_type, $post->mimeTypeImages)) data-fancybox="group" @endif
                                     href="{{ Storage::url($attached_file) }}" target="_blank"
                                 >
                                     <img class="media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="height: 150px; width: 150px;" />
@@ -75,7 +75,7 @@
                                         <tr>
                                             <td>@lang('cms.file_type')</td>
                                             <td>:</td>
-                                            <td>{{ $medium->mime_type }}</td>
+                                            <td>{{ $post->mime_type }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('cms.extension')</td>
@@ -100,9 +100,9 @@
                     <div class="form-group">
                         <label>@lang('validation.attributes.status')</label>
                         <select class="form-control input-sm" name="status">
-                            @foreach (collect($medium->getStatusOptions())->except('draft') as $optionValue => $optionName)
+                            @foreach (collect($post->getStatusOptions())->except('draft') as $optionValue => $optionName)
                                 <option
-                                    {{ 'trash' == request()->old('status', $medium->status) ? 'selected' : '' }}
+                                    {{ 'trash' == request()->old('status', $post->status) ? 'selected' : '' }}
                                     value="{{ $optionValue }}"
                                 >{{ $optionName }}</option>
                             @endforeach
@@ -128,11 +128,11 @@
                     <div class="categories-container">
                         @php
                         $categories = [];
-                        $categories = $medium->id && isset($medium->postmetas->where('key', 'categories')->first()->value) ? json_decode($medium->postmetas->where('key', 'categories')->first()->value, true) : $categories;
+                        $categories = $post->id && isset($post->postmetas->where('key', 'categories')->first()->value) ? json_decode($post->postmetas->where('key', 'categories')->first()->value, true) : $categories;
                         $categories = is_array(request()->old('postmetas.categories')) ? request()->old('postmetas.categories') : $categories;
                         @endphp
 
-                        @foreach ($medium->getCategoriesTree() as $category_tree)
+                        @foreach ($post->getCategoriesTree() as $category_tree)
                             <div class="checkbox">
                                 {{ $category_tree['tree_prefix'] }}
                                 <label>
@@ -157,12 +157,12 @@
                 <div class="box-body">
                     @php
                     $tags = [];
-                    $tags = $medium->id && isset($medium->postmetas->where('key', 'tags')->first()->value) ? json_decode($medium->postmetas->where('key', 'tags')->first()->value, true) : $tags;
+                    $tags = $post->id && isset($post->postmetas->where('key', 'tags')->first()->value) ? json_decode($post->postmetas->where('key', 'tags')->first()->value, true) : $tags;
                     $tags = is_array(request()->old('postmetas.tags')) ? request()->old('postmetas.tags') : $tags;
                     @endphp
 
                     <select class="form-control input-sm select2" multiple="multiple" name="postmetas[tags][]">
-                        @foreach ($medium->getTagOptions() as $tagId => $tagName)
+                        @foreach ($post->getTagOptions() as $tagId => $tagName)
                             <option {{ in_array($tagId, $tags) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
                         @endforeach
                     </select>
