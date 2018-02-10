@@ -65,29 +65,29 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($tags as $i => $tag)
+                        @forelse ($terms as $i => $term)
                             <tr>
-                                <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $tag->id }}" /></td>
+                                <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $term->id }}" /></td>
                                 <td>
                                     @foreach (config('app.languages') as $languageCode => $languageName)
-                                        @if ($tag->hasTranslation($languageCode))
-                                            <a href="{{ route('backend.tags.edit', [$tag->id] + ['locale' => $languageCode]) }}">
+                                        @if ($term->hasTranslation($languageCode))
+                                            <a href="{{ route('backend.tags.edit', [$term->id] + ['locale' => $languageCode]) }}">
                                                 <img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" />
                                             </a>
                                         @else
-                                            <a href="{{ route('backend.tags.edit', [$tag->id] + ['locale' => $languageCode]) }}">
+                                            <a href="{{ route('backend.tags.edit', [$term->id] + ['locale' => $languageCode]) }}">
                                                 <i class="fa fa-plus-square"></i>
                                             </a>
                                         @endif
                                     @endforeach
                                 </td>
-                                <td>{{ $tag->name }}</td>
-                                <td>{{ $tag->slug }}</td>
-                                <td>{{ $tag->description }}</td>
-                                <td align="right">{{ $tag->count }}</td>
+                                <td>{{ $term->name }}</td>
+                                <td>{{ $term->slug }}</td>
+                                <td>{{ $term->description }}</td>
+                                <td align="right">{{ $term->count }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.tags.edit', [$tag->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.tags.delete', $tag->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('backend.tags.edit', [$term->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.tags.delete', $term->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @empty
@@ -107,7 +107,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="7">{{ $tags->appends(request()->query())->links('vendor.pagination.default') }}</td>
+                            <td align="center" colspan="7">{{ $terms->appends(request()->query())->links('vendor.pagination.default') }}</td>
                         </tr>
                     </tfoot>
                 </table>

@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Backend\TermsController;
 use App\Http\Models\Categories;
 use App\Http\Models\Termmetas;
-use App\Http\Requests\Backend\Categories\StoreRequest;
-use App\Http\Requests\Backend\Categories\UpdateRequest;
 use Illuminate\Http\Request;
 
-class CategoriesController extends Controller
+class CategoriesController extends TermsController
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new Categories;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,10 +27,10 @@ class CategoriesController extends Controller
         $request->query('sort') ?: $request->query->set('sort', 'name,ASC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
-        $data['categories'] = Categories::search($request->query())->paginate($request->query('limit'));
-        $data['model'] = new Categories;
+        $data['model'] = $this->model;
+        $data['terms'] = $this->model::search($request->query())->paginate($request->query('limit'));
 
-        if ($request->query('action')) { (new Categories)->action($request->query()); return redirect()->back(); }
+        if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
         return view('backend/categories/index', $data);
     }
@@ -37,35 +42,9 @@ class CategoriesController extends Controller
      */
     public function create()
     {
-        $data['category'] = $category = new Categories;
-        $data['category_translation'] = $category;
+        $data['term'] = $this->model;
+        $data['term_translation'] = $this->model;
         return view('backend/categories/create', $data);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(StoreRequest $request)
-    {
-        $attributes = ['parent_id' => $request->input('parent_id'), $request->input('locale') => $request->input()];
-        $category = Categories::create($attributes);
-        (new Termmetas)->sync($request->input('termmetas'), $category->id);
-        flash(__('cms.data_has_been_created'))->success()->important();
-        return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -76,44 +55,8 @@ class CategoriesController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $data['category'] = $category = Categories::findOrFail($id);
-        $data['category_translation'] = $category->translateOrNew($request->query('locale'));
+        $data['term'] = $term = $this->model::findOrFail($id);
+        $data['term_translation'] = $term->translateOrNew($request->query('locale'));
         return view('backend/categories/update', $data);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateRequest $request, $id)
-    {
-        $category = Categories::findOrFail($id);
-        $attributes = ['parent_id' => $request->input('parent_id'), $request->input('locale') => $request->input()];
-        $category->fill($attributes)->save();
-        (new Termmetas)->sync($request->input('termmetas'), $category->id);
-        flash(__('cms.data_has_been_updated'))->success()->important();
-        return redirect()->back();
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
-
-    public function delete($id)
-    {
-        $category = Categories::findOrFail($id);
-        $category->delete();
-        flash(__('cms.data_has_been_deleted'))->success()->important();
-        return redirect()->back();
     }
 }

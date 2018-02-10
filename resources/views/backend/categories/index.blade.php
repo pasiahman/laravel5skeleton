@@ -76,30 +76,30 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($categories as $i => $category)
+                        @forelse ($terms as $i => $term)
                             <tr>
-                                <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $category->id }}" /></td>
+                                <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $term->id }}" /></td>
                                 <td>
                                     @foreach (config('app.languages') as $languageCode => $languageName)
-                                        @if ($category->hasTranslation($languageCode))
-                                            <a href="{{ route('backend.categories.edit', [$category->id] + ['locale' => $languageCode]) }}">
+                                        @if ($term->hasTranslation($languageCode))
+                                            <a href="{{ route('backend.categories.edit', [$term->id] + ['locale' => $languageCode]) }}">
                                                 <img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" />
                                             </a>
                                         @else
-                                            <a href="{{ route('backend.categories.edit', [$category->id] + ['locale' => $languageCode]) }}">
+                                            <a href="{{ route('backend.categories.edit', [$term->id] + ['locale' => $languageCode]) }}">
                                                 <i class="fa fa-plus-square"></i>
                                             </a>
                                         @endif
                                     @endforeach
                                 </td>
-                                <td>{{ $category->name }}</td>
-                                <td>{{ $category->slug }}</td>
-                                <td>{{ $category->description }}</td>
-                                <td>{{ $category->parent ? $category->parent->name : '' }}</td>
-                                <td align="right">{{ $category->count }}</td>
+                                <td>{{ $term->name }}</td>
+                                <td>{{ $term->slug }}</td>
+                                <td>{{ $term->description }}</td>
+                                <td>{{ $term->parent ? $term->parent->name : '' }}</td>
+                                <td align="right">{{ $term->count }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.categories.edit', [$category->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.categories.delete', $category->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('backend.categories.edit', [$term->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.categories.delete', $term->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @empty
@@ -119,7 +119,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="8">{{ $categories->appends(request()->query())->links('vendor.pagination.default') }}</td>
+                            <td align="center" colspan="8">{{ $terms->appends(request()->query())->links('vendor.pagination.default') }}</td>
                         </tr>
                     </tfoot>
                 </table>

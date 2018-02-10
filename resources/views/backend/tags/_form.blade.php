@@ -1,7 +1,7 @@
-@if ($tag->id)
-    <form action="{{ route('backend.tags.update', $tag->id) }}" method="post">
+@if ($term->id)
+    <form action="{{ route('backend.tags.update', $term->id) }}" method="post">
         {{ method_field('PUT') }}
-        <input name="id" type="hidden" value="{{ $tag->id }}" />
+        <input name="id" type="hidden" value="{{ $term->id }}" />
 @else
     <form action="{{ route('backend.tags.store') }}" method="post">
 @endif
@@ -13,8 +13,8 @@
                 <div class="box-body">
                     <input name="locale" type="hidden" value="{{ request()->old('locale', request()->query('locale', config('app.locale'))) }}" />
                     @foreach (config('app.languages') as $languageCode => $languageName)
-                        @if ($tag->id)
-                            @php $languageHref = route('backend.tags.edit', ['id' => $tag->id, 'locale' => $languageCode]) @endphp
+                        @if ($term->id)
+                            @php $languageHref = route('backend.tags.edit', ['id' => $term->id, 'locale' => $languageCode]) @endphp
                         @else
                             @php $languageHref = route('backend.tags.create', ['locale' => $languageCode]) @endphp
                         @endif
@@ -27,17 +27,17 @@
                     <hr />
                     <div class="form-group">
                         <label>@lang('validation.attributes.name') (*)</label>
-                        <input class="form-control input-sm" name="name" required type="text" value="{{ request()->old('name', $tag_translation->name) }}" />
+                        <input class="form-control input-sm" name="name" required type="text" value="{{ request()->old('name', $term_translation->name) }}" />
                         <i class="text-danger">{{ $errors->first('name') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.slug')</label>
-                        <input class="form-control input-sm" readonly type="text" value="{{ request()->old('slug', $tag_translation->slug) }}" />
+                        <input class="form-control input-sm" readonly type="text" value="{{ request()->old('slug', $term_translation->slug) }}" />
                         <i class="text-danger">{{ $errors->first('slug') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.description')</label>
-                        <textarea class="form-control input-sm" name="description" rows="3">{{ request()->old('description', $tag_translation->description) }}</textarea>
+                        <textarea class="form-control input-sm" name="description" rows="3">{{ request()->old('description', $term_translation->description) }}</textarea>
                         <i class="text-danger">{{ $errors->first('description') }}</i>
                     </div>
                 </div>
@@ -57,9 +57,9 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    @php $template = isset($tag->termmetas->where('key', 'template')->value) ? $tag->termmetas->where('key', 'template')->value : ''; @endphp
+                    @php $template = isset($term->termmetas->where('key', 'template')->value) ? $term->termmetas->where('key', 'template')->value : ''; @endphp
                     <select class="form-control input-sm" name="termmetas[template]">
-                        @foreach ($tag->getTemplateOptions() as $templateId => $templateName)
+                        @foreach ($term->getTemplateOptions() as $templateId => $templateName)
                             <option {{ $templateId == $template ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
                         @endforeach
                     </select>
@@ -99,7 +99,7 @@
 
                         @php
                         $images = [];
-                        $images = $tag->id && isset($tag->termmetas->where('key', 'images')->first()->value) ? json_decode($tag->termmetas->where('key', 'images')->first()->value, true) : $images;
+                        $images = $term->id && isset($term->termmetas->where('key', 'images')->first()->value) ? json_decode($term->termmetas->where('key', 'images')->first()->value, true) : $images;
                         $images = is_array(request()->old('termmeta.images')) ? request()->old('termmeta.images') : $images;
                         @endphp
 

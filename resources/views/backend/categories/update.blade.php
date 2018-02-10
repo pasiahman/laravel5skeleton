@@ -12,5 +12,5 @@
 @endsection
 
 @section('content')
-    @include('backend/categories/_form', ['category' => $category])
+    @include('backend/categories/_form')
 @endsection

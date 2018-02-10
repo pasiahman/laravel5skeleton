@@ -12,5 +12,5 @@
 @endsection
 
 @section('content')
-    @include('backend/tags/_form', ['tag' => $tag])
+    @include('backend/tags/_form')
 @endsection

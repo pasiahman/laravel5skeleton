@@ -1,7 +1,7 @@
-@if ($category->id)
-    <form action="{{ route('backend.medium-categories.update', $category->id) }}" method="post">
+@if ($term->id)
+    <form action="{{ route('backend.medium-categories.update', $term->id) }}" method="post">
         {{ method_field('PUT') }}
-        <input name="id" type="hidden" value="{{ $category->id }}" />
+        <input name="id" type="hidden" value="{{ $term->id }}" />
 @else
     <form action="{{ route('backend.medium-categories.store') }}" method="post">
 @endif
@@ -13,8 +13,8 @@
                 <div class="box-body">
                     <input name="locale" type="hidden" value="{{ request()->old('locale', request()->query('locale', config('app.locale'))) }}" />
                     @foreach (config('app.languages') as $languageCode => $languageName)
-                        @if ($category->id)
-                            @php $languageHref = route('backend.medium-categories.edit', ['id' => $category->id, 'locale' => $languageCode]) @endphp
+                        @if ($term->id)
+                            @php $languageHref = route('backend.medium-categories.edit', ['id' => $term->id, 'locale' => $languageCode]) @endphp
                         @else
                             @php $languageHref = route('backend.medium-categories.create', ['locale' => $languageCode]) @endphp
                         @endif
@@ -27,27 +27,27 @@
                     <hr />
                     <div class="form-group">
                         <label>@lang('validation.attributes.name') (*)</label>
-                        <input class="form-control input-sm" name="name" required type="text" value="{{ request()->old('name', $category_translation->name) }}" />
+                        <input class="form-control input-sm" name="name" required type="text" value="{{ request()->old('name', $term_translation->name) }}" />
                         <i class="text-danger">{{ $errors->first('name') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.slug')</label>
-                        <input class="form-control input-sm" readonly type="text" value="{{ request()->old('slug', $category_translation->slug) }}" />
+                        <input class="form-control input-sm" readonly type="text" value="{{ request()->old('slug', $term_translation->slug) }}" />
                         <i class="text-danger">{{ $errors->first('slug') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.parent')</label>
                         <select class="form-control input-sm" name="parent_id">
                             <option value="0"></option>
-                            @foreach ($category->getParentOptions() as $parentId => $parentName)
-                                <option {{ $parentId == $category->id ? 'disabled' : '' }} {{ $parentId == request()->old('parent_id', $category->parent_id) ? 'selected' : '' }} value="{{ $parentId }}">{{ $parentName }}</option>
+                            @foreach ($term->getParentOptions() as $parentId => $parentName)
+                                <option {{ $parentId == $term->id ? 'disabled' : '' }} {{ $parentId == request()->old('parent_id', $term->parent_id) ? 'selected' : '' }} value="{{ $parentId }}">{{ $parentName }}</option>
                             @endforeach
                         </select>
                         <i class="text-danger">{{ $errors->first('parent_id') }}</i>
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.description')</label>
-                        <textarea class="form-control input-sm" name="description" rows="3">{{ request()->old('description', $category_translation->description) }}</textarea>
+                        <textarea class="form-control input-sm" name="description" rows="3">{{ request()->old('description', $term_translation->description) }}</textarea>
                         <i class="text-danger">{{ $errors->first('description') }}</i>
                     </div>
                 </div>
@@ -67,9 +67,9 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    @php $template = isset($category->termmetas->where('key', 'template')->value) ? $category->termmetas->where('key', 'template')->value : ''; @endphp
+                    @php $template = isset($term->termmetas->where('key', 'template')->value) ? $term->termmetas->where('key', 'template')->value : ''; @endphp
                     <select class="form-control input-sm" name="termmetas[template]">
-                        @foreach ($category->getTemplateOptions() as $templateId => $templateName)
+                        @foreach ($term->getTemplateOptions() as $templateId => $templateName)
                             <option {{ $templateId == $template ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
                         @endforeach
                     </select>
@@ -110,7 +110,7 @@
 
                         @php
                         $images = [];
-                        $images = $category->id && isset($category->termmetas->where('key', 'images')->first()->value) ? json_decode($category->termmetas->where('key', 'images')->first()->value, true) : $images;
+                        $images = $term->id && isset($term->termmetas->where('key', 'images')->first()->value) ? json_decode($term->termmetas->where('key', 'images')->first()->value, true) : $images;
                         $images = is_array(request()->old('termmetas.images')) ? request()->old('termmetas.images') : $images;
                         @endphp
 
