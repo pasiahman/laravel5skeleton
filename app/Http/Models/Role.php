@@ -2,8 +2,6 @@
 
 namespace App\Http\Models;
 
-use Illuminate\Support\Facades\Validator;
-
 class Role extends \Spatie\Permission\Models\Role
 {
     protected $attributes = [

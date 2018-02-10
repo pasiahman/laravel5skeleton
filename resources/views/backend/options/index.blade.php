@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backend.options.create', request()->query()) }}">@lang('cms.create')</a>
+            <a class="btn btn-default btn-sm" href="{{ route('backend.options.create', request()->query()) }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.options.index') }}" method="get">
@@ -57,7 +57,7 @@
                                 <td>{{ $option->value }}</td>
                                 <td align="center">
                                     <a class="btn btn-default btn-xs" href="{{ route('backend.options.edit', [$option->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.options.delete', $option->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.options.delete', $option->id) }}" onclick="return confirm('@lang('cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @empty

@@ -2,6 +2,7 @@
 
 namespace App\Http\Models;
 
+use App\Http\Models\MediumCategories;
 use App\Http\Models\Posts;
 use App\Http\Models\Users;
 use Illuminate\Database\Eloquent\Builder;
@@ -9,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use Intervention\Image\Facades\Image;
 
 class Media extends Posts
@@ -27,6 +27,13 @@ class Media extends Posts
         parent::boot();
 
         static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'attachment'); });
+        static::addGlobalScope('status_deleted', function (Builder $builder) { if (! Auth::user()->can('backend media trash')) { $builder->where('status', '<>', 'trash'); } });
+    }
+
+    public function getCategoriesTree()
+    {
+        $tree = (new MediumCategories)->getTermsTree();
+        return $tree;
     }
 
     public function getMimeTypeOptionsAttribute()

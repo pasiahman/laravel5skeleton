@@ -14,5 +14,5 @@
 @endsection
 
 @section('content')
-    @include('backend/media/_upload', ['medium' => $medium])
+    @include('backend/media/_upload')
 @endsection

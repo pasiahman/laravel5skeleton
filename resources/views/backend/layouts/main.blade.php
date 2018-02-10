@@ -116,14 +116,47 @@
                     </ul>
                 </li>
                 {{-- <li class="header">@lang('cms.posts')</li> --}}
-                <li><a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.categories')</span></a></li>
-                <li><a href="{{ route('backend.media.index') }}"><i class="fa fa-upload"></i> <span>@lang('cms.media')</span></a></li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-book"></i> <span>@lang('cms.posts')</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.categories')</span></a></li>
+                        <li><a href="{{ route('backend.tags.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.tags')</span></a></li>
+                        <li><a href="{{ route('backend.posts.index') }}"><i class="fa fa-book"></i> <span>@lang('cms.posts')</span></a></li>
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-upload"></i> <span>@lang('cms.media')</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('backend.medium-categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.medium_categories')</span></a></li>
+                        <li><a href="{{ route('backend.media.index') }}"><i class="fa fa-upload"></i> <span>@lang('cms.media')</span></a></li>
+                    </ul>
+                </li>
 
                 <li class="header">Masters</li>
-                <li><a href="{{ route('backend.permissions.index') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
-                <li><a href="{{ route('backend.roles.index') }}"><i class="fa fa-user"></i> <span>@lang('cms.roles')</span></a></li>
-                <li><a href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
-                <li><a href="{{ route('backend.options.index') }}"><i class="fa fa-sliders"></i> <span>@lang('cms.options')</span></a></li>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-book"></i> <span>Masters</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="{{ route('backend.permissions.index') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
+                        <li><a href="{{ route('backend.roles.index') }}"><i class="fa fa-user"></i> <span>@lang('cms.roles')</span></a></li>
+                        <li><a href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
+                        <li><a href="{{ route('backend.options.index') }}"><i class="fa fa-sliders"></i> <span>@lang('cms.options')</span></a></li>
+                    </ul>
+                </li>
             </ul>
         </section>
         <!-- /.sidebar -->

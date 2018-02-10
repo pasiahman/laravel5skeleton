@@ -52,6 +52,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Included Css
 - [lipis/bootstrap-social](https://github.com/lipis/bootstrap-social)
+- [select2/select2-bootstrap-theme](https://github.com/select2/select2-bootstrap-theme)
 - [twbs/bootstrap](https://github.com/twbs/bootstrap)
 
 ## Included Js
@@ -60,6 +61,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [fancyapps/fancybox](https://github.com/fancyapps/fancybox)
 - [FineUploader/fine-uploader](https://github.com/FineUploader/fine-uploader)
 - [RubaXa/Sortable](https://github.com/RubaXa/Sortable)
+- [select2/select2](https://github.com/select2/select2)
 - [uxsolutions/bootstrap-datepicker](https://github.com/uxsolutions/bootstrap-datepicker)
 
 # Included Packages
@@ -85,4 +87,14 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - Run command, php artisan migrate:refresh --seed
 
 ## Demo, Email, Password
-[http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin
+[http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin
+
+## Roadmap
+1. Web Master
+    https://developers.google.com/webmasters/googleforwebmasters/
+    1.1 Sitemap generator, TBA
+    https://support.google.com/webmasters/answer/156184
+    1.2 Image publishing guidelines
+    https://support.google.com/webmasters/answer/114016
+    1.3 SEO
+    https://support.google.com/webmasters/answer/35291?hl=en

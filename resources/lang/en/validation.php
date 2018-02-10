@@ -117,10 +117,13 @@ return [
     */
 
     'attributes' => [
+        'author' => 'Author',
+        'content' => 'Content',
         'count' => 'Count',
         'created_at' => 'Created At',
         'description' => 'Description',
         'email' => 'Email',
+        'excerpt' => 'Excerpt',
         'guard_name' => 'Guard Name',
         'locale' => 'Locale',
         'mime_type' => 'Mime Type',
@@ -130,7 +133,9 @@ return [
         'slug' => 'Slug',
         'status' => 'Status',
         'taxonomy' => 'Taxonomy',
+        'template' => 'Template',
         'title' => 'Title',
+        'updated_at' => 'Updated At',
         'value' => 'Value',
     ],
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Termmeta extends Migration
+class Postmetas extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class Termmeta extends Migration
      */
     public function up()
     {
-        Schema::create('termmeta', function (Blueprint $table) {
+        Schema::create('postmetas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('term_id')->default('0');
+            $table->bigInteger('post_id');
             $table->string('key');
             $table->longText('value');
             $table->timestamps();
@@ -29,6 +29,6 @@ class Termmeta extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('termmeta');
+        Schema::dropIfExists('postmetas');
     }
 }

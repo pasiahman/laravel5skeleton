@@ -2,80 +2,44 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\Backend\PostsController;
 use App\Http\Models\Media;
-use App\Http\Models\Postmeta;
-use App\Http\Requests\Backend\Media\UpdateRequest;
+use App\Http\Models\Postmetas;
+use App\Http\Requests\Backend\Posts\UpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class MediaController extends Controller
+class MediaController extends PostsController
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new Media;
+    }
+
     public function index(Request $request)
     {
+        $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'created_at,DESC');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
-        $data['action_options'] = (new Media)->getStatusOptions();
-        $data['media'] = Media::search($request->query())->paginate($request->query('limit'));
-        $data['mime_type_options'] = (new Media)->mime_type_options;
-        $data['status_options'] = (new Media)->status_options;
+        $data['model'] = $this->model;
+        $data['posts'] = $this->model::search($request->query())->paginate($request->query('limit'));
 
-        if ($request->query('action')) { (new Media)->action($request->query()); return redirect()->back(); }
+        if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
         return view('backend/media/index', $data);
     }
 
-    public function create(Request $request)
-    {
-        $data['medium'] = $medium = new Media;
-
-        if ($request->input('create')) {
-            $validator = $medium->validate($request->input(), 'create');
-            if ($validator->passes()) {
-                $medium->fill($request->input())->save();
-                flash(__('cms.data_has_been_created'))->success()->important();
-                return redirect()->route('backendMedia');
-            } else {
-                $message = implode('<br />', $validator->errors()->all()); flash($message)->error()->important();
-                $data['errors'] = $validator->errors();
-            }
-        }
-
-        return view('backend/media/create', $data);
-    }
-
-    public function store(Request $request)
-    {
-        if ($file = $request->file('qqfile')) {
-            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
-
-            $medium = Media::create(['author' => auth()->user()->id, 'title' => $filename, 'name' => str_slug($filename), 'mime_type' => $file->getMimeType()]);
-            $originalPath = 'media/original/'.$medium->id.'/'.str_slug($filename).'.'.$extension;
-            $thumbnailPath = 'media/thumbnail/'.$medium->id.'/'.str_slug($filename).'.'.$extension;
-            $file->storeAs('', $originalPath);
-
-            $medium->setAttachedFile($originalPath);
-            $thumbnailPath = $medium->setAttachedFileThumbnail($originalPath, $thumbnailPath);
-
-            Postmeta::create(['post_id' => $medium->id, 'key' => 'attached_file', 'value' => $originalPath]);
-            Postmeta::create(['post_id' => $medium->id, 'key' => 'attached_file_thumbnail', 'value' => $thumbnailPath]);
-            Postmeta::create(['post_id' => $medium->id, 'key' => 'attachment_metadata', 'value' => json_encode(['extension' => $extension, 'size' => $file->getClientSize()])]);
-        }
-
-        return response()->json(['success' => true, 'thumbnailUrl' => Storage::url($thumbnailPath)]);
-    }
-
     /**
-     * Display the specified resource.
+     * Show the form for creating a new resource.
      *
-     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function create()
     {
-        //
+        return view('backend/media/create');
     }
 
     /**
@@ -86,7 +50,8 @@ class MediaController extends Controller
      */
     public function edit($id, Request $request)
     {
-        $data['medium'] = Media::search(['id' => $id])->firstOrFail();
+        $data['post'] = $post = $this->model::search(['id' => $id])->firstOrFail();
+        $data['post_translation'] = $post->translateOrNew($request->query('locale'));
         return view('backend/media/update', $data);
     }
 
@@ -99,18 +64,41 @@ class MediaController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
-        $request->merge(['name' => str_slug($request->input('title'))]);
-        $medium = Media::search(['id' => $id])->firstOrFail();
-        $medium->fill($request->input())->save();
+        $post = $this->model::search(['id' => $id])->firstOrFail();
+        $attributes = collect($request->input())->only($post->getFillable())->toArray();
+        $attributes[$request->input('locale')] = $request->input();
+        $post->fill($attributes)->save();
+        (new Postmetas)->sync($request->input('postmetas'), $post->id);
         flash(__('cms.data_has_been_updated'))->success()->important();
+        if ($post->status == 'trash' && ! auth()->user()->can('backend media trash')) { return redirect()->route('backend.media.index'); }
         return redirect()->back();
     }
 
-    public function delete($id)
+    public function upload(Request $request)
     {
-        $medium = Media::search(['id' => $id])->firstOrFail();
-        $medium->delete();
-        flash(__('cms.data_has_been_deleted'))->success()->important();
-        return redirect()->back();
+        if ($file = $request->file('qqfile')) {
+            $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $extension = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
+
+            $attributes['author_id'] = auth()->user()->id;
+            $attributes['mime_type'] = $file->getMimeType();
+            foreach (config('app.languages') as $languageCode => $languageName) {
+                $attributes[$languageCode] = ['title' => $filename];
+            }
+
+            $medium = Media::create($attributes);
+            $originalPath = 'media/original/'.$medium->id.'/'.$medium->name.'.'.$extension;
+            $thumbnailPath = 'media/thumbnail/'.$medium->id.'/'.$medium->name.'.'.$extension;
+            $file->storeAs('', $originalPath);
+
+            $medium->setAttachedFile($originalPath);
+            $thumbnailPath = $medium->setAttachedFileThumbnail($originalPath, $thumbnailPath);
+
+            Postmetas::create(['post_id' => $medium->id, 'key' => 'attached_file', 'value' => $originalPath]);
+            Postmetas::create(['post_id' => $medium->id, 'key' => 'attached_file_thumbnail', 'value' => $thumbnailPath]);
+            Postmetas::create(['post_id' => $medium->id, 'key' => 'attachment_metadata', 'value' => json_encode(['extension' => $extension, 'size' => $file->getClientSize()])]);
+        }
+
+        return response()->json(['success' => true, 'thumbnailUrl' => Storage::url($thumbnailPath)]);
     }
 }

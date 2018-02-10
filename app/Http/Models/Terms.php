@@ -2,14 +2,12 @@
 
 namespace App\Http\Models;
 
-use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Validator;
 use redzjovi\php\ArrayHelper;
 
 class Terms extends Model
 {
-    use Translatable;
+    use \Dimsav\Translatable\Translatable;
 
     /**
      * The attributes that are mass assignable.
@@ -31,35 +29,40 @@ class Terms extends Model
         parent::boot();
 
         self::deleting(function ($model) {
-            $model->Termmetas->each(function ($Termmeta) { $Termmeta->delete(); });
+            $model->termmetas->each(function ($termmeta) { $termmeta->delete(); });
             $model->deleteTranslations();
         });
     }
 
-    public function validate($input, $scenario = '')
-    {
-        $rules = [
-            'id' => ['required', 'integer', 'digits_between:1,20'],
-            'name' => ['required', 'between:0,200'],
-            'slug' => ['required', 'between:0,200'],
-            'taxonomy' => ['required', 'between:0,100'],
-            'description' => ['required'],
-            'parent' => ['required', 'integer', 'digits_between:1,20'],
-            'count' => ['required', 'integer', 'digits_between:1,20'],
-        ];
-
-        return Validator::make($input, $rules);
-    }
-
     public function getParentOptions()
     {
-        $parents = self::all()->sortBy(function ($row, $key) { return $row['name']; })->toArray();
+        $search = [];
+        request()->query('locale') ? $search['locale'] = request()->query('locale') : '';
+        $parents = self::search($search)->get()->sortBy(function ($row, $key) { return $row['name']; })->toArray();
         $parents = ArrayHelper::copyKeyName($parents, 'parent_id', 'parent');
         $tree = ArrayHelper::buildTree($parents);
         $tree = ArrayHelper::printTree($tree);
         $options = collect($tree)->pluck('tree_name', 'id')->toArray();
 
         return $options;
+    }
+
+    public function getTemplateOptions()
+    {
+        $options = [
+            'default' => __('cms.default'),
+        ];
+        return $options;
+    }
+
+    public function getTermsTree()
+    {
+        $tree = self::all()->sortBy(function ($row, $key) { return $row['name']; })->toArray();
+        $tree = ArrayHelper::copyKeyName($tree, 'parent_id', 'parent');
+        $tree = ArrayHelper::buildTree($tree);
+        $tree = ArrayHelper::printTree($tree, '&nbsp;&nbsp;');
+
+        return $tree;
     }
 
     public function parent()
@@ -79,13 +82,14 @@ class Terms extends Model
     public function scopeSearch($query, $params)
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';
-        isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
+        isset($params['id_in']) ? $query->whereIn(self::getTable().'.id', $params['id_in']) : '';
         isset($params['parent_id']) ? $query->where('parent_id', $params['parent_id']) : '';
 
         // term_translations
         isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';
         isset($params['name']) ? $query->whereTranslationLike('name', '%'.$params['name'].'%') : '';
-        isset($params['slug']) ? $query->whereTranslationLike('slug', '%'.$params['slug'].'%') : '';
+        isset($params['slug']) ? $query->whereTranslation('slug', $params['slug']) : '';
+        isset($params['slug_like']) ? $query->whereTranslationLike('slug', '%'.$params['slug_like'].'%') : '';
         isset($params['description']) ? $query->whereTranslationLike('description', '%'.$params['description'].'%') : '';
 
         if (isset($params['count'])) {
@@ -123,6 +127,6 @@ class Terms extends Model
 
     public function termmetas()
     {
-        return $this->hasMany('App\Http\Models\Termmeta', 'term_id', 'id');
+        return $this->hasMany('App\Http\Models\Termmetas', 'term_id', 'id');
     }
 }

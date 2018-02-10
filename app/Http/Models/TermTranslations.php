@@ -2,12 +2,11 @@
 
 namespace App\Http\Models;
 
-use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 
 class TermTranslations extends Model
 {
-    use Sluggable;
+    use \Cviebrock\EloquentSluggable\Sluggable;
 
     /**
      * The attributes that are mass assignable.

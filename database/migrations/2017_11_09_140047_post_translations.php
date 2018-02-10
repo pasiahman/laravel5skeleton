@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Postmeta extends Migration
+class PostTranslations extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,14 @@ class Postmeta extends Migration
      */
     public function up()
     {
-        Schema::create('postmeta', function (Blueprint $table) {
+        Schema::create('post_translations', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('post_id');
-            $table->string('key');
-            $table->longText('value');
+            $table->string('locale', 200);
+            $table->text('title');
+            $table->string('name', 200);
+            $table->text('excerpt')->nullable();
+            $table->longText('content')->nullable();
             $table->timestamps();
         });
     }
@@ -29,6 +32,6 @@ class Postmeta extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postmeta');
+        Schema::dropIfExists('post_translations');
     }
 }

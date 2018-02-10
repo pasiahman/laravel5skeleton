@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default" href="{{ route('backend.users.create', request()->input()) }}">@lang('cms.create')</a>
+            <a class="btn btn-default btn-sm" href="{{ route('backend.users.create', request()->input()) }}">@lang('cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.users.index') }}" method="get">

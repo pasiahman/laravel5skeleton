@@ -117,10 +117,13 @@ return [
     */
 
     'attributes'          => [
+        'author' => 'Penulis',
+        'content' => 'Konten',
         'count' => 'Jumlah',
         'created_at' => 'Dibuat Pada',
         'description' => 'Deskripsi',
         'email' => 'Email',
+        'excerpt' => 'Kutipan',
         'guard_name' => 'Nama Penjaga',
         'locale' => 'Lokal',
         'mime_type' => 'Tipe Mime',
@@ -130,7 +133,9 @@ return [
         'slug' => 'Slug',
         'status' => 'Keadaan',
         'taxonomy' => 'Taksonomi',
+        'template' => 'Template',
         'title' => 'Judul',
+        'updated_at' => 'Diperbarui Pada',
         'value' => 'Nilai',
     ],
 
