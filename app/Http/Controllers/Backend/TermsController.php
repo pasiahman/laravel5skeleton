@@ -57,8 +57,12 @@ class TermsController extends Controller
      */
     public function store(StoreRequest $request)
     {
-        $attributes = ['parent_id' => $request->input('parent_id'), $request->input('locale') => $request->input()];
-        $term = $this->model::create($attributes);
+        $term = $this->model;
+        $attributes['parent_id'] = $request->input('parent_id');
+        foreach (config('app.languages') as $languageCode => $languageName) {
+            $attributes[$languageCode] = $request->input();
+        }
+        $term->fill($attributes)->save();
         (new Termmetas)->sync($request->input('termmetas'), $term->id);
         flash(__('cms.data_has_been_created'))->success()->important();
         return redirect()->back();
@@ -98,7 +102,8 @@ class TermsController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         $term = $this->model::findOrFail($id);
-        $attributes = ['parent_id' => $request->input('parent_id'), $request->input('locale') => $request->input()];
+        $attributes['parent_id'] = $request->input('parent_id');
+        $attributes[$request->input('locale')] = $request->input();
         $term->fill($attributes)->save();
         (new Termmetas)->sync($request->input('termmetas'), $term->id);
         flash(__('cms.data_has_been_updated'))->success()->important();
