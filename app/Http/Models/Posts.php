@@ -76,6 +76,54 @@ class Posts extends Model
         return $options;
     }
 
+    public function getPostmetaAttachedFile()
+    {
+        $attachedFile = $this->id && isset($this->postmetas->where('key', 'attached_file')->first()->value) ? $this->postmetas->where('key', 'attached_file')->first()->value : '';
+        return $attachedFile;
+    }
+
+    public function getPostmetaAttachedFileThumbnail()
+    {
+        $attachedFile = $this->id && isset($this->postmetas->where('key', 'attached_file_thumbnail')->first()->value) ? $this->postmetas->where('key', 'attached_file_thumbnail')->first()->value : '';
+        return $attachedFile;
+    }
+
+    public function getPostmetaAttachmentMetadata()
+    {
+        $attachmentMetadata = $this->id && isset($this->postmetas->where('key', 'attachment_metadata')->first()->value) ? json_decode($this->postmetas->where('key', 'attachment_metadata')->first()->value, true) : [];
+        return $attachmentMetadata;
+    }
+
+    public function getPostmetaCategoriesId()
+    {
+        $categoriesId = [];
+        $categoriesId = $this->id && isset($this->postmetas->where('key', 'categories')->first()->value) ? json_decode($this->postmetas->where('key', 'categories')->first()->value, true) : $categoriesId;
+        $categoriesId = is_array(request()->old('postmetas.categories')) ? request()->old('postmetas.categories') : $categoriesId;
+        return $categoriesId;
+    }
+
+    public function getPostmetaImagesId()
+    {
+        $imagesId = [];
+        $imagesId = $this->id && isset($this->postmetas->where('key', 'images')->first()->value) ? json_decode($this->postmetas->where('key', 'images')->first()->value, true) : $imagesId;
+        $imagesId = is_array(request()->old('postmetas.images')) ? request()->old('postmetas.images') : $imagesId;
+        return $imagesId;
+    }
+
+    public function getPostmetaTagsId()
+    {
+        $tagsId = [];
+        $tagsId = $this->id && isset($this->postmetas->where('key', 'tags')->first()->value) ? json_decode($this->postmetas->where('key', 'tags')->first()->value, true) : $tagsId;
+        $tagsId = is_array(request()->old('postmetas.tags')) ? request()->old('postmetas.tags') : $tagsId;
+        return $tagsId;
+    }
+
+    public function getPostmetaTemplate()
+    {
+        $template = isset($this->postmetas->where('key', 'template')->value) ? $this->postmetas->where('key', 'template')->value : '';
+        return $template;
+    }
+
     public function getStatusOptions()
     {
         $options = [
@@ -83,6 +131,11 @@ class Posts extends Model
             'publish' => __('cms.publish'),
             'trash' => __('cms.trash'),
         ];
+
+        if ($this->id) {
+            unset($options['trash']);
+        }
+
         return $options;
     }
 

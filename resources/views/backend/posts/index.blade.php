@@ -69,8 +69,8 @@
                                 @lang('validation.attributes.status')
                                 <select class="form-control input-sm" name="status">
                                     <option value=""></option>
-                                    @foreach ($model->status_options as $optionValue => $optionName)
-                                        <option {{ $optionValue == request()->query('status') ? 'selected' : '' }} value="{{ $optionValue }}">{{ $optionName }}</option>
+                                    @foreach ($model->status_options as $statusId => $statusName)
+                                        <option {{ $statusId == request()->query('status') ? 'selected' : '' }} value="{{ $statusId }}">{{ $statusName }}</option>
                                     @endforeach
                                 </select>
                             </th>
@@ -105,9 +105,7 @@
                                 <td>{{ $post->author->name }}</td>
                                 <td>
                                     @php
-                                    $categories = [];
-                                    $categories = isset($post->postmetas->where('key', 'categories')->first()->value) ? json_decode($post->postmetas->where('key', 'categories')->first()->value, true) : $categories;
-                                    $categories = \App\Http\Models\Categories::search(['id_in' => $categories, 'sort' => 'name,ASC'])->get();
+                                    $categories = \App\Http\Models\Categories::search(['id_in' => $post->getPostmetaCategoriesId(), 'sort' => 'name,ASC'])->get();
                                     @endphp
 
                                     @if ($categories)
@@ -141,8 +139,8 @@
                             <td colspan="8">
                                 <select class="input-sm" name="action">
                                     <option value="">@lang('cms.action')</option>
-                                    @foreach ($model->getStatusOptions() as $optionValue => $optionName)
-                                        <option value="{{ $optionValue }}">{{ $optionName }}</option>
+                                    @foreach ($model->getStatusOptions() as $statusId => $statusName)
+                                        <option value="{{ $statusId }}">{{ $statusName }}</option>
                                     @endforeach
                                     @can('backend posts delete')
                                         <option value="delete">@lang('cms.delete')</option>
