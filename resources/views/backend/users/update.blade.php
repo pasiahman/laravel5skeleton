@@ -14,5 +14,5 @@
 @endsection
 
 @section('content')
-    @include('backend/users/_form', ['user' => $user])
+    @include('backend/users/_form')
 @endsection

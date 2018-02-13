@@ -14,5 +14,5 @@
 @endsection
 
 @section('content')
-    @include('backend/permissions/_form', ['permission' => $permission])
+    @include('backend/permissions/_form')
 @endsection

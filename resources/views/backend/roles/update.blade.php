@@ -14,5 +14,5 @@
 @endsection
 
 @section('content')
-    @include('backend/roles/_form', ['role' => $role])
+    @include('backend/roles/_form')
 @endsection

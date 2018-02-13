@@ -14,5 +14,5 @@
 @endsection
 
 @section('content')
-    @include('backend/options/_form', ['option' => $option])
+    @include('backend/options/_form')
 @endsection
