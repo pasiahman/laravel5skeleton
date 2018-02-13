@@ -60,7 +60,9 @@ class PostsController extends Controller
         $post = $this->model;
         $attributes = collect($request->input())->only($post->getFillable())->toArray();
         $attributes['author_id'] = auth()->user()->id;
-        $attributes[$request->input('locale')] = $request->input();
+        foreach (config('app.languages') as $languageCode => $languageName) {
+            $attributes[$languageCode] = $request->input();
+        }
         $post->fill($attributes)->save();
         (new Postmetas)->sync($request->input('postmetas'), $post->id);
         flash(__('cms.data_has_been_created'))->success()->important();

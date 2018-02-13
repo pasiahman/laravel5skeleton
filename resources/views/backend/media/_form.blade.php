@@ -47,21 +47,19 @@
                     </div>
                     @if ($post->id)
                         @php
-                        $attached_file = $post->postmetas->where('key', 'attached_file')->first()->value;
-                        $attached_file_thumbnail = $post->postmetas->where('key', 'attached_file_thumbnail')->first()->value;
-                        $attachment_metadata = json_decode($post->postmetas->where('key', 'attachment_metadata')->first()->value, true);
+                        $attachment_metadata = $post->getPostmetaAttachmentMetadata();
                         @endphp
 
                         <div class="row">
                             <div class="col-md-4">
-                                <input name="postmetas[attached_file]" type="hidden" value="{{ $attached_file }}" />
-                                <input name="postmetas[attached_file_thumbnail]" type="hidden" value="{{ $attached_file_thumbnail }}" />
+                                <input name="postmetas[attached_file]" type="hidden" value="{{ $post->getPostmetaAttachedFile() }}" />
+                                <input name="postmetas[attached_file_thumbnail]" type="hidden" value="{{ $post->getPostmetaAttachedFileThumbnail() }}" />
                                 <input name="postmetas[attachment_metadata]" type="hidden" value="{{ json_encode($attachment_metadata) }}" />
                                 <a
                                     @if (in_array($post->mime_type, $post->mimeTypeImages)) data-fancybox="group" @endif
-                                    href="{{ Storage::url($attached_file) }}" target="_blank"
+                                    href="{{ Storage::url($post->getPostmetaAttachedFile()) }}" target="_blank"
                                 >
-                                    <img class="media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="height: 150px; width: 150px;" />
+                                    <img class="media-object" src="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}" style="height: 150px; width: 150px;" />
                                 </a>
                             </div>
                             <div class="col-md-8">
@@ -70,7 +68,7 @@
                                         <tr>
                                             <td width="20%">@lang('cms.file_url')</td>
                                             <td width="1%">:</td>
-                                            <td>{{ $attached_file }}</td>
+                                            <td>{{ $post->getPostmetaAttachedFile() }}</td>
                                         </tr>
                                         <tr>
                                             <td>@lang('cms.file_type')</td>
@@ -100,11 +98,8 @@
                     <div class="form-group">
                         <label>@lang('validation.attributes.status')</label>
                         <select class="form-control input-sm" name="status">
-                            @foreach (collect($post->getStatusOptions())->except('draft') as $optionValue => $optionName)
-                                <option
-                                    {{ 'trash' == request()->old('status', $post->status) ? 'selected' : '' }}
-                                    value="{{ $optionValue }}"
-                                >{{ $optionName }}</option>
+                            @foreach (collect($post->getStatusOptions())->except('draft') as $statusValue => $statusName)
+                                <option {{ $statusValue == request()->old('status', $post->status) ? 'selected' : '' }} value="{{ $statusValue }}">{{ $statusName }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -126,17 +121,11 @@
                 </div>
                 <div class="box-body">
                     <div class="categories-container">
-                        @php
-                        $categories = [];
-                        $categories = $post->id && isset($post->postmetas->where('key', 'categories')->first()->value) ? json_decode($post->postmetas->where('key', 'categories')->first()->value, true) : $categories;
-                        $categories = is_array(request()->old('postmetas.categories')) ? request()->old('postmetas.categories') : $categories;
-                        @endphp
-
                         @foreach ($post->getCategoriesTree() as $category_tree)
                             <div class="checkbox">
                                 {{ $category_tree['tree_prefix'] }}
                                 <label>
-                                    <input name="postmetas[categories][]" {{ in_array($category_tree['id'], $categories) ? 'checked' : '' }} type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
+                                    <input {{ in_array($category_tree['id'], $post->getPostmetaCategoriesId()) ? 'checked' : '' }} name="postmetas[categories][]" type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
                                 </label>
                             </div>
                         @endforeach
@@ -155,15 +144,9 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    @php
-                    $tags = [];
-                    $tags = $post->id && isset($post->postmetas->where('key', 'tags')->first()->value) ? json_decode($post->postmetas->where('key', 'tags')->first()->value, true) : $tags;
-                    $tags = is_array(request()->old('postmetas.tags')) ? request()->old('postmetas.tags') : $tags;
-                    @endphp
-
                     <select class="form-control input-sm select2" multiple="multiple" name="postmetas[tags][]">
                         @foreach ($post->getTagOptions() as $tagId => $tagName)
-                            <option {{ in_array($tagId, $tags) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
+                            <option {{ in_array($tagId, $post->getPostmetaTagsId()) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
                         @endforeach
                     </select>
                 </div>
