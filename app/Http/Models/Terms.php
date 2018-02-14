@@ -55,6 +55,20 @@ class Terms extends Model
         return $options;
     }
 
+    public function getTermmetaImagesId()
+    {
+        $imagesId = [];
+        $imagesId = $this->id && isset($this->termmetas->where('key', 'images')->first()->value) ? json_decode($this->termmetas->where('key', 'images')->first()->value, true) : $imagesId;
+        $imagesId = is_array(request()->old('termmetas.images')) ? request()->old('termmetas.images') : $imagesId;
+        return $imagesId;
+    }
+
+    public function getTermmetaTemplate()
+    {
+        $template = isset($this->termmetas->where('key', 'template')->value) ? $this->termmetas->where('key', 'template')->value : '';
+        return $template;
+    }
+
     public function getTermsTree()
     {
         $tree = self::all()->sortBy(function ($row, $key) { return $row['name']; })->toArray();

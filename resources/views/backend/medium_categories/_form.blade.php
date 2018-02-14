@@ -67,10 +67,9 @@
                     </div>
                 </div>
                 <div class="box-body">
-                    @php $template = isset($term->termmetas->where('key', 'template')->value) ? $term->termmetas->where('key', 'template')->value : ''; @endphp
                     <select class="form-control input-sm" name="termmetas[template]">
                         @foreach ($term->getTemplateOptions() as $templateId => $templateName)
-                            <option {{ $templateId == $template ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
+                            <option {{ $templateId == $term->getTermmetaTemplate() ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -108,24 +107,14 @@
                             </li>
                         </template>
 
-                        @php
-                        $images = [];
-                        $images = $term->id && isset($term->termmetas->where('key', 'images')->first()->value) ? json_decode($term->termmetas->where('key', 'images')->first()->value, true) : $images;
-                        $images = is_array(request()->old('termmetas.images')) ? request()->old('termmetas.images') : $images;
-                        @endphp
-
-                        @foreach ($images as $imageId)
-                            @php
-                            $medium = \App\Http\Models\Media::find($imageId);
-                            $attached_file = $medium->postmetas->where('key', 'attached_file')->first()->value;
-                            $attached_file_thumbnail = $medium->postmetas->where('key', 'attached_file_thumbnail')->first()->value;
-                            @endphp
+                        @foreach ($term->getTermmetaImagesId() as $imageId)
+                            @php $medium = \App\Http\Models\Media::find($imageId); @endphp
 
                             <li>
                                 <input class="images_media_id" name="termmetas[images][]" type="hidden" value="{{ $imageId }}" />
                                 <div style="position: relative;">
-                                    <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($attached_file) }}" target="_blank">
-                                        <img class="images_media_attached_file_thumbnail media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="height: 64px; width: 64px;" />
+                                    <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaAttachedFile()) }}" target="_blank">
+                                        <img class="images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaAttachedFileThumbnail()) }}" style="height: 64px; width: 64px;" />
                                     </a>
                                     <button class="close template_close" type="button"><span>&times;</span></button>
                                 </div>
