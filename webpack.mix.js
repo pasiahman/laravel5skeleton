@@ -46,6 +46,7 @@ mix.combine([
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
     'resources/vendor/laracasts/flash/custom.js',
     'resources/vendor/select2/select2-custom.js',
+    'resources/vendor/Sortable/Sortable-custom.js',
     'resources/assets/js/core.js',
 ], 'public/js/backend-app.js');
 
