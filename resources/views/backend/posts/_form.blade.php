@@ -42,7 +42,7 @@
                     </div>
                     <div class="form-group">
                         <label>@lang('validation.attributes.content')</label>
-                        <textarea class="form-control" name="content" rows="6">{{ request()->old('content', $post_translation->content) }}</textarea>
+                        <textarea class="form-control tinymce" name="content" rows="6">{{ request()->old('content', $post_translation->content) }}</textarea>
                         <i class="text-danger">{{ $errors->first('content') }}</i>
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                         <label>@lang('validation.attributes.status')</label>
                         <select class="form-control input-sm" name="status">
                             @foreach ($post->getStatusOptions() as $statusValue => $statusName)
-                                <option value="{{ $statusValue }}">{{ $statusName }}</option>
+                                <option {{ $statusValue == request()->old('status', $post->status) ? 'selected' : '' }} value="{{ $statusValue }}">{{ $statusName }}</option>
                             @endforeach
                         </select>
                     </div>
