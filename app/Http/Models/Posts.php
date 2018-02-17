@@ -190,6 +190,14 @@ class Posts extends Model
         isset($params['type']) ? $query->where('type', $params['type']) : '';
         isset($params['mime_type']) ? $query->where('mime_type', $params['mime_type']) : '';
         isset($params['mime_type_like']) ? $query->where('mime_type', 'like', '%'.$params['mime_type_like'].'%') : '';
+        if (isset($params['mime_type_like_in'])) {
+            $mimeTypeLikes = explode(',', $params['mime_type_like_in']);
+            $query->where(function ($query) use ($mimeTypeLikes) {
+                foreach ($mimeTypeLikes as $mimeTypeLike) {
+                    $query->orWhere('mime_type', 'like', '%'.$mimeTypeLike.'%');
+                }
+            });
+        }
         isset($params['status']) ? $query->where('status', $params['status']) : '';
         isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
         isset($params['created_at_date']) ? $query->whereDate('created_at', '=', $params['created_at_date']) : '';

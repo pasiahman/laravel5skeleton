@@ -27,6 +27,7 @@ mix.styles([
     'resources/bower/admin-lte/dist/css/AdminLTE.min.css',
     'resources/bower/admin-lte/dist/css/skins/_all-skins.min.css',
     'resources/vendor/admin-lte/AdminLTE-custom.css',
+    'resources/vendor/tinymce/tinymce-custom.css',
 ], 'public/css/backend-app.css')
 .copy('resources/bower/font-awesome/fonts', 'public/fonts');
 
