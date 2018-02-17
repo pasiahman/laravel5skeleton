@@ -199,8 +199,8 @@ class Posts extends Model
             });
         }
         isset($params['status']) ? $query->where('status', $params['status']) : '';
-        isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
-        isset($params['created_at_date']) ? $query->whereDate('created_at', '=', $params['created_at_date']) : '';
+        isset($params['created_at']) ? $query->where(self::getTable().'created_at', 'like', '%'.$params['created_at'].'%') : '';
+        isset($params['created_at_date']) ? $query->whereDate(self::getTable().'created_at', '=', $params['created_at_date']) : '';
         isset($params['updated_at_date']) ? $query->whereDate(self::getTable().'.updated_at', '=', $params['updated_at_date']) : '';
 
         // postmetas
@@ -215,7 +215,7 @@ class Posts extends Model
         isset($params['content']) ? $query->whereTranslationLike('content', '%'.$params['content'].'%') : '';
 
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {
-            if (in_array($sort[0], ['updated_at'])) {
+            if (in_array($sort[0], ['created_at', 'updated_at'])) {
                 $query->orderBy(self::getTable().'.'.$sort[0], $sort[1]);
             } else if (in_array($sort[0], ['title', 'name', 'excerpt', 'content'])) {
                 $query->join($this->getTranslationsTable().' AS translation', function ($join) {

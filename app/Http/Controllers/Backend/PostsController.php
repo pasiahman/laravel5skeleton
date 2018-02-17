@@ -134,7 +134,7 @@ class PostsController extends Controller
 
     public function trash($id)
     {
-        $post = $this->model::search(['id' => $id])->findOrFail();
+        $post = $this->model::search(['id' => $id])->firstOrFail();
         $post->fill(['status' => 'trash'])->save();
         flash(__('cms.data_has_been_deleted'))->success()->important();
         return redirect()->back();

@@ -65,6 +65,15 @@
                                     @endforeach
                                 </select>
                             </th>
+                            <th>
+                                @lang('cms.categories')
+                                <select class="form-control input-sm" name="category_id">
+                                    <option value=""></option>
+                                    @foreach ($model->getCategoryIdOptions() as $categoryId => $categoryName)
+                                        <option {{ $categoryId == request()->input('category_id') ? 'selected' : '' }} value="{{ $categoryId }}">{{ $categoryName }}</option>
+                                    @endforeach
+                                </select>
+                            </th>
                             @can('backend media trash')
                                 <th>
                                     @lang('validation.attributes.status')
@@ -81,23 +90,21 @@
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a
                                     class="btn btn-default btn-xs"
-                                    href="{{ route('backend.media.index', array_except(request()->query(), ['page', 'limit', 'sort', 'title', 'mime_type', 'updated_at_date'])) }}"
+                                    href="{{ route('backend.media.index', array_except(request()->query(), ['page', 'limit', 'sort', 'title', 'mime_type', 'category_id', 'updated_at_date'])) }}"
                                 ><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($posts as $i => $post)
-                            @php ($attached_file = $post->postmetas->where('key', 'attached_file')->first()->value)
-                            @php ($attached_file_thumbnail = $post->postmetas->where('key', 'attached_file_thumbnail')->first()->value)
                             <tr>
                                 <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $post->id }}" /></td>
                                 <td>
                                     <a
                                     @if (in_array($post->mime_type, $post->mimeTypeImages)) data-fancybox="group" @endif
-                                        href="{{ Storage::url($attached_file) }}" target="_blank"
+                                        href="{{ Storage::url($post->getPostmetaAttachedFile()) }}" target="_blank"
                                         >
-                                        <img class="media-object" src="{{ Storage::url($attached_file_thumbnail) }}" style="height: 32px; width: 32px;" />
+                                        <img class="media-object" src="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}" style="height: 32px; width: 32px;" />
                                     </a>
                                 </td>
                                 <td>
@@ -115,6 +122,21 @@
                                 </td>
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->mime_type }}</td>
+                                <td>
+                                    @php
+                                    $categories = \App\Http\Models\MediumCategories::search(['id_in' => $post->getPostmetaCategoriesId(), 'sort' => 'name,ASC'])->get();
+                                    @endphp
+
+                                    @if ($categories)
+                                        <ol>
+                                            @foreach ($categories as $category)
+                                                <li>
+                                                    <a href="{{ route('backend.medium-categories.edit', [$category->id]) }}">{{ $category->name }}</a><br />
+                                                </li>
+                                            @endforeach
+                                        </ol>
+                                    @endif
+                                </td>
                                 @can('backend media trash')
                                     <td>@lang('cms.'.$post->status)</td>
                                 @endcan
@@ -128,8 +150,8 @@
                                     @if (request()->query('layout') == 'media_iframe')
                                         <button
                                             class="btn btn-success btn-xs media_choose"
-                                            data-attached_file="{{ Storage::url($attached_file) }}"
-                                            data-attached_file_thumbnail="{{ Storage::url($attached_file_thumbnail) }}"
+                                            data-attached_file="{{ Storage::url($post->getPostmetaAttachedFile()) }}"
+                                            data-attached_file_thumbnail="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}"
                                             data-fancybox_to="{{ request()->query('fancybox_to') }}"
                                             data-media_id="{{ $post->id }}"
                                             data-success-message="@lang('cms.added')"

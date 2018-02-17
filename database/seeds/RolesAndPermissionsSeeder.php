@@ -59,6 +59,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'backend categories',
             'backend media',
             'backend media role',
+            'backend medium categories',
             'backend posts',
             'backend roles',
             'backend tags',
