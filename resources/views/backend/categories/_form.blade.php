@@ -87,6 +87,7 @@
                 </div>
 
                 <div class="box-body">
+                    <input class="images_media_id" name="termmetas[images][]" type="hidden" value="" />
                     <u>
                         <a
                             data-fancybox

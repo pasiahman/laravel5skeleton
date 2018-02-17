@@ -92,6 +92,7 @@
                 </div>
                 <div class="box-body">
                     <div class="categories-container">
+                        <input name="postmetas[categories][]" type="hidden" value="" />
                         @foreach ($post->getCategoriesTree() as $category_tree)
                             <div class="checkbox">
                                 {{ $category_tree['tree_prefix'] }}
@@ -115,6 +116,7 @@
                     </div>
                 </div>
                 <div class="box-body">
+                    <input name="postmetas[tags][]" type="hidden" value="" />
                     <select class="form-control input-sm select2" multiple="multiple" name="postmetas[tags][]">
                         @foreach ($post->getTagOptions() as $tagId => $tagName)
                             <option {{ in_array($tagId, $post->getPostmetaTagsId()) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
@@ -134,6 +136,7 @@
                     </div>
                 </div>
                 <div class="box-body">
+                    <input class="images_media_id" name="postmetas[images][]" type="hidden" value="" />
                     <u>
                         <a
                             data-fancybox
