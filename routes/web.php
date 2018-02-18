@@ -30,6 +30,10 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('backend/medium-categories', 'Backend\MediumCategoriesController', ['as' => 'backend']);
         Route::get('backend/medium-categories/{id}/delete', ['as' => 'backend.medium-categories.delete', 'uses' => 'Backend\MediumCategoriesController@delete']);
     });
+    Route::group(['middleware' => ['permission:backend menus']], function () {
+        Route::resource('backend/menus', 'Backend\MenusController', ['as' => 'backend']);
+        Route::get('backend/menus/{id}/delete', ['as' => 'backend.menus.delete', 'uses' => 'Backend\MenusController@delete']);
+    });
     Route::group(['middleware' => ['permission:backend options']], function () {
         Route::resource('backend/options', 'Backend\OptionsController', ['as' => 'backend']);
         Route::get('backend/options/{id}/delete', ['as' => 'backend.options.delete', 'uses' => 'Backend\OptionsController@delete']);

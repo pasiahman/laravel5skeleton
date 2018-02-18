@@ -27,6 +27,7 @@ return [
     'logout' => 'Logout',
     'media' => 'Media',
     'medium_categories' => 'Medium Categories',
+    'menus' => 'Menus',
     'no_data' => 'No data',
     'options' => 'Options',
     'overwrite_permissions' => 'Overwrite permissions',

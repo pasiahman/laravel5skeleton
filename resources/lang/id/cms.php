@@ -27,6 +27,7 @@ return [
     'logout' => 'Keluar',
     'media' => 'Media',
     'medium_categories' => 'Kategori Media',
+    'menus' => 'Menu',
     'no_data' => 'Tidak ada data',
     'options' => 'Pilihan',
     'overwrite_permissions' => 'Menimpa izin',
