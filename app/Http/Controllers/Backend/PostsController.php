@@ -90,7 +90,7 @@ class PostsController extends Controller
     {
         $data['post'] = $post = $this->model::findOrFail($id);
         $data['post_translation'] = $post->translateOrNew($request->query('locale'));
-        return view('backend/posts/update', $data);
+        return view('backend/posts/edit', $data);
     }
 
     /**

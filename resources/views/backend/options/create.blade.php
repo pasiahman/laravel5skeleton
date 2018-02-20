@@ -14,5 +14,7 @@
 @endsection
 
 @section('content')
-    @include('backend/options/_form')
+    <form action="{{ route('backend.options.store') }}" method="post">
+        @include('backend/options/_form')
+    </form>
 @endsection

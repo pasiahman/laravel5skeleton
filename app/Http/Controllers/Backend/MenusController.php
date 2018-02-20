@@ -57,6 +57,6 @@ class MenusController extends TermsController
     {
         $data['term'] = $term = $this->model::findOrFail($id);
         $data['term_translation'] = $term->translateOrNew($request->query('locale'));
-        return view('backend/menus/update', $data);
+        return view('backend/menus/edit', $data);
     }
 }

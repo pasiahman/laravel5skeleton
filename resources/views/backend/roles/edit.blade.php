@@ -14,5 +14,9 @@
 @endsection
 
 @section('content')
-    @include('backend/roles/_form')
+    <form action="{{ route('backend.roles.update', $role->id) }}" method="post">
+        {{ method_field('PUT') }}
+        <input name="id" type="hidden" value="{{ $role->id }}" />
+        @include('backend/roles/_form')
+    </form>
 @endsection

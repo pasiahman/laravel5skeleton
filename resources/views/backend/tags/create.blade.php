@@ -12,5 +12,7 @@
 @endsection
 
 @section('content')
-    @include('backend/tags/_form')
+    <form action="{{ route('backend.tags.store') }}" method="post">
+        @include('backend/tags/_form')
+    </form>
 @endsection

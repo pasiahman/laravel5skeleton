@@ -14,5 +14,9 @@
 @endsection
 
 @section('content')
-    @include('backend/users/_form')
+    <form action="{{ route('backend.users.update', $user->id) }}" method="post">
+        {{ method_field('PUT') }}
+        <input name="id" type="hidden" value="{{ $user->id }}" />
+        @include('backend/users/_form')
+    </form>
 @endsection

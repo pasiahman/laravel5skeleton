@@ -68,7 +68,7 @@ class UsersController extends Controller
         $data['permissions'] = Permission::orderBy('name')->get();
         $data['roles'] = Role::orderBy('name')->get();
         $data['user'] = Users::findOrFail($id);
-        return view('backend/users/update', $data);
+        return view('backend/users/edit', $data);
     }
 
     /**

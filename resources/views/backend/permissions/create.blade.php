@@ -14,5 +14,7 @@
 @endsection
 
 @section('content')
-    @include('backend/permissions/_form')
+    <form action="{{ route('backend.permissions.store') }}" method="post">
+        @include('backend/permissions/_form')
+    </form>
 @endsection

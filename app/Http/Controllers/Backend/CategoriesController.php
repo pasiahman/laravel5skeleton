@@ -57,6 +57,6 @@ class CategoriesController extends TermsController
     {
         $data['term'] = $term = $this->model::findOrFail($id);
         $data['term_translation'] = $term->translateOrNew($request->query('locale'));
-        return view('backend/categories/update', $data);
+        return view('backend/categories/edit', $data);
     }
 }

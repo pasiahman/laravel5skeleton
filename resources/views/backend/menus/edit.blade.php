@@ -12,5 +12,9 @@
 @endsection
 
 @section('content')
-    @include('backend/menus/_form')
+    <form action="{{ route('backend.menus.update', $term->id) }}" method="post">
+        {{ method_field('PUT') }}
+        <input name="id" type="hidden" value="{{ $term->id }}" />
+        @include('backend/menus/_form')
+    </form>
 @endsection

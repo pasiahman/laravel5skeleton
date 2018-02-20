@@ -14,5 +14,7 @@
 @endsection
 
 @section('content')
-    @include('backend/roles/_form')
+    <form action="{{ route('backend.roles.store') }}" method="post">
+        @include('backend/roles/_form')
+    </form>
 @endsection

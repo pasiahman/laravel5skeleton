@@ -71,7 +71,7 @@ class OptionsController extends Controller
     public function edit($id)
     {
         $data['option'] = Options::findOrFail($id);
-        return view('backend/options/update', $data);
+        return view('backend/options/edit', $data);
     }
 
     /**

@@ -57,6 +57,6 @@ class TagsController extends TermsController
     {
         $data['term'] = $term = $this->model::findOrFail($id);
         $data['term_translation'] = $term->translateOrNew($request->query('locale'));
-        return view('backend/tags/update', $data);
+        return view('backend/tags/edit', $data);
     }
 }

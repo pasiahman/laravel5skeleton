@@ -52,7 +52,7 @@ class MediaController extends PostsController
     {
         $data['post'] = $post = $this->model::search(['id' => $id])->firstOrFail();
         $data['post_translation'] = $post->translateOrNew($request->query('locale'));
-        return view('backend/media/update', $data);
+        return view('backend/media/edit', $data);
     }
 
     /**

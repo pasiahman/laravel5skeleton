@@ -12,5 +12,7 @@
 @endsection
 
 @section('content')
-    @include('backend/menus/_form')
+    <form action="{{ route('backend.menus.store') }}" method="post">
+        @include('backend/menus/_form')
+    </form>
 @endsection

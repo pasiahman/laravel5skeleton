@@ -12,5 +12,9 @@
 @endsection
 
 @section('content')
-    @include('backend/tags/_form')
+    <form action="{{ route('backend.tags.update', $term->id) }}" method="post">
+        {{ method_field('PUT') }}
+        <input name="id" type="hidden" value="{{ $term->id }}" />
+        @include('backend/tags/_form')
+    </form>
 @endsection

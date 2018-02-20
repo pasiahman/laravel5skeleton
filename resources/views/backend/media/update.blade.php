@@ -14,5 +14,9 @@
 @endsection
 
 @section('content')
-    @include('backend/media/_form')
+    <form action="{{ route('backend.media.update', $post->id) }}" method="post">
+        {{ method_field('PUT') }}
+        <input name="id" type="hidden" value="{{ $post->id }}" />
+        @include('backend/media/_form')
+    </form>
 @endsection

@@ -14,5 +14,9 @@
 @endsection
 
 @section('content')
-    @include('backend/permissions/_form')
+    <form action="{{ route('backend.permissions.update', $permission->id) }}" method="post">
+        {{ method_field('PUT') }}
+        <input name="id" type="hidden" value="{{ $permission->id }}" />
+        @include('backend/permissions/_form')
+    </form>
 @endsection

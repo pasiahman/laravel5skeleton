@@ -54,7 +54,7 @@ class PermissionsController extends Controller
     public function edit($id)
     {
         $data['permission'] = Permission::search(['id' => $id])->firstOrFail();
-        return view('backend/permissions/update', $data);
+        return view('backend/permissions/edit', $data);
     }
 
     /**
