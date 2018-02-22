@@ -43,6 +43,8 @@ return [
     'sort' => 'Urut',
     'tag' => 'Tag',
     'tags' => 'Tag',
+    'term' => 'Term',
+    'terms' => 'Term',
     'trash' => 'Sampah',
     'update' => 'Perbarui',
     'users' => 'Pengguna',

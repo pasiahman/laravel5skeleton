@@ -70,10 +70,10 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                    <div class="pull-right">
-                                        <a class="btn btn-default btn-flat" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            @lang('cms.logout')
-                                        </a>
+                                <div class="pull-right">
+                                    <a class="btn btn-default btn-flat" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        @lang('cms.logout')
+                                    </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
@@ -155,6 +155,7 @@
                         <li><a href="{{ route('backend.permissions.index') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
                         <li><a href="{{ route('backend.roles.index') }}"><i class="fa fa-user"></i> <span>@lang('cms.roles')</span></a></li>
                         <li><a href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
+                        <li><a href="{{ route('backend.menus.index') }}"><i class="fa fa-bars"></i> <span>@lang('cms.menus')</span></a></li>
                         <li><a href="{{ route('backend.options.index') }}"><i class="fa fa-sliders"></i> <span>@lang('cms.options')</span></a></li>
                     </ul>
                 </li>

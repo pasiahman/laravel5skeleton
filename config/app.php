@@ -181,14 +181,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Abhimanyu003\Conversion\ConversionServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
-        Dimsav\Translatable\TranslatableServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
-
     ],
 
     /*
@@ -238,10 +230,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
-        'Conversion'  => Abhimanyu003\Conversion\Facades\Conversion::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

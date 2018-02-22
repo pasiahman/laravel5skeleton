@@ -43,6 +43,8 @@ return [
     'sort' => 'Sort',
     'tag' => 'Tag',
     'tags' => 'Tags',
+    'term' => 'Term',
+    'terms' => 'Terms',
     'trash' => 'Trash',
     'update' => 'Update',
     'users' => 'Users',
