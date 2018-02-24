@@ -2,6 +2,7 @@
 
 return [
     'action' => 'Aksi',
+    'add_to_menu' => 'Tambahkan ke menu',
     'added' => 'Ditambahkan',
     'are_you_sure_to_delete_this' => 'Apakah kamu yakin untuk menghapus ini',
     'are_you_sure_to_delete_this_permanently' => 'Apakah kamu yakin untuk menghapus ini secara permanen',

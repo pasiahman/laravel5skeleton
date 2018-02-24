@@ -2,6 +2,7 @@
 
 return [
     'action' => 'Action',
+    'add_to_menu' => 'Add to menu',
     'added' => 'Added',
     'are_you_sure_to_delete_this' => 'Are you sure to delete this',
     'are_you_sure_to_delete_this_permanently' => 'Are you sure to delete this permanently',

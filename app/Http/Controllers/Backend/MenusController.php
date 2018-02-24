@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Backend\TermsController;
+use App\Http\Models\Categories;
 use App\Http\Models\Menus;
+use App\Http\Models\Posts;
 use App\Http\Models\Termmetas;
 use Illuminate\Http\Request;
 
@@ -55,8 +57,11 @@ class MenusController extends TermsController
      */
     public function edit($id, Request $request)
     {
+        $data['post'] = new Posts;
+        $data['posts'] = Posts::where('status', 'publish')->get();
         $data['term'] = $term = $this->model::findOrFail($id);
         $data['term_translation'] = $term->translateOrNew($request->query('locale'));
+        dump($data);
         return view('backend/menus/edit', $data);
     }
 }

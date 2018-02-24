@@ -53,3 +53,15 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-3">
+        <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
+            @include('backend/menus/_accordion/_posts', ['posts' => $posts])
+        </div>
+    </div>
+    <div class="col-md-9">
+        <div class="box">
+            @include('backend/menus/_nestable')
+        </div>
+    </div>
+</div>

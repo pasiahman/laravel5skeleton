@@ -136,6 +136,7 @@ return [
         'template' => 'Template',
         'title' => 'Title',
         'updated_at' => 'Updated At',
+        'url' => 'Url',
         'value' => 'Value',
     ],
 
