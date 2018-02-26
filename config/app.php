@@ -181,6 +181,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Abhimanyu003\Conversion\ConversionServiceProvider::class,
+
     ],
 
     /*
@@ -230,6 +232,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
+
+        'Conversion'  => Abhimanyu003\Conversion\Facades\Conversion::class,
 
     ],
 

@@ -32,7 +32,7 @@ class Posts extends Model
 
     protected $table = 'posts';
 
-    protected $with = ['author', 'postmetas', 'translations'];
+    protected $with = ['translations'];
 
     public $translatedAttributes = ['title', 'name', 'excerpt', 'content'];
     public $translationForeignKey = 'post_id';

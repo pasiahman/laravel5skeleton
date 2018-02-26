@@ -25,7 +25,7 @@ class MediaController extends PostsController
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['model'] = $this->model;
-        $data['posts'] = $this->model::search($request->query())->paginate($request->query('limit'));
+        $data['posts'] = $this->model::with(['author', 'postmetas'])->search($request->query())->paginate($request->query('limit'));
 
         if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
