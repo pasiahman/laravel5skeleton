@@ -89,7 +89,7 @@
                         <div class="checkbox">
                             {{ $category_tree['tree_prefix'] }}
                             <label>
-                                <input {{ in_array($category_tree['id'], $post->getPostmetaCategoriesId()) ? 'checked' : '' }} name="postmetas[categories][]" type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['tree_name'] }}
+                                <input {{ in_array($category_tree['id'], $post->getPostmetaCategoriesId()) ? 'checked' : '' }} name="postmetas[categories][]" type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
                             </label>
                         </div>
                     @endforeach

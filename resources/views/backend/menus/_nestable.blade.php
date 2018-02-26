@@ -1,17 +1,24 @@
 <div class="box-body">
     <template class="hidden" id="menu_row_template">
-        <li class="dd-item dd3-item" data-id="$data_id" data-title="$data_title" data-type="$data_type" data-url="">
-            <div class="dd-handle dd3-handle">Drag</div>
-            <div class="dd3-content">
-                $data_title - $data_type
-                <a class="menu_edit" data-target="#menu_modal" data-toggle="modal" role="button"><i class="fa fa-pencil"></i></a>
-                <a class="menu_trash" role="button"><i class="fa fa-trash"></i></a>
-            </div>
-        </li>
+        @component('backend/menus/_nestable_template', [
+            'data_id' => '$data_id',
+            'data_title' => '$data_title',
+            'data_type' => '$data_type',
+            'data_url' => '$data_url',
+        ])
+
+        @endcomponent
     </template>
 
     <div class="dd" id="nestable">
-        <ol class="dd-list"></ol>
+        <input name="termmetas[nestable]" type="hidden" value="{{ json_encode($term->getTermmetaNestable()) }}" />
+        <ol class="dd-list">
+            @php
+            $nestable = $term->getTermmetaNestable();
+            @endphp
+
+            {!! $term->generateAsHtml($nestable) !!}
+        </ol>
     </div>
 </div>
 
@@ -39,6 +46,11 @@
 
 @push('scripts')
     <script>
+    $('#menu_form').submit(function () {
+        var menu_nestable = $('#nestable').nestable('serialize');
+        $('input[name="termmetas[nestable]"]').val(JSON.stringify(menu_nestable));
+    });
+
     $('#nestable').nestable();
 
     $(document).on('click', '.menu_edit', function() {
@@ -49,8 +61,6 @@
         $('#menu_modal_url').val(dd_item.attr('data-url'));
     });
 
-    $(document).on('click', '.menu_trash', function() {
-        $(this).closest('.dd-item').remove();
-    });
+    $(document).on('click', '.menu_trash', function() { $(this).closest('.dd-item').remove(); });
     </script>
 @endpush

@@ -26,15 +26,16 @@
     $('#post_add').click(function () {
         var post = document.getElementById('post');
 
-        if (post.value) {
+        if (post.value) { // 1. If has value
             var content = document.getElementById('menu_row_template').innerHTML
                 .replace('$data_id', post.value)
                 .replace('$data_title', post.options[post.selectedIndex].text)
                 .replace('$data_title', post.options[post.selectedIndex].text)
                 .replace('$data_type', 'post')
-                .replace('$data_type', '@lang('cms.post')');
+                .replace('$data_type', 'post');
 
-            document.querySelectorAll('#nestable .dd-list')[0].innerHTML += content;
+            document.querySelectorAll('#nestable .dd-list')[0].innerHTML += content; // 2. Append content to menu nestable
+            $(post).val(null).trigger('change'); // 3. Set null
         }
     });
     </script>

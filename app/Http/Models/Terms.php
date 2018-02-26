@@ -66,6 +66,14 @@ class Terms extends Model
         return $imagesId;
     }
 
+    public function getTermmetaNestable()
+    {
+        $this->nestable = [];
+        $this->nestable = $this->id && isset($this->termmetas->where('key', 'nestable')->first()->value) ? json_decode($this->termmetas->where('key', 'nestable')->first()->value, true) : $this->nestable;
+        $this->nestable = is_array(request()->old('termmetas.nestable')) ? request()->old('termmetas.nestable') : $this->nestable;
+        return $this->nestable;
+    }
+
     public function getTermmetaTemplate()
     {
         $template = isset($this->termmetas->where('key', 'template')->value) ? $this->termmetas->where('key', 'template')->value : '';
