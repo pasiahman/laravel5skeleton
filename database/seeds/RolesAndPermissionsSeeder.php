@@ -19,6 +19,9 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // create permissions
         Permission::create(['name' => 'backend categories']);
+        Permission::create(['name' => 'backend custom links']);
+        Permission::create(['name' => 'backend custom links delete']);
+        Permission::create(['name' => 'backend custom links trash']);
         Permission::create(['name' => 'backend media']);
         Permission::create(['name' => 'backend media all']);
         Permission::create(['name' => 'backend media delete']);
@@ -39,6 +42,9 @@ class RolesAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'superadmin']);
         $role->givePermissionTo([
             'backend categories',
+            'backend custom links',
+            'backend custom links delete',
+            'backend custom links trash',
             'backend media',
             'backend media all',
             'backend media delete',
@@ -59,6 +65,7 @@ class RolesAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo([
             'backend categories',
+            'backend custom links',
             'backend media',
             'backend media role',
             'backend medium categories',

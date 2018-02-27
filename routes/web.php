@@ -20,6 +20,11 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('backend/categories', 'Backend\CategoriesController', ['as' => 'backend']);
         Route::get('backend/categories/{id}/delete', ['as' => 'backend.categories.delete', 'uses' => 'Backend\CategoriesController@delete']);
     });
+    Route::group(['middleware' => ['permission:backend custom links']], function () {
+        Route::resource('backend/custom-links', 'Backend\CustomLinksController', ['as' => 'backend']);
+        Route::get('backend/custom-links/{id}/delete', ['as' => 'backend.custom-links.delete', 'uses' => 'Backend\CustomLinksController@delete']);
+        Route::get('backend/custom-links/{id}/trash', ['as' => 'backend.custom-links.trash', 'uses' => 'Backend\CustomLinksController@trash']);
+    });
     Route::group(['middleware' => ['permission:backend media']], function () {
         Route::resource('backend/media', 'Backend\MediaController', ['as' => 'backend']);
         Route::get('backend/media/{id}/delete', ['as' => 'backend.media.delete', 'uses' => 'Backend\MediaController@delete']);

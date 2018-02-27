@@ -11,6 +11,7 @@ return [
     'category' => 'Category',
     'choose' => 'Choose',
     'create' => 'Create',
+    'custom_links' => 'Custom Links',
     'date' => 'Date',
     'default' => 'Default',
     'delete' => 'Delete',

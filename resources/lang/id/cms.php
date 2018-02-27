@@ -11,6 +11,7 @@ return [
     'category' => 'Kategori',
     'choose' => 'Pilih',
     'create' => 'Buat',
+    'custom_links' => 'Tautan Khusus',
     'date' => 'Tanggal',
     'default' => 'Default',
     'delete' => 'Hapus',

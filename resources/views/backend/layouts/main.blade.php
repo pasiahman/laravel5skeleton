@@ -128,6 +128,7 @@
                         <li><a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.categories')</span></a></li>
                         <li><a href="{{ route('backend.tags.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.tags')</span></a></li>
                         <li><a href="{{ route('backend.posts.index') }}"><i class="fa fa-book"></i> <span>@lang('cms.posts')</span></a></li>
+                        <li><a href="{{ route('backend.custom-links.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.custom_links')</span></a></li>
                     </ul>
                 </li>
                 <li class="treeview">
