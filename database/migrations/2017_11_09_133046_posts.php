@@ -16,7 +16,7 @@ class Posts extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('author_id');
-            $table->enum('type', ['attachment', 'page', 'post']);
+            $table->enum('type', ['attachment', 'custom_link', 'page', 'post']);
             $table->string('mime_type', 100);
             $table->enum('status', ['draft', 'publish', 'trash'])->default('publish');
             $table->enum('comment_status', ['closed', 'open'])->default('open');

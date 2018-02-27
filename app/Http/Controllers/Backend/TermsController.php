@@ -89,7 +89,7 @@ class TermsController extends Controller
     {
         $data['term'] = $term = $this->model::findOrFail($id);
         $data['term_translation'] = $term->translateOrNew($request->query('locale'));
-        return view('backend/terms/update', $data);
+        return view('backend/terms/edit', $data);
     }
 
     /**

@@ -60,7 +60,7 @@ class RolesController extends Controller
     {
         $data['permissions'] = Permission::orderBy('name')->get();
         $data['role'] = Role::findOrFail($id);
-        return view('backend/roles/update', $data);
+        return view('backend/roles/edit', $data);
     }
 
     /**

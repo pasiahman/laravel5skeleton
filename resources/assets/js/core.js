@@ -15,8 +15,3 @@ $(document).on('click', '.table_row_checkbox_all', function () {
 });
 
 $(document).on('click', '.template_close', function () { $(this).closest('li').remove(); });
-
-$(document).ready(function () {
-    var sortables = document.querySelectorAll('.sortable-list-group');
-    Array.prototype.forEach.call(sortables, function(element, index) { Sortable.create(element); });
-});

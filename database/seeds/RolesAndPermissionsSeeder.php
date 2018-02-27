@@ -19,12 +19,16 @@ class RolesAndPermissionsSeeder extends Seeder
 
         // create permissions
         Permission::create(['name' => 'backend categories']);
+        Permission::create(['name' => 'backend custom links']);
+        Permission::create(['name' => 'backend custom links delete']);
+        Permission::create(['name' => 'backend custom links trash']);
         Permission::create(['name' => 'backend media']);
         Permission::create(['name' => 'backend media all']);
         Permission::create(['name' => 'backend media delete']);
         Permission::create(['name' => 'backend media trash']);
         Permission::create(['name' => 'backend media role']);
         Permission::create(['name' => 'backend medium categories']);
+        Permission::create(['name' => 'backend menus']);
         Permission::create(['name' => 'backend options']);
         Permission::create(['name' => 'backend permissions']);
         Permission::create(['name' => 'backend posts']);
@@ -38,12 +42,16 @@ class RolesAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'superadmin']);
         $role->givePermissionTo([
             'backend categories',
+            'backend custom links',
+            'backend custom links delete',
+            'backend custom links trash',
             'backend media',
             'backend media all',
             'backend media delete',
             'backend media role',
             'backend media trash',
             'backend medium categories',
+            'backend menus',
             'backend options',
             'backend permissions',
             'backend posts',
@@ -57,8 +65,10 @@ class RolesAndPermissionsSeeder extends Seeder
         $role = Role::create(['name' => 'admin']);
         $role->givePermissionTo([
             'backend categories',
+            'backend custom links',
             'backend media',
             'backend media role',
+            'backend medium categories',
             'backend posts',
             'backend roles',
             'backend tags',

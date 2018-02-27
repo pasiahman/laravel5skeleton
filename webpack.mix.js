@@ -27,6 +27,8 @@ mix.styles([
     'resources/bower/admin-lte/dist/css/AdminLTE.min.css',
     'resources/bower/admin-lte/dist/css/skins/_all-skins.min.css',
     'resources/vendor/admin-lte/AdminLTE-custom.css',
+    'resources/vendor/nestable/jquery.nestable-custom.css',
+    'resources/vendor/tinymce/tinymce-custom.css',
 ], 'public/css/backend-app.css')
 .copy('resources/bower/font-awesome/fonts', 'public/fonts');
 
@@ -39,13 +41,17 @@ mix.combine([
     'resources/bower/fancybox/dist/jquery.fancybox.min.js',
     'resources/bower/fastclick/lib/fastclick.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
+    'resources/bower/nestable/jquery.nestable.js',
     'resources/bower/select2/dist/js/select2.min.js',
     'resources/bower/Sortable/Sortable.min.js',
+    'resources/bower/tinymce/tinymce.min.js',
     'resources/bower/toastr/toastr.min.js',
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/vendor/jquery-pjax/jquery.pjax-custom.js',
     'resources/vendor/laracasts/flash/custom.js',
     'resources/vendor/select2/select2-custom.js',
+    'resources/vendor/Sortable/Sortable-custom.js',
+    'resources/vendor/tinymce/tinymce-custom.js',
     'resources/assets/js/core.js',
 ], 'public/js/backend-app.js');
 
@@ -57,13 +63,15 @@ mix.styles([
     'resources/bower/select2/dist/css/select2.min.css',
     'resources/bower/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
 ], 'public/css/app.css')
+.copy('resources/bower/codemirror', 'public/bower/tinymce/plugins/codemirror/codemirror')
 // .copy('resources/bower/fine-uploader', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/edit.gif', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/fine-uploader-gallery.min.css', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/fine-uploader.min.js', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/loading.gif', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/retry.gif', 'public/bower/fine-uploader')
-.copy('resources/bower/font-awesome/fonts', 'public/fonts');
+.copy('resources/bower/font-awesome/fonts', 'public/fonts')
+.copy('resources/bower/tinymce', 'public/bower/tinymce');
 
 mix.combine([
     'resources/bower/jquery/dist/jquery.min.js',

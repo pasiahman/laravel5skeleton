@@ -2,6 +2,7 @@
 
 return [
     'action' => 'Aksi',
+    'add_to_menu' => 'Tambahkan ke menu',
     'added' => 'Ditambahkan',
     'are_you_sure_to_delete_this' => 'Apakah kamu yakin untuk menghapus ini',
     'are_you_sure_to_delete_this_permanently' => 'Apakah kamu yakin untuk menghapus ini secara permanen',
@@ -10,6 +11,7 @@ return [
     'category' => 'Kategori',
     'choose' => 'Pilih',
     'create' => 'Buat',
+    'custom_links' => 'Tautan Khusus',
     'date' => 'Tanggal',
     'default' => 'Default',
     'delete' => 'Hapus',
@@ -27,6 +29,7 @@ return [
     'logout' => 'Keluar',
     'media' => 'Media',
     'medium_categories' => 'Kategori Media',
+    'menus' => 'Menu',
     'no_data' => 'Tidak ada data',
     'options' => 'Pilihan',
     'overwrite_permissions' => 'Menimpa izin',
@@ -42,6 +45,8 @@ return [
     'sort' => 'Urut',
     'tag' => 'Tag',
     'tags' => 'Tag',
+    'term' => 'Term',
+    'terms' => 'Term',
     'trash' => 'Sampah',
     'update' => 'Perbarui',
     'users' => 'Pengguna',

@@ -14,5 +14,7 @@
 @endsection
 
 @section('content')
-    @include('backend/users/_form', ['user' => $user])
+    <form action="{{ route('backend.users.store') }}" method="post">
+        @include('backend/users/_form')
+    </form>
 @endsection

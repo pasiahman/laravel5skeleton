@@ -30,8 +30,8 @@
                                         </select>
                                         @lang('cms.sort')
                                         <select class="input-sm" name="sort">
-                                            <option {{ request()->query('sort') == 'name_like,ASC' ? 'selected' : '' }} value="name_like,ASC">@lang('validation.attributes.name') (A-Z)</option>
-                                            <option {{ request()->query('sort') == 'name_like,DESC' ? 'selected' : '' }} value="name_like,DESC">@lang('validation.attributes.name') (Z-A)</option>
+                                            <option {{ request()->query('sort') == 'title,ASC' ? 'selected' : '' }} value="title,ASC">@lang('validation.attributes.title') (A-Z)</option>
+                                            <option {{ request()->query('sort') == 'title,DESC' ? 'selected' : '' }} value="title,DESC">@lang('validation.attributes.title') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'author.name,ASC' ? 'selected' : '' }} value="author.name,ASC">@lang('validation.attributes.author') (A-Z)</option>
                                             <option {{ request()->query('sort') == 'author.name,DESC' ? 'selected' : '' }} value="author.name,DESC">@lang('validation.attributes.author') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'status,ASC' ? 'selected' : '' }} value="status,ASC">@lang('validation.attributes.status') (↓)</option>
@@ -46,7 +46,7 @@
                         <tr>
                             <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                             <th>@lang('validation.attributes.locale')</th>
-                            <th>@lang('validation.attributes.name') <input class="form-control input-sm" name="name_like" type="text" value="{{ request()->query('name_like') }}" /></th>
+                            <th>@lang('validation.attributes.title') <input class="form-control input-sm" name="title_like" type="text" value="{{ request()->query('title_like') }}" /></th>
                             <th>
                                 @lang('validation.attributes.author')
                                 <select class="form-control input-sm" name="author_id">
@@ -101,7 +101,7 @@
                                         @endif
                                     @endforeach
                                 </td>
-                                <td>{{ $post->name }}</td>
+                                <td>{{ $post->title }}</td>
                                 <td>{{ $post->author->name }}</td>
                                 <td>
                                     @php

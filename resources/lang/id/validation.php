@@ -136,6 +136,7 @@ return [
         'template' => 'Template',
         'title' => 'Judul',
         'updated_at' => 'Diperbarui Pada',
+        'url' => 'Url',
         'value' => 'Nilai',
     ],
 

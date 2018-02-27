@@ -30,7 +30,7 @@ class PostsController extends Controller
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['model'] = $this->model;
-        $data['posts'] = $this->model::select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));
+        $data['posts'] = $this->model::with(['author', 'postmetas'])->select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));
 
         if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
@@ -90,7 +90,7 @@ class PostsController extends Controller
     {
         $data['post'] = $post = $this->model::findOrFail($id);
         $data['post_translation'] = $post->translateOrNew($request->query('locale'));
-        return view('backend/posts/update', $data);
+        return view('backend/posts/edit', $data);
     }
 
     /**
@@ -134,7 +134,7 @@ class PostsController extends Controller
 
     public function trash($id)
     {
-        $post = $this->model::search(['id' => $id])->findOrFail();
+        $post = $this->model::search(['id' => $id])->firstOrFail();
         $post->fill(['status' => 'trash'])->save();
         flash(__('cms.data_has_been_deleted'))->success()->important();
         return redirect()->back();

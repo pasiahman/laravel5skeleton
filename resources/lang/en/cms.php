@@ -2,6 +2,7 @@
 
 return [
     'action' => 'Action',
+    'add_to_menu' => 'Add to menu',
     'added' => 'Added',
     'are_you_sure_to_delete_this' => 'Are you sure to delete this',
     'are_you_sure_to_delete_this_permanently' => 'Are you sure to delete this permanently',
@@ -10,6 +11,7 @@ return [
     'category' => 'Category',
     'choose' => 'Choose',
     'create' => 'Create',
+    'custom_links' => 'Custom Links',
     'date' => 'Date',
     'default' => 'Default',
     'delete' => 'Delete',
@@ -27,6 +29,7 @@ return [
     'logout' => 'Logout',
     'media' => 'Media',
     'medium_categories' => 'Medium Categories',
+    'menus' => 'Menus',
     'no_data' => 'No data',
     'options' => 'Options',
     'overwrite_permissions' => 'Overwrite permissions',
@@ -42,6 +45,8 @@ return [
     'sort' => 'Sort',
     'tag' => 'Tag',
     'tags' => 'Tags',
+    'term' => 'Term',
+    'terms' => 'Terms',
     'trash' => 'Trash',
     'update' => 'Update',
     'users' => 'Users',

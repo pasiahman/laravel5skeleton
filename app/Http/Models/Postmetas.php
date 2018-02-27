@@ -30,7 +30,7 @@ class Postmetas extends Model
 
         if ($metas) {
             foreach ($metas as $key => $value) {
-                $value = is_array($value) ? json_encode($value) : $value;
+                $value = is_array($value) ? json_encode(array_filter($value)) : $value;
 
                 if ($meta = self::where('post_id', $postId)->where('key', $key)->first()) {
                     $meta->fill(['value' => $value])->save(); // update
@@ -42,6 +42,6 @@ class Postmetas extends Model
             }
         }
 
-        self::whereNotIn('id', $ids)->where('post_id', $postId)->delete();
+        // self::whereNotIn('id', $ids)->where('post_id', $postId)->delete();
     }
 }

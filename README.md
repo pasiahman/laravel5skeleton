@@ -56,16 +56,20 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [twbs/bootstrap](https://github.com/twbs/bootstrap)
 
 ## Included Js
+- [christiaan/tinymce-codemirror](https://github.com/christiaan/tinymce-codemirror)
 - [CodeSeven/toastr](https://github.com/CodeSeven/toastr)
+- [dbushell/Nestable](https://github.com/dbushell/Nestable)
 - [defunkt/jquery-pjax](https://github.com/defunkt/jquery-pjax)
 - [fancyapps/fancybox](https://github.com/fancyapps/fancybox)
 - [FineUploader/fine-uploader](https://github.com/FineUploader/fine-uploader)
 - [RubaXa/Sortable](https://github.com/RubaXa/Sortable)
 - [select2/select2](https://github.com/select2/select2)
+- [tinymce/tinymce-dist](https://github.com/tinymce/tinymce-dist)
 - [uxsolutions/bootstrap-datepicker](https://github.com/uxsolutions/bootstrap-datepicker)
 
 # Included Packages
 - [abhimanyu003/conversion](https://github.com/abhimanyu003/conversion)
+- [atayahmet/laravel-nestable](https://github.com/atayahmet/laravel-nestable)
 - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
 - [dimsav/laravel-translatable](https://github.com/dimsav/laravel-translatable)
 - [Intervention/image](https://github.com/Intervention/image)

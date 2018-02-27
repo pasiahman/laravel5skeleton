@@ -36,6 +36,12 @@ class Media extends Posts
         return $tree;
     }
 
+    public function getCategoryIdOptions()
+    {
+        $options = (new MediumCategories)->getParentOptions();
+        return $options;
+    }
+
     public function getMimeTypeOptionsAttribute()
     {
         return self::orderBy('mime_type')->pluck('mime_type', 'mime_type')->toArray();
@@ -94,9 +100,9 @@ class Media extends Posts
         } else if (Auth::user()->can('backend media role')) {
             $roles = Auth::user()->getRoleNames();
             $authors = Users::role($roles)->get()->pluck('id', 'id');
-            $query->whereIn('author', $authors); // group
+            $query->whereIn('author_id', $authors); // group
         } else if (Auth::user()->can('backend media')) {
-            $query->where('author', Auth::user()->id);  // self
+            $query->where('author_id', Auth::user()->id);  // self
         }
 
         return $query;

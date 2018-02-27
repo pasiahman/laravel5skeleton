@@ -32,7 +32,7 @@ class Posts extends Model
 
     protected $table = 'posts';
 
-    protected $with = ['author', 'postmetas', 'translations'];
+    protected $with = ['translations'];
 
     public $translatedAttributes = ['title', 'name', 'excerpt', 'content'];
     public $translationForeignKey = 'post_id';
@@ -73,6 +73,12 @@ class Posts extends Model
     public function getCategoryIdOptions()
     {
         $options = (new Categories)->getParentOptions();
+        return $options;
+    }
+
+    public function getPostIdOptions()
+    {
+        $options = self::search(['sort' => 'title,ASC'])->select([self::getTable().'.id', 'title'])->get()->pluck('title', 'id')->toArray();
         return $options;
     }
 
@@ -132,10 +138,6 @@ class Posts extends Model
             'trash' => __('cms.trash'),
         ];
 
-        if ($this->id) {
-            unset($options['trash']);
-        }
-
         return $options;
     }
 
@@ -147,9 +149,9 @@ class Posts extends Model
         return $options;
     }
 
-    public function getTagOptions()
+    public function getTagIdOptions()
     {
-        $options = Tags::search(['sort' => 'name,ASC'])->get()->pluck('name', 'id')->toArray();
+        $options = (new Tags)->getTagIdOptions();
         return $options;
     }
 
@@ -190,9 +192,17 @@ class Posts extends Model
         isset($params['type']) ? $query->where('type', $params['type']) : '';
         isset($params['mime_type']) ? $query->where('mime_type', $params['mime_type']) : '';
         isset($params['mime_type_like']) ? $query->where('mime_type', 'like', '%'.$params['mime_type_like'].'%') : '';
+        if (isset($params['mime_type_like_in'])) {
+            $mimeTypeLikes = explode(',', $params['mime_type_like_in']);
+            $query->where(function ($query) use ($mimeTypeLikes) {
+                foreach ($mimeTypeLikes as $mimeTypeLike) {
+                    $query->orWhere('mime_type', 'like', '%'.$mimeTypeLike.'%');
+                }
+            });
+        }
         isset($params['status']) ? $query->where('status', $params['status']) : '';
-        isset($params['created_at']) ? $query->where('created_at', 'like', '%'.$params['created_at'].'%') : '';
-        isset($params['created_at_date']) ? $query->whereDate('created_at', '=', $params['created_at_date']) : '';
+        isset($params['created_at']) ? $query->where(self::getTable().'created_at', 'like', '%'.$params['created_at'].'%') : '';
+        isset($params['created_at_date']) ? $query->whereDate(self::getTable().'created_at', '=', $params['created_at_date']) : '';
         isset($params['updated_at_date']) ? $query->whereDate(self::getTable().'.updated_at', '=', $params['updated_at_date']) : '';
 
         // postmetas
@@ -201,13 +211,14 @@ class Posts extends Model
         // post_translations
         isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';
         isset($params['title']) ? $query->whereTranslationLike('title', '%'.$params['title'].'%') : '';
+        isset($params['title_like']) ? $query->whereTranslationLike('title', '%'.$params['title_like'].'%') : '';
         isset($params['name']) ? $query->whereTranslation('name', $params['name']) : '';
         isset($params['name_like']) ? $query->whereTranslationLike('name', '%'.$params['name_like'].'%') : '';
         isset($params['excerpt']) ? $query->whereTranslationLike('excerpt', '%'.$params['excerpt'].'%') : '';
         isset($params['content']) ? $query->whereTranslationLike('content', '%'.$params['content'].'%') : '';
 
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {
-            if (in_array($sort[0], ['updated_at'])) {
+            if (in_array($sort[0], ['created_at', 'updated_at'])) {
                 $query->orderBy(self::getTable().'.'.$sort[0], $sort[1]);
             } else if (in_array($sort[0], ['title', 'name', 'excerpt', 'content'])) {
                 $query->join($this->getTranslationsTable().' AS translation', function ($join) {

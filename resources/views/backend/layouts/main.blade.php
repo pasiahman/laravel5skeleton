@@ -5,8 +5,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="app_name" content="{{ config('app.name') }}" />
+    <meta name="app_url" content="{{ config('app.url') }}" />
+    <meta name="csrf-token" content="{{ csrf_token() }}"><!-- CSRF Token -->
 
     <title>@yield('title', config('app.name', 'Laravel'))</title>
 
@@ -69,10 +70,10 @@
                             </li>
                             <!-- Menu Footer-->
                             <li class="user-footer">
-                                    <div class="pull-right">
-                                        <a class="btn btn-default btn-flat" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            @lang('cms.logout')
-                                        </a>
+                                <div class="pull-right">
+                                    <a class="btn btn-default btn-flat" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        @lang('cms.logout')
+                                    </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
@@ -127,6 +128,7 @@
                         <li><a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.categories')</span></a></li>
                         <li><a href="{{ route('backend.tags.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.tags')</span></a></li>
                         <li><a href="{{ route('backend.posts.index') }}"><i class="fa fa-book"></i> <span>@lang('cms.posts')</span></a></li>
+                        <li><a href="{{ route('backend.custom-links.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.custom_links')</span></a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -154,6 +156,7 @@
                         <li><a href="{{ route('backend.permissions.index') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
                         <li><a href="{{ route('backend.roles.index') }}"><i class="fa fa-user"></i> <span>@lang('cms.roles')</span></a></li>
                         <li><a href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
+                        <li><a href="{{ route('backend.menus.index') }}"><i class="fa fa-bars"></i> <span>@lang('cms.menus')</span></a></li>
                         <li><a href="{{ route('backend.options.index') }}"><i class="fa fa-sliders"></i> <span>@lang('cms.options')</span></a></li>
                     </ul>
                 </li>
@@ -179,6 +182,7 @@
         <section class="content">
             @include('flash::message')
             @yield('content')
+            @yield('content_modal')
         </section>
         <!-- /.content -->
     </div>

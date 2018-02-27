@@ -57,6 +57,6 @@ class MediumCategoriesController extends TermsController
     {
         $data['term'] = $term = $this->model::findOrFail($id);
         $data['term_translation'] = $term->translateOrNew($request->query('locale'));
-        return view('backend/medium_categories/update', $data);
+        return view('backend/medium_categories/edit', $data);
     }
 }

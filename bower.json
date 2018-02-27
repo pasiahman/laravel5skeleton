@@ -19,12 +19,15 @@
     "bootstrap": "boostrap#^3.3.7",
     "bootstrap-datepicker": "^1.7.1",
     "bootstrap-social": "^5.1.1",
+    "codemirror": "^5.34.0",
     "fancybox": "^3.2.5",
     "fine-uploader": "^5.13.0",
     "font-awesome": "~4.7",
     "jquery-pjax": "^2.0.1",
+    "nestable": "*",
     "select2-bootstrap-theme": "^0.1.0-beta.10",
     "Sortable": "sortablejs#^1.6.0",
+    "tinymce": "tinymce-dist#^4.7.6",
     "toastr": "^2.1.3"
   }
 }

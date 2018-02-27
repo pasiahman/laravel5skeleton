@@ -182,12 +182,6 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Abhimanyu003\Conversion\ConversionServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
-        Dimsav\Translatable\TranslatableServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Laracasts\Flash\FlashServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 
@@ -240,8 +234,6 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Conversion'  => Abhimanyu003\Conversion\Facades\Conversion::class,
-        'Debugbar' => Barryvdh\Debugbar\Facade::class,
-        'Image' => Intervention\Image\Facades\Image::class,
 
     ],
 

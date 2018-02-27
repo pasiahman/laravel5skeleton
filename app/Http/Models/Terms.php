@@ -8,6 +8,7 @@ use redzjovi\php\ArrayHelper;
 class Terms extends Model
 {
     use \Dimsav\Translatable\Translatable;
+    use \Nestable\NestableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +18,8 @@ class Terms extends Model
     protected $fillable = ['taxonomy', 'parent_id', 'count'];
 
     protected $table = 'terms';
+
+    protected $parent = 'parent_id';
 
     protected $with = ['translations'];
 
@@ -53,6 +56,28 @@ class Terms extends Model
             'default' => __('cms.default'),
         ];
         return $options;
+    }
+
+    public function getTermmetaImagesId()
+    {
+        $imagesId = [];
+        $imagesId = $this->id && isset($this->termmetas->where('key', 'images')->first()->value) ? json_decode($this->termmetas->where('key', 'images')->first()->value, true) : $imagesId;
+        $imagesId = is_array(request()->old('termmetas.images')) ? request()->old('termmetas.images') : $imagesId;
+        return $imagesId;
+    }
+
+    public function getTermmetaNestable()
+    {
+        $this->nestable = [];
+        $this->nestable = $this->id && isset($this->termmetas->where('key', 'nestable')->first()->value) ? json_decode($this->termmetas->where('key', 'nestable')->first()->value, true) : $this->nestable;
+        $this->nestable = is_array(request()->old('termmetas.nestable')) ? request()->old('termmetas.nestable') : $this->nestable;
+        return $this->nestable;
+    }
+
+    public function getTermmetaTemplate()
+    {
+        $template = isset($this->termmetas->where('key', 'template')->value) ? $this->termmetas->where('key', 'template')->value : '';
+        return $template;
     }
 
     public function getTermsTree()

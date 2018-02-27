@@ -25,7 +25,7 @@ class MediaController extends PostsController
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['model'] = $this->model;
-        $data['posts'] = $this->model::search($request->query())->paginate($request->query('limit'));
+        $data['posts'] = $this->model::with(['author', 'postmetas'])->search($request->query())->paginate($request->query('limit'));
 
         if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
@@ -52,7 +52,7 @@ class MediaController extends PostsController
     {
         $data['post'] = $post = $this->model::search(['id' => $id])->firstOrFail();
         $data['post_translation'] = $post->translateOrNew($request->query('locale'));
-        return view('backend/media/update', $data);
+        return view('backend/media/edit', $data);
     }
 
     /**

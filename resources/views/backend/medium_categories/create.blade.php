@@ -12,5 +12,7 @@
 @endsection
 
 @section('content')
-    @include('backend/medium_categories/_form')
+    <form action="{{ route('backend.medium-categories.store') }}" method="post">
+        @include('backend/medium_categories/_form')
+    </form>
 @endsection

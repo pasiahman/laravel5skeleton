@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "93f90b7f0188582d032ea9885ef463bb",
+    "content-hash": "d612bec5a79edd55ff9004be97fb6f03",
     "packages": [
         {
             "name": "abhimanyusharma003/conversion",
@@ -50,6 +50,73 @@
                 "unit"
             ],
             "time": "2016-08-31T19:54:38+00:00"
+        },
+        {
+            "name": "atayahmet/laravel-nestable",
+            "version": "v0.8.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/atayahmet/laravel-nestable.git",
+                "reference": "49668c3c78066b5d0da09b20979096e00abf72fd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/atayahmet/laravel-nestable/zipball/49668c3c78066b5d0da09b20979096e00abf72fd",
+                "reference": "49668c3c78066b5d0da09b20979096e00abf72fd",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "5.2.*|5.3.*|5.4.*|5.5.*|5.6.*",
+                "illuminate/support": "5.2.*|5.3.*|5.4.*|5.5.*|5.6.*",
+                "php": ">=5.5.5"
+            },
+            "require-dev": {
+                "orchestra/database": "~3.1",
+                "orchestra/testbench": "~3.0",
+                "phpunit/phpunit": "^4.0|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Nestable\\NestableServiceProvider"
+                    ],
+                    "aliases": {
+                        "Nestable": "Nestable\\Facades\\NestableService"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Nestable\\": "src/",
+                    "Nestable\\Tests\\": "tests/"
+                },
+                "files": [
+                    "src/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ahmet ATAY",
+                    "email": "ahmet.atay@hotmail.com",
+                    "homepage": "http://www.atayahmet.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Laravel 5 nested categories library",
+            "homepage": "https://github.com/atayahmet/nestable",
+            "keywords": [
+                "category",
+                "laravel",
+                "nestable",
+                "nested",
+                "nestedset"
+            ],
+            "time": "2018-02-18T08:54:19+00:00"
         },
         {
             "name": "cocur/slugify",
