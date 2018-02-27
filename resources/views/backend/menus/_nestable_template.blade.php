@@ -1,4 +1,11 @@
-<li class="dd-item dd3-item" data-id="{{ $data_id }}" data-title="{{ $data_title }}" data-type="{{ $data_type }}" data-url="{{ $data_url }}">
+<li
+    class="dd-item dd3-item"
+    data-id="{{ $data_id }}"
+    data-permission="{{ $data_permission }}"
+    data-title="{{ $data_title }}"
+    data-type="{{ $data_type }}"
+    data-url="{{ $data_url }}"
+>
     <div class="dd-handle dd3-handle">Drag</div>
     <div class="dd3-content">
         {{ $data_title }} - {{ $data_type }}

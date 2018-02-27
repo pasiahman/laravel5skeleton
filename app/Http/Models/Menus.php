@@ -16,6 +16,7 @@ class Menus extends Terms
         'post',
         'title',
         'url',
+        'permission',
     ];
 
     protected static function boot()
@@ -48,6 +49,8 @@ class Menus extends Terms
             $data['data_title'] = $this->title;
             $data['data_type'] = $this->type;
             $data['data_url'] = $this->url;
+            $data['data_permission'] = $this->permission;
+
             $data['item'] = $item;
             $data['menu'] = $this;
             $html .= \Illuminate\Support\Facades\View::make('backend/menus/_nestable_template', $data)->render();
@@ -66,6 +69,12 @@ class Menus extends Terms
     {
         $tree = (new \App\Http\Models\CustomLinks)->getPostIdOptions();
         return $tree;
+    }
+
+    public function getPermissionIdOptions()
+    {
+        $options = (new \App\Http\Models\Permission)->getPermissionIdOptions();
+        return $options;
     }
 
     public function getPost()

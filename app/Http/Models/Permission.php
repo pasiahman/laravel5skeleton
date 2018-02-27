@@ -24,6 +24,12 @@ class Permission extends \Spatie\Permission\Models\Permission
      */
     protected $hidden = [];
 
+    public function getPermissionIdOptions()
+    {
+        $options = self::select(['id', 'name'])->orderBy('name')->get()->pluck('name', 'id')->toArray();
+        return $options;
+    }
+
     public function scopeAction($query, $params)
     {
         if ($params['action'] == 'delete' && isset($params['action_id'])) {
