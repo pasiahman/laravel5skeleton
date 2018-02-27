@@ -24,7 +24,7 @@
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th class="text-right" colspan="8">
+                            <th class="text-right" colspan="9">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         @lang('cms.per_page')
@@ -161,12 +161,12 @@
                                 </td>
                             </tr>
                         @empty
-                            <tr><td align="center" colspan="8">@lang('cms.no_data')</td></tr>
+                            <tr><td align="center" colspan="9">@lang('cms.no_data')</td></tr>
                         @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="8">
+                            <td colspan="9">
                                 <select class="input-sm" name="action">
                                     <option value="">@lang('cms.action')</option>
                                     @can('backend media trash')
@@ -181,7 +181,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="8">{{ $posts->appends(request()->query())->links('vendor.pagination.default') }}</td>
+                            <td align="center" colspan="9">{{ $posts->appends(request()->query())->links('vendor.pagination.default') }}</td>
                         </tr>
                     </tfoot>
                 </table>

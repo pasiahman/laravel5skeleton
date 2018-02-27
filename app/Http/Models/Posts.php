@@ -132,10 +132,6 @@ class Posts extends Model
             'trash' => __('cms.trash'),
         ];
 
-        if ($this->id) {
-            unset($options['trash']);
-        }
-
         return $options;
     }
 
@@ -209,6 +205,7 @@ class Posts extends Model
         // post_translations
         isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';
         isset($params['title']) ? $query->whereTranslationLike('title', '%'.$params['title'].'%') : '';
+        isset($params['title_like']) ? $query->whereTranslationLike('title', '%'.$params['title_like'].'%') : '';
         isset($params['name']) ? $query->whereTranslation('name', $params['name']) : '';
         isset($params['name_like']) ? $query->whereTranslationLike('name', '%'.$params['name_like'].'%') : '';
         isset($params['excerpt']) ? $query->whereTranslationLike('excerpt', '%'.$params['excerpt'].'%') : '';

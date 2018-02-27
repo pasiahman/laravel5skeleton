@@ -18,12 +18,12 @@
                 @endforeach
                 <hr />
                 <div class="form-group">
-                    <label>@lang('validation.attributes.title') (*)</label>
+                    <label>@lang('validation.attributes.name') (*)</label>
                     <input class="form-control input-sm" name="title" required type="text" value="{{ request()->old('title', $post_translation->title) }}" />
                     <i class="text-danger">{{ $errors->first('title') }}</i>
                 </div>
                 <div class="form-group">
-                    <label>@lang('validation.attributes.name') (*)</label>
+                    <label>@lang('validation.attributes.slug')</label>
                     <input class="form-control input-sm" name="name" readonly required type="text" value="{{ request()->old('name', $post_translation->name) }}" />
                     <i class="text-danger">{{ $errors->first('name') }}</i>
                 </div>
