@@ -7,7 +7,7 @@
     <div aria-labelledby="headingPosts" class="panel-collapse collapse in" id="collapsePosts" role="tabpanel">
         <div class="panel-body">
             <div class="form-group">
-                <select class="form-control select2" data-allow-clear="true" data-placeholder="" id="post">
+                <select class="form-control select2" data-allow-clear="true" data-placeholder="" data-width="100%" id="post">
                     <option></option>
                     @foreach ($posts as $post)
                         <option value="{{ $post->id }}">{{ $post->title }}</option>

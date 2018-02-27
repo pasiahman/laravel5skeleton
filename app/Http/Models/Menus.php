@@ -66,6 +66,12 @@ class Menus extends Terms
                 $this->title = $post->title;
                 $this->url = url('categories/'.$post->name);
                 break;
+            case 'tag' :
+                $tag = \App\Http\Models\Tags::findOrFail($this->id);
+                $this->post = $tag;
+                $this->title = $tag->name;
+                $this->url = url('tags/'.$tag->name);
+                break;
             default :
                 $this->title = '';
                 $this->url = '';

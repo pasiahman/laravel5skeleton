@@ -58,6 +58,7 @@
         <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
             @include('backend/menus/_accordion/_posts', ['posts' => $posts])
             @include('backend/menus/_accordion/_categories', ['post' => $post])
+            @include('backend/menus/_accordion/_tags', ['post' => $post])
         </div>
     </div>
     <div class="col-md-9">
