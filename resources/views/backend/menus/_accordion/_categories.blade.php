@@ -8,7 +8,7 @@
         <div class="panel-body">
             <div class="form-group">
                 <div class="categories-container">
-                    @foreach ($post->getCategoriesTree() as $category_tree)
+                    @foreach ($term->getCategoriesTree() as $category_tree)
                         <div class="checkbox">
                             {{ $category_tree['tree_prefix'] }}
                             <label>

@@ -9,8 +9,8 @@
             <div class="form-group">
                 <select class="form-control select2" data-allow-clear="true" data-placeholder="" data-width="100%" id="post">
                     <option></option>
-                    @foreach ($posts as $post)
-                        <option value="{{ $post->id }}">{{ $post->title }}</option>
+                    @foreach ($term->getPostIdOptions() as $postId => $postTitle)
+                        <option value="{{ $postId }}">{{ $postTitle }}</option>
                     @endforeach
                 </select>
             </div>

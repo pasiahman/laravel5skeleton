@@ -9,7 +9,7 @@
             <div class="form-group">
                 <select class="form-control select2" data-allow-clear="true" data-placeholder="" data-width="100%" id="tag">
                     <option></option>
-                    @foreach ($post->getTagOptions() as $tagId => $tagName)
+                    @foreach ($term->getTagIdOptions() as $tagId => $tagName)
                         <option value="{{ $tagId }}">{{ $tagName }}</option>
                     @endforeach
                 </select>

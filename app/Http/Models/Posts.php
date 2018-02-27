@@ -76,6 +76,12 @@ class Posts extends Model
         return $options;
     }
 
+    public function getPostIdOptions()
+    {
+        $options = self::search(['sort' => 'title,ASC'])->select([self::getTable().'.id', 'title'])->get()->pluck('title', 'id')->toArray();
+        return $options;
+    }
+
     public function getPostmetaAttachedFile()
     {
         $attachedFile = $this->id && isset($this->postmetas->where('key', 'attached_file')->first()->value) ? $this->postmetas->where('key', 'attached_file')->first()->value : '';
@@ -143,9 +149,9 @@ class Posts extends Model
         return $options;
     }
 
-    public function getTagOptions()
+    public function getTagIdOptions()
     {
-        $options = Tags::search(['sort' => 'name,ASC'])->get()->pluck('name', 'id')->toArray();
+        $options = (new Tags)->getTagIdOptions();
         return $options;
     }
 

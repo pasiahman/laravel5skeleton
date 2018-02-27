@@ -182,6 +182,7 @@
         <section class="content">
             @include('flash::message')
             @yield('content')
+            @yield('content_modal')
         </section>
         <!-- /.content -->
     </div>

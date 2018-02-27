@@ -56,9 +56,10 @@
 <div class="row">
     <div class="col-md-3">
         <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
-            @include('backend/menus/_accordion/_posts', ['posts' => $posts])
-            @include('backend/menus/_accordion/_categories', ['post' => $post])
-            @include('backend/menus/_accordion/_tags', ['post' => $post])
+            @include('backend/menus/_accordion/_posts', ['term' => $term])
+            @include('backend/menus/_accordion/_categories', ['term' => $term])
+            @include('backend/menus/_accordion/_tags', ['term' => $term])
+            @include('backend/menus/_accordion/_custom_links', ['term' => $term])
         </div>
     </div>
     <div class="col-md-9">

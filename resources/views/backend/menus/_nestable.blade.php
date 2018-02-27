@@ -23,26 +23,30 @@
 </div>
 
 <!-- Modal -->
-<div aria-labelledby="menu_modal_label" class="modal fade" id="menu_modal" role="dialog" tabindex="-1">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="menu_modal_label"></h4>
-            </div>
-            <div class="modal-body">
-                <div class="form-group menu_modal_url_row">
-                    <label>@lang('validation.attributes.url')</label>
-                    <input class="form-control" id="menu_modal_url" type="text" />
+@section('content_modal')
+    <form id="menu_modal_form">
+        <div aria-labelledby="menu_modal_label" class="modal fade" id="menu_modal" role="dialog" tabindex="-1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="menu_modal_label"></h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group menu_modal_url_row">
+                            <label>@lang('validation.attributes.url')</label>
+                            <input class="form-control" id="menu_modal_url" type="text" />
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+                        <button class="btn btn-success" type="submit">Save changes</button>
+                    </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-                <button class="btn btn-success" type="button">Save changes</button>
-            </div>
         </div>
-    </div>
-</div>
+    </form>
+@endsection
 
 @push('scripts')
     <script>
@@ -52,15 +56,24 @@
     });
 
     $('#nestable').nestable();
+    var menu_edit;
 
-    $(document).on('click', '.menu_edit', function() {
+    $(document).on('click', '.menu_edit', function () {
         var dd_item = $(this).closest('.dd-item');
+        menu_edit = $(this);
 
         $('#menu_modal_label').html(dd_item.attr('data-title'));
-        dd_item.attr('data-type') == 'custom' ? $('.menu_modal_url_row').show() : $('.menu_modal_url_row').hide();
+        dd_item.attr('data-type') == 'custom_link' ? $('.menu_modal_url_row').show() : $('.menu_modal_url_row').hide();
         $('#menu_modal_url').val(dd_item.attr('data-url'));
     });
 
-    $(document).on('click', '.menu_trash', function() { $(this).closest('.dd-item').remove(); });
+    $(document).on('click', '.menu_trash', function () { $(this).closest('.dd-item').remove(); });
+
+    $('#menu_modal_form').submit(function (e) {
+        e.preventDefault();
+        var dd_item = menu_edit.closest('.dd-item');
+        dd_item.attr('data-url', $('#menu_modal_url').val());
+        $('#menu_modal').modal('hide');
+    });
     </script>
 @endpush

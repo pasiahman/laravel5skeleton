@@ -110,7 +110,7 @@
             <div class="box-body">
                 <input name="postmetas[tags][]" type="hidden" value="" />
                 <select class="form-control input-sm select2" data-width="100%" multiple="multiple" name="postmetas[tags][]">
-                    @foreach ($post->getTagOptions() as $tagId => $tagName)
+                    @foreach ($post->getTagIdOptions() as $tagId => $tagName)
                         <option {{ in_array($tagId, $post->getPostmetaTagsId()) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
                     @endforeach
                 </select>

@@ -44,8 +44,6 @@ class MenusController extends TermsController
      */
     public function create()
     {
-        $data['post'] = new Posts;
-        $data['posts'] = Posts::where('status', 'publish')->get();
         $data['term'] = $this->model;
         $data['term_translation'] = $this->model;
         return view('backend/menus/create', $data);
@@ -59,8 +57,6 @@ class MenusController extends TermsController
      */
     public function edit($id, Request $request)
     {
-        $data['post'] = new Posts;
-        $data['posts'] = Posts::where('status', 'publish')->get();
         $data['term'] = $term = $this->model::findOrFail($id);
         $data['term_translation'] = $term->translateOrNew($request->query('locale'));
         return view('backend/menus/edit', $data);
