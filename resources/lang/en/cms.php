@@ -26,6 +26,7 @@ return [
     'file_size' => 'File Size',
     'file_type' => 'File Type',
     'file_url' => 'File Url',
+    'icon' => 'Icon',
     'images' => 'Images',
     'logout' => 'Logout',
     'media' => 'Media',

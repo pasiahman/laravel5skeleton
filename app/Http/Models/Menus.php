@@ -14,6 +14,7 @@ class Menus extends Terms
 
         // custom attribute
         'post',
+        'icon',
         'title',
         'url',
         'permission',
@@ -45,6 +46,7 @@ class Menus extends Terms
             $this->attributes = $item;
             $this->getPost();
 
+            $data['data_icon'] = $this->icon;
             $data['data_id'] = $this->id;
             $data['data_title'] = $this->title;
             $data['data_type'] = $this->type;

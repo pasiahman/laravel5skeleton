@@ -26,6 +26,7 @@ return [
     'file_size' => 'Ukuran Berkas',
     'file_type' => 'Tipe Berkas',
     'file_url' => 'Url Berkas',
+    'icon' => 'Ikon',
     'images' => 'Gambar',
     'logout' => 'Keluar',
     'media' => 'Media',

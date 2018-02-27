@@ -1,5 +1,6 @@
 <li
     class="dd-item dd3-item"
+    data-icon="{{ $data_icon }}"
     data-id="{{ $data_id }}"
     data-permission="{{ $data_permission }}"
     data-title="{{ $data_title }}"
