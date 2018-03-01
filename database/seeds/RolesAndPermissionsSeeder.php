@@ -75,6 +75,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'backend users',
         ]);
 
+        $role = Role::create(['name' => 'member']);
+
         // assign roles to user
         $user = Users::where('email', 'superadmin@email.com')->first();
         $user->assignRole('superadmin');
