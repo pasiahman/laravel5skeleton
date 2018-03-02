@@ -65,10 +65,7 @@ class Handler extends ExceptionHandler
     protected function getJsonResponse(Exception $exception)
     {
         if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
-            return response()->json(
-                ['message' => __('cms.data_not_found'), 'status_code' => Response::HTTP_NOT_FOUND],
-                Response::HTTP_NOT_FOUND
-            );
+            return response()->json(['message' => __('cms.data_not_found')], Response::HTTP_NOT_FOUND);
         }
     }
 
