@@ -23,6 +23,7 @@ class MembersSeeder extends Seeder
             $user->assignRole('member');
 
             \App\Http\Models\Cnr\UserDetails::create([
+                'user_id' => $user->id,
                 'phone_number' => $faker->phoneNumber,
                 'api_token' => $faker->md5,
                 'verification_code' => $faker->numberBetween(0, 9999),

@@ -15,6 +15,7 @@ class CreateUserDetail extends Migration
     {
         Schema::create('user_details', function (Blueprint $table) {
             $table->increments('id');
+            $table->biginteger('user_id');
             $table->string('phone_number', 20);
             $table->string('api_token');
             $table->string('verification_code', 10);
