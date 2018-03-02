@@ -10,9 +10,13 @@ class UsersController extends Controller
 {
     /**
      * @SWG\Get(
-     *   path="/api/users",
-     *   summary="",
-     *   @SWG\Response(response=200, description="OK"),
+     *      path="/api/users",
+     *      summary="",
+     *      description="",
+     *      produces={"application/json"},
+     *      operationId="",
+     *      tags={"users"},
+     *      @SWG\Response(response=200, description="OK"),
      * )
      */
     public function index()

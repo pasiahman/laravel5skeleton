@@ -11,9 +11,23 @@ use Illuminate\Http\Request;
 class UserBalanceController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @SWG\Get(
+     *      path="/api/user_balance",
+     *      summary="",
+     *      description="",
+     *      produces={"application/json"},
+     *      operationId="",
+     *      tags={"users"},
+     *      @SWG\Parameter(
+     *          name="phone_number",
+     *          in="query",
+     *          required=true,
+     *          type="string",
+     *          description="Phone Number",
+     *      ),
+     *      @SWG\Response(response=200, description="OK"),
+     *      @SWG\Response(response=404, description="Not Found"),
+     * )
      */
     public function index(Request $request)
     {

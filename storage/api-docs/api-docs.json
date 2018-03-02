@@ -6,9 +6,47 @@
     },
     "basePath": "/dotcomsolution/chicknroll/public",
     "paths": {
+        "/api/user_balance": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "phone_number",
+                        "in": "query",
+                        "description": "Phone Number",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/api/users": {
             "get": {
+                "tags": [
+                    "users"
+                ],
                 "summary": "",
+                "description": "",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
                 "responses": {
                     "200": {
                         "description": "OK"
