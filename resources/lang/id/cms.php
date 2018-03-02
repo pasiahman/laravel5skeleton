@@ -12,6 +12,7 @@ return [
     'choose' => 'Pilih',
     'create' => 'Buat',
     'custom_links' => 'Tautan Khusus',
+    'data_not_found' => 'Data tidak ditemukan',
     'date' => 'Tanggal',
     'default' => 'Default',
     'delete' => 'Hapus',

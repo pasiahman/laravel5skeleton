@@ -44,6 +44,7 @@ class Users extends \App\User
         isset($params['name']) ? $query->where('name', 'like', '%'.$params['name'].'%') : '';
         isset($params['email']) ? $query->where('email', 'like', '%'.$params['email'].'%') : '';
         isset($params['role_id']) ? $query->whereHas('roles', function ($query) use ($params) { $query->where('id', $params['role_id']); }) : '';
+        isset($params['role_name']) ? $query->whereHas('roles', function ($query) use ($params) { $query->where('name', $params['role_name']); }) : '';
         if (isset($params['sort']) && $sort = explode(',', $params['sort'])) {
             if (count($sort) == 2) {
                 $query->orderBy($sort[0], $sort[1]);
@@ -69,5 +70,10 @@ class Users extends \App\User
             return $this->assignRole($roles);
         }
         return $this;
+    }
+
+    public function userDetail()
+    {
+        return $this->hasOne('\App\Http\Models\Cnr\UserDetails', 'user_id', 'id');
     }
 }
