@@ -50,7 +50,7 @@ class Handler extends ExceptionHandler
          * So we need to convert every exception to a json response.
          */
         if ($request->ajax() || $request->wantsJson()) {
-            return $this->getJsonResponse($exception);
+            return $this->getJsonResponse($request, $exception);
         }
 
         return parent::render($request, $exception);
@@ -62,10 +62,12 @@ class Handler extends ExceptionHandler
      * @param Exception $exception
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function getJsonResponse(Exception $exception)
+    protected function getJsonResponse($request, Exception $exception)
     {
         if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             return response()->json(['message' => __('cms.data_not_found')], Response::HTTP_NOT_FOUND);
+        } else {
+            return parent::render($request, $exception);
         }
     }
 
