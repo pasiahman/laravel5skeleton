@@ -17,5 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('transactions', ['as' => 'api.transactions.store', 'uses' => 'Cnr\TransactionsController@store']);
 Route::get('user_balance', ['as' => 'api.user_balance.index', 'uses' => 'Cnr\UserBalanceController@index']);
 Route::get('users', ['as' => 'api.users.index', 'uses' => 'UsersController@index']);

@@ -103,6 +103,13 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'balances' => [
+            'amount_check' => ':attribute lebih kecil dari saldo.',
+        ],
+        'user_details' => [
+            'phone_number_exist' => ':attribute tidak terdaftar.',
+            'verification_code_is_invalid' => ':attribute tidak valid.',
+        ],
     ],
 
     /*
@@ -138,6 +145,7 @@ return [
         'updated_at' => 'Diperbarui Pada',
         'url' => 'Url',
         'value' => 'Nilai',
+        'verification_code' => 'Kode Verifikasi',
     ],
 
 ];

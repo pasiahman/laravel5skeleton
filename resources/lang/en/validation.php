@@ -103,6 +103,13 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'balances' => [
+            'amount_check' => ':attribute smaller than balance.',
+        ],
+        'user_details' => [
+            'phone_number_exist' => ':attribute is not exist.',
+            'verification_code_is_invalid' => ':attribute is invalid.',
+        ],
     ],
 
     /*
@@ -138,6 +145,7 @@ return [
         'updated_at' => 'Updated At',
         'url' => 'Url',
         'value' => 'Value',
+        'verification_code' => 'Verification Code',
     ],
 
 ];

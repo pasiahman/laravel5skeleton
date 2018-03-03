@@ -6,6 +6,67 @@
     },
     "basePath": "/dotcomsolution/chicknroll/public",
     "paths": {
+        "/api/transactions": {
+            "post": {
+                "tags": [
+                    "transactions"
+                ],
+                "summary": "",
+                "description": "",
+                "operationId": "",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "reference_number",
+                        "in": "formData",
+                        "description": "varchar(50)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "total",
+                        "in": "formData",
+                        "description": "bigint(20)",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "cnr_cash",
+                        "in": "formData",
+                        "description": "bigint(50)",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "phone_number",
+                        "in": "formData",
+                        "description": "varchar(50)",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "verification_code",
+                        "in": "formData",
+                        "description": "varchar(10)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity"
+                    }
+                }
+            }
+        },
         "/api/user_balance": {
             "get": {
                 "tags": [
