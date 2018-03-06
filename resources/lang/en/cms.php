@@ -13,6 +13,7 @@ return [
     'close' => 'Close',
     'create' => 'Create',
     'custom_links' => 'Custom Links',
+    'data_not_found' => 'Data not found', 
     'date' => 'Date',
     'default' => 'Default',
     'delete' => 'Delete',
