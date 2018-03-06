@@ -9,9 +9,14 @@ use App\Http\Controllers\Controller;
 class UsersController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @SWG\Get(
+     *      path="/api/users",
+     *      summary="",
+     *      description="",
+     *      produces={"application/json"},
+     *      tags={"users"},
+     *      @SWG\Response(response=200, description="OK"),
+     * )
      */
     public function index()
     {
