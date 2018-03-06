@@ -93,7 +93,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - Run command, php artisan migrate:refresh --seed
 
 ## Demo, Email, Password
-[http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin
+- [http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin 
+- [api/documentation](http://laravel5skeleton-redzjovi.c9users.io/public/api/documentation)
 
 ## Roadmap
 1. Web Master
