@@ -61,7 +61,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [dbushell/Nestable](https://github.com/dbushell/Nestable)
 - [defunkt/jquery-pjax](https://github.com/defunkt/jquery-pjax)
 - [fancyapps/fancybox](https://github.com/fancyapps/fancybox)
-- [farbelous/fontawesome-iconpicker](https://github.com/farbelous/fontawesome-iconpicker)
 - [FineUploader/fine-uploader](https://github.com/FineUploader/fine-uploader)
 - [RubaXa/Sortable](https://github.com/RubaXa/Sortable)
 - [select2/select2](https://github.com/select2/select2)
@@ -93,7 +92,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - Run command, php artisan migrate:refresh --seed
 
 ## Demo, Email, Password
-- [http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin 
+- [http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin
 - [api/documentation](http://laravel5skeleton-redzjovi.c9users.io/public/api/documentation)
 
 ## Roadmap

@@ -37,10 +37,7 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="menu_modal_icon">@lang('cms.icon')</label>
-                            <div class="input-group">
-                                <span class="input-group-addon"></span>
-                                <input class="form-control icp icp-auto" id="menu_modal_icon" type="text" />
-                            </div>
+                            <input class="form-control" id="menu_modal_icon" type="text" />
                         </div>
                         <div class="form-group menu_modal_url_row">
                             <label for="menu_modal_url">@lang('validation.attributes.url')</label>
@@ -81,8 +78,7 @@
         menu_edit = $(this);
 
         $('#menu_modal_label').html(dd_item.attr('data-title'));
-        $.iconpicker.batch('#menu_modal_icon', 'destroy');
-        $('#menu_modal_icon').val(dd_item.attr('data-icon')).iconpicker();
+        $('#menu_modal_icon').val(dd_item.attr('data-icon'));
         dd_item.attr('data-type') == 'custom_link' ? $('.menu_modal_url_row').show() : $('.menu_modal_url_row').hide();
         $('#menu_modal_url').val(dd_item.attr('data-url'));
         $('#menu_modal_permission').val(dd_item.attr('data-permission')).trigger('change');
