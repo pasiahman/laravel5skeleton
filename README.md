@@ -69,7 +69,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # Included Packages
 - [abhimanyu003/conversion](https://github.com/abhimanyu003/conversion)
-- [atayahmet/laravel-nestable](https://github.com/atayahmet/laravel-nestable)
 - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
 - [DarkaOnLine/L5-Swagger](https://github.com/DarkaOnLine/L5-Swagger)
 - [dimsav/laravel-translatable](https://github.com/dimsav/laravel-translatable)

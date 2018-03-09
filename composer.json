@@ -7,7 +7,6 @@
     "require": {
         "php": ">=5.6.4",
         "abhimanyusharma003/conversion": "dev-master",
-        "atayahmet/laravel-nestable": "^0.8.7",
         "cviebrock/eloquent-sluggable": "4.4.1",
         "darkaonline/l5-swagger": "5.5.x-dev",
         "dimsav/laravel-translatable": "8.1",

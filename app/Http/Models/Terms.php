@@ -8,7 +8,6 @@ use redzjovi\php\ArrayHelper;
 class Terms extends Model
 {
     use \Dimsav\Translatable\Translatable;
-    use \Nestable\NestableTrait;
 
     /**
      * The attributes that are mass assignable.
