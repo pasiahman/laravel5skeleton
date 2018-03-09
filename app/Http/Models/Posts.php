@@ -210,7 +210,7 @@ class Posts extends Model
 
         // post_translations
         isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';
-        isset($params['title']) ? $query->whereTranslationLike('title', '%'.$params['title'].'%') : '';
+        isset($params['title']) ? $query->whereTranslation('title', $params['title']) : '';
         isset($params['title_like']) ? $query->whereTranslationLike('title', '%'.$params['title_like'].'%') : '';
         isset($params['name']) ? $query->whereTranslation('name', $params['name']) : '';
         isset($params['name_like']) ? $query->whereTranslationLike('name', '%'.$params['name_like'].'%') : '';
