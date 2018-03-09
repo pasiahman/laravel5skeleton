@@ -18,6 +18,6 @@ class CustomLinks extends Posts
         parent::boot();
 
         static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'custom_link'); });
-        static::addGlobalScope('status_deleted', function (Builder $builder) { if (! Auth::user()->can('backend custom links trash')) { $builder->where('status', '<>', 'trash'); } });
+        static::addGlobalScope('status_deleted', function (Builder $builder) { Auth::check() && Auth::user()->can('backend custom links trash') ?: $builder->where('status', '<>', 'trash'); });
     }
 }
