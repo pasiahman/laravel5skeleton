@@ -1,9 +1,9 @@
 <div class="box-body">
     <template class="hidden" id="menu_row_template">
         @component('backend/menus/_nestable_template', [
-            'data_icon' => '$data_icon',
+            'data_icon' => '',
             'data_id' => '$data_id',
-            'data_permission' => '$data_permission',
+            'data_permission' => '',
             'data_title' => '$data_title',
             'data_type' => '$data_type',
             'data_url' => '$data_url',

@@ -11,14 +11,10 @@ class Menus extends Terms
 {
     protected $attributes = [
         'taxonomy' => 'menu',
-
-        // custom attribute
-        'post',
-        'icon',
-        'title',
-        'url',
-        'permission',
     ];
+
+    // custom attribute
+    protected $post, $icon, $title, $type, $url, $permission;
 
     protected static function boot()
     {
@@ -46,12 +42,12 @@ class Menus extends Terms
             $this->attributes = $item;
             $this->getPost();
 
-            $data['data_icon'] = $this->icon;
+            $data['data_icon'] = $this->getIcon();
             $data['data_id'] = $this->id;
-            $data['data_title'] = $this->title;
-            $data['data_type'] = $this->type;
-            $data['data_url'] = $this->url;
-            $data['data_permission'] = $this->permission;
+            $data['data_title'] = $this->getTitle();
+            $data['data_type'] = $this->getType();
+            $data['data_url'] = $this->getUrl();
+            $data['data_permission'] = $this->getPermission();
 
             $data['item'] = $item;
             $data['menu'] = $this;
@@ -73,6 +69,16 @@ class Menus extends Terms
         return $tree;
     }
 
+    public function getIcon()
+    {
+        return $this->attributes['icon'];
+    }
+
+    public function getPermission()
+    {
+        return $this->attributes['permission'];
+    }
+
     public function getPermissionIdOptions()
     {
         $options = (new \App\Http\Models\Permission)->getPermissionIdOptions();
@@ -81,37 +87,38 @@ class Menus extends Terms
 
     public function getPost()
     {
-        switch ($this->type) {
+        switch ($this->getType()) {
             case 'category' :
                 $category = \App\Http\Models\Categories::findOrFail($this->id);
-                $this->post = $category;
-                $this->title = $category->name;
-                $this->url = url('categories/'.$category->slug);
+                $this->setPost($category);
+                $this->setTitle($category->name);
+                $this->setUrl(url('categories/'.$category->slug));
                 break;
             case 'custom_link' :
                 $customLink = \App\Http\Models\CustomLinks::findOrFail($this->id);
-                $this->post = $customLink;
-                $this->title = $customLink->title;
-                $this->url = $this->url;
+                $this->setPost($customLink);
+                $this->setTitle($customLink->title);
+                $this->setUrl($this->getUrl());
                 break;
             case 'post' :
                 $post = Posts::findOrFail($this->id);
-                $this->post = $post;
-                $this->title = $post->title;
-                $this->url = url('categories/'.$post->name);
+                $this->setPost($post);
+                $this->setTitle($post->title);
+                $this->setUrl(url('categories/'.$post->name));
                 break;
             case 'tag' :
                 $tag = Tags::findOrFail($this->id);
-                $this->post = $tag;
-                $this->title = $tag->name;
-                $this->url = url('tags/'.$tag->name);
+                $this->setPost($tag);
+                $this->setTitle($tag->name);
+                $this->setUrl(url('tags/'.$tag->name));
                 break;
             default :
-                $this->title = '';
-                $this->url = '';
+                $this->setPost('');
+                $this->setTitle('');
+                $this->setUrl('');
         }
 
-        return $this->post;
+        return $this->attributes['post'];
     }
 
     public function getPostIdOptions()
@@ -124,5 +131,35 @@ class Menus extends Terms
     {
         $options = (new Tags)->getTagIdOptions();
         return $options;
+    }
+
+    public function getTitle()
+    {
+        return $this->attributes['title'];
+    }
+
+    public function getType()
+    {
+        return $this->attributes['type'];
+    }
+
+    public function getUrl()
+    {
+        return $this->attributes['url'];
+    }
+
+    public function setPost($value)
+    {
+        $this->attributes['post'] = $value;
+    }
+
+    public function setTitle($value)
+    {
+        $this->attributes['title'] = $value;
+    }
+
+    public function setUrl($value)
+    {
+        $this->attributes['url'] = $value;
     }
 }
