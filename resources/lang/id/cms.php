@@ -36,6 +36,7 @@ return [
     'medium_categories' => 'Kategori Media',
     'menus' => 'Menu',
     'no_data' => 'Tidak ada data',
+    'of' => 'Dari',
     'options' => 'Pilihan',
     'overwrite_permissions' => 'Menimpa izin',
     'page' => 'Halaman',

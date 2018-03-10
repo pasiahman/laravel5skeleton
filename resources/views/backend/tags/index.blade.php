@@ -107,7 +107,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="7">{{ $terms->appends(request()->query())->links('vendor.pagination.default') }}</td>
+                            <td align="center" colspan="7">{{ $terms->appends(request()->query())->links('vendor.pagination.default-2') }}</td>
                         </tr>
                     </tfoot>
                 </table>
