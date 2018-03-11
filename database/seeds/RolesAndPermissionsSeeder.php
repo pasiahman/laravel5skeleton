@@ -34,6 +34,9 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend menus']);
         Permission::create(['name' => 'backend options']);
         Permission::create(['name' => 'backend permissions']);
+        Permission::create(['name' => 'backend pages']);
+        Permission::create(['name' => 'backend pages delete']);
+        Permission::create(['name' => 'backend pages trash']);
         Permission::create(['name' => 'backend posts']);
         Permission::create(['name' => 'backend posts delete']);
         Permission::create(['name' => 'backend posts trash']);
@@ -60,6 +63,9 @@ class RolesAndPermissionsSeeder extends Seeder
             'backend menus',
             'backend options',
             'backend permissions',
+            'backend pages',
+            'backend pages delete',
+            'backend pages trash',
             'backend posts',
             'backend posts delete',
             'backend posts trash',
@@ -78,6 +84,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'backend media',
             'backend media role',
             'backend medium categories',
+            'backend pages',
             'backend posts',
             'backend roles',
             'backend tags',

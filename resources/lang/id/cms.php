@@ -43,6 +43,8 @@ return [
     'per_page' => 'Per halaman',
     'permission' => 'Izin',
     'permissions' => 'Izin',
+    'page' => 'Halaman',
+    'pages' => 'Halaman',
     'post' => 'Posting',
     'posts' => 'Posting',
     'publish' => 'Terbit',

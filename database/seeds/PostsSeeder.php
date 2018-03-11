@@ -43,6 +43,10 @@ class PostsSeeder extends Seeder
                 'postmetas' => ['template' => 'default'],
             ],
             [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Pages'], 'id' => ['title' => 'Halaman']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
                 'post' => ['author_id' => 1, 'en' => ['title' => 'Medium Categories'], 'id' => ['title' => 'Kategori Media']],
                 'postmetas' => ['template' => 'default'],
             ],

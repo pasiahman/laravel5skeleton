@@ -43,6 +43,8 @@ return [
     'per_page' => 'Per page',
     'permission' => 'Permission',
     'permissions' => 'Permissions',
+    'page' => 'Page',
+    'pages' => 'Pages',
     'post' => 'Post',
     'posts' => 'Posts',
     'publish' => 'Publish',
