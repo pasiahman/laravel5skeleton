@@ -72,10 +72,12 @@ Route::group(['middleware' => ['auth']], function () {
 });
 // Route::get('/backend', 'Backend\HomeController@index');
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::get('locale/{locale?}', ['as' => 'locale.setlocale', 'uses' => 'Frontend\LocaleController@setLocale']);
 Route::get('/login/{social}', 'Auth\LoginController@socialLogin')->where('social', 'facebook|github|google');
 Route::get('/login/{social}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'facebook|github|google');
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/posts/{name}', ['as' => 'frontend.posts.index', 'uses' => 'Frontend\PostsController@index']);
+Route::get('/users/{email}', ['as' => 'frontend.users.index', 'uses' => 'Frontend\UsersController@index']);
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Route::get('/', ['as' => 'frontend', 'uses' => 'Frontend\HomeController@index']);

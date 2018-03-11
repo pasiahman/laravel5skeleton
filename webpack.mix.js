@@ -62,7 +62,7 @@ mix.styles([
     'resources/bower/font-awesome/css/font-awesome.min.css',
     'resources/bower/select2/dist/css/select2.min.css',
     'resources/bower/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
-], 'public/css/app.css')
+], 'public/css/frontend-app.css')
 .copy('resources/bower/codemirror', 'public/bower/tinymce/plugins/codemirror/codemirror')
 // .copy('resources/bower/fine-uploader', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/edit.gif', 'public/bower/fine-uploader')
@@ -85,4 +85,4 @@ mix.combine([
     'resources/vendor/laracasts/flash/custom.js',
     'resources/vendor/select2/select2-custom.js',
     'resources/assets/js/core.js',
-], 'public/js/app.js');
+], 'public/js/frontend-app.js');
