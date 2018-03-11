@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Models\CustomLinks;
 use App\Http\Models\Postmetas;
-use App\Http\Models\Posts;
 use Illuminate\Database\Seeder;
 
-class PostsSeeder extends Seeder
+class CustomLinksSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -76,18 +76,9 @@ class PostsSeeder extends Seeder
             ],
         ];
 
-        $faker = \Faker\Factory::create();
-        $limit = 50;
-
-        for ($i = 0; $i < $limit; $i++) {
-            $post = Posts::create([
-                'author_id' => 1,
-                'en' => ['title' => $faker->sentence, 'excerpt' => $faker->text, 'content' => $faker->text(1000)],
-                'id' => ['title' => $faker->sentence, 'excerpt' => $faker->text, 'content' => $faker->text(1000)],
-            ]);
-            (new Postmetas)->sync([
-                'template' => 'default',
-            ], $post->id);
+        foreach ($contents as $content) {
+            $post = CustomLinks::create($content['post']);
+            (new Postmetas)->sync($content['postmetas'], $post->id);
         }
     }
 }

@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             RolesAndPermissionsSeeder::class,
             PostsSeeder::class,
+            CustomLinksSeeder::class,
             MenusSeeder::class,
         ]);
     }
