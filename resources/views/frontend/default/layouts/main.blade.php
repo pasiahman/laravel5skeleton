@@ -63,16 +63,18 @@
 
                 <!-- Blog Search Well -->
                 <div class="well">
-                    <h4>Blog Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                            </button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
+                    <h4>@lang('cms.search')</h4>
+                    <form action="{{ route('frontend.posts.index') }}">
+                        <div class="input-group">
+                            <input class="form-control" name="name_like" type="text" value="{{ request()->query('name_like') }}" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="submit">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </span>
+                        </div>
+                        <!-- /.input-group -->
+                    </form>
                 </div>
 
                 <!-- Blog Categories Well -->

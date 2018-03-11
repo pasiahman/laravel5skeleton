@@ -59,6 +59,7 @@ return [
     'role_permissions' => 'Izin peran',
     'roles' => 'Peran',
     'save' => 'Simpan',
+    'search' => 'Cari',
     'sort' => 'Urut',
     'tag' => 'Tag',
     'tags' => 'Tag',

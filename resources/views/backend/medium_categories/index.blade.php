@@ -119,7 +119,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="8">{{ $categories->appends(request()->query())->links('vendor.pagination.default-2') }}</td>
+                            <td align="center" colspan="8">{{ $categories->appends(request()->query())->links('vendor/pagination/default-2') }}</td>
                         </tr>
                     </tfoot>
                 </table>

@@ -12,7 +12,7 @@
     <!-- Blog Post -->
     @foreach ($posts as $post)
         <h2>
-            <a href="{{ route('frontend.posts.index', ['name' => $post->name]) }}">{{ $post->title }}</a>
+            <a href="{{ route('frontend.posts.show', ['name' => $post->name]) }}">{{ $post->title }}</a>
         </h2>
         <p class="lead">
             {{ strtolower(__('cms.by')) }} <a href="{{ route('frontend.users.index', ['email' => $post->author->email]) }}">{{ $post->author->name }}</a>
@@ -27,10 +27,12 @@
         $medium = \App\Http\Models\Media::find($imageId);
         @endphp
 
-        <img alt="{{ $medium ? $medium->name : '' }}" class="img-responsive" src="{{ $medium ? Storage::url($medium->getPostmetaAttachedFileThumbnail()) : 'http://placehold.it/900x300' }}" />
+        <div align="center">
+            <img alt="{{ $medium ? $medium->name : '' }}" class="img-responsive" src="{{ $medium ? Storage::url($medium->getPostmetaAttachedFileThumbnail()) : 'http://placehold.it/900x300' }}" />
+        </div>
         <hr />
         <p>{{ $post->excerpt }}</p>
-        <a class="btn btn-primary" href="{{ route('frontend.posts.index', ['name' => $post->name]) }}">@lang('cms.read_more') <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
+        <a class="btn btn-primary" href="{{ route('frontend.posts.show', ['name' => $post->name]) }}">@lang('cms.read_more') <i aria-hidden="true" class="fa fa-chevron-right"></i></a>
         <hr />
     @endforeach
 

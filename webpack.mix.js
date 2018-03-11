@@ -59,6 +59,7 @@ mix.styles([
     'resources/bower/bootstrap/dist/css/bootstrap.min.css',
     'resources/bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
     'resources/bower/bootstrap-social/bootstrap-social.css',
+    'resources/bower/fancybox/dist/jquery.fancybox.min.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
     'resources/bower/select2/dist/css/select2.min.css',
     'resources/bower/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
@@ -78,6 +79,7 @@ mix.combine([
     'resources/bower/bootstrap/dist/js/bootstrap.min.js',
 
     'resources/bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    'resources/bower/fancybox/dist/jquery.fancybox.min.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
     'resources/bower/select2/dist/js/select2.min.js',
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',

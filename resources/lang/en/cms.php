@@ -59,6 +59,7 @@ return [
     'role_permissions' => 'Role permissions',
     'roles' => 'Roles',
     'save' => 'Save',
+    'search' => 'Search',
     'sort' => 'Sort',
     'tag' => 'Tag',
     'tags' => 'Tags',
