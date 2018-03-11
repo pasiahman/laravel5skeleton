@@ -31,6 +31,9 @@ class Menus extends Terms
             case 'backend-master' :
                 $html = $this->generateAsHtmlBackendMaster($nestable);
                 break;
+            case 'frontend-default-top' :
+                $html = $this->generateAsHtmlFrontendDefaultTop($nestable);
+                break;
             default :
                 $html = $this->generateAsHtmlBackendMenuForm($nestable);
         }
@@ -79,6 +82,29 @@ class Menus extends Terms
             $data['item'] = $item;
             $data['menu'] = $this;
             $html .= \Illuminate\Support\Facades\View::make('backend/menus/_nestable_template', $data)->render();
+        }
+
+        return $html;
+    }
+
+    public function generateAsHtmlFrontendDefaultTop($nestable)
+    {
+        $html = '';
+
+        foreach ($nestable as $item) {
+            $this->attributes = $item;
+            $this->getPost();
+
+            $data['data_icon'] = $this->getIcon();
+            $data['data_id'] = $this->id;
+            $data['data_title'] = $this->getTitle();
+            $data['data_type'] = $this->getType();
+            $data['data_url'] = $this->getUrl();
+            $data['data_permission'] = $this->getPermission();
+
+            $data['item'] = $item;
+            $data['menu'] = $this;
+            $html .= \Illuminate\Support\Facades\View::make('frontend/default/menus/_templates/_frontend_top', $data)->render();
         }
 
         return $html;

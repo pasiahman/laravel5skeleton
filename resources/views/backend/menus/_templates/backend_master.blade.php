@@ -1,4 +1,7 @@
-@if (auth()->check() && auth()->user()->hasPermissionTo($item['permission']))
+@if (
+    empty($item['permission']) ||
+    (auth()->check() && auth()->user()->hasPermissionTo($item['permission']))
+)
     <li
         @if (isset($item['children']) && is_array($item['children']))
             class="treeview"
@@ -12,7 +15,7 @@
                 </span>
             @endif
         </a>
-        @if (isset($item['children']) && is_array($item['children']))
+        @if (isset($item['children']) && is_array($item['children']) && count($item['children']) > 0)
             <ul class="treeview-menu">{!! $menu->generateAsHtmlBackendMaster($item['children']) !!}</ul>
         @endif
     </li>

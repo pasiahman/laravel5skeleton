@@ -15,23 +15,7 @@ class CustomLinksSeeder extends Seeder
     {
         $contents = [
             [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Main'], 'id' => ['title' => 'Main']],
-                'postmetas' => ['template' => 'default'],
-            ],
-            [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Dashboard'], 'id' => ['title' => 'Dashboard']],
-                'postmetas' => ['template' => 'default'],
-            ],
-            [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Posts'], 'id' => ['title' => 'Posting']],
-                'postmetas' => ['template' => 'default'],
-            ],
-            [
                 'post' => ['author_id' => 1, 'en' => ['title' => 'Categories'], 'id' => ['title' => 'Kategori']],
-                'postmetas' => ['template' => 'default'],
-            ],
-            [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Tags'], 'id' => ['title' => 'Tag']],
                 'postmetas' => ['template' => 'default'],
             ],
             [
@@ -39,15 +23,19 @@ class CustomLinksSeeder extends Seeder
                 'postmetas' => ['template' => 'default'],
             ],
             [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Media'], 'id' => ['title' => 'Media']],
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Dashboard'], 'id' => ['title' => 'Dashboard']],
                 'postmetas' => ['template' => 'default'],
             ],
             [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Pages'], 'id' => ['title' => 'Halaman']],
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Login'], 'id' => ['title' => 'Masuk']],
                 'postmetas' => ['template' => 'default'],
             ],
             [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Medium Categories'], 'id' => ['title' => 'Kategori Media']],
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Logout'], 'id' => ['title' => 'Keluar']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Main'], 'id' => ['title' => 'Main']],
                 'postmetas' => ['template' => 'default'],
             ],
             [
@@ -55,15 +43,11 @@ class CustomLinksSeeder extends Seeder
                 'postmetas' => ['template' => 'default'],
             ],
             [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Permissions'], 'id' => ['title' => 'Izin']],
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Media'], 'id' => ['title' => 'Media']],
                 'postmetas' => ['template' => 'default'],
             ],
             [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Roles'], 'id' => ['title' => 'Peran']],
-                'postmetas' => ['template' => 'default'],
-            ],
-            [
-                'post' => ['author_id' => 1, 'en' => ['title' => 'Users'], 'id' => ['title' => 'Pengguna']],
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Medium Categories'], 'id' => ['title' => 'Kategori Media']],
                 'postmetas' => ['template' => 'default'],
             ],
             [
@@ -72,6 +56,34 @@ class CustomLinksSeeder extends Seeder
             ],
             [
                 'post' => ['author_id' => 1, 'en' => ['title' => 'Options'], 'id' => ['title' => 'Pilihan']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Pages'], 'id' => ['title' => 'Halaman']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Permissions'], 'id' => ['title' => 'Izin']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Posts'], 'id' => ['title' => 'Posting']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Register'], 'id' => ['title' => 'Daftar']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Roles'], 'id' => ['title' => 'Peran']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Tags'], 'id' => ['title' => 'Tag']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Users'], 'id' => ['title' => 'Pengguna']],
                 'postmetas' => ['template' => 'default'],
             ],
         ];

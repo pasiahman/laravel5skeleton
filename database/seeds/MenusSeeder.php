@@ -168,7 +168,11 @@ class MenusSeeder extends Seeder
                 ],
             ],
             [
-                'term' => ['en' => ['name' => 'Frontend Menu'], 'id' => ['name' => 'Frontend Menu']],
+                'term' => ['en' => ['name' => 'Frontend Default Top Right'], 'id' => ['name' => 'Frontend Default Top Right']],
+                'termmetas' => [],
+            ],
+            [
+                'term' => ['en' => ['name' => 'Frontend Default Top Left'], 'id' => ['name' => 'Frontend Default Top Left']],
                 'termmetas' => [],
             ],
         ];

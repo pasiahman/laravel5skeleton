@@ -41,6 +41,43 @@
                     <li>
                         <a href="#">Contact</a>
                     </li>
+                    @php
+                    $term = \App\Http\Models\Menus::search(['slug' => 'frontend-default-top-left'])->firstOrFail();
+                    $nestable = $term->getTermmetaNestable();
+                    @endphp
+                    {!! $term->generateAsHtml($nestable, 'frontend-default-top') !!}
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    @php
+                    $term = \App\Http\Models\Menus::search(['slug' => 'frontend-default-top-right'])->firstOrFail();
+                    $nestable = $term->getTermmetaNestable();
+                    @endphp
+                    {!! $term->generateAsHtml($nestable, 'frontend-default-top') !!}
+
+                    @if (Auth::guest())
+                        <li><a href="{{ route('login') }}">@lang('cms.login')</a></li>
+                        <li><a href="{{ route('register') }}">@lang('cms.register')</a></li>
+                    @else
+                        <li class="dropdown">
+                            <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
+                                {{ Auth::user()->name }} <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="{{ route('logout') }}"
+                                        onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                        @lang('cms.logout')
+                                    </a>
+
+                                    <form action="{{ route('logout') }}" id="logout-form" method="POST" style="display: none;">
+                                        {{ csrf_field() }}
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    @endif
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
