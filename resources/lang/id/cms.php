@@ -58,6 +58,7 @@ return [
     'publish' => 'Terbit',
     'read_more' => 'Baca Lebih Banyak',
     'register' => 'Daftar',
+    'remember_me' => 'Ingatkan Saya',
     'role_permissions' => 'Izin peran',
     'roles' => 'Peran',
     'save' => 'Simpan',

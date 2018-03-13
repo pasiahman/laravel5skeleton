@@ -58,6 +58,7 @@ return [
     'publish' => 'Publish',
     'read_more' => 'Read More',
     'register' => 'Register',
+    'remember_me' => 'Remember Me',
     'role_permissions' => 'Role permissions',
     'roles' => 'Roles',
     'save' => 'Save',
