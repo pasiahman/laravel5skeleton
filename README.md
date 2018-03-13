@@ -74,6 +74,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [dimsav/laravel-translatable](https://github.com/dimsav/laravel-translatable)
 - [Intervention/image](https://github.com/Intervention/image)
 - [laracasts/flash](https://github.com/laracasts/flash)
+- [laravel/passport](https://github.com/laravel/passport)
 - [renatomarinho/laravel-page-speed](https://github.com/renatomarinho/laravel-page-speed)
 - [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
 - [spatie/laravel-pjax](https://github.com/spatie/laravel-pjax)
@@ -89,6 +90,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - Run command, composer update
 - Rename .env.example to .env, and update all setting
 - Run command, php artisan migrate:refresh --seed
+- Run command, php artisan passport:install
 
 ## Demo, Email, Password
 - [http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin

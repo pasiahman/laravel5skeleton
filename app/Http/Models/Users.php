@@ -2,10 +2,12 @@
 
 namespace App\Http\Models;
 
+use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
 class Users extends \App\User
 {
+    use HasApiTokens;
     use HasRoles;
 
     /**
