@@ -6,10 +6,36 @@ use App\Http\Controllers\Controller;
 use App\Http\Models\Users;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthenticationController extends Controller
 {
+    /**
+     * @SWG\Post(
+     *      path="/api/authentication/login",
+     *      summary="",
+     *      description="",
+     *      produces={"application/json"},
+     *      tags={"authentication"},
+     *      @SWG\Parameter(name="email", type="string", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Parameter(name="password", type="integer", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Response(response=200, description="OK"),
+     *      @SWG\Response(response=401, description="Unauthorized"),
+     *      @SWG\Response(response=422, description="Unprocessable Entity"),
+     * )
+     */
+    public function login(\App\Http\Requests\API\Authentication\LoginRequest $request)
+    {
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $user = Auth::user();
+            $data['access_token'] = $user->createToken('MyApp')->accessToken;
+            return response()->json($data, Response::HTTP_OK);
+        } else {
+            return response()->json(['message' => trans('auth.failed')], Response::HTTP_UNAUTHORIZED);
+        }
+    }
+
     /**
      * @SWG\Post(
      *      path="/api/authentication/register",

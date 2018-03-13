@@ -17,6 +17,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::post('authentication/login', ['as' => 'api.authentication.login', 'uses' => 'API\AuthenticationController@login']);
 Route::post('authentication/register', ['as' => 'api.authentication.register', 'uses' => 'API\AuthenticationController@register']);
 Route::post('authentication/register-email-phone-number', ['as' => 'api.authentication.register-email-phone-number', 'uses' => 'API\AuthenticationController@registerEmailPhoneNumber']);
 Route::get('users', ['as' => 'api.users.index', 'uses' => 'API\UsersController@index']);
