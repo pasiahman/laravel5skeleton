@@ -4,9 +4,7 @@
 {{-- @section('content_header')@endsection --}}
 {{-- @section('breadcrumb')@endsection --}}
 
-@push('styles')
-    <link href="{{ asset('frontend/default/home/index.css') }}" rel="stylesheet" />
-@endpush
+{{-- @push('styles')@endpush --}}
 
 @section('content')
     <!-- Blog Post -->
