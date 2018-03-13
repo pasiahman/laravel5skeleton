@@ -130,6 +130,7 @@ return [
         'name' => 'Name',
         'parent' => 'Parent',
         'password' => 'Password',
+        'phone_number' => 'Phone Number',
         'slug' => 'Slug',
         'status' => 'Status',
         'taxonomy' => 'Taxonomy',

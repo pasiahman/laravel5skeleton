@@ -130,6 +130,7 @@ return [
         'name' => 'Nama',
         'parent' => 'Induk',
         'password' => 'Kata Sandi',
+        'phone_number' => 'Nomor Telepon',
         'slug' => 'Slug',
         'status' => 'Keadaan',
         'taxonomy' => 'Taksonomi',
