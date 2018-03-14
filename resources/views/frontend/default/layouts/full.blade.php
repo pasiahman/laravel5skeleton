@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
 <head>
@@ -52,7 +53,7 @@
 
                     @if (Auth::guest())
                         <li><a href="{{ route('frontend.authentication.login') }}">@lang('cms.login')</a></li>
-                        {{-- <li><a href="{{ route('register') }}">@lang('cms.register')</a></li> --}}
+                        <li><a href="{{ route('frontend.authentication.register') }}">@lang('cms.register')</a></li>
                     @else
                         <li class="dropdown">
                             <a aria-expanded="false" aria-haspopup="true" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">

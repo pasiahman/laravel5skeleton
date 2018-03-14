@@ -78,6 +78,8 @@ Route::get('/login/{social}/callback', 'Auth\LoginController@handleProviderCallb
 Route::get('/authentication/login', ['as' => 'frontend.authentication.login', 'uses' => 'Frontend\AuthenticationController@login']);
 Route::post('/authentication/login', ['as' => 'frontend.authentication.loginStore', 'uses' => 'Frontend\AuthenticationController@loginStore']);
 Route::post('/authentication/logout', ['as' => 'frontend.authentication.logoutStore', 'uses' => 'Frontend\AuthenticationController@logoutStore']);
+Route::get('/authentication/register', ['as' => 'frontend.authentication.register', 'uses' => 'Frontend\AuthenticationController@register']);
+Route::post('/authentication/register', ['as' => 'frontend.authentication.registerStore', 'uses' => 'Frontend\AuthenticationController@registerStore']);
 Route::resource('/posts', 'Frontend\PostsController', ['as' => 'frontend']);
 Route::get('/posts/{name}', ['as' => 'frontend.posts.show', 'uses' => 'Frontend\PostsController@show']);
 Route::get('/users/{email}', ['as' => 'frontend.users.index', 'uses' => 'Frontend\UsersController@index']);

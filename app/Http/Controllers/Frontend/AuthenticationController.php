@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Models\Users;;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 class AuthenticationController extends Controller
@@ -41,5 +43,20 @@ class AuthenticationController extends Controller
         $request->session()->invalidate();
 
         return redirect('/');
+    }
+
+    public function register()
+    {
+        return view('frontend/default/authentication/register');
+    }
+
+    public function registerStore(\App\Http\Requests\Frontend\Authentication\RegisterStoreRequest $request)
+    {
+        $user = new Users();
+        $user->fill($request->input());
+        $user->password = Hash::make($user->password);
+        $user->save();
+        Auth::login($user);
+        return redirect()->route('frontend');
     }
 }
