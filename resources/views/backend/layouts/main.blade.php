@@ -69,11 +69,11 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-right">
-                                    <a class="btn btn-default btn-flat" href="{{ route('frontend.authentication.logout-store') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a class="btn btn-default btn-flat" href="{{ route('frontend.authentication.logoutStore') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         @lang('cms.logout')
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('frontend.authentication.logout-store') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('frontend.authentication.logoutStore') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </div>

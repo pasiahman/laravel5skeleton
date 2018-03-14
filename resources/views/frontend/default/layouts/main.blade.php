@@ -51,7 +51,7 @@
                     {!! $term->generateAsHtml($nestable, 'frontend-default-top') !!}
 
                     @if (Auth::guest())
-                        <li><a href="{{ route('frontend.authentication.login-show') }}">@lang('cms.login')</a></li>
+                        <li><a href="{{ route('frontend.authentication.login') }}">@lang('cms.login')</a></li>
                         {{-- <li><a href="{{ route('register') }}">@lang('cms.register')</a></li> --}}
                     @else
                         <li class="dropdown">
@@ -60,13 +60,13 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="{{ route('frontend.authentication.logout-store') }}"
+                                    <a href="{{ route('frontend.authentication.logoutStore') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">
                                         @lang('cms.logout')
                                     </a>
 
-                                    <form action="{{ route('frontend.authentication.logout-store') }}" id="logout-form" method="POST" style="display: none;">
+                                    <form action="{{ route('frontend.authentication.logoutStore') }}" id="logout-form" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </li>
