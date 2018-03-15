@@ -85,6 +85,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - Run command, npm run production (to run laravel mix)
 - Rename .env.example to .env, and update all setting
 - Run command, php artisan migrate:refresh --seed
+- If you want queue, update QUEUE_DRIVER=database in .env and run command, php artisan queue:work
 
 ## Installation for Production
 - Run command, composer update
