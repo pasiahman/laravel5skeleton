@@ -64,7 +64,9 @@ class Handler extends ExceptionHandler
      */
     protected function getJsonResponse($request, Exception $exception)
     {
-        if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
+        if ($exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException) {
+            return response()->json(['message' => Response::HTTP_NOT_FOUND], Response::HTTP_NOT_FOUND);
+        } else if ($exception instanceof \Illuminate\Database\Eloquent\ModelNotFoundException) {
             return response()->json(['message' => __('cms.data_not_found')], Response::HTTP_NOT_FOUND);
         } else {
             return parent::render($request, $exception);
