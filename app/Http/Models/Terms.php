@@ -75,7 +75,7 @@ class Terms extends Model
 
     public function getTermmetaTemplate()
     {
-        $template = isset($this->termmetas->where('key', 'template')->value) ? $this->termmetas->where('key', 'template')->value : '';
+        $template = isset($this->termmetas->where('key', 'template')->first()->value) ? $this->termmetas->where('key', 'template')->first()->value : '';
         return $template;
     }
 

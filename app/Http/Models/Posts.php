@@ -125,7 +125,7 @@ class Posts extends Model
 
     public function getPostmetaTemplate()
     {
-        $template = isset($this->postmetas->where('key', 'template')->value) ? $this->postmetas->where('key', 'template')->value : '';
+        $template = isset($this->postmetas->where('key', 'template')->first()->value) ? $this->postmetas->where('key', 'template')->first()->value : '';
         return $template;
     }
 
