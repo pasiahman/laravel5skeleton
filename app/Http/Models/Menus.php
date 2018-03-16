@@ -153,6 +153,12 @@ class Menus extends Terms
                 $this->setTitle($customLink->title);
                 $this->setUrl($this->getUrl());
                 break;
+            case 'page' :
+                $post = \App\Http\Models\Pages::findOrFail($this->id);
+                $this->setPost($post);
+                $this->setTitle($post->title);
+                $this->setUrl(url('pages/'.$post->name));
+                break;
             case 'post' :
                 $post = Posts::findOrFail($this->id);
                 $this->setPost($post);
