@@ -41,6 +41,53 @@ class AuthenticationController extends ApiController
 
     /**
      * @SWG\Post(
+     *      path="/api/authentication/password/forgot",
+     *      summary="",
+     *      description="",
+     *      produces={"application/json"},
+     *      tags={"authentication"},
+     *      @SWG\Parameter(name="email", type="string", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Response(response=200, description="OK"),
+     *      @SWG\Response(response=422, description="Unprocessable Entity"),
+     * )
+     */
+    public function passwordForgot(\App\Http\Requests\API\Authentication\PasswordForgotStoreRequest $request)
+    {
+        $user = Users::where('email', $request->input('email'))->firstOrFail();
+        $user->verification_code = rand(111111, 999999);
+        $user->save();
+
+        $user->notify(new \App\Notifications\Authentication\PasswordResetLink($user));
+
+        return response()->json();
+    }
+
+    /**
+     * @SWG\Post(
+     *      path="/api/authentication/password/reset",
+     *      summary="",
+     *      description="",
+     *      produces={"application/json"},
+     *      tags={"authentication"},
+     *      @SWG\Parameter(name="email", type="string", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Parameter(name="password", type="string", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Parameter(name="password_confirmation", type="string", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Parameter(name="verification_code", type="string", in="formData", required=true, description="varchar(6)"),
+     *      @SWG\Response(response=200, description="OK"),
+     *      @SWG\Response(response=422, description="Unprocessable Entity"),
+     * )
+     */
+    public function passwordReset(\App\Http\Requests\API\Authentication\PasswordResetStoreRequest $request)
+    {
+        $user = Users::where('email', $request->input('email'))->where('verification_code', $request->input('verification_code'))->firstOrFail();
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+
+        return response()->json();
+    }
+
+    /**
+     * @SWG\Post(
      *      path="/api/authentication/register",
      *      summary="",
      *      description="",

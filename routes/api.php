@@ -18,6 +18,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::post('authentication/login', ['as' => 'api.authentication.login', 'uses' => 'API\AuthenticationController@login']);
+Route::post('authentication/password/forgot', ['as' => 'api.authentication.passwordForgot', 'uses' => 'API\AuthenticationController@passwordForgot']);
+Route::post('authentication/password/reset', ['as' => 'api.authentication.passwordReset', 'uses' => 'API\AuthenticationController@passwordReset']);
 Route::post('authentication/register', ['as' => 'api.authentication.register', 'uses' => 'API\AuthenticationController@register']);
 Route::post('authentication/verified', ['as' => 'api.authentication.verified', 'uses' => 'API\AuthenticationController@verified']);
 Route::post('authentication/verify', ['as' => 'api.authentication.verify', 'uses' => 'API\AuthenticationController@verify']);
