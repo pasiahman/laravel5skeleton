@@ -45,6 +45,40 @@ class AuthenticationController extends Controller
         return redirect('/');
     }
 
+    public function passwordForgot()
+    {
+        return view('frontend/default/authentication/password/forgot');
+    }
+
+    public function passwordForgotStore(\App\Http\Requests\API\Authentication\PasswordForgotStoreRequest $request)
+    {
+        $user = Users::where('email', $request->input('email'))->firstOrFail();
+        $user->verification_code = rand(111111, 999999);
+        $user->save();
+
+        $user->notify(new \App\Notifications\Authentication\PasswordResetLink($user));
+
+        flash(__('passwords.sent'))->success()->important();
+        return view('frontend/default/authentication/password/forgot');
+    }
+
+    public function passwordReset(Request $request)
+    {
+        $data['user'] = Users::where('email', $request->query('email'))->where('verification_code', $request->query('verification_code'))->firstOrFail();
+        return view('frontend/default/authentication/password/reset', $data);
+    }
+
+    public function passwordResetStore(\App\Http\Requests\API\Authentication\PasswordResetStoreRequest $request)
+    {
+        $user = Users::where('email', $request->input('email'))->where('verification_code', $request->input('verification_code'))->firstOrFail();
+        $user->password = Hash::make($request->input('password'));
+        $user->save();
+
+        flash(__('passwords.reset'))->success()->important();
+
+        return redirect()->route('frontend.authentication.login');
+    }
+
     public function register()
     {
         return view('frontend/default/authentication/register');

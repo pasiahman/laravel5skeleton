@@ -134,6 +134,7 @@ return [
         'name' => 'Nama',
         'parent' => 'Induk',
         'password' => 'Kata Sandi',
+        'password_confirmation' => 'Konfirmasi Kata Sandi',
         'phone_number' => 'Nomor Telepon',
         'slug' => 'Slug',
         'status' => 'Keadaan',

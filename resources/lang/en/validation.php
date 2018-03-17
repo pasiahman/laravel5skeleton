@@ -134,6 +134,7 @@ return [
         'name' => 'Name',
         'parent' => 'Parent',
         'password' => 'Password',
+        'password_confirmation' => 'Confirm Password',
         'phone_number' => 'Phone Number',
         'slug' => 'Slug',
         'status' => 'Status',
