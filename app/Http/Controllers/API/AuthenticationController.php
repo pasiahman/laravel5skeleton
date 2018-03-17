@@ -19,7 +19,7 @@ class AuthenticationController extends Controller
      *      produces={"application/json"},
      *      tags={"authentication"},
      *      @SWG\Parameter(name="email", type="string", in="formData", required=true, description="varchar(191)"),
-     *      @SWG\Parameter(name="password", type="integer", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Parameter(name="password", type="string", in="formData", required=true, description="varchar(191)"),
      *      @SWG\Response(response=200, description="OK"),
      *      @SWG\Response(response=401, description="Unauthorized"),
      *      @SWG\Response(response=422, description="Unprocessable Entity"),
@@ -29,7 +29,10 @@ class AuthenticationController extends Controller
     {
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
-            $data['access_token'] = $user->createToken('MyApp')->accessToken;
+            $user->access_token = Hash::make(time());
+            $user->save();
+
+            $data['access_token'] = $user->access_token;
             return response()->json($data, Response::HTTP_OK);
         } else {
             return response()->json(['message' => trans('auth.failed')], Response::HTTP_UNAUTHORIZED);
@@ -45,7 +48,7 @@ class AuthenticationController extends Controller
      *      tags={"authentication"},
      *      @SWG\Parameter(name="name", type="string", in="formData", required=true, description="varchar(191)"),
      *      @SWG\Parameter(name="email", type="string", in="formData", required=true, description="varchar(191)"),
-     *      @SWG\Parameter(name="password", type="integer", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Parameter(name="password", type="string", in="formData", required=true, description="varchar(191)"),
      *      @SWG\Response(response=200, description="OK"),
      *      @SWG\Response(response=422, description="Unprocessable Entity"),
      * )
@@ -55,34 +58,58 @@ class AuthenticationController extends Controller
         $user = new Users;
         $user->fill($request->input());
         $user->password = Hash::make($user->password);
+        $user->verification_code = rand(111111, 999999);
         $user->save();
 
-        $data['access_token'] = $user->createToken('MyApp')->accessToken;
+        $user->notify(new \App\Notifications\Users\VerificationCodeVerify($user));
+
+        $data['verification_code'] = $user->verification_code;
         return response()->json($data, Response::HTTP_OK);
     }
 
     /**
      * @SWG\Post(
-     *      path="/api/authentication/register-email-phone-number",
+     *      path="/api/authentication/verified",
      *      summary="",
      *      description="",
      *      produces={"application/json"},
      *      tags={"authentication"},
      *      @SWG\Parameter(name="email", type="string", in="formData", required=true, description="varchar(191)"),
-     *      @SWG\Parameter(name="phone_number", type="string", in="formData", required=true, description="varchar(20)"),
-     *      @SWG\Parameter(name="password", type="integer", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Parameter(name="password", type="string", in="formData", required=true, description="varchar(6)"),
      *      @SWG\Response(response=200, description="OK"),
      *      @SWG\Response(response=422, description="Unprocessable Entity"),
      * )
      */
-    public function registerEmailPhoneNumber(\App\Http\Requests\API\Authentication\RegisterEmailPhoneNumberRequest $request)
+    public function verified(\App\Http\Requests\API\Authentication\LoginRequest $request)
     {
-        $user = new Users;
-        $user->fill($request->input());
-        $user->password = Hash::make($user->password);
+        if (Auth::attempt($request->only('email', 'password'))) {
+            $data['verified'] = Auth::user()->verified;
+            return response()->json($data, Response::HTTP_OK);
+        } else {
+            return response()->json(['message' => trans('auth.failed')], Response::HTTP_UNAUTHORIZED);
+        }
+    }
+
+    /**
+     * @SWG\Post(
+     *      path="/api/authentication/verify",
+     *      summary="",
+     *      description="",
+     *      produces={"application/json"},
+     *      tags={"authentication"},
+     *      @SWG\Parameter(name="email", type="string", in="formData", required=true, description="varchar(191)"),
+     *      @SWG\Parameter(name="verification_code", type="string", in="formData", required=true, description="varchar(6)"),
+     *      @SWG\Response(response=200, description="OK"),
+     *      @SWG\Response(response=422, description="Unprocessable Entity"),
+     * )
+     */
+    public function verify(\App\Http\Requests\API\Authentication\VerifyRequest $request)
+    {
+        $user = Users::where('email', $request->input('email'))->firstOrFail();
+        $user->verified = 1;
         $user->save();
 
-        $data['access_token'] = $user->createToken('MyApp')->accessToken;
+        $data['verified'] = $user->verified;
         return response()->json($data, Response::HTTP_OK);
     }
 }
