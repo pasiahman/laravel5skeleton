@@ -90,7 +90,9 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
+                @include('flash::message')
                 @yield('content')
+                @yield('content_modal')
             </div>
 
             <!-- Blog Sidebar Widgets Column -->

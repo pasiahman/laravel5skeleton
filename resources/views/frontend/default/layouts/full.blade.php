@@ -91,7 +91,9 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-12">
+                @include('flash::message')
                 @yield('content')
+                @yield('content_modal')
             </div>
 
         </div>
