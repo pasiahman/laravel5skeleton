@@ -80,5 +80,9 @@ Route::get('authentication/register', ['as' => 'frontend.authentication.register
 Route::post('authentication/register', ['as' => 'frontend.authentication.registerStore', 'uses' => 'Frontend\AuthenticationController@registerStore']);
 Route::resource('posts', 'Frontend\PostsController', ['as' => 'frontend']);
 Route::get('posts/{name}', ['as' => 'frontend.posts.show', 'uses' => 'Frontend\PostsController@show']);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('users/profile', ['as' => 'frontend.users.profile', 'uses' => 'Frontend\UsersController@profile']);
+    Route::put('users/profile', ['as' => 'frontend.users.profileUpdate', 'uses' => 'Frontend\UsersController@profileUpdate']);
+});
 Route::get('users/{email}', ['as' => 'frontend.users.index', 'uses' => 'Frontend\UsersController@index']);
 Route::get('', ['as' => 'frontend', 'uses' => 'Frontend\HomeController@index']);

@@ -60,6 +60,9 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
+                                    <a href="{{ route('frontend.users.profile') }}">@lang('cms.profile')</a>
+                                </li>
+                                <li>
                                     <a href="{{ route('frontend.authentication.logoutStore') }}"
                                         onclick="event.preventDefault();
                                                  document.getElementById('logout-form').submit();">

@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsersController extends Controller
 {
@@ -81,5 +82,20 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function profile()
+    {
+        $data['user'] = Auth::user();
+        return view('frontend/default/users/profile', $data);
+    }
+
+    public function profileUpdate(\App\Http\Requests\API\Users\ProfileUpdateRequest $request)
+    {
+        $request->input('password') ? $request->merge(['password' => Hash::make($request->input('password'))]) : $request->request->remove('password');
+        $user = Auth::user();
+        $user->fill($request->input())->save();
+        flash(__('cms.data_has_been_updated'))->success()->important();
+        return redirect()->back();
     }
 }

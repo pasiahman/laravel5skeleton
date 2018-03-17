@@ -55,6 +55,7 @@ return [
     'posted_on' => 'Diposting pada',
     'posts' => 'Posting',
     'prev' => 'Sebelumnya',
+    'profile' => 'Profil',
     'publish' => 'Terbit',
     'read_more' => 'Baca Lebih Banyak',
     'register' => 'Daftar',

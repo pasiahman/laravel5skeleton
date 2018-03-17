@@ -55,6 +55,7 @@ return [
     'posted_on' => 'Posted on',
     'posts' => 'Posts',
     'prev' => 'Previous',
+    'profile' => 'Profile',
     'publish' => 'Publish',
     'read_more' => 'Read More',
     'register' => 'Register',
