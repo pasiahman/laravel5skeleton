@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\API\Controller;
+use App\Http\Controllers\ApiController;
 use App\Http\Models\Users;
+use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class UsersController extends Controller
+class UsersController extends ApiController
 {
     /**
      * @SWG\Get(
@@ -158,5 +159,31 @@ class UsersController extends Controller
         $user = Auth::user();
         $user->fill($request->input())->save();
         return response()->json($user);
+    }
+
+    /**
+     * @SWG\Get(
+     *      path="/api/users/verification-code/refresh",
+     *      summary="",
+     *      description="",
+     *      produces={"application/json"},
+     *      tags={"users"},
+     *      security={
+     *          { "Access-Token": {} }
+     *      },
+     *      @SWG\Response(response=200, description="OK"),
+     *      @SWG\Response(response=401, description="Unauthorized"),
+     * )
+     */
+    public function verificationCodeRefresh()
+    {
+        $user = Auth::user();
+        $user->verification_code = rand(111111, 999999);
+        $user->save();
+
+        $user->notify(new \App\Notifications\Users\VerificationCodeRefresh($user));
+
+        $data['verification_code'] = $user->verification_code;
+        return response()->json($data, Response::HTTP_OK);
     }
 }

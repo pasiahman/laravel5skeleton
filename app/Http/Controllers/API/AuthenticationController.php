@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Http\API\Controller;
+use App\Http\Controllers\ApiController;
 use App\Http\Models\Users;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
-class AuthenticationController extends Controller
+class AuthenticationController extends ApiController
 {
     /**
      * @SWG\Post(

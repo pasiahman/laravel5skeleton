@@ -25,3 +25,6 @@ Route::group(['middleware' => ['authApi', 'userVerified']], function () {
     Route::get('users/profile', ['as' => 'api.users.profileShow', 'uses' => 'API\UsersController@profileShow']);
     Route::put('users/profile', ['as' => 'api.users.profileUpdate', 'uses' => 'API\UsersController@profileUpdate']);
 });
+Route::group(['middleware' => ['authApi']], function () {
+    Route::get('users/verification-code/refresh', ['as' => 'api.users.verificationCodeRefresh', 'uses' => 'API\UsersController@verificationCodeRefresh']);
+});

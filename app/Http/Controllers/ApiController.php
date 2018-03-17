@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
 
 /**
  * @SWG\Swagger(
@@ -21,7 +23,7 @@ namespace App\Http\Controllers\Api;
  * This class should be parent class for other API controllers
  * Class Controller
  */
-class Controller extends Controller
+class ApiController extends Controller
 {
 
 }
