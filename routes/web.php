@@ -11,8 +11,6 @@
 |
 */
 
-Auth::routes();
-
 Route::group(['middleware' => ['auth']], function () {
     Route::get('backend', ['as' => 'backend', 'uses' => 'Backend\UsersController@index']);
 
@@ -70,20 +68,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('backend/users/{id}/delete', ['as' => 'backend.users.delete', 'uses' => 'Backend\UsersController@delete']);
     });
 });
-// Route::get('/backend', 'Backend\HomeController@index');
 
+// Auth::routes();
 Route::get('locale/{locale?}', ['as' => 'locale.setlocale', 'uses' => 'Frontend\LocaleController@setLocale']);
-Route::get('/login/{social}', 'Auth\LoginController@socialLogin')->where('social', 'facebook|github|google');
-Route::get('/login/{social}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'facebook|github|google');
-Route::get('/authentication/login', ['as' => 'frontend.authentication.login', 'uses' => 'Frontend\AuthenticationController@login']);
-Route::post('/authentication/login', ['as' => 'frontend.authentication.loginStore', 'uses' => 'Frontend\AuthenticationController@loginStore']);
-Route::post('/authentication/logout', ['as' => 'frontend.authentication.logoutStore', 'uses' => 'Frontend\AuthenticationController@logoutStore']);
-Route::get('/authentication/register', ['as' => 'frontend.authentication.register', 'uses' => 'Frontend\AuthenticationController@register']);
-Route::post('/authentication/register', ['as' => 'frontend.authentication.registerStore', 'uses' => 'Frontend\AuthenticationController@registerStore']);
-Route::resource('/posts', 'Frontend\PostsController', ['as' => 'frontend']);
-Route::get('/posts/{name}', ['as' => 'frontend.posts.show', 'uses' => 'Frontend\PostsController@show']);
-Route::get('/users/{email}', ['as' => 'frontend.users.index', 'uses' => 'Frontend\UsersController@index']);
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-Route::get('/', ['as' => 'frontend', 'uses' => 'Frontend\HomeController@index']);
+Route::get('login/{social}', 'Auth\LoginController@socialLogin')->where('social', 'facebook|github|google');
+Route::get('login/{social}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'facebook|github|google');
+Route::get('authentication/login', ['as' => 'frontend.authentication.login', 'uses' => 'Frontend\AuthenticationController@login']);
+Route::post('authentication/login', ['as' => 'frontend.authentication.loginStore', 'uses' => 'Frontend\AuthenticationController@loginStore']);
+Route::post('authentication/logout', ['as' => 'frontend.authentication.logoutStore', 'uses' => 'Frontend\AuthenticationController@logoutStore']);
+Route::get('authentication/register', ['as' => 'frontend.authentication.register', 'uses' => 'Frontend\AuthenticationController@register']);
+Route::post('authentication/register', ['as' => 'frontend.authentication.registerStore', 'uses' => 'Frontend\AuthenticationController@registerStore']);
+Route::resource('posts', 'Frontend\PostsController', ['as' => 'frontend']);
+Route::get('posts/{name}', ['as' => 'frontend.posts.show', 'uses' => 'Frontend\PostsController@show']);
+Route::get('users/{email}', ['as' => 'frontend.users.index', 'uses' => 'Frontend\UsersController@index']);
+Route::get('', ['as' => 'frontend', 'uses' => 'Frontend\HomeController@index']);
