@@ -10,6 +10,14 @@ namespace App\Http\Controllers\Api;
  *     version="1.0.0",
  *   )
  * )
+ *
+ * @SWG\SecurityScheme(
+ *   in="header",
+ *   name="Access-Token",
+ *   securityDefinition="Access-Token",
+ *   type="apiKey"
+ * )
+ *
  * This class should be parent class for other API controllers
  * Class Controller
  */
