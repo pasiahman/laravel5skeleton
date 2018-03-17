@@ -55,8 +55,25 @@ class AuthenticationController extends Controller
         $user = new Users();
         $user->fill($request->input());
         $user->password = Hash::make($user->password);
+        $user->verified = 0;
+        $user->verification_code = rand(111111, 999999);
         $user->save();
         Auth::login($user);
+        return redirect()->route('frontend');
+    }
+
+    public function verify(Request $request)
+    {
+        $data['user'] = Users::where('email', $request->query('email'))->firstOrFail();
+        return view('frontend/default/authentication/verify', $data);
+    }
+
+    public function verifyStore(\App\Http\Requests\API\Authentication\VerifyRequest $request)
+    {
+        $user = Users::where('email', $request->input('email'))->firstOrFail();
+        $user->verified = 1;
+        $user->save();
+        flash(__('cms.verification_success'))->success()->important();
         return redirect()->route('frontend');
     }
 }

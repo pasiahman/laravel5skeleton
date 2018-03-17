@@ -78,11 +78,15 @@ Route::post('authentication/login', ['as' => 'frontend.authentication.loginStore
 Route::post('authentication/logout', ['as' => 'frontend.authentication.logoutStore', 'uses' => 'Frontend\AuthenticationController@logoutStore']);
 Route::get('authentication/register', ['as' => 'frontend.authentication.register', 'uses' => 'Frontend\AuthenticationController@register']);
 Route::post('authentication/register', ['as' => 'frontend.authentication.registerStore', 'uses' => 'Frontend\AuthenticationController@registerStore']);
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('authentication/verify', ['as' => 'frontend.authentication.verify', 'uses' => 'Frontend\AuthenticationController@verify']);
+    Route::post('authentication/verify', ['as' => 'frontend.authentication.verifyStore', 'uses' => 'Frontend\AuthenticationController@verifyStore']);
+});
 Route::resource('posts', 'Frontend\PostsController', ['as' => 'frontend']);
 Route::get('posts/{name}', ['as' => 'frontend.posts.show', 'uses' => 'Frontend\PostsController@show']);
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('users/profile', ['as' => 'frontend.users.profile', 'uses' => 'Frontend\UsersController@profile']);
-    Route::put('users/profile', ['as' => 'frontend.users.profileUpdate', 'uses' => 'Frontend\UsersController@profileUpdate']);
+Route::group(['middleware' => ['auth', 'userVerified']], function () {
+    Route::get('/users/profile', ['as' => 'frontend.users.profile', 'uses' => 'Frontend\UsersController@profile']);
+    Route::put('/users/profile', ['as' => 'frontend.users.profileUpdate', 'uses' => 'Frontend\UsersController@profileUpdate']);
 });
 Route::get('users/{email}', ['as' => 'frontend.users.index', 'uses' => 'Frontend\UsersController@index']);
 Route::get('', ['as' => 'frontend', 'uses' => 'Frontend\HomeController@index']);

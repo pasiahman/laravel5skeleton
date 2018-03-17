@@ -72,4 +72,6 @@ return [
     'trash' => 'Sampah',
     'update' => 'Perbarui',
     'users' => 'Pengguna',
+    'verification_success' => 'Verifikasi Sukses',
+    'verify' => 'Periksa',
 ];

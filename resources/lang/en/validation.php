@@ -103,6 +103,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'users' => [
+            'user_is_not_yet_verified' => 'User is not yet verified.',
+            'verification_code_is_invalid' => ':attribute is invalid.',
+        ],
     ],
 
     /*
@@ -139,6 +143,7 @@ return [
         'updated_at' => 'Updated At',
         'url' => 'Url',
         'value' => 'Value',
+        'verification_code' => 'Verification Code',
     ],
 
 ];

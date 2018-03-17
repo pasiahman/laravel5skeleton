@@ -103,6 +103,10 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'users' => [
+            'user_is_not_yet_verified' => 'Pengguna belum terverifikasi.',
+            'verification_code_is_invalid' => ':attribute tidak valid.',
+        ],
     ],
 
     /*
@@ -139,6 +143,7 @@ return [
         'updated_at' => 'Diperbarui Pada',
         'url' => 'Url',
         'value' => 'Nilai',
+        'verification_code' => 'Kode Verifikasi',
     ],
 
 ];

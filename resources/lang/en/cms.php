@@ -72,4 +72,6 @@ return [
     'trash' => 'Trash',
     'update' => 'Update',
     'users' => 'Users',
+    'verification_success' => 'Verification Success',
+    'verify' => 'Verify',
 ];
