@@ -67,7 +67,7 @@
                                     <option {{ request()->query('count_operator') == '>' ? 'selected' : '' }} value=">">></option>
                                     <option {{ request()->query('count_operator') == '<' ? 'selected' : '' }} value="<"><</option>
                                 </select>
-                                <input class="form-control input-sm" name="count" type="number" value="{{ request()->query('count') }}" />
+                                <input class="form-control input-sm text-right" name="count" type="number" value="{{ request()->query('count') }}" />
                             </th>
                             <th>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
