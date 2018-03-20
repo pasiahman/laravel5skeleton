@@ -33,7 +33,7 @@ class AuthenticationController extends ApiController
             $user->save();
 
             $data['access_token'] = $user->access_token;
-            return response()->json($data, Response::HTTP_OK);
+            return response()->json($data);
         } else {
             return response()->json(['message' => trans('auth.failed')], Response::HTTP_UNAUTHORIZED);
         }
@@ -111,7 +111,7 @@ class AuthenticationController extends ApiController
         $user->notify(new \App\Notifications\Users\VerificationCodeVerify($user));
 
         $data['verification_code'] = $user->verification_code;
-        return response()->json($data, Response::HTTP_OK);
+        return response()->json($data);
     }
 
     /**
@@ -131,7 +131,7 @@ class AuthenticationController extends ApiController
     {
         if (Auth::attempt($request->only('email', 'password'))) {
             $data['verified'] = Auth::user()->verified;
-            return response()->json($data, Response::HTTP_OK);
+            return response()->json($data);
         } else {
             return response()->json(['message' => trans('auth.failed')], Response::HTTP_UNAUTHORIZED);
         }
@@ -157,6 +157,6 @@ class AuthenticationController extends ApiController
         $user->save();
 
         $data['verified'] = $user->verified;
-        return response()->json($data, Response::HTTP_OK);
+        return response()->json($data);
     }
 }

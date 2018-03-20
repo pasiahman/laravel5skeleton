@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\ApiController;
 use App\Http\Models\Users;
-use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -184,6 +183,6 @@ class UsersController extends ApiController
         $user->notify(new \App\Notifications\Users\VerificationCodeRefresh($user));
 
         $data['verification_code'] = $user->verification_code;
-        return response()->json($data, Response::HTTP_OK);
+        return response()->json($data);
     }
 }
