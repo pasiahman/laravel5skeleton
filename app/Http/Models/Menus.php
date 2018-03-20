@@ -142,15 +142,15 @@ class Menus extends Terms
     {
         switch ($this->getType()) {
             case 'category' :
-                $category = \App\Http\Models\Categories::findOrFail($this->id);
-                $this->setPost($category);
-                $this->setTitle($category->name);
-                $this->setUrl(url('categories/'.$category->slug));
+                $term = \App\Http\Models\Categories::findOrFail($this->id);
+                $this->setPost($term);
+                $this->setTitle($term->name);
+                $this->setUrl(url('categories/'.$term->slug));
                 break;
             case 'custom_link' :
-                $customLink = \App\Http\Models\CustomLinks::findOrFail($this->id);
-                $this->setPost($customLink);
-                $this->setTitle($customLink->title);
+                $post = \App\Http\Models\CustomLinks::findOrFail($this->id);
+                $this->setPost($post);
+                $this->setTitle($post->title);
                 $this->setUrl($this->getUrl());
                 break;
             case 'page' :
@@ -166,10 +166,10 @@ class Menus extends Terms
                 $this->setUrl(url('posts/'.$post->name));
                 break;
             case 'tag' :
-                $tag = Tags::findOrFail($this->id);
-                $this->setPost($tag);
-                $this->setTitle($tag->name);
-                $this->setUrl(url('tags/'.$tag->name));
+                $term = Tags::findOrFail($this->id);
+                $this->setPost($term);
+                $this->setTitle($term->name);
+                $this->setUrl(url('tags/'.$term->name));
                 break;
             default :
                 $this->setPost('');
