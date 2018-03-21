@@ -32,8 +32,8 @@
                                         <select class="input-sm" name="sort">
                                             <option {{ request()->query('sort') == 'title_like,ASC' ? 'selected' : '' }} value="title_like,ASC">@lang('validation.attributes.title') (A-Z)</option>
                                             <option {{ request()->query('sort') == 'title_like,DESC' ? 'selected' : '' }} value="title_like,DESC">@lang('validation.attributes.title') (Z-A)</option>
-                                            <option {{ request()->query('sort') == 'author.name,ASC' ? 'selected' : '' }} value="author.name,ASC">@lang('validation.attributes.author') (A-Z)</option>
-                                            <option {{ request()->query('sort') == 'author.name,DESC' ? 'selected' : '' }} value="author.name,DESC">@lang('validation.attributes.author') (Z-A)</option>
+                                            <option {{ request()->query('sort') == 'author_name,ASC' ? 'selected' : '' }} value="author_name,ASC">@lang('validation.attributes.author') (A-Z)</option>
+                                            <option {{ request()->query('sort') == 'author_name,DESC' ? 'selected' : '' }} value="author_name,DESC">@lang('validation.attributes.author') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'status,ASC' ? 'selected' : '' }} value="status,ASC">@lang('validation.attributes.status') (↓)</option>
                                             <option {{ request()->query('sort') == 'status,DESC' ? 'selected' : '' }} value="status,DESC">@lang('validation.attributes.status') (↑)</option>
                                             <option {{ request()->query('sort') == 'updated_at,ASC' ? 'selected' : '' }} value="updated_at,ASC">@lang('validation.attributes.updated_at') (↓)</option>

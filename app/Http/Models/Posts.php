@@ -59,7 +59,7 @@ class Posts extends Model
 
     public function getAuthorIdOptions()
     {
-        $options = self::search(['sort' => 'author.name,ASC'])->select(['author_id', 'author.name AS author_name'])->get()->pluck('author_name', 'author_id')->toArray();
+        $options = self::search(['sort' => 'author_name,ASC'])->get()->pluck('author_name', 'author_id')->toArray();
         return $options;
     }
 
@@ -227,12 +227,23 @@ class Posts extends Model
                 ->groupBy(self::getTable().'.id')
                 ->orderBy('translation.'.$sort[0], $sort[1])
                 ->select(self::getTable().'.*');
-            } else if (in_array($sort[0], ['author.name'])) {
+            } else if (in_array($sort[0], ['author_name'])) {
                 $query->join((new Users)->getTable().' AS author', function ($join) {
                     $join->on('author.id', '=', self::getTable().'.author_id');
                 })
                 ->orderBy($sort[0], $sort[1])
-                ->select([self::getTable().'.*', 'author.name AS author_name']);
+                ->select([
+                    self::getTable().'.*',
+                    'author.name AS author_name',
+                ]);
+            } else if (str_contains($sort[0], 'postmetas.')) {
+                $key = explode('.', $sort[0]);
+                $key = $key[1];
+                $query->join((new Postmetas)->getTable().' AS postmetas', function ($join) use ($key) {
+                    $join->on('postmetas.post_id', '=', self::getTable().'.'.self::getKeyName());
+                    $join->where('postmetas.key', '=', $key);
+                })
+                ->orderBy('postmetas.value', $sort[1]);
             } else {
                 count($sort) == 2 ? $query->orderBy($sort[0], $sort[1]) : '';
             }

@@ -132,7 +132,7 @@ class Terms extends Model
                 ->groupBy(self::getTable().'.id')
                 ->orderBy('translation.'.$sort[0], $sort[1])
                 ->select(self::getTable().'.*');
-            } else if ($sort[0] == 'parent_name') {
+            } else if (in_array($sort[0], ['parent_name'])) {
                 $query->leftJoin(self::getTable().' AS parent', function ($join) {
                     $join->on('parent.id', '=', self::getTable().'.parent_id');
                 })
@@ -142,7 +142,10 @@ class Terms extends Model
                 })
                 ->groupBy(self::getTable().'.id')
                 ->orderBy($sort[0], $sort[1])
-                ->select([$this->getTable().'.*', 'parent_translation.name AS parent_name']);
+                ->select([
+                    $this->getTable().'.*',
+                    'parent_translation.name AS parent_name',
+                ]);
             }
         }
 
