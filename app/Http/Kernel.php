@@ -71,6 +71,6 @@ class Kernel extends HttpKernel
         'authApi' => \App\Http\Middleware\AuthApi::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
-        'userVerified' => \App\Http\Middleware\UserVerified::class,
+        'userVerified' => \Modules\Users\Http\Middleware\UserVerified::class,
     ];
 }

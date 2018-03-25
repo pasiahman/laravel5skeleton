@@ -17,12 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('authentication/login', ['as' => 'api.authentication.login', 'uses' => 'API\AuthenticationController@login']);
-Route::post('authentication/password/forgot', ['as' => 'api.authentication.passwordForgot', 'uses' => 'API\AuthenticationController@passwordForgot']);
-Route::post('authentication/password/reset', ['as' => 'api.authentication.passwordReset', 'uses' => 'API\AuthenticationController@passwordReset']);
-Route::post('authentication/register', ['as' => 'api.authentication.register', 'uses' => 'API\AuthenticationController@register']);
-Route::post('authentication/verified', ['as' => 'api.authentication.verified', 'uses' => 'API\AuthenticationController@verified']);
-Route::post('authentication/verify', ['as' => 'api.authentication.verify', 'uses' => 'API\AuthenticationController@verify']);
+Route::post('authentication/login', ['as' => 'api.authentication.login', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@login']);
+Route::post('authentication/password/forgot', ['as' => 'api.authentication.passwordForgot', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@passwordForgot']);
+Route::post('authentication/password/reset', ['as' => 'api.authentication.passwordReset', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@passwordReset']);
+Route::post('authentication/register', ['as' => 'api.authentication.register', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@register']);
+Route::post('authentication/verified', ['as' => 'api.authentication.verified', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@verified']);
+Route::post('authentication/verify', ['as' => 'api.authentication.verify', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@verify']);
 Route::group(['middleware' => ['authApi', 'userVerified']], function () {
     Route::get('users/profile', ['as' => 'api.users.profileShow', 'uses' => 'API\UsersController@profileShow']);
     Route::put('users/profile', ['as' => 'api.users.profileUpdate', 'uses' => 'API\UsersController@profileUpdate']);
