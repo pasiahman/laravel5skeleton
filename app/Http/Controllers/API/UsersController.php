@@ -180,7 +180,7 @@ class UsersController extends ApiController
         $user->verification_code = rand(111111, 999999);
         $user->save();
 
-        $user->notify(new \App\Notifications\Users\VerificationCodeRefresh($user));
+        $user->notify(new \Modules\Users\Notifications\VerificationCodeRefresh($user));
 
         $data['verification_code'] = $user->verification_code;
         return response()->json($data);

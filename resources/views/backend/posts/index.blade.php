@@ -150,7 +150,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="8">{{ $posts->appends(request()->query())->links('vendor/pagination/default-2') }}</td>
+                            <td align="center" colspan="8">{{ $posts->appends(request()->query())->links('cms::vendor/pagination/default-2') }}</td>
                         </tr>
                     </tfoot>
                 </table>

@@ -35,5 +35,5 @@
     @endforeach
 
     <!-- Pager -->
-    {{ $posts->appends(request()->query())->links('vendor/pagination/default-blog') }}
+    {{ $posts->appends(request()->query())->links('cms::vendor/pagination/default-blog') }}
 @endsection

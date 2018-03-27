@@ -30,8 +30,8 @@
                                         </select>
                                         @lang('cms.sort')
                                         <select class="input-sm" name="sort">
-                                            <option {{ request()->query('sort') == 'title_like,ASC' ? 'selected' : '' }} value="title_like,ASC">@lang('validation.attributes.title') (A-Z)</option>
-                                            <option {{ request()->query('sort') == 'title_like,DESC' ? 'selected' : '' }} value="title_like,DESC">@lang('validation.attributes.title') (Z-A)</option>
+                                            <option {{ request()->query('sort') == 'title,ASC' ? 'selected' : '' }} value="title,ASC">@lang('validation.attributes.title') (A-Z)</option>
+                                            <option {{ request()->query('sort') == 'title,DESC' ? 'selected' : '' }} value="title,DESC">@lang('validation.attributes.title') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'author_name,ASC' ? 'selected' : '' }} value="author_name,ASC">@lang('validation.attributes.author') (A-Z)</option>
                                             <option {{ request()->query('sort') == 'author_name,DESC' ? 'selected' : '' }} value="author_name,DESC">@lang('validation.attributes.author') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'status,ASC' ? 'selected' : '' }} value="status,ASC">@lang('validation.attributes.status') (↓)</option>
@@ -126,7 +126,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="8">{{ $posts->appends(request()->query())->links('vendor/pagination/default-2') }}</td>
+                            <td align="center" colspan="8">{{ $posts->appends(request()->query())->links('cms::vendor/pagination/default-2') }}</td>
                         </tr>
                     </tfoot>
                 </table>
