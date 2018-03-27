@@ -2,10 +2,10 @@
 
 use App\Http\Models\CustomLinks;
 use App\Http\Models\Menus;
-use App\Http\Models\Permission;
 use App\Http\Models\Termmetas;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
+use Modules\Permissions\Models\Permission;
 
 class MenusSeeder extends Seeder
 {
