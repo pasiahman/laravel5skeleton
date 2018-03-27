@@ -5,11 +5,11 @@ namespace App\Http\Models;
 use App\Http\Models\Categories;
 use App\Http\Models\Postmetas;
 use App\Http\Models\Tags;
-use App\Http\Models\Users;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Modules\Users\Models\Users;
 
 class Posts extends Model
 {
@@ -54,7 +54,7 @@ class Posts extends Model
 
     public function author()
     {
-        return $this->hasOne('App\Http\Models\Users', 'id', 'author_id');
+        return $this->hasOne('\Modules\Users\Models\Users', 'id', 'author_id');
     }
 
     public function getAuthorIdOptions()

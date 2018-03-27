@@ -47,7 +47,7 @@
         "laravel-refresh-seed": [
             "php artisan migrate:refresh",
             "php artisan module:migrate-refresh Permissions",
-            "php artisan module:migrate-refresh UsersAddresses",
+            "php artisan module:migrate-refresh UserAddresses",
             "php artisan module:migrate-refresh Users",
             "php artisan db:seed"
         ],

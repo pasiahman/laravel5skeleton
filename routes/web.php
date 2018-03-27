@@ -12,12 +12,12 @@
 */
 
 Route::group(['middleware' => ['auth']], function () {
-    Route::get('backend', ['as' => 'backend', 'uses' => 'Backend\UsersController@index']);
-
+    Route::get('backend', ['as' => 'backend', 'uses' => '\Modules\Users\Http\Controllers\Backend\UsersController@index']);
     Route::group(['middleware' => ['permission:backend categories']], function () {
         Route::resource('backend/categories', 'Backend\CategoriesController', ['as' => 'backend']);
         Route::get('backend/categories/{id}/delete', ['as' => 'backend.categories.delete', 'uses' => 'Backend\CategoriesController@delete']);
     });
+    Route::get('backend/dashboard', ['as' => 'backend.dashboard', 'uses' => '\Modules\Users\Http\Controllers\Backend\UsersController@index']);
     Route::group(['middleware' => ['permission:backend custom links']], function () {
         Route::resource('backend/custom-links', 'Backend\CustomLinksController', ['as' => 'backend']);
         Route::get('backend/custom-links/{id}/delete', ['as' => 'backend.custom-links.delete', 'uses' => 'Backend\CustomLinksController@delete']);
@@ -55,10 +55,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('backend/tags', 'Backend\TagsController', ['as' => 'backend']);
         Route::get('backend/tags/{id}/delete', ['as' => 'backend.tags.delete', 'uses' => 'Backend\TagsController@delete']);
     });
-    Route::group(['middleware' => ['permission:backend users']], function () {
-        Route::resource('backend/users', 'Backend\UsersController', ['as' => 'backend']);
-        Route::get('backend/users/{id}/delete', ['as' => 'backend.users.delete', 'uses' => 'Backend\UsersController@delete']);
-    });
 });
 
 // Auth::routes();
@@ -67,9 +63,5 @@ Route::get('login/{social}', 'Auth\LoginController@socialLogin')->where('social'
 Route::get('login/{social}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'facebook|github|google');
 Route::resource('posts', 'Frontend\PostsController', ['as' => 'frontend']);
 Route::get('posts/{name}', ['as' => 'frontend.posts.show', 'uses' => 'Frontend\PostsController@show']);
-Route::group(['middleware' => ['auth', 'userVerified']], function () {
-    Route::get('/users/profile', ['as' => 'frontend.users.profile', 'uses' => 'Frontend\UsersController@profile']);
-    Route::put('/users/profile', ['as' => 'frontend.users.profileUpdate', 'uses' => 'Frontend\UsersController@profileUpdate']);
-});
 Route::get('users/{email}', ['as' => 'frontend.users.index', 'uses' => 'Frontend\UsersController@index']);
 Route::get('', ['as' => 'frontend', 'uses' => 'Frontend\HomeController@index']);

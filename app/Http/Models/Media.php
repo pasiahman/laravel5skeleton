@@ -4,13 +4,13 @@ namespace App\Http\Models;
 
 use App\Http\Models\MediumCategories;
 use App\Http\Models\Posts;
-use App\Http\Models\Users;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Facades\Image;
+use Modules\Users\Models\Users;
 
 class Media extends Posts
 {

@@ -2,10 +2,10 @@
 
 namespace App\Http\Middleware;
 
-use App\Http\Models\Users;
 use Closure;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Modules\Users\Models\Users;
 
 class AuthApi
 {
