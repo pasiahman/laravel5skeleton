@@ -70,19 +70,6 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 // Auth::routes();
-Route::get('authentication/login', ['as' => 'frontend.authentication.login', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@login']);
-Route::post('authentication/login', ['as' => 'frontend.authentication.loginStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@loginStore']);
-Route::post('authentication/logout', ['as' => 'frontend.authentication.logoutStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@logoutStore']);
-Route::get('authentication/password/forgot', ['as' => 'frontend.authentication.passwordForgot', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordForgot']);
-Route::post('authentication/password/forgot', ['as' => 'frontend.authentication.passwordForgotStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordForgotStore']);
-Route::get('authentication/password/reset', ['as' => 'frontend.authentication.passwordReset', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordReset']);
-Route::post('authentication/password/reset', ['as' => 'frontend.authentication.passwordResetStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordResetStore']);
-Route::get('authentication/register', ['as' => 'frontend.authentication.register', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@register']);
-Route::post('authentication/register', ['as' => 'frontend.authentication.registerStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@registerStore']);
-Route::group(['middleware' => ['auth']], function () {
-    Route::get('authentication/verify', ['as' => 'frontend.authentication.verify', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@verify']);
-    Route::post('authentication/verify', ['as' => 'frontend.authentication.verifyStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@verifyStore']);
-});
 Route::get('locale/{locale?}', ['as' => 'locale.setlocale', 'uses' => 'Frontend\LocaleController@setLocale']);
 Route::get('login/{social}', 'Auth\LoginController@socialLogin')->where('social', 'facebook|github|google');
 Route::get('login/{social}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'facebook|github|google');
