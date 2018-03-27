@@ -51,10 +51,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('backend/posts/{id}/delete', ['as' => 'backend.posts.delete', 'uses' => 'Backend\PostsController@delete']);
         Route::get('backend/posts/{id}/trash', ['as' => 'backend.posts.trash', 'uses' => 'Backend\PostsController@trash']);
     });
-    Route::group(['middleware' => ['permission:backend roles']], function () {
-        Route::resource('backend/roles', 'Backend\RolesController', ['as' => 'backend']);
-        Route::get('backend/roles/{id}/delete', ['as' => 'backend.roles.delete', 'uses' => 'Backend\RolesController@delete']);
-    });
     Route::group(['middleware' => ['permission:backend tags']], function () {
         Route::resource('backend/tags', 'Backend\TagsController', ['as' => 'backend']);
         Route::get('backend/tags/{id}/delete', ['as' => 'backend.tags.delete', 'uses' => 'Backend\TagsController@delete']);
