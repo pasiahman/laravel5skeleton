@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\Permission;
 use App\Http\Models\Role;
 use App\Http\Requests\Backend\Roles\StoreRequest;
 use App\Http\Requests\Backend\Roles\UpdateRequest;
 use Illuminate\Http\Request;
+use Modules\Permissions\Models\Permission;
 
 class RolesController extends Controller
 {

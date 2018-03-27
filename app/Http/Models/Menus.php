@@ -134,7 +134,7 @@ class Menus extends Terms
 
     public function getPermissionIdOptions()
     {
-        $options = (new \App\Http\Models\Permission)->getPermissionIdOptions();
+        $options = (new \Modules\Permissions\Models\Permission)->getPermissionIdOptions();
         return $options;
     }
 
