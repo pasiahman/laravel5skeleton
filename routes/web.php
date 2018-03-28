@@ -13,10 +13,6 @@
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('backend', ['as' => 'backend', 'uses' => '\Modules\Users\Http\Controllers\Backend\UsersController@index']);
-    Route::group(['middleware' => ['permission:backend categories']], function () {
-        Route::resource('backend/categories', 'Backend\CategoriesController', ['as' => 'backend']);
-        Route::get('backend/categories/{id}/delete', ['as' => 'backend.categories.delete', 'uses' => 'Backend\CategoriesController@delete']);
-    });
     Route::get('backend/dashboard', ['as' => 'backend.dashboard', 'uses' => '\Modules\Users\Http\Controllers\Backend\UsersController@index']);
     Route::group(['middleware' => ['permission:backend custom links']], function () {
         Route::resource('backend/custom-links', 'Backend\CustomLinksController', ['as' => 'backend']);
@@ -28,10 +24,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('backend/media/{id}/delete', ['as' => 'backend.media.delete', 'uses' => 'Backend\MediaController@delete']);
         Route::get('backend/media/{id}/trash', ['as' => 'backend.media.trash', 'uses' => 'Backend\MediaController@trash']);
         Route::post('backend/media/upload', ['as' => 'backend.media.upload', 'uses' => 'Backend\MediaController@upload']);
-    });
-    Route::group(['middleware' => ['permission:backend medium categories']], function () {
-        Route::resource('backend/medium-categories', 'Backend\MediumCategoriesController', ['as' => 'backend']);
-        Route::get('backend/medium-categories/{id}/delete', ['as' => 'backend.medium-categories.delete', 'uses' => 'Backend\MediumCategoriesController@delete']);
     });
     Route::group(['middleware' => ['permission:backend menus']], function () {
         Route::resource('backend/menus', 'Backend\MenusController', ['as' => 'backend']);
@@ -50,10 +42,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('backend/posts', 'Backend\PostsController', ['as' => 'backend']);
         Route::get('backend/posts/{id}/delete', ['as' => 'backend.posts.delete', 'uses' => 'Backend\PostsController@delete']);
         Route::get('backend/posts/{id}/trash', ['as' => 'backend.posts.trash', 'uses' => 'Backend\PostsController@trash']);
-    });
-    Route::group(['middleware' => ['permission:backend tags']], function () {
-        Route::resource('backend/tags', 'Backend\TagsController', ['as' => 'backend']);
-        Route::get('backend/tags/{id}/delete', ['as' => 'backend.tags.delete', 'uses' => 'Backend\TagsController@delete']);
     });
 });
 

@@ -3,9 +3,10 @@
 namespace App\Http\Models;
 
 use App\Http\Models\Posts;
-use App\Http\Models\Tags;
-use App\Http\Models\Terms;
 use Illuminate\Database\Eloquent\Builder;
+use Modules\Categories\Models\Categories;
+use Modules\Tags\Models\Tags;
+use Modules\Terms\Models\Terms;
 use redzjovi\php\UrlHelper;
 
 class Menus extends Terms
@@ -142,7 +143,7 @@ class Menus extends Terms
     {
         switch ($this->getType()) {
             case 'category' :
-                $term = \App\Http\Models\Categories::findOrFail($this->id);
+                $term = \Modules\Categories\Models\Categories::findOrFail($this->id);
                 $this->setPost($term);
                 $this->setTitle($term->name);
                 $this->setUrl(url('categories/'.$term->slug));

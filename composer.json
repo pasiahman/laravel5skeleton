@@ -44,9 +44,12 @@
     },
     "minimum-stability": "stable",
     "scripts": {
-        "laravel-refresh-seed": [
+        "migrate:refresh:seed": [
             "php artisan migrate:refresh",
             "php artisan module:migrate-refresh Permissions",
+            "php artisan module:migrate-refresh Termmetas",
+            "php artisan module:migrate-refresh Terms",
+            "php artisan module:migrate-refresh TermTranslations",
             "php artisan module:migrate-refresh UserAddresses",
             "php artisan module:migrate-refresh Users",
             "php artisan db:seed"
