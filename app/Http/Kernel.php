@@ -70,7 +70,7 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
-        'authApi' => \App\Http\Middleware\AuthApi::class,
+        'authApi' => \Modules\Users\Http\Middleware\AuthApi::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
         'userVerified' => \Modules\Users\Http\Middleware\UserVerified::class,
