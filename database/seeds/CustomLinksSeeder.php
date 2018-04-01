@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Models\CustomLinks;
-use App\Http\Models\Postmetas;
 use Illuminate\Database\Seeder;
+use Modules\Postmetas\Models\Postmetas;
 
 class CustomLinksSeeder extends Seeder
 {

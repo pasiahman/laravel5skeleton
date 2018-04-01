@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Models\CustomLinks;
-use App\Http\Models\Postmetas;
 use Illuminate\Http\Request;
+use Modules\Postmetas\Models\Postmetas;
 
 class CustomLinksController extends \Modules\Posts\Http\Controllers\Backend\PostsController
 {

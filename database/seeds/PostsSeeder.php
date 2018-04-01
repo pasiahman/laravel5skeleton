@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Models\Postmetas;
 use Illuminate\Database\Seeder;
+use Modules\Postmetas\Models\Postmetas;
 use Modules\Posts\Models\Posts;
 
 class PostsSeeder extends Seeder

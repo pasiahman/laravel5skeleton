@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Models\Media;
-use App\Http\Models\Postmetas;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Modules\Postmetas\Models\Postmetas;
 
 class MediaController extends \Modules\Posts\Http\Controllers\Backend\PostsController
 {
