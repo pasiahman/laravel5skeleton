@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Models\CustomLinks;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
+use Modules\CustomLinks\Models\CustomLinks;
 use Modules\Menus\Models\Menus;
 use Modules\Permissions\Models\Permission;
 use Modules\Termmetas\Models\Termmetas;
