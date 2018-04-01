@@ -25,10 +25,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('backend/media/{id}/trash', ['as' => 'backend.media.trash', 'uses' => 'Backend\MediaController@trash']);
         Route::post('backend/media/upload', ['as' => 'backend.media.upload', 'uses' => 'Backend\MediaController@upload']);
     });
-    Route::group(['middleware' => ['permission:backend menus']], function () {
-        Route::resource('backend/menus', 'Backend\MenusController', ['as' => 'backend']);
-        Route::get('backend/menus/{id}/delete', ['as' => 'backend.menus.delete', 'uses' => 'Backend\MenusController@delete']);
-    });
     Route::group(['middleware' => ['permission:backend options']], function () {
         Route::resource('backend/options', 'Backend\OptionsController', ['as' => 'backend']);
         Route::get('backend/options/{id}/delete', ['as' => 'backend.options.delete', 'uses' => 'Backend\OptionsController@delete']);
