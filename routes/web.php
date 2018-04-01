@@ -24,11 +24,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::resource('backend/options', 'Backend\OptionsController', ['as' => 'backend']);
         Route::get('backend/options/{id}/delete', ['as' => 'backend.options.delete', 'uses' => 'Backend\OptionsController@delete']);
     });
-    Route::group(['middleware' => ['permission:backend pages']], function () {
-        Route::resource('backend/pages', 'Backend\PagesController', ['as' => 'backend']);
-        Route::get('backend/pages/{id}/delete', ['as' => 'backend.pages.delete', 'uses' => 'Backend\PagesController@delete']);
-        Route::get('backend/pages/{id}/trash', ['as' => 'backend.pages.trash', 'uses' => 'Backend\PagesController@trash']);
-    });
 });
 
 // Auth::routes();
