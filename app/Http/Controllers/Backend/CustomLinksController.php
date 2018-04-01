@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Backend\PostsController;
 use App\Http\Models\CustomLinks;
 use App\Http\Models\Postmetas;
-use App\Http\Requests\Backend\Posts\UpdateRequest;
 use Illuminate\Http\Request;
 
-class CustomLinksController extends PostsController
+class CustomLinksController extends \Modules\Posts\Http\Controllers\Backend\PostsController
 {
     protected $model;
 
@@ -68,7 +66,7 @@ class CustomLinksController extends PostsController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(\Modules\Posts\Http\Requests\Backend\UpdateRequest $request, $id)
     {
         $post = $this->model::findOrFail($id);
         $attributes = collect($request->input())->only($post->getFillable())->toArray();

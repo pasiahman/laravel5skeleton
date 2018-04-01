@@ -2,9 +2,9 @@
 
 namespace App\Http\Models;
 
-use App\Http\Models\Posts;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Modules\Posts\Models\Posts;
 
 class CustomLinks extends Posts
 {

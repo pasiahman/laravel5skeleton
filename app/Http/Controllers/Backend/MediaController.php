@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Backend\PostsController;
 use App\Http\Models\Media;
 use App\Http\Models\Postmetas;
-use App\Http\Requests\Backend\Posts\UpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class MediaController extends PostsController
+class MediaController extends \Modules\Posts\Http\Controllers\Backend\PostsController
 {
     protected $model;
 
@@ -62,7 +60,7 @@ class MediaController extends PostsController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRequest $request, $id)
+    public function update(\Modules\Posts\Http\Requests\Backend\UpdateRequest $request, $id)
     {
         $post = $this->model::search(['id' => $id])->firstOrFail();
         $attributes = collect($request->input())->only($post->getFillable())->toArray();

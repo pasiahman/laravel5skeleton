@@ -47,6 +47,7 @@
         "migrate:refresh:seed": [
             "php artisan migrate:refresh",
             "php artisan module:migrate-refresh Permissions",
+            "php artisan module:migrate-refresh Posts",
             "php artisan module:migrate-refresh Termmetas",
             "php artisan module:migrate-refresh Terms",
             "php artisan module:migrate-refresh TermTranslations",

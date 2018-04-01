@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Backend\PostsController;
 use App\Http\Models\Pages;
 use Illuminate\Http\Request;
 
-class PagesController extends PostsController
+class PagesController extends \Modules\Posts\Http\Controllers\Backend\PostsController
 {
     protected $model;
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\Posts;
 use Illuminate\Http\Request;
+use Modules\Posts\Models\Posts;
 
 class HomeController extends Controller
 {
