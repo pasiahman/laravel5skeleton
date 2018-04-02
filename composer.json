@@ -15,6 +15,7 @@
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "malhal/laravel-geographical": "^1.0",
         "nwidart/laravel-modules": "^2.7",
         "redzjovi/php": "dev-master",
         "renatomarinho/laravel-page-speed": "^1.8",
