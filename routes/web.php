@@ -14,12 +14,6 @@
 Route::group(['middleware' => ['auth']], function () {
     Route::get('backend', ['as' => 'backend', 'uses' => '\Modules\Users\Http\Controllers\Backend\UsersController@index']);
     Route::get('backend/dashboard', ['as' => 'backend.dashboard', 'uses' => '\Modules\Users\Http\Controllers\Backend\UsersController@index']);
-    Route::group(['middleware' => ['permission:backend media']], function () {
-        Route::resource('backend/media', 'Backend\MediaController', ['as' => 'backend']);
-        Route::get('backend/media/{id}/delete', ['as' => 'backend.media.delete', 'uses' => 'Backend\MediaController@delete']);
-        Route::get('backend/media/{id}/trash', ['as' => 'backend.media.trash', 'uses' => 'Backend\MediaController@trash']);
-        Route::post('backend/media/upload', ['as' => 'backend.media.upload', 'uses' => 'Backend\MediaController@upload']);
-    });
     Route::group(['middleware' => ['permission:backend options']], function () {
         Route::resource('backend/options', 'Backend\OptionsController', ['as' => 'backend']);
         Route::get('backend/options/{id}/delete', ['as' => 'backend.options.delete', 'uses' => 'Backend\OptionsController@delete']);
