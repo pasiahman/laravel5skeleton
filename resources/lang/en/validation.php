@@ -157,6 +157,7 @@ return [
         'product_status' => 'Always Available',
         'province_id' => 'Province',
         'regency_id' => 'Regency',
+        'sell_price' => 'Sell Price',
         'slug' => 'Slug',
         'status' => 'Status',
         'stock' => 'Stock',

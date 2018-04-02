@@ -1,6 +1,11 @@
 <?php
 
 return [
+    'menus' => [
+        'accordion' => [
+            'products' => true,
+        ],
+    ],
     'user_addresses' => true,
     'users' => [
         'balance' => true,

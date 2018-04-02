@@ -157,6 +157,7 @@ return [
         'product_status' => 'Status Produk',
         'province_id' => 'Provinsi',
         'regency_id' => 'Kabupaten',
+        'sell_price' => 'Harga Jual',
         'slug' => 'Slug',
         'status' => 'Keadaan',
         'stock' => 'Stok',
