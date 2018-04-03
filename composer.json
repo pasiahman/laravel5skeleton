@@ -48,7 +48,7 @@
         "migrate:refresh:seed": [
             "php artisan migrate:refresh",
             "php artisan module:migrate-refresh Cms",
-            "php artisan module:migrate-refresh Permissions",
+            "php artisan module:migrate-refresh Permissions --seed",
             "php artisan module:migrate-refresh Postmetas",
             "php artisan module:migrate-refresh Posts",
             "php artisan module:migrate-refresh PostTranslations",
