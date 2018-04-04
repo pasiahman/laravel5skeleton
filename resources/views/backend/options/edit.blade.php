@@ -1,7 +1,7 @@
 @extends('backend.layouts.main')
 
-@section('title', __('cms.update'))
-@section('content_header', __('cms.update'))
+@section('title', __('cms.edit'))
+@section('content_header', __('cms.edit'))
 @section('breadcrumb')
     <ol class="breadcrumb">
         <li>
@@ -9,7 +9,7 @@
                 <i class="fa fa-sliders"></i>@lang('cms.options')
             </a>
         </li>
-        <li class="active">@lang('cms.update')</li>
+        <li class="active">@lang('cms.edit')</li>
     </ol>
 @endsection
 

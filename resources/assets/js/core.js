@@ -1,3 +1,24 @@
+$(document).on('change', 'select.provinces', function () {
+    $.ajax({
+        url: document.querySelector('meta[name="api.geocodes.regencies.index"]').content,
+        headers: {
+            'Access-Token': document.querySelector('meta[name=access_token]').content
+        },
+        data: { parent_id: $(this).val() },
+        success: function (response) {
+            $('select.regencies option:not(:first)').remove();
+            $.each(response.data, function(key, regency) {
+                $('select.regencies').append('<option value="'+regency.id+'">'+regency.name+'</option>');
+            });
+
+            $('select.regencies_rajaongkir option:not(:first)').remove();
+            $.each(response.data, function(key, regency) {
+                $('select.regencies_rajaongkir').append('<option value="'+regency.id+'">'+regency.rajaongkir_id+'</option>');
+            });
+        },
+    });
+});
+
 $(document).on('click', '.table_row_checkbox', function () {
     var checked = true;
     $('.table_row_checkbox').each(function () {

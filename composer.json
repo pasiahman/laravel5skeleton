@@ -15,6 +15,8 @@
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
+        "malhal/laravel-geographical": "^1.0",
+        "nwidart/laravel-modules": "^2.7",
         "redzjovi/php": "dev-master",
         "renatomarinho/laravel-page-speed": "^1.8",
         "spatie/laravel-permission": "^2.7",
@@ -32,7 +34,8 @@
             "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Modules\\": "Modules/"
         }
     },
     "autoload-dev": {
@@ -42,6 +45,22 @@
     },
     "minimum-stability": "stable",
     "scripts": {
+        "migrate:refresh:seed": [
+            "php artisan migrate:refresh",
+            "php artisan module:migrate-refresh Cms",
+            "php artisan module:migrate-refresh Geocodes",
+            "php artisan module:migrate-refresh Permissions --seed",
+            "php artisan module:migrate-refresh Postmetas",
+            "php artisan module:migrate-refresh Posts",
+            "php artisan module:migrate-refresh PostTranslations",
+            "php artisan module:migrate-refresh Roles --seed",
+            "php artisan module:migrate-refresh Termmetas",
+            "php artisan module:migrate-refresh Terms",
+            "php artisan module:migrate-refresh TermTranslations",
+            "php artisan module:migrate-refresh UserAddresses",
+            "php artisan module:migrate-refresh Users",
+            "php artisan db:seed"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"

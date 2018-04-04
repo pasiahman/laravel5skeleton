@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Models\CustomLinks;
-use App\Http\Models\Menus;
-use App\Http\Models\Permission;
-use App\Http\Models\Termmetas;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
+use Modules\CustomLinks\Models\CustomLinks;
+use Modules\Menus\Models\Menus;
+use Modules\Permissions\Models\Permission;
+use Modules\Termmetas\Models\Termmetas;
 
 class MenusSeeder extends Seeder
 {

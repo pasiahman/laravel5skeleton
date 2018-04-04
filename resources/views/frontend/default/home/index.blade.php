@@ -1,4 +1,4 @@
-@extends('frontend.default.layouts.main')
+@extends('cms::frontend/default/layouts/main')
 
 {{-- @section('title')@endsection --}}
 {{-- @section('content_header')@endsection --}}
@@ -22,7 +22,7 @@
 
         @php
         $imageId = collect($post->getPostmetaImagesId())->first();
-        $medium = \App\Http\Models\Media::find($imageId);
+        $medium = \Modules\Media\Models\Media::find($imageId);
         @endphp
 
         <div align="center">
@@ -35,5 +35,5 @@
     @endforeach
 
     <!-- Pager -->
-    {{ $posts->appends(request()->query())->links('vendor/pagination/default-blog') }}
+    {{ $posts->appends(request()->query())->links('cms::vendor/pagination/default-blog') }}
 @endsection

@@ -26,7 +26,7 @@
 
     @php
     $imageId = collect($post->getPostmetaImagesId())->first();
-    $medium = \App\Http\Models\Media::find($imageId);
+    $medium = \Modules\Media\Models\Media::find($imageId);
     @endphp
 
     <!-- Preview Image -->

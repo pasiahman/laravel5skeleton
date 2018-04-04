@@ -74,6 +74,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [dimsav/laravel-translatable](https://github.com/dimsav/laravel-translatable)
 - [Intervention/image](https://github.com/Intervention/image)
 - [laracasts/flash](https://github.com/laracasts/flash)
+- [malhal/Laravel-Geographical](https://github.com/malhal/Laravel-Geographical)
+- [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules)
 - [renatomarinho/laravel-page-speed](https://github.com/renatomarinho/laravel-page-speed)
 - [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
 - [spatie/laravel-pjax](https://github.com/spatie/laravel-pjax)
@@ -84,13 +86,13 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - Run command, npm run production (to run laravel mix)
 - Rename .env.example to .env, and update all setting
 - If you want queue, update QUEUE_DRIVER=database in .env and run command, php artisan queue:work
-- Run command, php artisan migrate:refresh --seed
+- Run command, composer migrate:refresh:seed
 
 ## Installation for Production
 - Run command, composer install
 - Rename .env.example to .env, and update all setting
 - If you want queue, update QUEUE_DRIVER=database in .env and run command, php artisan queue:work
-- Run command, php artisan migrate:refresh --seed
+- Run command, composer migrate:refresh:seed
 
 ## Demo, Email, Password
 - [http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin
