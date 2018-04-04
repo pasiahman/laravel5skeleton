@@ -76,7 +76,7 @@
                         </tr>
 
                         <tr>
-                            <td align="center" colspan="4">{{ $options->appends(request()->query())->links('vendor.pagination.default') }}</td>
+                            <td align="center" colspan="4">{{ $options->appends(request()->query())->links('cms::vendor/pagination/default-2') }}</td>
                         </tr>
                     </tfoot>
                 </table>

@@ -20,7 +20,6 @@ mix.styles([
     'resources/bower/bootstrap-social/bootstrap-social.css',
     'resources/bower/fancybox/dist/jquery.fancybox.min.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
-    'resources/bower/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css',
     'resources/bower/select2/dist/css/select2.min.css',
     'resources/bower/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
     'resources/bower/toastr/toastr.min.css',
@@ -41,7 +40,6 @@ mix.combine([
     'resources/bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
     'resources/bower/fancybox/dist/jquery.fancybox.min.js',
     'resources/bower/fastclick/lib/fastclick.js',
-    'resources/bower/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.min.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
     'resources/bower/nestable/jquery.nestable.js',
     'resources/bower/select2/dist/js/select2.min.js',
@@ -61,10 +59,11 @@ mix.styles([
     'resources/bower/bootstrap/dist/css/bootstrap.min.css',
     'resources/bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
     'resources/bower/bootstrap-social/bootstrap-social.css',
+    'resources/bower/fancybox/dist/jquery.fancybox.min.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
     'resources/bower/select2/dist/css/select2.min.css',
     'resources/bower/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
-], 'public/css/app.css')
+], 'public/css/frontend-app.css')
 .copy('resources/bower/codemirror', 'public/bower/tinymce/plugins/codemirror/codemirror')
 // .copy('resources/bower/fine-uploader', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/edit.gif', 'public/bower/fine-uploader')
@@ -80,6 +79,7 @@ mix.combine([
     'resources/bower/bootstrap/dist/js/bootstrap.min.js',
 
     'resources/bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    'resources/bower/fancybox/dist/jquery.fancybox.min.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
     'resources/bower/select2/dist/js/select2.min.js',
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
@@ -87,4 +87,4 @@ mix.combine([
     'resources/vendor/laracasts/flash/custom.js',
     'resources/vendor/select2/select2-custom.js',
     'resources/assets/js/core.js',
-], 'public/js/app.js');
+], 'public/js/frontend-app.js');

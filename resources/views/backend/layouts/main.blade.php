@@ -37,16 +37,14 @@
             <div class="navbar-custom-menu">
                 <ul class="nav navbar-nav">
                     <li class="dropdown">
-                        @php ($languages = config('app.languages'))
-                        @php ($locale = config('app.locale'))
                         <a aria-expanded="false" class="dropdown-toggle" data-toggle="dropdown" href="#" role="button">
-                            <img src="{{ asset('images/flags/'.$locale.'.gif') }}" /> <span class="caret"></span>
+                            <img src="{{ asset('images/flags/'.config('app.locale').'.gif') }}" /> <span class="caret"></span>
                         </a>
-                        @if ($languages)
+                        @if ($languages = config('app.languages'))
                             <ul class="dropdown-menu" role="menu">
                                 @foreach ($languages as $languageCode => $languageName)
                                     <li>
-                                        <a href="{{ route('locale.setlocale', $languageCode) }}"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /> {{ $languageName }}</a>
+                                        <a href="{{ route('locale.localeUpdate', $languageCode) }}"><img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" /> {{ $languageName }}</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -71,11 +69,11 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-right">
-                                    <a class="btn btn-default btn-flat" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                    <a class="btn btn-default btn-flat" href="{{ route('frontend.authentication.logoutStore') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         @lang('cms.logout')
                                     </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    <form id="logout-form" action="{{ route('frontend.authentication.logoutStore') }}" method="POST" style="display: none;">
                                         {{ csrf_field() }}
                                     </form>
                                 </div>
@@ -103,63 +101,19 @@
             </div>
             <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="../../index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-                        <li><a href="../../index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-                    </ul>
-                </li>
-                {{-- <li class="header">@lang('cms.posts')</li> --}}
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-book"></i> <span>@lang('cms.posts')</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ route('backend.categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.categories')</span></a></li>
-                        <li><a href="{{ route('backend.tags.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.tags')</span></a></li>
-                        <li><a href="{{ route('backend.posts.index') }}"><i class="fa fa-book"></i> <span>@lang('cms.posts')</span></a></li>
-                        <li><a href="{{ route('backend.custom-links.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.custom_links')</span></a></li>
-                    </ul>
-                </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-upload"></i> <span>@lang('cms.media')</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ route('backend.medium-categories.index') }}"><i class="fa fa-circle-o"></i> <span>@lang('cms.medium_categories')</span></a></li>
-                        <li><a href="{{ route('backend.media.index') }}"><i class="fa fa-upload"></i> <span>@lang('cms.media')</span></a></li>
-                    </ul>
-                </li>
+                <li class="header">@lang('cms.main')</li>
+                @php
+                $term = \Modules\Menus\Models\Menus::search(['slug' => 'backend-main'])->firstOrFail();
+                $nestable = $term->getTermmetaNestable();
+                @endphp
+                {!! $term->generateAsHtml($nestable, 'backend-master') !!}
 
-                <li class="header">Masters</li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-book"></i> <span>Masters</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li><a href="{{ route('backend.permissions.index') }}"><i class="fa fa-ban"></i> <span>@lang('cms.permissions')</span></a></li>
-                        <li><a href="{{ route('backend.roles.index') }}"><i class="fa fa-user"></i> <span>@lang('cms.roles')</span></a></li>
-                        <li><a href="{{ route('backend.users.index') }}"><i class="fa fa-users"></i> <span>@lang('cms.users')</span></a></li>
-                        <li><a href="{{ route('backend.menus.index') }}"><i class="fa fa-bars"></i> <span>@lang('cms.menus')</span></a></li>
-                        <li><a href="{{ route('backend.options.index') }}"><i class="fa fa-sliders"></i> <span>@lang('cms.options')</span></a></li>
-                    </ul>
-                </li>
+                <li class="header">@lang('cms.masters')</li>
+                @php
+                $term = \Modules\Menus\Models\Menus::search(['slug' => 'backend-master'])->firstOrFail();
+                $nestable = $term->getTermmetaNestable();
+                @endphp
+                {!! $term->generateAsHtml($nestable, 'backend-master') !!}
             </ul>
         </section>
         <!-- /.sidebar -->

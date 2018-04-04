@@ -4,6 +4,7 @@
 /public/storage
 /resources/bower/*
 /storage/*.key
+/storage/api-docs/*
 /vendor
 /.idea
 /.vagrant

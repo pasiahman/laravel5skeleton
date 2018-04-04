@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class UsersSeeder extends Seeder
 {
@@ -16,12 +15,16 @@ class UsersSeeder extends Seeder
             [
                 'name' => 'Super Admin',
                 'email' => 'superadmin@email.com',
-                'password' => Hash::make('superadmin'),
+                'password' => \Hash::make('superadmin'),
+                'access_token' => \Hash::make(time()),
+                'verified' => 1,
             ],
             [
                 'name' => 'Admin',
                 'email' => 'admin@email.com',
-                'password' => Hash::make('admin'),
+                'password' => \Hash::make('admin'),
+                'access_token' => \Hash::make(time()),
+                'verified' => 1,
             ],
         ]);
     }

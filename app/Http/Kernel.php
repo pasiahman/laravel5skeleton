@@ -44,12 +44,14 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
-            \App\Http\Middleware\Localization::class,
+            \Modules\Cms\Http\Middleware\Localization::class,
         ],
 
         'api' => [
             'throttle:60,1',
             'bindings',
+
+            \Modules\Cms\Http\Middleware\Localization::class,
         ],
     ];
 
@@ -68,7 +70,9 @@ class Kernel extends HttpKernel
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 
+        'authApi' => \Modules\Users\Http\Middleware\AuthApi::class,
         'permission' => \Spatie\Permission\Middlewares\PermissionMiddleware::class,
         'role' => \Spatie\Permission\Middlewares\RoleMiddleware::class,
+        'userVerified' => \Modules\Users\Http\Middleware\UserVerified::class,
     ];
 }

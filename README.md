@@ -61,7 +61,6 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [dbushell/Nestable](https://github.com/dbushell/Nestable)
 - [defunkt/jquery-pjax](https://github.com/defunkt/jquery-pjax)
 - [fancyapps/fancybox](https://github.com/fancyapps/fancybox)
-- [farbelous/fontawesome-iconpicker](https://github.com/farbelous/fontawesome-iconpicker)
 - [FineUploader/fine-uploader](https://github.com/FineUploader/fine-uploader)
 - [RubaXa/Sortable](https://github.com/RubaXa/Sortable)
 - [select2/select2](https://github.com/select2/select2)
@@ -70,29 +69,34 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 # Included Packages
 - [abhimanyu003/conversion](https://github.com/abhimanyu003/conversion)
-- [atayahmet/laravel-nestable](https://github.com/atayahmet/laravel-nestable)
 - [barryvdh/laravel-debugbar](https://github.com/barryvdh/laravel-debugbar)
+- [DarkaOnLine/L5-Swagger](https://github.com/DarkaOnLine/L5-Swagger)
 - [dimsav/laravel-translatable](https://github.com/dimsav/laravel-translatable)
 - [Intervention/image](https://github.com/Intervention/image)
 - [laracasts/flash](https://github.com/laracasts/flash)
+- [malhal/Laravel-Geographical](https://github.com/malhal/Laravel-Geographical)
+- [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules)
 - [renatomarinho/laravel-page-speed](https://github.com/renatomarinho/laravel-page-speed)
 - [spatie/laravel-permission](https://github.com/spatie/laravel-permission)
 - [spatie/laravel-pjax](https://github.com/spatie/laravel-pjax)
 
 ## Installation for Development
-- Run command, composer update
+- Run command, composer install
 - Run command, bower update
 - Run command, npm run production (to run laravel mix)
 - Rename .env.example to .env, and update all setting
-- Run command, php artisan migrate:refresh --seed
+- If you want queue, update QUEUE_DRIVER=database in .env and run command, php artisan queue:work
+- Run command, composer migrate:refresh:seed
 
 ## Installation for Production
-- Run command, composer update
+- Run command, composer install
 - Rename .env.example to .env, and update all setting
-- Run command, php artisan migrate:refresh --seed
+- If you want queue, update QUEUE_DRIVER=database in .env and run command, php artisan queue:work
+- Run command, composer migrate:refresh:seed
 
 ## Demo, Email, Password
-[http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin
+- [http://laravel5skeleton-redzjovi.c9users.io/public/backend](http://laravel5skeleton-redzjovi.c9users.io/public/backend/categories), superadmin@email.com, superadmin
+- [api/documentation](http://laravel5skeleton-redzjovi.c9users.io/public/api/documentation)
 
 ## Roadmap
 1. Web Master
