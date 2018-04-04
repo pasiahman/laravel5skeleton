@@ -1,6 +1,12 @@
 <?php
 
 return [
+    'geocodes' => [
+        'code' => false,
+        'latitude' => false,
+        'longitude' => false,
+        'rajaongkir_id' => true,
+    ],
     'menus' => [
         'accordion' => [
             'products' => true,

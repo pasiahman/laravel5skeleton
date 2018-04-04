@@ -22,6 +22,7 @@ class RolesAndPermissionsSeeder extends Seeder
             'backend custom links delete',
             'backend custom links trash',
             'backend dashboard',
+            'backend geocodes',
             'backend main',
             'backend masters',
             'backend media',
