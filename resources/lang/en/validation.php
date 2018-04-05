@@ -164,6 +164,7 @@ return [
         'slug' => 'Slug',
         'status' => 'Status',
         'stock' => 'Stock',
+        'store_id' => 'Store Id',
         'taxonomy' => 'Taxonomy',
         'template' => 'Template',
         'title' => 'Title',

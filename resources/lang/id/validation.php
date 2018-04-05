@@ -164,6 +164,7 @@ return [
         'slug' => 'Slug',
         'status' => 'Keadaan',
         'stock' => 'Stok',
+        'store_id' => 'Id Toko',
         'taxonomy' => 'Taksonomi',
         'template' => 'Template',
         'title' => 'Judul',

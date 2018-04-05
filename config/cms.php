@@ -14,6 +14,7 @@ return [
     ],
     'user_addresses' => true,
     'users' => [
+        'store_id' => false,
         'balance' => true,
         'game_token' => true,
     ],
