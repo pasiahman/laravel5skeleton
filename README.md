@@ -82,8 +82,8 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Installation for Development
 - Run command, composer install
-- Run command, bower update
-- Run command, npm run production (to run laravel mix)
+- Run command, bower update (optional)
+- Run command, npm run production (to run laravel mix) (optional)
 - Rename .env.example to .env, and update all setting
 - If you want queue, update QUEUE_DRIVER=database in .env and run command, php artisan queue:work
 - Run command, composer migrate:refresh:seed
