@@ -155,6 +155,14 @@ class MenusSeeder extends Seeder
                                     'icon' => 'fa fa-bars',
                                 ],
                                 [
+                                    'url' => 'backend/geocodes',
+                                    'type' => 'custom_link',
+                                    'title' => CustomLinks::search(['name' => 'geocodes'])->firstOrFail()->title,
+                                    'permission' => Permission::where('name', 'backend geocodes')->firstOrFail()->id,
+                                    'id' => CustomLinks::search(['name' => 'geocodes'])->firstOrFail()->id,
+                                    'icon' => 'fa fa-globe',
+                                ],
+                                [
                                     'url' => 'backend/options',
                                     'type' => 'custom_link',
                                     'title' => CustomLinks::search(['name' => 'options'])->firstOrFail()->title,

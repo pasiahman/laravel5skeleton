@@ -27,6 +27,10 @@ class CustomLinksSeeder extends Seeder
                 'postmetas' => ['template' => 'default'],
             ],
             [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Geocodes'], 'id' => ['title' => 'Kode Geografis']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
                 'post' => ['author_id' => 1, 'en' => ['title' => 'Login'], 'id' => ['title' => 'Masuk']],
                 'postmetas' => ['template' => 'default'],
             ],
