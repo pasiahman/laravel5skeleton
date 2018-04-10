@@ -103,6 +103,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'products' => [
+            'stock_is_not_enough' => 'Stok tidak cukup.',
+        ],
         'users' => [
             'balance_is_not_enough' => 'Saldo tidak cukup.',
             'game_token_is_not_enough' => 'Token Game tidak cukup.',
@@ -141,6 +144,7 @@ return [
         'email' => 'Email',
         'excerpt' => 'Kutipan',
         'game_token' => 'Token Permainan',
+        'grand_total' => 'Total Keseluruhan',
         'guard_name' => 'Nama Penjaga',
         'id' => 'Id',
         'latitude' => 'Lintang',
@@ -148,6 +152,7 @@ return [
         'longitude' => 'Garis Bujur',
         'mime_type' => 'Tipe Mime',
         'name' => 'Nama',
+        'number' => 'Nomor',
         'parent' => 'Induk',
         'parent_id' => 'Id Induk',
         'password' => 'Kata Sandi',
@@ -158,7 +163,9 @@ return [
         'primary' => 'Utama',
         'product_status' => 'Status Produk',
         'province_id' => 'Provinsi',
+        'quantity' => 'Kuantitas',
         'rajaongkir_id' => 'Id Rajaongkir',
+        'receipt_number' => 'Nomor Tanda Terima',
         'regency_id' => 'Kabupaten',
         'sell_price' => 'Harga Jual',
         'slug' => 'Slug',

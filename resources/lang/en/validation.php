@@ -103,6 +103,9 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'products' => [
+            'stock_is_not_enough' => 'Stock is not enough.',
+        ],
         'users' => [
             'balance_is_not_enough' => 'Balance is not enough.',
             'game_token_is_not_enough' => 'Game Token is not enough.',
@@ -141,6 +144,7 @@ return [
         'email' => 'Email',
         'excerpt' => 'Excerpt',
         'game_token' => 'Game Token',
+        'grand_total' => 'Grand Total',
         'guard_name' => 'Guard Name',
         'id' => 'Id',
         'latitude' => 'Latitude',
@@ -148,6 +152,7 @@ return [
         'longitude' => 'Longitude',
         'mime_type' => 'Mime Type',
         'name' => 'Name',
+        'number' => 'Number',
         'parent' => 'Parent',
         'parent_id' => 'Parent Id',
         'password' => 'Password',
@@ -158,7 +163,9 @@ return [
         'primary' => 'Primary',
         'product_status' => 'Always Available',
         'province_id' => 'Province',
+        'quantity' => 'Quantity',
         'rajaongkir_id' => 'Rajaongkir Id',
+        'receipt_number' => 'Receipt Number',
         'regency_id' => 'Regency',
         'sell_price' => 'Sell Price',
         'slug' => 'Slug',
