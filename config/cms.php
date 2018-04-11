@@ -17,5 +17,7 @@ return [
         'store_id' => false,
         'balance' => true,
         'game_token' => true,
+
+        'role_default' => false,
     ],
 ];
