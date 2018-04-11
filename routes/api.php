@@ -23,10 +23,6 @@ Route::post('authentication/password/reset', ['as' => 'api.authentication.passwo
 Route::post('authentication/register', ['as' => 'api.authentication.register', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@register']);
 Route::post('authentication/verified', ['as' => 'api.authentication.verified', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@verified']);
 Route::post('authentication/verify', ['as' => 'api.authentication.verify', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@verify']);
-Route::group(['middleware' => ['authApi', 'userVerified']], function () {
-    Route::get('users/profile', ['as' => 'api.users.profileShow', 'uses' => 'API\UsersController@profileShow']);
-    Route::put('users/profile', ['as' => 'api.users.profileUpdate', 'uses' => 'API\UsersController@profileUpdate']);
-});
 Route::group(['middleware' => ['authApi']], function () {
     Route::get('users/verification-code/refresh', ['as' => 'api.users.verificationCodeRefresh', 'uses' => 'API\UsersController@verificationCodeRefresh']);
 });

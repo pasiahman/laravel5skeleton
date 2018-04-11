@@ -50,8 +50,8 @@
             "php artisan migrate:refresh",
             "php artisan module:seed Permissions",
             "php artisan module:seed Roles",
-            "php artisan cache:clear",
-            "php artisan db:seed"
+            "php artisan db:seed",
+            "php artisan cache:clear"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
