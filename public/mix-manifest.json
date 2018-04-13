@@ -1,11 +1,1 @@
-{
-    "/css/backend-app.css": "/css/backend-app.css",
-    "/js/backend-app.js": "/js/backend-app.js",
-    "/css/frontend-app.css": "/css/frontend-app.css",
-    "/bower/fine-uploader/edit.gif": "/bower/fine-uploader/edit.gif",
-    "/bower/fine-uploader/fine-uploader-gallery.min.css": "/bower/fine-uploader/fine-uploader-gallery.min.css",
-    "/bower/fine-uploader/fine-uploader.min.js": "/bower/fine-uploader/fine-uploader.min.js",
-    "/bower/fine-uploader/loading.gif": "/bower/fine-uploader/loading.gif",
-    "/bower/fine-uploader/retry.gif": "/bower/fine-uploader/retry.gif",
-    "/js/frontend-app.js": "/js/frontend-app.js"
-}
+{}
