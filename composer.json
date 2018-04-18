@@ -18,6 +18,7 @@
         "malhal/laravel-geographical": "^1.0",
         "nesbot/carbon": "^1.26",
         "nwidart/laravel-modules": "^2.7",
+        "ramsey/uuid": "^3.7",
         "redzjovi/php": "dev-master",
         "redzjovi/shipment-tracking": "dev-master",
         "renatomarinho/laravel-page-speed": "^1.8",
