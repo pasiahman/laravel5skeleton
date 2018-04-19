@@ -25,6 +25,8 @@
     "fine-uploader": "^5.13.0",
     "font-awesome": "~4.7",
     "jquery-pjax": "^2.0.1",
+    "kbw-countdown": "^2.1.0",
+    "moment": "^2.22.1",
     "nestable": "*",
     "select2-bootstrap-theme": "^0.1.0-beta.10",
     "Sortable": "sortablejs#^1.6.0",

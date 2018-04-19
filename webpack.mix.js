@@ -20,6 +20,7 @@ mix.styles([
     'resources/bower/bootstrap-social/bootstrap-social.css',
     'resources/bower/fancybox/dist/jquery.fancybox.min.css',
     'resources/bower/font-awesome/css/font-awesome.min.css',
+    'resources/bower/kbw-countdown/dist/css/jquery.countdown.css',
     'resources/bower/select2/dist/css/select2.min.css',
     'resources/bower/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
     'resources/bower/toastr/toastr.min.css',
@@ -41,12 +42,16 @@ mix.combine([
     'resources/bower/fancybox/dist/jquery.fancybox.min.js',
     'resources/bower/fastclick/lib/fastclick.js',
     'resources/bower/jquery-pjax/jquery.pjax.js',
+    'resources/bower/kbw-plugin/dist/js/jquery.plugin.min.js',
+    'resources/bower/kbw-countdown/dist/js/jquery.countdown.min.js',
+    'resources/bower/moment/min/moment-with-locales.min.js',
     'resources/bower/nestable/jquery.nestable.js',
     'resources/bower/select2/dist/js/select2.min.js',
     'resources/bower/Sortable/Sortable.min.js',
     'resources/bower/tinymce/tinymce.min.js',
     'resources/bower/toastr/toastr.min.js',
     'Modules/Cms/Resources/vendor/jquery-pjax/jquery.pjax-custom.js',
+    'Modules/Cms/Resources/vendor/kbw-countdown/jquery.countdown-custom.js',
     'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/vendor/laracasts/flash/custom.js',
     'resources/vendor/select2/select2-custom.js',
@@ -72,6 +77,7 @@ mix.styles([
 .copy('resources/bower/fine-uploader/dist/loading.gif', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/retry.gif', 'public/bower/fine-uploader')
 .copy('resources/bower/font-awesome/fonts', 'public/fonts')
+.copy('resources/bower/kbw-countdown/dist/js/jquery.countdown-id.js', 'public/bower/kbw-countdown/dist/js')
 .copy('resources/bower/tinymce', 'public/bower/tinymce');
 
 mix.combine([
