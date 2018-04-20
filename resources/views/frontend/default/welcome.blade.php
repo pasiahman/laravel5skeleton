@@ -70,9 +70,20 @@
                 <div class="top-right links">
                     @if (Auth::check())
                         <a href="{{ url('/home') }}">Home</a>
+                        <a href="{{ route('frontend.users.profile') }}">@lang('cms.profile')</a>
+
+                        <a href="{{ route('frontend.authentication.logoutStore') }}"
+                            onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
+                            @lang('cms.logout')
+                        </a>
+
+                        <form action="{{ route('frontend.authentication.logoutStore') }}" id="logout-form" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
                     @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
+                        <a href="{{ route('frontend.authentication.login') }}">@lang('cms.login')</a>
+                        <a href="{{ route('frontend.authentication.register') }}">@lang('cms.register')</a>
                     @endif
                 </div>
             @endif
