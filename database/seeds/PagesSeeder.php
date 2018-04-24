@@ -17,13 +17,21 @@ class PagesSeeder extends Seeder
             [
                 'post' => [
                     'author_id' => 1,
+                    'en' => ['title' => 'Home', 'content' => ''],
+                    'id' => ['title' => 'Home', 'content' => '']
+                ],
+                'postmetas' => ['template' => 'home'],
+            ],
+            [
+                'post' => [
+                    'author_id' => 1,
                     'en' => ['title' => 'Home Popup', 'content' => 'Home Poup Content'],
                     'id' => ['title' => 'Home Popup', 'content' => 'Home Poup Konten']
                 ],
                 'postmetas' => ['template' => 'default'],
             ],
         ];
-        
+
         foreach ($contents as $content) {
             $post = Pages::create($content['post']);
             (new Postmetas)->sync($content['postmetas'], $post->id);

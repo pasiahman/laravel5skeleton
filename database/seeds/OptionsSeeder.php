@@ -14,6 +14,7 @@ class OptionsSeeder extends Seeder
     public function run()
     {
         $contents = [
+            ['type' => 'page_id', 'name' => 'frontend_home_page', 'value' => Pages::search(['name' => 'home'])->firstOrFail()->id],
             ['type' => 'page_id', 'name' => 'frontend_home_popup', 'value' => Pages::search(['name' => 'home-popup'])->firstOrFail()->id],
         ];
 
