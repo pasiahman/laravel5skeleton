@@ -48,7 +48,7 @@ $(document).ready(function () {
         // menubar: false,
         // mobile: { theme: 'mobile' },
         plugins: 'advlist charmap code codemirror codesample fullscreen help hr image link lists media pagebreak textcolor visualblocks visualchars wordcount',
-        relative_urls: true,
+        relative_urls: false,
         resize: false,
         selector: 'textarea.tinymce',
         skin_url: document.querySelector('meta[name=app_url]').getAttribute('content')+'/bower/tinymce/skins/lightgray',
