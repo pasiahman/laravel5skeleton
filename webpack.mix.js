@@ -69,6 +69,7 @@ mix.styles([
     'resources/bower/select2/dist/css/select2.min.css',
     'resources/bower/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
 ], 'public/css/frontend-app.css')
+.copy('resources/bower/bootstrap/fonts', 'public/fonts')
 .copy('resources/bower/codemirror', 'public/bower/tinymce/plugins/codemirror/codemirror')
 // .copy('resources/bower/fine-uploader', 'public/bower/fine-uploader')
 .copy('resources/bower/fine-uploader/dist/edit.gif', 'public/bower/fine-uploader')
