@@ -21,7 +21,4 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 // Auth::routes();
-Route::resource('posts', 'Frontend\PostsController', ['as' => 'frontend']);
-Route::get('posts/{name}', ['as' => 'frontend.posts.show', 'uses' => 'Frontend\PostsController@show']);
-Route::get('users/{email}', ['as' => 'frontend.users.index', 'uses' => 'Frontend\PostsController@index']);
 Route::get('', ['as' => 'frontend', 'uses' => 'FrontendController@index']);
