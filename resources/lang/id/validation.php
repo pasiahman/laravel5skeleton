@@ -171,6 +171,7 @@ return [
         'province_id' => 'Provinsi',
         'quantity' => 'Kuantitas',
         'rajaongkir_id' => 'Id Rajaongkir',
+        'rating' => 'Penilaian',
         'receipt_number' => 'Nomor Tanda Terima',
         'reference_id' => 'Id Referensi',
         'regency_id' => 'Kabupaten',

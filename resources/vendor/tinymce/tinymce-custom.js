@@ -19,7 +19,7 @@ $(document).ready(function () {
                 'mode/clike/clike.js',
                 'mode/php/php.js'
             ],
-            path: 'CodeMirror', // Path to CodeMirror distribution
+            path: 'codemirror', // Path to CodeMirror distribution
             // saveCursorPosition: true, // Insert caret marker
             // width: 800 // Default value is 800
         },

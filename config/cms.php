@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'currency' => [
+        'symbol' => [
+            'left' => [
+                'default' => 'Rp',
+            ]
+        ],
+    ],
     'geocodes' => [
         'code' => false,
         'latitude' => false,
@@ -11,6 +18,7 @@ return [
         'accordion' => [
             'doku_myshortcart_payment_methods' => false,
             'products' => true,
+            'product_testimonials' => false,
         ],
     ],
     'pages' => [
@@ -21,6 +29,11 @@ return [
                 'home' => false,
                 'new_arrival' => false,
             ],
+        ],
+    ],
+    'products' => [
+        'product_testimonials' => [
+            'rating_average' => false,
         ],
     ],
     'transactions' => [

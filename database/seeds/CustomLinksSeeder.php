@@ -19,6 +19,10 @@ class CustomLinksSeeder extends Seeder
                 'postmetas' => ['template' => 'default'],
             ],
             [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Content'], 'id' => ['title' => 'Konten']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
                 'post' => ['author_id' => 1, 'en' => ['title' => 'Custom Links'], 'id' => ['title' => 'Tautan Khusus']],
                 'postmetas' => ['template' => 'default'],
             ],
@@ -75,6 +79,18 @@ class CustomLinksSeeder extends Seeder
                 'postmetas' => ['template' => 'default'],
             ],
             [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Product Categories'], 'id' => ['title' => 'Kategori Produk']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Product Testimonials'], 'id' => ['title' => 'Testimonial Produk']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Products'], 'id' => ['title' => 'Produk']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
                 'post' => ['author_id' => 1, 'en' => ['title' => 'Register'], 'id' => ['title' => 'Daftar']],
                 'postmetas' => ['template' => 'default'],
             ],
@@ -84,6 +100,10 @@ class CustomLinksSeeder extends Seeder
             ],
             [
                 'post' => ['author_id' => 1, 'en' => ['title' => 'Tags'], 'id' => ['title' => 'Tag']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Testimonials'], 'id' => ['title' => 'Kesaksian']],
                 'postmetas' => ['template' => 'default'],
             ],
             [

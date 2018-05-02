@@ -171,6 +171,7 @@ return [
         'province_id' => 'Province',
         'quantity' => 'Quantity',
         'rajaongkir_id' => 'Rajaongkir Id',
+        'rating' => 'Rating',
         'receipt_number' => 'Receipt Number',
         'reference_id' => 'Reference Id',
         'regency_id' => 'Regency',
