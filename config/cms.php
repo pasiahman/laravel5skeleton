@@ -51,6 +51,9 @@ return [
         'game_token_default' => 10,
 
         'role_default' => false,
+        'usermetas' => [
+            'job' => false,
+        ],
         'user_socialites' => true,
     ],
 ];
