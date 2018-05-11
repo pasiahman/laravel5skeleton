@@ -24,6 +24,7 @@
     "fancybox": "^3.2.5",
     "fine-uploader": "^5.13.0",
     "font-awesome": "~4.7",
+    "jstree": "^3.3.5",
     "jquery-pjax": "^2.0.1",
     "kbw-countdown": "^2.1.0",
     "moment": "^2.22.1",

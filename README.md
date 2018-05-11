@@ -68,6 +68,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [select2/select2](https://github.com/select2/select2)
 - [tinymce/tinymce-dist](https://github.com/tinymce/tinymce-dist)
 - [uxsolutions/bootstrap-datepicker](https://github.com/uxsolutions/bootstrap-datepicker)
+- [vakata/jstree](https://github.com/vakata/jstree) 
 - [verlok/lazyload](https://github.com/verlok/lazyload)
 
 # Included Packages
