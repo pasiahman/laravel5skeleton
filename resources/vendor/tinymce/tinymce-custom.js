@@ -1,9 +1,9 @@
-$(document).ready(function () {
+function tinymce_init()
+{
     // delete var document_base_url = document.querySelector('meta[name=app_url]').getAttribute('content');
     // delete document_base_url += document_base_url.endsWith('/') ? '' : '/';
-
     tinyMCE.baseURL = document.querySelector('meta[name=app_url]').getAttribute('content')+'/bower/tinymce';
-    tinymce.init({
+    tinyMCE.init({
         branding: false,
         codemirror: {
             config: { // CodeMirror config object
@@ -60,4 +60,12 @@ $(document).ready(function () {
         //     'strikethrough hr forecolor backcolor | removeformat charmap outdent indent | undo redo help codesample | code fullscreen'
         // ]
     });
+}
+
+$(document).ajaxSuccess(function() {
+    tinymce_init();
+});
+
+$(document).ready(function() {
+    tinymce_init();
 });
