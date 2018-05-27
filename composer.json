@@ -10,13 +10,16 @@
         "cviebrock/eloquent-sluggable": "4.4.1",
         "darkaonline/l5-swagger": "5.5.x-dev",
         "dimsav/laravel-translatable": "8.1",
+        "doctrine/dbal": "2.5.*",
         "intervention/image": "^2.4",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.5.*",
         "laravel/socialite": "^3.0",
         "laravel/tinker": "~1.0",
         "malhal/laravel-geographical": "^1.0",
+        "nesbot/carbon": "^1.26",
         "nwidart/laravel-modules": "^2.7",
+        "ramsey/uuid": "^3.7",
         "redzjovi/php": "dev-master",
         "redzjovi/shipment-tracking": "dev-master",
         "renatomarinho/laravel-page-speed": "^1.8",
@@ -48,10 +51,12 @@
     "scripts": {
         "migrate:refresh:seed": [
             "php artisan migrate:refresh",
+            "php artisan module:seed DokuMyshortcart",
+            "php artisan module:seed Options",
             "php artisan module:seed Permissions",
             "php artisan module:seed Roles",
-            "php artisan cache:clear",
-            "php artisan db:seed"
+            "php artisan db:seed",
+            "php artisan cache:clear"
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

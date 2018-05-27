@@ -1,3 +1,71 @@
+## 5.38.0 (2018-05-21)
+
+### Bug fixes
+
+Improve reliability of noticing a missing mouseup event during dragging.
+
+Make sure `getSelection` is always called on the correct document.
+
+Fix interpretation of line breaks and non-breaking spaces inserted by renderer in contentEditable mode.
+
+Work around some browsers inexplicably making the fake scrollbars focusable.
+
+Make sure `coordsChar` doesn't return positions inside collapsed ranges.
+
+[javascript mode](http://codemirror.net/mode/javascript/): Support block scopes, bindingless catch, bignum suffix, `s` regexp flag.
+
+[markdown mode](http://codemirror.net/mode/markdown/): Adjust a wasteful regexp.
+
+[show-hint addon](http://codemirror.net/doc/manual.html#addon_show-hint): Allow opening the control without any item selected.
+
+### New features
+
+New theme: [darcula](http://codemirror.net/demo/theme.html#darcula).
+
+[dialog addon](http://codemirror.net/doc/manual.html#addon_dialog): Add a CSS class (`dialog-opened`) to the editor when a dialog is open.
+
+## 5.37.0 (2018-04-20)
+
+### Bug fixes
+
+Suppress keypress events during composition, for platforms that don't properly do this themselves.
+
+[xml-fold addon](http://codemirror.net/demo/folding.html): Improve handling of line-wrapped opening tags.
+
+[javascript mode](http://codemirror.net/mode/javascript/): Improve TypeScript support.
+
+[python mode](http://codemirror.net/mode/python/): Highlight expressions inside format strings.
+
+### New features
+
+[vim bindings](http://codemirror.net/demo/vim.html): Add support for '(' and ')' movement.
+
+New themes: [idea](http://codemirror.net/demo/theme.html#idea), [ssms](http://codemirror.net/demo/theme.html#ssms), [gruvbox-dark](http://codemirror.net/demo/theme.html#gruvbox-dark).
+
+## 5.36.0 (2018-03-20)
+
+### Bug fixes
+
+Make sure all document-level event handlers are registered on the document that the editor is part of.
+
+Fix issue that prevented edits whose origin starts with `+` from being combined in history events for an editor-less document.
+
+[multiplex addon](http://codemirror.net/demo/multiplex.html): Improve handling of indentation.
+
+[merge addon](http://codemirror.net/doc/manual.html#addon_merge): Use CSS `:after` element to style the scroll-lock icon.
+
+[javascript-hint addon](http://codemirror.net/doc/manual.html#addon_javascript-hint): Don't provide completions in JSON mode.
+
+[continuelist addon](http://codemirror.net/doc/manual.html#addon_continuelist): Fix numbering error.
+
+[show-hint addon](http://codemirror.net/doc/manual.html#addon_show-hint): Make `fromList` completion strategy act on the current token up to the cursor, rather than the entire token.
+
+[markdown mode](http://codemirror.net/mode/markdown/): Fix a regexp with potentially exponental complexity.
+
+### New features
+
+New theme: [lucario](http://codemirror.net/demo/theme.html#lucario).
+
 ## 5.35.0 (2018-02-20)
 
 ### Bug fixes

@@ -21,9 +21,3 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 // Auth::routes();
-Route::get('login/{social}', 'Auth\LoginController@socialLogin')->where('social', 'facebook|github|google');
-Route::get('login/{social}/callback', 'Auth\LoginController@handleProviderCallback')->where('social', 'facebook|github|google');
-Route::resource('posts', 'Frontend\PostsController', ['as' => 'frontend']);
-Route::get('posts/{name}', ['as' => 'frontend.posts.show', 'uses' => 'Frontend\PostsController@show']);
-Route::get('users/{email}', ['as' => 'frontend.users.index', 'uses' => 'Frontend\PostsController@index']);
-Route::get('', ['as' => 'frontend', 'uses' => 'Frontend\HomeController@index']);

@@ -1,9 +1,9 @@
-$(document).ready(function () {
-    var document_base_url = document.querySelector('meta[name=app_url]').getAttribute('content');
-    document_base_url += document_base_url.endsWith('/') ? '' : '/';
-
+function tinymce_init()
+{
+    // delete var document_base_url = document.querySelector('meta[name=app_url]').getAttribute('content');
+    // delete document_base_url += document_base_url.endsWith('/') ? '' : '/';
     tinyMCE.baseURL = document.querySelector('meta[name=app_url]').getAttribute('content')+'/bower/tinymce';
-    tinymce.init({
+    tinyMCE.init({
         branding: false,
         codemirror: {
             config: { // CodeMirror config object
@@ -19,11 +19,11 @@ $(document).ready(function () {
                 'mode/clike/clike.js',
                 'mode/php/php.js'
             ],
-            path: 'CodeMirror', // Path to CodeMirror distribution
+            path: 'codemirror', // Path to CodeMirror distribution
             // saveCursorPosition: true, // Insert caret marker
             // width: 800 // Default value is 800
         },
-        document_base_url: document_base_url,
+        // delete document_base_url: document_base_url,
         file_browser_callback: function (field_name, url, type, win) {
             var mime_type_like = '';
             if (type == 'image') {
@@ -48,7 +48,8 @@ $(document).ready(function () {
         // menubar: false,
         // mobile: { theme: 'mobile' },
         plugins: 'advlist charmap code codemirror codesample fullscreen help hr image link lists media pagebreak textcolor visualblocks visualchars wordcount',
-        relative_urls: true,
+        relative_urls: false,
+        remove_script_host: false,
         resize: false,
         selector: 'textarea.tinymce',
         skin_url: document.querySelector('meta[name=app_url]').getAttribute('content')+'/bower/tinymce/skins/lightgray',
@@ -59,4 +60,12 @@ $(document).ready(function () {
         //     'strikethrough hr forecolor backcolor | removeformat charmap outdent indent | undo redo help codesample | code fullscreen'
         // ]
     });
+}
+
+$(document).ajaxSuccess(function() {
+    tinymce_init();
+});
+
+$(document).ready(function() {
+    tinymce_init();
 });

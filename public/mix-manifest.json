@@ -7,5 +7,6 @@
     "/bower/fine-uploader/fine-uploader.min.js": "/bower/fine-uploader/fine-uploader.min.js",
     "/bower/fine-uploader/loading.gif": "/bower/fine-uploader/loading.gif",
     "/bower/fine-uploader/retry.gif": "/bower/fine-uploader/retry.gif",
+    "/bower/kbw-countdown/dist/js/jquery.countdown-id.js": "/bower/kbw-countdown/dist/js/jquery.countdown-id.js",
     "/js/frontend-app.js": "/js/frontend-app.js"
 }
