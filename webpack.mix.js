@@ -27,39 +27,34 @@ mix.styles([
 
     'resources/bower/admin-lte/dist/css/AdminLTE.min.css',
     'resources/bower/admin-lte/dist/css/skins/_all-skins.min.css',
-    'resources/vendor/admin-lte/AdminLTE-custom.css',
-    'resources/vendor/nestable/jquery.nestable-custom.css',
-    'resources/vendor/tinymce/tinymce-custom.css',
+
+    'Modules/Cms/Resources/vendor/admin-lte/AdminLTE-custom.css',
+    'Modules/Cms/Resources/vendor/nestable/jquery.nestable-custom.css',
+    'Modules/Cms/Resources/vendor/tinymce/tinymce-custom.css',
 ], 'public/css/backend-app.css')
 .copy('resources/bower/font-awesome/fonts', 'public/fonts');
 
 mix.combine([
     'resources/bower/jquery/dist/jquery.min.js',
-    'resources/bower/bootstrap/dist/js/bootstrap.min.js',
-    'resources/bower/admin-lte/dist/js/adminlte.min.js',
 
-    'resources/bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    'resources/bower/admin-lte/dist/js/adminlte.min.js',
+    'resources/bower/bootstrap/dist/js/bootstrap.min.js',
+    'resources/bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js', 'Modules/Cms/Resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/bower/fancybox/dist/jquery.fancybox.min.js',
     'resources/bower/fastclick/lib/fastclick.js',
-    'resources/bower/jquery-pjax/jquery.pjax.js',
+    'resources/bower/jquery-pjax/jquery.pjax.js', 'Modules/Cms/Resources/vendor/jquery-pjax/jquery.pjax-custom.js',
     'resources/bower/kbw-plugin/dist/js/jquery.plugin.min.js',
-    'resources/bower/kbw-countdown/dist/js/jquery.countdown.min.js',
+    'resources/bower/kbw-countdown/dist/js/jquery.countdown.min.js', 'Modules/Cms/Resources/vendor/kbw-countdown/jquery.countdown-custom.js',
     'resources/bower/moment/min/moment-with-locales.min.js',
     'resources/bower/nestable/jquery.nestable.js',
-    'resources/bower/select2/dist/js/select2.min.js',
-    'resources/bower/Sortable/Sortable.min.js',
-    'resources/bower/tinymce/tinymce.min.js',
+    'resources/bower/select2/dist/js/select2.min.js', 'Modules/Cms/Resources/vendor/select2/select2-custom.js',
+    'resources/bower/Sortable/Sortable.min.js', 'Modules/Cms/Resources/vendor/Sortable/Sortable-custom.js',
+    'resources/bower/tinymce/tinymce.min.js', 'Modules/Cms/Resources/vendor/tinymce/tinymce-custom.js',
     'resources/bower/toastr/toastr.min.js',
-    'resources/bower/vanilla-lazyload/dist/lazyload.min.js',
-    'Modules/Cms/Resources/vendor/jquery-pjax/jquery.pjax-custom.js',
-    'Modules/Cms/Resources/vendor/kbw-countdown/jquery.countdown-custom.js',
-    'Modules/Cms/Resources/vendor/vanilla-lazyload/lazyload-custom.js',
-    'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
-    'resources/vendor/laracasts/flash/custom.js',
-    'resources/vendor/select2/select2-custom.js',
-    'resources/vendor/Sortable/Sortable-custom.js',
-    'resources/vendor/tinymce/tinymce-custom.js',
-    'resources/assets/js/core.js',
+    'resources/bower/vanilla-lazyload/dist/lazyload.min.js', 'Modules/Cms/Resources/vendor/vanilla-lazyload/lazyload-custom.js',
+
+    'Modules/Cms/Resources/assets/js/core.js',
+    'Modules/Cms/Resources/vendor/laracasts/flash/custom.js',
 ], 'public/js/backend-app.js');
 
 mix.styles([
@@ -85,17 +80,13 @@ mix.styles([
 
 mix.combine([
     'resources/bower/jquery/dist/jquery.min.js',
-    'resources/bower/bootstrap/dist/js/bootstrap.min.js',
 
-    'resources/bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js',
+    'resources/bower/bootstrap/dist/js/bootstrap.min.js',
+    'resources/bower/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js', 'Modules/Cms/Resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
     'resources/bower/fancybox/dist/jquery.fancybox.min.js',
-    'resources/bower/jquery-pjax/jquery.pjax.js',
-    'resources/bower/select2/dist/js/select2.min.js',
-    'resources/bower/vanilla-lazyload/dist/lazyload.min.js',
-    'Modules/Cms/Resources/vendor/jquery-pjax/jquery.pjax-custom.js',
-    'Modules/Cms/Resources/vendor/vanilla-lazyload/lazyload-custom.js',
-    'resources/vendor/bootstrap-datepicker/bootstrap-datepicker-custom.js',
-    'resources/vendor/laracasts/flash/custom.js',
-    'resources/vendor/select2/select2-custom.js',
-    'resources/assets/js/core.js',
+    'resources/bower/jquery-pjax/jquery.pjax.js', 'Modules/Cms/Resources/vendor/jquery-pjax/jquery.pjax-custom.js',
+    'resources/bower/select2/dist/js/select2.min.js', 'Modules/Cms/Resources/vendor/select2/select2-custom.js',
+    'resources/bower/vanilla-lazyload/dist/lazyload.min.js', 'Modules/Cms/Resources/vendor/vanilla-lazyload/lazyload-custom.js',
+    'Modules/Cms/Resources/assets/js/core.js',
+    'Modules/Cms/Resources/vendor/laracasts/flash/custom.js',
 ], 'public/js/frontend-app.js');
