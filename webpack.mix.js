@@ -15,7 +15,7 @@ let mix = require('laravel-mix');
 //     .sass('resources/assets/sass/app.scss', 'public/css');
 
 mix.styles([
-    'resources/bower/bootstrap/dist/css/bootstrap.min.css',
+    'resources/bower/bootstrap/dist/css/bootstrap.min.css', 'Modules/Cms/Resources/vendor/bootstrap/bootstrap-custom.css',
     'resources/bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
     'resources/bower/bootstrap-social/bootstrap-social.css',
     'resources/bower/fancybox/dist/jquery.fancybox.min.css',
@@ -58,7 +58,7 @@ mix.combine([
 ], 'public/js/backend-app.js');
 
 mix.styles([
-    'resources/bower/bootstrap/dist/css/bootstrap.min.css',
+    'resources/bower/bootstrap/dist/css/bootstrap.min.css', 'Modules/Cms/Resources/vendor/bootstrap/bootstrap-custom.css',
     'resources/bower/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css',
     'resources/bower/bootstrap-social/bootstrap-social.css',
     'resources/bower/fancybox/dist/jquery.fancybox.min.css',
