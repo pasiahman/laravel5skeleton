@@ -48,8 +48,8 @@ return [
     'user_addresses' => true,
     'users' => [
         'store_id' => false,
-        'balance' => true,
-        'game_token' => true,
+        'balance' => false,
+        'game_token' => false,
         'game_token_default' => 10,
 
         'role_default' => false,
