@@ -45,6 +45,9 @@ return [
             'rating_average' => false,
         ],
     ],
+    'theme' => [
+        'frontend' => 'default',
+    ],
     'transactions' => [
         'status_options' => [
             'received' => false,

@@ -107,6 +107,10 @@ class CustomLinksSeeder extends Seeder
                 'postmetas' => ['template' => 'default'],
             ],
             [
+                'post' => ['author_id' => 1, 'en' => ['title' => 'Theme'], 'id' => ['title' => 'Theme']],
+                'postmetas' => ['template' => 'default'],
+            ],
+            [
                 'post' => ['author_id' => 1, 'en' => ['title' => 'Users'], 'id' => ['title' => 'Pengguna']],
                 'postmetas' => ['template' => 'default'],
             ],
