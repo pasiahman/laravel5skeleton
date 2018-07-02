@@ -131,6 +131,7 @@ return [
     'attributes' => [
         'access_token' => 'Access Token',
         'address' => 'Address',
+        'address_as' => 'Address as',
         'amount' => 'Amount',
         'author' => 'Author',
         'balance' => 'Balance',

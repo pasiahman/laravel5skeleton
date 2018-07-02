@@ -131,6 +131,7 @@ return [
     'attributes'          => [
         'access_token' => 'Akses Token',
         'address' => 'Alamat',
+        'address_as' => 'Alamat sebagai',
         'amount' => 'Jumlah',
         'author' => 'Penulis',
         'balance' => 'Saldo',
