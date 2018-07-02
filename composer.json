@@ -52,6 +52,7 @@
         "migrate:refresh:seed": [
             "php artisan migrate:refresh",
             "php artisan module:seed DokuMyshortcart",
+            "php artisan module:seed Geocodes",
             "php artisan module:seed Options",
             "php artisan module:seed Permissions",
             "php artisan module:seed Roles",
