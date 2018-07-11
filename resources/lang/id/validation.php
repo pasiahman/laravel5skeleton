@@ -188,6 +188,7 @@ return [
         'taxonomy' => 'Taksonomi',
         'template' => 'Template',
         'title' => 'Judul',
+        'transaction_id' => 'Id Transaksi',
         'type' => 'Tipe',
         'updated_at' => 'Diperbarui Pada',
         'url' => 'Url',

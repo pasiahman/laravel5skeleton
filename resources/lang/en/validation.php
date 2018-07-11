@@ -188,6 +188,7 @@ return [
         'taxonomy' => 'Taxonomy',
         'template' => 'Template',
         'title' => 'Title',
+        'transaction_id' => 'Transaction Id',
         'type' => 'Type',
         'updated_at' => 'Updated At',
         'url' => 'Url',
