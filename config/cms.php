@@ -49,6 +49,10 @@ return [
         'frontend' => 'default',
     ],
     'transactions' => [
+        'sender_id' => true,
+        'sender' => [
+            'store_id' => true,
+        ],
         'status_options' => [
             'received' => false,
             'finished' => false,
