@@ -59,6 +59,7 @@ return [
     'users' => [
         'store_id' => false,
         'balance' => false,
+        'balance_default' => 0,
         'game_token' => false,
         'game_token_default' => 10,
 
