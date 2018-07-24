@@ -44,6 +44,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
 
+            \Modules\Cms\Http\Middleware\ForceHttps::class,
             \Modules\Cms\Http\Middleware\Localization::class,
         ],
 
