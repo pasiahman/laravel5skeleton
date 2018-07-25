@@ -80,6 +80,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 - [doctrine/dbal](https://github.com/doctrine/dbal)
 - [Intervention/image](https://github.com/Intervention/image)
 - [laracasts/flash](https://github.com/laracasts/flash)
+- [Maatwebsite/Laravel-Excel](https://github.com/Maatwebsite/Laravel-Excel)
 - [malhal/Laravel-Geographical](https://github.com/malhal/Laravel-Geographical)
 - [nWidart/laravel-modules](https://github.com/nWidart/laravel-modules)
 - [ramsey/uuid](https://github.com/ramsey/uuid)
