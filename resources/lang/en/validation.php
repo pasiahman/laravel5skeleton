@@ -167,6 +167,8 @@ return [
         'parent_id' => 'Parent Id',
         'password' => 'Password',
         'password_confirmation' => 'Confirm Password',
+        'payment_date' => 'Payment Date',
+        'payment_status' => 'Payment Status',
         'phone_number' => 'Phone Number',
         'post_id' => 'Post',
         'postal_code' => 'Postal Code',

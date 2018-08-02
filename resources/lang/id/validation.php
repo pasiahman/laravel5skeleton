@@ -167,6 +167,8 @@ return [
         'parent_id' => 'Id Induk',
         'password' => 'Kata Sandi',
         'password_confirmation' => 'Konfirmasi Kata Sandi',
+        'payment_date' => 'Tanggal Pembayaran',
+        'payment_status' => 'Status Pembayaran',
         'phone_number' => 'Nomor Telepon',
         'post_id' => 'Posting',
         'postal_code' => 'Kode Pos',
